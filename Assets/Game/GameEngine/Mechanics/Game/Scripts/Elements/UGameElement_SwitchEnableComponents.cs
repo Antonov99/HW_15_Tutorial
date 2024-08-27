@@ -14,19 +14,19 @@ namespace Game.GameEngine.Mechanics
 
         void IGameStartElement.StartGame()
         {
-            this.EnableUnits(true);
+            EnableUnits(true);
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.EnableUnits(false);
+            EnableUnits(false);
         }
 
         private void EnableUnits(bool isEnable)
         {
-            for (int i = 0, count = this.units.Length; i < count; i++)
+            for (int i = 0, count = units.Length; i < count; i++)
             {
-                var unit = this.units[i];
+                var unit = units[i];
                 unit.Get<IComponent_Enable>().SetEnable(isEnable);
             }
         }

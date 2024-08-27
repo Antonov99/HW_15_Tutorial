@@ -10,8 +10,8 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<DestroyArgs> OnDestroyed
         {
-            add { this.eventReceiver.OnDestroy += value; }
-            remove { this.eventReceiver.OnDestroy -= value; }
+            add { eventReceiver.OnDestroy += value; }
+            remove { eventReceiver.OnDestroy -= value; }
         }
 
         [SerializeField]
@@ -19,7 +19,7 @@ namespace Game.GameEngine.Mechanics
 
         public void Destroy(DestroyArgs args)
         {
-            this.eventReceiver.Call(args);
+            eventReceiver.Call(args);
         }
     }
 }

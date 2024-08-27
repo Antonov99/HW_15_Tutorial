@@ -10,7 +10,7 @@ namespace Windows.Examples
 
         protected override MonoWindow GetPrefab(MyScreenId key)
         {
-            foreach (var frame in this.screens)
+            foreach (var frame in screens)
             {
                 if (frame.id == key)
                 {

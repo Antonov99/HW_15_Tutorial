@@ -12,8 +12,8 @@ namespace Elementary
 
         public int Current
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
 
 #if ODIN_INSPECTOR
@@ -26,26 +26,26 @@ namespace Elementary
 
         public void AddListener(IAction<int> listener)
         {
-            this.onValueChanged += listener;
+            onValueChanged += listener;
         }
 
         public void RemoveListener(IAction<int> listener)
         {
-            this.onValueChanged -= listener;
+            onValueChanged -= listener;
         }
 
         public IAction<int> AddListener(Action<int> listener)
         {
             var actionDelegate = new ActionDelegate<int>(listener);
-            this.onValueChanged += actionDelegate;
+            onValueChanged += actionDelegate;
             return actionDelegate;
         }
 
         private void SetValue(int value)
         {
             this.value = value;
-            this.onValueChanged?.Do(value);
-            this.OnValueChanged?.Invoke(value);
+            onValueChanged?.Do(value);
+            OnValueChanged?.Invoke(value);
         }
     }
 }

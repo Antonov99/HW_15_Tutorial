@@ -17,7 +17,7 @@ namespace Game.App
 
         public async void Do(Action<LoadingResult> callback)
         {
-            var checkForUpdates = await this.updater.CheckForUpdates();
+            var checkForUpdates = await updater.CheckForUpdates();
 
             LoadingResult result;
             if (checkForUpdates.isSuccessful)

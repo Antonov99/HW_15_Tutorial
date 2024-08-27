@@ -17,19 +17,19 @@ namespace Game
 
         public LanguageInfo GetLanguage(int index)
         {
-            return this.supportedLanguages[index];
+            return supportedLanguages[index];
         }
 
         public LanguageInfo[] GetLanguages()
         {
-            return this.supportedLanguages;
+            return supportedLanguages;
         }
 
         public bool LanguageExists(SystemLanguage language)
         {
-            for (int i = 0, count = this.supportedLanguages.Length; i < count; i++)
+            for (int i = 0, count = supportedLanguages.Length; i < count; i++)
             {
-                var info = this.supportedLanguages[i];
+                var info = supportedLanguages[i];
                 if (info.language == language)
                 {
                     return true;
@@ -41,9 +41,9 @@ namespace Game
 
         public LanguageInfo FindInfo(SystemLanguage language)
         {
-            for (int i = 0, count = this.supportedLanguages.Length; i < count; i++)
+            for (int i = 0, count = supportedLanguages.Length; i < count; i++)
             {
-                var info = this.supportedLanguages[i];
+                var info = supportedLanguages[i];
                 if (info.language == language)
                 {
                     return info;

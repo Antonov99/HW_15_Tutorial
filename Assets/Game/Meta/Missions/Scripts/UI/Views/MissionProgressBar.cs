@@ -27,18 +27,18 @@ namespace Game.Meta
         
         public void SetProgress(float progress, string text)
         {
-            this.fill.fillAmount = progress;
+            fill.fillAmount = progress;
             this.text.text = text;
 
             if (progress >= 1)
             {
-                this.text.color = this.completeTextColor;
-                this.fill.color = this.completeFillColor;
+                this.text.color = completeTextColor;
+                fill.color = completeFillColor;
             }
             else
             {
-                this.text.color = this.processingTextColor;
-                this.fill.color = this.progressFillColor;
+                this.text.color = processingTextColor;
+                fill.color = progressFillColor;
             }
         }
     }

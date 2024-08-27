@@ -16,7 +16,7 @@ namespace Game.Meta
             if (item.TryGetComponent(out IComponent_BoosterInfo boosterComponent))
             {
                 BoosterConfig boosterConfig = boosterComponent.BoosterInfo;
-                this.boostersManager.LaunchBooster(boosterConfig);
+                boostersManager.LaunchBooster(boosterConfig);
             }
         }
     }

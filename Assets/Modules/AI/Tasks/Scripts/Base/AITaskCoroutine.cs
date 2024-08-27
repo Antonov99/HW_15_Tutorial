@@ -9,15 +9,15 @@ namespace AI.Tasks
 
         protected override void Do()
         {
-            this.coroutine = MonoHelper.Instance.StartCoroutine(this.DoAsync());            
+            coroutine = MonoHelper.Instance.StartCoroutine(DoAsync());            
         }
 
         protected override void OnCancel()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                MonoHelper.Instance.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                MonoHelper.Instance.StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
 

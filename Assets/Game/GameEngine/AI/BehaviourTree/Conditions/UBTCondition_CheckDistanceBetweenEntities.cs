@@ -25,13 +25,13 @@ namespace Game.GameEngine.AI
 
         public override bool IsTrue()
         {
-            if (!this.Blackboard.TryGetVariable(this.entity1Key, out IEntity unit))
+            if (!Blackboard.TryGetVariable(entity1Key, out IEntity unit))
                 return false;
 
-            if (!this.Blackboard.TryGetVariable(this.entity2Key, out IEntity target))
+            if (!Blackboard.TryGetVariable(entity2Key, out IEntity target))
                 return false;
 
-            return this.IsDistanceReached(unit, target);
+            return IsDistanceReached(unit, target);
         }
 
         private bool IsDistanceReached(IEntity unit, IEntity target)
@@ -40,7 +40,7 @@ namespace Game.GameEngine.AI
             var targetPosition = target.Get<IComponent_GetPosition>().Position;
 
             var distanceVector = targetPosition - unitPosition;
-            return distanceVector.sqrMagnitude <= Mathf.Pow(this.minDistance, 2);
+            return distanceVector.sqrMagnitude <= Mathf.Pow(minDistance, 2);
         }
     }
 }

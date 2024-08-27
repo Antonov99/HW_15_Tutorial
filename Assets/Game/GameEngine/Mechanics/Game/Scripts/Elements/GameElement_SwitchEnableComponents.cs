@@ -20,18 +20,18 @@ namespace Game.GameEngine.Mechanics
 
         void IGameStartElement.StartGame()
         {
-            for (int i = 0, count = this.targets.Length; i < count; i++)
+            for (int i = 0, count = targets.Length; i < count; i++)
             {
-                var target = this.targets[i];
+                var target = targets[i];
                 target.Get<IComponent_Enable>().SetEnable(true);
             }
         }
 
         void IGameFinishElement.FinishGame()
         {
-            for (int i = 0, count = this.targets.Length; i < count; i++)
+            for (int i = 0, count = targets.Length; i < count; i++)
             {
-                var target = this.targets[i];
+                var target = targets[i];
                 target.Get<IComponent_Enable>().SetEnable(false);
             }
         }

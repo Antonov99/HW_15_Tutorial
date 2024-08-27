@@ -49,48 +49,48 @@ namespace Game.GameEngine.AI
         public void Construct(IBlackboard blackboard, float stoppingDistance)
         {
             this.blackboard = blackboard;
-            this.moveAgent.SetStoppingDistance(stoppingDistance);
+            moveAgent.SetStoppingDistance(stoppingDistance);
         }
 
         public override void Enter()
         {
-            if (!this.blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!blackboard.TryGetVariable(targetKey, out IEntity target))
             {
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.stoppingDistanceKey, out float stoppingDistance))
+            if (!blackboard.TryGetVariable(stoppingDistanceKey, out float stoppingDistance))
             {
                 return;
             }
 
-            this.targetPositionComponent = target.Get<IComponent_GetPosition>();
+            targetPositionComponent = target.Get<IComponent_GetPosition>();
 
-            this.moveAgent.SetMovingEntity(unit); //Unit
-            this.moveAgent.SetStoppingDistance(stoppingDistance); //Stopping Distance
-            this.moveAgent.SetTarget(this.targetPositionComponent.Position);
-            this.moveAgent.Play();
+            moveAgent.SetMovingEntity(unit); //Unit
+            moveAgent.SetStoppingDistance(stoppingDistance); //Stopping Distance
+            moveAgent.SetTarget(targetPositionComponent.Position);
+            moveAgent.Play();
             
-            this.enabled = true;
+            enabled = true;
         }
 
         public override void Exit()
         {
-            this.enabled = false;
-            this.moveAgent.Stop();
+            enabled = false;
+            moveAgent.Stop();
         }
 
         void IFixedUpdateListener.FixedUpdate(float deltaTime)
         {
-            if (this.enabled)
+            if (enabled)
             {
-                var nextPosition = this.targetPositionComponent.Position;
-                this.moveAgent.SetTarget(nextPosition);
+                var nextPosition = targetPositionComponent.Position;
+                moveAgent.SetTarget(nextPosition);
             }
         }
     }

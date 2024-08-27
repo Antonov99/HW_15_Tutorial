@@ -21,14 +21,14 @@ namespace AI.Tasks
 
         protected override IEnumerator DoAsync()
         {
-            while (!this.CheckTargetReached(this.target))
+            while (!CheckTargetReached(target))
             {
-                this.MoveToTarget(this.target);
-                yield return this.framePeriod;
+                MoveToTarget(target);
+                yield return framePeriod;
             }
 
-            yield return this.framePeriod; //A little bit clumsy... Wait next frame
-            this.Return(true);
+            yield return framePeriod; //A little bit clumsy... Wait next frame
+            Return(true);
         }
 
         protected abstract bool CheckTargetReached(T target);

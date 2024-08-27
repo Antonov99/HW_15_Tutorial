@@ -12,12 +12,12 @@ namespace Game.Meta
         
         void IGameReadyElement.ReadyGame()
         {
-            this.missionsManager.OnRewardReceived += this.OnReceiveRewardQuest;
+            missionsManager.OnRewardReceived += OnReceiveRewardQuest;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.missionsManager.OnRewardReceived -= this.OnReceiveRewardQuest;
+            missionsManager.OnRewardReceived -= OnReceiveRewardQuest;
         }
 
         private void OnReceiveRewardQuest(Mission mission)

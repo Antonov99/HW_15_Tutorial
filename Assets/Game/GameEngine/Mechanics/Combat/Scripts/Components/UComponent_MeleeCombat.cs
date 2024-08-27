@@ -8,19 +8,19 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<CombatOperation> OnCombatStarted
         {
-            add { this.combatOperator.OnStarted += value; }
-            remove { this.combatOperator.OnStarted -= value; }
+            add { combatOperator.OnStarted += value; }
+            remove { combatOperator.OnStarted -= value; }
         }
 
         public event Action<CombatOperation> OnCombatStopped
         {
-            add { this.combatOperator.OnStopped += value; }
-            remove { this.combatOperator.OnStopped -= value; }
+            add { combatOperator.OnStopped += value; }
+            remove { combatOperator.OnStopped -= value; }
         }
 
         public bool IsCombat
         {
-            get { return this.combatOperator.IsActive; }
+            get { return combatOperator.IsActive; }
         }
 
         [SerializeField]
@@ -28,17 +28,17 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanStartCombat(CombatOperation operation)
         {
-            return this.combatOperator.CanStart(operation);
+            return combatOperator.CanStart(operation);
         }
 
         public void StartCombat(CombatOperation operation)
         {
-            this.combatOperator.DoStart(operation);
+            combatOperator.DoStart(operation);
         }
 
         public void StopCombat()
         {
-            this.combatOperator.Stop();
+            combatOperator.Stop();
         }
     }
 }

@@ -14,19 +14,19 @@ namespace Elementary
 
         public int Current
         {
-            get { return this.currentValue; }
-            set { this.SetValue(value); }
+            get { return currentValue; }
+            set { SetValue(value); }
         }
 
         public int MaxValue
         {
-            get { return this.maxValue; }
-            set { this.SetMaxValue(value); }
+            get { return maxValue; }
+            set { SetMaxValue(value); }
         }
 
         public bool IsLimit
         {
-            get { return this.currentValue >= this.maxValue; }
+            get { return currentValue >= maxValue; }
         }
 
         private ActionComposite<int> onValueChanged;
@@ -43,57 +43,57 @@ namespace Elementary
 
         public void AddListener(IAction<int> listener)
         {
-            this.onValueChanged += listener;
+            onValueChanged += listener;
         }
 
         public void RemoveListener(IAction<int> listener)
         {
-            this.onValueChanged -= listener;
+            onValueChanged -= listener;
         }
 
         public void AddMaxListener(IAction<int> listener)
         {
-            this.onMaxValueChanged += listener;
+            onMaxValueChanged += listener;
         }
 
         public void RemoveMaxListener(IAction<int> listener)
         {
-            this.onMaxValueChanged -= listener;
+            onMaxValueChanged -= listener;
         }
 
         public IAction<int> AddListener(Action<int> listener)
         {
             var actionDelegate = new ActionDelegate<int>(listener);
-            this.onValueChanged += actionDelegate;
+            onValueChanged += actionDelegate;
             return actionDelegate;
         }
 
         public IAction<int> AddMaxListener(Action<int> listener)
         {
             var actionDelegate = new ActionDelegate<int>(listener);
-            this.onMaxValueChanged += actionDelegate;
+            onMaxValueChanged += actionDelegate;
             return actionDelegate;
         }
 
         private void SetValue(int value)
         {
-            value = Mathf.Clamp(value, 0, this.maxValue);
-            this.currentValue = value;
-            this.onValueChanged?.Do(value);
-            this.OnValueChanged?.Invoke(value);
+            value = Mathf.Clamp(value, 0, maxValue);
+            currentValue = value;
+            onValueChanged?.Do(value);
+            OnValueChanged?.Invoke(value);
         }
 
         private void SetMaxValue(int value)
         {
             value = Math.Max(1, value);
-            if (this.currentValue > value)
+            if (currentValue > value)
             {
-                this.SetValue(value);
+                SetValue(value);
             }
 
-            this.maxValue = value;
-            this.onMaxValueChanged?.Do(value);
-            this.OnMaxValueChanged?.Invoke(value);
+            maxValue = value;
+            onMaxValueChanged?.Do(value);
+            OnMaxValueChanged?.Invoke(value);
         }
     }
 }

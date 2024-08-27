@@ -16,7 +16,7 @@ namespace Game.GameEngine
 
         public override void Enter()
         {
-            this.animationSystem.SetBaseSpeed(this.speed.Current);
+            animationSystem.SetBaseSpeed(speed.Current);
         }
     }
 }

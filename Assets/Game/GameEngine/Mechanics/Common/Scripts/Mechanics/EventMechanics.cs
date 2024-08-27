@@ -20,12 +20,12 @@ namespace Game.GameEngine.Mechanics
 
         void IEnableListener.OnEnable()
         {
-            this.emitter.OnEvent += this.action;
+            emitter.OnEvent += action;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.emitter.OnEvent -= this.action;
+            emitter.OnEvent -= action;
         }
     }
     
@@ -45,12 +45,12 @@ namespace Game.GameEngine.Mechanics
 
         void IEnableListener.OnEnable()
         {
-            this.emitter.OnEvent += this.action;
+            emitter.OnEvent += action;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.emitter.OnEvent -= this.action;
+            emitter.OnEvent -= action;
         }
     }
 }

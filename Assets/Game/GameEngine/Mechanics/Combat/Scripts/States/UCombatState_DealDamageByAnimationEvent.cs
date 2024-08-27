@@ -27,19 +27,19 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.animationSystem.OnStringReceived += this.OnAnimationEvent;
+            animationSystem.OnStringReceived += OnAnimationEvent;
         }
 
         public override void Exit()
         {
-            this.animationSystem.OnStringReceived -= this.OnAnimationEvent;
+            animationSystem.OnStringReceived -= OnAnimationEvent;
         }
 
         private void OnAnimationEvent(string message)
         {
-            if (this.animationEvents.Contains(message) && this.combatOperator.IsActive)
+            if (animationEvents.Contains(message) && combatOperator.IsActive)
             {
-                this.damageAction.Do(this.combatOperator.Current);
+                damageAction.Do(combatOperator.Current);
             }
         }
     }

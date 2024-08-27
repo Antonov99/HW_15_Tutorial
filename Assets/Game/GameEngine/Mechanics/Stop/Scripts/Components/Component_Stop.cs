@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
 
         public void Stop()
         {
-            this.stopEmitter.Call();
+            stopEmitter.Call();
         }
     }
 }

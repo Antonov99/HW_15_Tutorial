@@ -21,7 +21,7 @@ namespace KevinIglesias {
 		
 		void Awake()
 		{
-			jumper = this.transform;
+			jumper = transform;
 			startPosition = jumper.position;
 			jumpCO = StartJump();
 		}

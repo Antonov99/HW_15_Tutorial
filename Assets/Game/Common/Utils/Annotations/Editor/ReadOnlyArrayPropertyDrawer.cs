@@ -8,7 +8,7 @@ public sealed class ReadOnlyArrayPropertyDrawer : OdinAttributeDrawer<ReadOnlyAr
     protected override void DrawPropertyLayout(GUIContent label)
     {
         GUI.enabled = false;
-        this.CallNextDrawer(label);
+        CallNextDrawer(label);
         GUI.enabled = true;
     }
 }

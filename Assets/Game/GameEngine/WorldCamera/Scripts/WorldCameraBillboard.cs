@@ -12,16 +12,16 @@ namespace Game.GameEngine
     
         private void Start()
         {
-            if (this.lookAtStart)
+            if (lookAtStart)
             {
-                this.LookAtCamera();                
+                LookAtCamera();                
             }
         }
         
         [Button]
         public void LookAtCamera()
         {
-            var rootPosition = this.transform.position;
+            var rootPosition = transform.position;
             var instance = WorldCamera.Instance;
             if (ReferenceEquals(instance, null))
             {
@@ -31,7 +31,7 @@ namespace Game.GameEngine
             var cameraRotation = instance.transform.rotation;
             var cameraVector = cameraRotation * Vector3.forward;
             var worldUp = cameraRotation * Vector3.up;
-            this.transform.LookAt(rootPosition + cameraVector, worldUp);
+            transform.LookAt(rootPosition + cameraVector, worldUp);
         }
     }
 }

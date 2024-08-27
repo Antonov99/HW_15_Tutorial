@@ -60,16 +60,16 @@ namespace ES3Types
                 switch (propertyName)
 				{
 					case "filterMode":
-						instance.filterMode = reader.Read<UnityEngine.FilterMode>();
+						instance.filterMode = reader.Read<FilterMode>();
 						break;
 					case "anisoLevel":
-						instance.anisoLevel = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.anisoLevel = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "wrapMode":
-						instance.wrapMode = reader.Read<UnityEngine.TextureWrapMode>();
+						instance.wrapMode = reader.Read<TextureWrapMode>();
 						break;
 					case "mipMapBias":
-						instance.mipMapBias = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.mipMapBias = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "rawTextureData":
                         // LoadRawTextureData requires that the correct width, height, TextureFormat and mipMaps are set before being called.

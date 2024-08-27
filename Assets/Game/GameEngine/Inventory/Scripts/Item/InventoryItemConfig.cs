@@ -12,22 +12,22 @@ namespace Game.GameEngine.InventorySystem
     {
         public string ItemName
         {
-            get { return this.origin.Name; }
+            get { return origin.Name; }
         }
 
         public InventoryItemMetadata Metadata
         {
-            get { return this.origin.Metadata; }
+            get { return origin.Metadata; }
         }
 
         public InventoryItemFlags Flags
         {
-            get { return this.origin.Flags; }
+            get { return origin.Flags; }
         }
 
         public InventoryItem Prototype
         {
-            get { return this.origin; }
+            get { return origin; }
         }
 
         [OdinSerialize]

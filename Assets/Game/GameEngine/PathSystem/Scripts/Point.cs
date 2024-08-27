@@ -6,17 +6,17 @@ namespace Game.GameEngine.PathSystem
     {
         public bool IsActive
         {
-            get { return this.gameObject.activeInHierarchy; }
+            get { return gameObject.activeInHierarchy; }
         }
 
         public Vector3 WorldPosition
         {
-            get { return this.transform.position; }
+            get { return transform.position; }
         }
 
         public float GetDistanceTo(Point point2)
         {
-            var posiiton1 = this.WorldPosition;
+            var posiiton1 = WorldPosition;
             var position2 = point2.WorldPosition;
             
             var vector = position2 - posiiton1;
@@ -26,7 +26,7 @@ namespace Game.GameEngine.PathSystem
         
         public float GetDistanceTo(Vector3 position)
         {
-            var vector = this.WorldPosition - position;
+            var vector = WorldPosition - position;
             vector.y = 0;
             return vector.magnitude;
         }

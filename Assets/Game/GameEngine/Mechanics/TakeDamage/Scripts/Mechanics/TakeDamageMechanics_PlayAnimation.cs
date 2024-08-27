@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
 
         protected override void OnDamageTaken(TakeDamageArgs damageArgs)
         {
-            this.animator.Play(this.animationName, -1, 0);
+            animator.Play(animationName, -1, 0);
         }
     }
 }

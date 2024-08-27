@@ -7,7 +7,7 @@ namespace Game.GameEngine.AI
     {
         public bool IsRunning
         {
-            get { return this.executor.IsRunning; }
+            get { return executor.IsRunning; }
         }
 
         private readonly IAICommandExecutor<Type> executor;
@@ -19,17 +19,17 @@ namespace Game.GameEngine.AI
 
         public void Execute<T>(T args)
         {
-            this.executor.Execute(args);
+            executor.Execute(args);
         }
 
         public void ExecuteForce<T>(T args)
         {
-            this.executor.ExecuteForce(args);
+            executor.ExecuteForce(args);
         }
 
         public void Interrupt()
         {
-            this.executor.Interrupt();
+            executor.Interrupt();
         }
     }
 }

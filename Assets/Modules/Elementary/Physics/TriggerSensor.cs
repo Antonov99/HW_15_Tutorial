@@ -14,17 +14,17 @@ namespace Elementary
 
         private void OnTriggerEnter(Collider other)
         {
-            this.OnTriggerEntered?.Invoke(other);
+            OnTriggerEntered?.Invoke(other);
         }
 
         private void OnTriggerStay(Collider other)
         {
-            this.OnTriggerStaying?.Invoke(other);
+            OnTriggerStaying?.Invoke(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            this.OnTriggerExited?.Invoke(other);
+            OnTriggerExited?.Invoke(other);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
         public void Do(HarvestResourceOperation operation)
         {
             var targetPosition = operation.targetResource.Get<IComponent_GetPosition>().Position;
-            this.engine.LookAtPosition(targetPosition);
+            engine.LookAtPosition(targetPosition);
         }
     }
 }

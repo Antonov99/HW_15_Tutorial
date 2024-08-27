@@ -34,7 +34,7 @@ namespace Game.Localization
             var pageNames = pages.Select(it => it.name).ToArray();
             
             //Define page:
-            var key = this.ValueEntry.SmartValue;
+            var key = ValueEntry.SmartValue;
             var separator = textConfig.pageSeparator;
             var separators = new[] {separator};
 
@@ -78,7 +78,7 @@ namespace Game.Localization
             entityIndex = EditorGUILayout.Popup(entityIndex, entityKeys);
             entityKey = entityKeys[entityIndex];
 
-            this.ValueEntry.SmartValue = pageName + separator + entityKey;
+            ValueEntry.SmartValue = pageName + separator + entityKey;
             EditorGUILayout.EndHorizontal();
         }
     }

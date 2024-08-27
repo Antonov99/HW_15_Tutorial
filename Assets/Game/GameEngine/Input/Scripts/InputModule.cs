@@ -18,13 +18,13 @@ namespace Game.GameEngine
 
         private void Awake()
         {
-            this.joystick.enabled = false;
+            joystick.enabled = false;
         }
 
         public override void ConstructGame(GameContext context)
         {
-            this.stateManager.AddState(InputStateId.BASE, new InputState_Joystick(this.joystick));
-            this.stateManager.AddState(InputStateId.LOCK, new State());
+            stateManager.AddState(InputStateId.BASE, new InputState_Joystick(joystick));
+            stateManager.AddState(InputStateId.LOCK, new State());
         }
     }
 }

@@ -13,12 +13,12 @@ namespace Game.GameEngine.Mechanics
 
         public void ConstructOperator(IOperator<CombatOperation> combatOperator)
         {
-            this.combatEngine = combatOperator;
+            combatEngine = combatOperator;
         }
 
         protected override void OnEnter()
         {
-            this.targetComponent = this.combatEngine
+            targetComponent = combatEngine
                 .Current
                 .targetEntity
                 .Get<IComponent_GetPosition>();
@@ -28,13 +28,13 @@ namespace Game.GameEngine.Mechanics
         {
             if (!distanceReached)
             {
-                this.combatEngine.Stop();
+                combatEngine.Stop();
             }
         }
 
         protected override Vector3 GetTargetPosition()
         {
-            return this.targetComponent.Position;
+            return targetComponent.Position;
         }
     }
 }

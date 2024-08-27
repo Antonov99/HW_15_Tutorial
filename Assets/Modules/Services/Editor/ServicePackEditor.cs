@@ -15,29 +15,29 @@ namespace Services.UnityEditor
 
         private void OnEnable()
         {
-            this.editorMode = this.serializedObject.FindProperty(nameof(this.editorMode));
-            this.releaseScripts = this.serializedObject.FindProperty(nameof(this.releaseScripts));
-            this.editorScripts = this.serializedObject.FindProperty(nameof(this.editorScripts));
+            editorMode = serializedObject.FindProperty(nameof(editorMode));
+            releaseScripts = serializedObject.FindProperty(nameof(releaseScripts));
+            editorScripts = serializedObject.FindProperty(nameof(editorScripts));
         }
 
         public override void OnInspectorGUI()
         {
-            if (this.editorMode.boolValue)
+            if (editorMode.boolValue)
             {
                 GUI.enabled = false;
             }
 
-            EditorGUILayout.PropertyField(this.releaseScripts, includeChildren: true);
+            EditorGUILayout.PropertyField(releaseScripts, includeChildren: true);
             GUI.enabled = true;
 
             EditorGUILayout.Space(4.0f);
-            this.editorMode.boolValue = EditorGUILayout.BeginToggleGroup("Editor Mode", this.editorMode.boolValue);
+            editorMode.boolValue = EditorGUILayout.BeginToggleGroup("Editor Mode", editorMode.boolValue);
 
             EditorGUILayout.Space(4.0f);
-            EditorGUILayout.PropertyField(this.editorScripts, includeChildren: true);
+            EditorGUILayout.PropertyField(editorScripts, includeChildren: true);
             EditorGUILayout.EndToggleGroup();
 
-            this.serializedObject.ApplyModifiedPropertiesWithoutUndo();
+            serializedObject.ApplyModifiedPropertiesWithoutUndo();
         }
     }
 }

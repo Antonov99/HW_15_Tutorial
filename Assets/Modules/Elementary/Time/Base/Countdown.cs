@@ -26,14 +26,14 @@ namespace Elementary
         [ProgressBar(0, 1)]
         public float Progress
         {
-            get { return 1 - this.remainingTime / this.duration; }
-            set { this.SetProgress(value); }
+            get { return 1 - remainingTime / duration; }
+            set { SetProgress(value); }
         }
 
         public float Duration
         {
-            get { return this.duration; }
-            set { this.duration = value; }
+            get { return duration; }
+            set { duration = value; }
         }
 
         [ReadOnly]
@@ -41,8 +41,8 @@ namespace Elementary
         [PropertyOrder(-8)]
         public float RemainingTime
         {
-            get { return this.remainingTime; }
-            set { this.remainingTime = Mathf.Clamp(value, 0, this.duration); }
+            get { return remainingTime; }
+            set { remainingTime = Mathf.Clamp(value, 0, duration); }
         }
         
         [Space]
@@ -60,65 +60,65 @@ namespace Elementary
         public Countdown(float duration)
         {
             this.duration = duration;
-            this.remainingTime = duration;
+            remainingTime = duration;
         }
 
         public void Play()
         {
-            if (this.IsPlaying)
+            if (IsPlaying)
             {
                 return;
             }
 
-            this.IsPlaying = true;
-            this.OnStarted?.Invoke();
-            this.coroutine = MonoHelper.Instance.StartCoroutine(this.TimerRoutine());
+            IsPlaying = true;
+            OnStarted?.Invoke();
+            coroutine = MonoHelper.Instance.StartCoroutine(TimerRoutine());
         }
 
         public void Stop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                MonoHelper.Instance.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                MonoHelper.Instance.StopCoroutine(coroutine);
+                coroutine = null;
             }
 
-            if (this.IsPlaying)
+            if (IsPlaying)
             {
-                this.IsPlaying = false;
-                this.OnStopped?.Invoke();
+                IsPlaying = false;
+                OnStopped?.Invoke();
             }
         }
 
         public void ResetTime()
         {
-            this.remainingTime = this.duration;
-            this.OnReset?.Invoke();
+            remainingTime = duration;
+            OnReset?.Invoke();
         }
 
         private IEnumerator TimerRoutine()
         {
-            while (this.remainingTime > 0)
+            while (remainingTime > 0)
             {
                 yield return null;
-                this.remainingTime -= Time.deltaTime;
-                this.OnTimeChanged?.Invoke();
+                remainingTime -= Time.deltaTime;
+                OnTimeChanged?.Invoke();
             }
 
-            this.IsPlaying = false;
-            this.OnEnded?.Invoke();
+            IsPlaying = false;
+            OnEnded?.Invoke();
         }
 
         private void SetProgress(float progress)
         {
             progress = Mathf.Clamp01(progress);
-            this.remainingTime = this.duration * (1 - progress);
-            this.OnTimeChanged?.Invoke();
+            remainingTime = duration * (1 - progress);
+            OnTimeChanged?.Invoke();
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            this.remainingTime = this.duration;
+            remainingTime = duration;
         }
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()

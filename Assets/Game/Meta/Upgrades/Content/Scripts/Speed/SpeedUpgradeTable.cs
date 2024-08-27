@@ -9,7 +9,7 @@ namespace Game.Meta
     {
         public float SpeedStep
         {
-            get { return this.speedStep; }
+            get { return speedStep; }
         }
 
         [Space]
@@ -36,27 +36,27 @@ namespace Game.Meta
         public float GetSpeed(int level)
         {
             var index = level - 1;
-            return this.table[index];
+            return table[index];
         }
 
         public void OnValidate(int maxLevel)
         {
-            this.EvaluateTable(maxLevel);
+            EvaluateTable(maxLevel);
         }
 
         private void EvaluateTable(int maxLevel)
         {
-            this.table = new float[maxLevel];
-            this.table[0] = this.startSpeed;
-            this.table[maxLevel - 1] = this.endSpeed;
+            table = new float[maxLevel];
+            table[0] = startSpeed;
+            table[maxLevel - 1] = endSpeed;
 
-            var speedStep = (this.endSpeed - this.startSpeed) / (maxLevel - 1);
+            var speedStep = (endSpeed - startSpeed) / (maxLevel - 1);
             this.speedStep = (float) Math.Round(speedStep, 2);
 
             for (var i = 1; i < maxLevel - 1; i++)
             {
-                var speed = this.startSpeed + this.speedStep * i;
-                this.table[i] = (float) Math.Round(speed, 2);
+                var speed = startSpeed + this.speedStep * i;
+                table[i] = (float) Math.Round(speed, 2);
             }
         }
 

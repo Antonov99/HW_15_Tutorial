@@ -9,11 +9,11 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Material() : base(typeof(UnityEngine.Material)){ Instance = this; }
+		public ES3Type_Material() : base(typeof(Material)){ Instance = this; }
 
 		protected override void WriteUnityObject(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Material)obj;
+			var instance = (Material)obj;
 
 			writer.WriteProperty("name", instance.name);
 			writer.WriteProperty("shader", instance.shader);
@@ -483,7 +483,7 @@ namespace ES3Types
 
 		protected override void ReadUnityObject<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.Material)obj;
+			var instance = (Material)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
@@ -492,16 +492,16 @@ namespace ES3Types
 						instance.name = reader.Read<string>(ES3Type_string.Instance);
 						break;
 					case "shader":
-						instance.shader = reader.Read<UnityEngine.Shader>(ES3Type_Shader.Instance);
+						instance.shader = reader.Read<Shader>(ES3Type_Shader.Instance);
 						break;
 					case "renderQueue":
-						instance.renderQueue = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.renderQueue = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "shaderKeywords":
-						instance.shaderKeywords = reader.Read<System.String[]>();
+						instance.shaderKeywords = reader.Read<String[]>();
 						break;
 					case "globalIlluminationFlags":
-						instance.globalIlluminationFlags = reader.Read<UnityEngine.MaterialGlobalIlluminationFlags>();
+						instance.globalIlluminationFlags = reader.Read<MaterialGlobalIlluminationFlags>();
 						break;
 				    case "_Color":
 					    instance.SetColor("_Color", reader.Read<Color>());

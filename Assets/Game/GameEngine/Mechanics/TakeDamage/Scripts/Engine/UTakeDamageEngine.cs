@@ -19,18 +19,18 @@ namespace Game.GameEngine.Mechanics
         [GUIColor(0, 1, 0)]
         public void TakeDamage(TakeDamageArgs damageArgs)
         {
-            if (this.hitPointsEngine.Current <= 0)
+            if (hitPointsEngine.Current <= 0)
             {
                 return;
             }
 
-            this.hitPointsEngine.Current -= damageArgs.damage;
-            this.OnDamageTaken?.Invoke(damageArgs);
+            hitPointsEngine.Current -= damageArgs.damage;
+            OnDamageTaken?.Invoke(damageArgs);
 
-            if (this.hitPointsEngine.Current <= 0)
+            if (hitPointsEngine.Current <= 0)
             {
                 var destroyEvent = MechanicsUtils.ConvertToDestroyEvent(damageArgs);
-                this.destroyReceiver.Call(destroyEvent);
+                destroyReceiver.Call(destroyEvent);
             }
         }
     }

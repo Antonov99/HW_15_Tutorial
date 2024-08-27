@@ -16,8 +16,8 @@ namespace Game.UI
         private void Awake()
         {
             instance = this;
-            this.errorText.text = string.Empty;
-            this.progressBar.SetProgress(0.0f);
+            errorText.text = string.Empty;
+            progressBar.SetProgress(0.0f);
         }
 
         private void OnDestroy()

@@ -218,17 +218,17 @@ public class ES3Settings : System.ICloneable
         foreach (var setting in enums)
         {
             if (setting is ES3.EncryptionType)
-                this.encryptionType = (ES3.EncryptionType)setting;
+                encryptionType = (ES3.EncryptionType)setting;
             else if (setting is ES3.Location)
-                this.location = (ES3.Location)setting;
+                location = (ES3.Location)setting;
             else if (setting is ES3.CompressionType)
-                this.compressionType = (ES3.CompressionType)setting;
+                compressionType = (ES3.CompressionType)setting;
             else if (setting is ES3.ReferenceMode)
-                this.referenceMode = (ES3.ReferenceMode)setting;
+                referenceMode = (ES3.ReferenceMode)setting;
             else if (setting is ES3.Format)
-                this.format = (ES3.Format)setting;
+                format = (ES3.Format)setting;
             else if (setting is ES3.Directory)
-                this.directory = (ES3.Directory)setting;
+                directory = (ES3.Directory)setting;
         }
     }
 

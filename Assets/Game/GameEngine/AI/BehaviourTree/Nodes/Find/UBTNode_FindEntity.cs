@@ -25,20 +25,20 @@ namespace Game.GameEngine.AI
         
         protected override void Run()
         {
-            if (this.entitiesService.FindEntity(this.entityCondition, out var entity))
+            if (entitiesService.FindEntity(entityCondition, out var entity))
             {
-                this.Blackboard.ReplaceVariable(this.entityParameterName, entity);
-                this.Return(true);
+                Blackboard.ReplaceVariable(entityParameterName, entity);
+                Return(true);
             }
             else
             {
-                this.Return(false);
+                Return(false);
             }
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.entitiesService = context.GetService<EntitiesService>();
+            entitiesService = context.GetService<EntitiesService>();
         }
     }
 }

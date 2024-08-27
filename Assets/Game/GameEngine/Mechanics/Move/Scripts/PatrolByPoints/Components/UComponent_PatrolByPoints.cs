@@ -10,7 +10,7 @@ namespace Game.GameEngine.Mechanics
         
         public void StartPatrol(PatrolByPointsOperation operation)
         {
-            this.engine.StartPatrol(operation);
+            engine.StartPatrol(operation);
         }
     }
 }

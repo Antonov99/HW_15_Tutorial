@@ -17,29 +17,29 @@ namespace Game.Meta
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.boostersManager = context.GetService<BoostersManager>();
+            boostersManager = context.GetService<BoostersManager>();
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.boostersManager.OnBoosterStarted += this.OnBoosterStarted;
-            this.boostersManager.OnBoosterFinished += this.OnBoosterFinished;
+            boostersManager.OnBoosterStarted += OnBoosterStarted;
+            boostersManager.OnBoosterFinished += OnBoosterFinished;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.boostersManager.OnBoosterStarted -= this.OnBoosterStarted;
-            this.boostersManager.OnBoosterFinished -= this.OnBoosterFinished;
+            boostersManager.OnBoosterStarted -= OnBoosterStarted;
+            boostersManager.OnBoosterFinished -= OnBoosterFinished;
         }
 
         private void OnBoosterStarted(Booster booster)
         {
-            this.listView.AddBooster(booster);
+            listView.AddBooster(booster);
         }
 
         private void OnBoosterFinished(Booster booster)
         {
-            this.listView.RemoveBooster(booster);
+            listView.RemoveBooster(booster);
         }
     }
 }

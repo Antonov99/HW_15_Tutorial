@@ -10,12 +10,12 @@ namespace Game.GameEngine.Mechanics
 
         public Condition_Entity_IsNotMoving(IEntity entity)
         {
-            this.moveComponent = entity.Get<IComponent_IsMoving>();
+            moveComponent = entity.Get<IComponent_IsMoving>();
         }
 
         public bool IsTrue()
         {
-            return !this.moveComponent.IsMoving;
+            return !moveComponent.IsMoving;
         }
     }
 }

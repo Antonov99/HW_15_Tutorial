@@ -22,22 +22,22 @@ namespace Game.GameEngine.AI
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!Blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.Blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!Blackboard.TryGetVariable(targetKey, out IEntity target))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
             var targetTransform = target.Get<IComponent_GetPosition>();
             var targetPosition = targetTransform.Position;
             unit.Get<IComponent_LookAtPosition>().LookAtPosition(targetPosition);
-            this.Return(true);
+            Return(true);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Game.GameEngine.AI
     {
         public string MovePosiitonKey
         {
-            set { this.movePositionKey = value; }
+            set { movePositionKey = value; }
         }
 
         [Space]
@@ -26,13 +26,13 @@ namespace Game.GameEngine.AI
 
         protected override void Execute(CommandArgs_MoveToPosition args)
         {
-            this.blackboard.ReplaceVariable(this.movePositionKey, args.targetPosition);
+            blackboard.ReplaceVariable(movePositionKey, args.targetPosition);
             base.Execute(args);
         }
 
         protected override void OnInterrupt()
         {
-            this.blackboard.RemoveVariable(this.movePositionKey);
+            blackboard.RemoveVariable(movePositionKey);
             base.OnInterrupt();
         }
     }

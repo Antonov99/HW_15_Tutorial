@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_GradientAlphaKey() : base(typeof(UnityEngine.GradientAlphaKey))
+		public ES3Type_GradientAlphaKey() : base(typeof(GradientAlphaKey))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.GradientAlphaKey)obj;
+			var instance = (GradientAlphaKey)obj;
 			
 			writer.WriteProperty("alpha", instance.alpha, ES3Type_float.Instance);
 			writer.WriteProperty("time", instance.time, ES3Type_float.Instance);
@@ -24,7 +24,7 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			return new UnityEngine.GradientAlphaKey(reader.ReadProperty<float>(ES3Type_float.Instance),
+			return new GradientAlphaKey(reader.ReadProperty<float>(ES3Type_float.Instance),
 													reader.ReadProperty<float>(ES3Type_float.Instance));
 		}
 	}

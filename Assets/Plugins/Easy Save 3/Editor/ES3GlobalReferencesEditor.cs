@@ -8,20 +8,20 @@ using System.Collections.Generic;
 
 namespace ES3Internal
 {
-    [CustomEditor(typeof(ES3Internal.ES3GlobalReferences))]
-    [System.Serializable]
+    [CustomEditor(typeof(ES3GlobalReferences))]
+    [Serializable]
     public class ES3GlobalReferencesEditor : Editor
     {
         private bool isDraggingOver = false;
         private bool openReferences = false;
 
-        private ES3Internal.ES3GlobalReferences _globalRefs = null;
-        private ES3Internal.ES3GlobalReferences globalRefs
+        private ES3GlobalReferences _globalRefs = null;
+        private ES3GlobalReferences globalRefs
         {
             get
             {
                 if (_globalRefs == null)
-                    _globalRefs = (ES3Internal.ES3GlobalReferences)serializedObject.targetObject;
+                    _globalRefs = (ES3GlobalReferences)serializedObject.targetObject;
                 return _globalRefs;
             }
         }

@@ -11,12 +11,12 @@ namespace Game.Meta
     {
         public ResourceType ResourceType
         {
-            get { return this.resourceType; }
+            get { return resourceType; }
         }
 
         public int RequiredResources
         {
-            get { return this.requiredResources; }
+            get { return requiredResources; }
         }
         
         [Header("Quest")]

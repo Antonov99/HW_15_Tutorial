@@ -38,37 +38,37 @@ namespace Game.Gameplay.Player
 
         public void PlayIncomeFromWorld(Vector3 startWorldPosition, ResourceType resourceType, int income)
         {
-            this.StartCoroutine(this.PlayFromWorldRoutine(startWorldPosition, resourceType, income));
+            StartCoroutine(PlayFromWorldRoutine(startWorldPosition, resourceType, income));
         }
 
         private IEnumerator PlayFromWorldRoutine(Vector3 startWorldPosition, ResourceType resourceType, int income)
         {
-            if (!this.panel.IsItemShown(resourceType))
+            if (!panel.IsItemShown(resourceType))
             {
-                this.panel.ShowItem(resourceType);
+                panel.ShowItem(resourceType);
                 yield return new WaitForEndOfFrame(); //Wait for calc UI position    
             }
 
-            var info = this.resourceCatalog.FindResource(resourceType);
+            var info = resourceCatalog.FindResource(resourceType);
             var icon = info.icon;
 
-            var prevValue = this.panel.GetCurrentValue(resourceType);
+            var prevValue = panel.GetCurrentValue(resourceType);
             var newValue = prevValue + income;
-            var particleIterator = new IntValueIterator(prevValue, newValue, this.maxParticleCount);
+            var particleIterator = new IntValueIterator(prevValue, newValue, maxParticleCount);
 
-            var emissionPeriod = new WaitForSeconds(this.emissonPeriod);
-            var endUIPosition = this.panel.GetIconCenter(resourceType);
+            var emissionPeriod = new WaitForSeconds(emissonPeriod);
+            var endUIPosition = panel.GetIconCenter(resourceType);
 
             for (int i = 0, count = particleIterator.ParticleCount; i < count; i++)
             {
-                var routine = this.PlayParticle(
+                var routine = PlayParticle(
                     startWorldPosition,
                     endUIPosition,
                     icon,
                     resourceType,
                     particleIterator
                 );
-                this.StartCoroutine(routine);
+                StartCoroutine(routine);
                 yield return emissionPeriod;
             }
         }
@@ -81,31 +81,31 @@ namespace Game.Gameplay.Player
             IntValueIterator particleIterator
         )
         {
-            var particleObject = this.particlePool.Get(this.worldViewport);
+            var particleObject = particlePool.Get(worldViewport);
             particleObject.SetIcon(icon);
 
             var particleTransform = particleObject.transform;
             particleTransform.position = CameraUtils.FromWorldToUIPosition(
-                this.worldCamera,
-                this.uiCamera,
+                worldCamera,
+                uiCamera,
                 startWorldPosition
             );
 
-            yield return UIAnimations.AnimateFlyRoutine(particleTransform, this.settings, endUIPosiiton);
-            this.particlePool.Release(particleObject);
+            yield return UIAnimations.AnimateFlyRoutine(particleTransform, settings, endUIPosiiton);
+            particlePool.Release(particleObject);
 
             if (particleIterator.NextValue(out var resourceCount))
             {
-                this.panel.IncrementItem(resourceType, resourceCount);
+                panel.IncrementItem(resourceType, resourceCount);
             }
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.particlePool = context.GetService<GUIParticlePoolService>().ImagePool;
-            this.uiCamera = context.GetService<GUICameraService>().Camera;
-            this.worldCamera = WorldCamera.Instance;
-            this.worldViewport = context.GetService<GUIParticleViewportService>().WorldViewport;
+            particlePool = context.GetService<GUIParticlePoolService>().ImagePool;
+            uiCamera = context.GetService<GUICameraService>().Camera;
+            worldCamera = WorldCamera.Instance;
+            worldViewport = context.GetService<GUIParticleViewportService>().WorldViewport;
         }
     }
 }

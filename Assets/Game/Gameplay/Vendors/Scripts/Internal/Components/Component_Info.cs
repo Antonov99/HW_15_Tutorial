@@ -6,12 +6,12 @@ namespace Game.Gameplay.Vendors
     {
         public ResourceType ResourceType
         {
-            get { return this.config.resourceType; }
+            get { return config.resourceType; }
         }
 
         public int PricePerOne
         {
-            get { return this.config.pricePerOne; }
+            get { return config.pricePerOne; }
         }
 
         private readonly ScriptableVendor config;

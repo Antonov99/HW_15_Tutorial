@@ -26,12 +26,12 @@ namespace Game.UI
 
         public void AddListener(UnityAction action)
         {
-            this.button.onClick.AddListener(action);
+            button.onClick.AddListener(action);
         }
 
         public void RemoveListener(UnityAction action)
         {
-            this.button.onClick.RemoveListener(action);
+            button.onClick.RemoveListener(action);
         }
 
         public void SetState(State state)
@@ -40,13 +40,13 @@ namespace Game.UI
 
             if (state == State.AVAILABLE)
             {
-                this.button.interactable = true;
-                this.buttonBackground.sprite = this.availableButtonSprite;
+                button.interactable = true;
+                buttonBackground.sprite = availableButtonSprite;
             }
             else if (state == State.LOCKED)
             {
-                this.button.interactable = false;
-                this.buttonBackground.sprite = this.unavailableButtonSprite;
+                button.interactable = false;
+                buttonBackground.sprite = unavailableButtonSprite;
             }
             else
             {
@@ -65,7 +65,7 @@ namespace Game.UI
         {
             try
             {
-                this.SetState(this.state);
+                SetState(state);
             }
             catch (Exception)
             {

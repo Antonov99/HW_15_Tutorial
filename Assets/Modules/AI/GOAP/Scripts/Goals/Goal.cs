@@ -6,7 +6,7 @@ namespace AI.GOAP
     {
         public IFactState ResultState
         {
-            get { return this.resultState; }
+            get { return resultState; }
         }
 
         [SerializeField]

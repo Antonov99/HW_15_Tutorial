@@ -15,14 +15,14 @@ namespace Game.Localization
             var pages = config.spreadsheet.pages;
             var count = pages.Length;
 
-            this.translators = new Dictionary<string, ITranslator<string>>(count);
+            translators = new Dictionary<string, ITranslator<string>>(count);
             for (var i = 0; i < count; i++)
             {
                 var page = pages[i];
-                this.translators[page.name] = new LocalizationModule.TextTranslator(page.entities);
+                translators[page.name] = new LocalizationModule.TextTranslator(page.entities);
             }
 
-            this.pageSeparator = new[]
+            pageSeparator = new[]
             {
                 config.pageSeparator
             };
@@ -30,13 +30,13 @@ namespace Game.Localization
 
         public string GetTranslation(string key, SystemLanguage language)
         {
-            if (!TextKeyParser.TryParse(key, this.pageSeparator, out var pageName, out var entityKey))
+            if (!TextKeyParser.TryParse(key, pageSeparator, out var pageName, out var entityKey))
             {
                 Debug.LogWarning($"Can not parse key {key}!");
                 return key;
             }
 
-            if (!this.translators.TryGetValue(pageName, out var translator))
+            if (!translators.TryGetValue(pageName, out var translator))
             {
                 Debug.LogWarning($"Translator is not found: {entityKey}!");
                 return key;

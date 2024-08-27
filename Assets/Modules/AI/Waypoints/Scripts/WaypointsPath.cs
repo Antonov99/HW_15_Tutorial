@@ -9,7 +9,7 @@ namespace AI.Waypoints
         public List<Transform> GetTransformPoints()
         {
             var points = new List<Transform>();
-            foreach (Transform point in this.transform)
+            foreach (Transform point in transform)
             {
                 if (point.gameObject.activeSelf)
                 {
@@ -23,7 +23,7 @@ namespace AI.Waypoints
         public List<Vector3> GetPositionPoints()
         {
             var points = new List<Vector3>();
-            foreach (Transform point in this.transform)
+            foreach (Transform point in transform)
             {
                 if (point.gameObject.activeSelf)
                 {
@@ -47,10 +47,10 @@ namespace AI.Waypoints
 
         private void OnDrawGizmos()
         {
-            if (this.drawGizmos)
+            if (drawGizmos)
             {
-                var points = this.GetTransformPoints();
-                WaypointsPathGizmos.DrawRoads(points, this.loop, this.color);
+                var points = GetTransformPoints();
+                WaypointsPathGizmos.DrawRoads(points, loop, color);
             }
         }
 #endif

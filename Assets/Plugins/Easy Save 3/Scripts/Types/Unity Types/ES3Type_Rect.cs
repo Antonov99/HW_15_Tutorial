@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Rect() : base(typeof(UnityEngine.Rect))
+		public ES3Type_Rect() : base(typeof(Rect))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Rect)obj;
+			var instance = (Rect)obj;
 			
 			writer.WriteProperty("x", instance.x, ES3Type_float.Instance);
 			writer.WriteProperty("y", instance.y, ES3Type_float.Instance);

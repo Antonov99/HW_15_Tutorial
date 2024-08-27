@@ -13,7 +13,7 @@ namespace GameNodes
         [Button]
         public void TakeDamage(int damage)
         {
-            this.gameContext
+            gameContext
                 .Node<PlayerContext>(it => it.name == "PlayerSys1")
                 .Service<HeroService>()
                 .GetHero()

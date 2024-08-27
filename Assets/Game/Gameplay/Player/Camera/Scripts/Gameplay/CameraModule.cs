@@ -15,12 +15,12 @@ namespace Game.Gameplay.Player
 
         private void Awake()
         {
-            this.virtualCamera.enabled = false;
+            virtualCamera.enabled = false;
         }
 
         public override IEnumerable<IGameElement> GetElements()
         {
-            yield return this.cameraController;
+            yield return cameraController;
         }
 
         public override IEnumerable<object> GetServices()
@@ -31,7 +31,7 @@ namespace Game.Gameplay.Player
         public override void ConstructGame(GameContext context)
         {
             var heroService = context.GetService<HeroService>();
-            this.cameraController.Construct(this.virtualCamera, heroService);
+            cameraController.Construct(virtualCamera, heroService);
         }
     }
 }

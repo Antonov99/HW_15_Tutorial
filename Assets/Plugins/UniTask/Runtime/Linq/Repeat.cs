@@ -42,7 +42,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.count = count;
                 this.cancellationToken = cancellationToken;
 
-                this.remaining = count;
+                remaining = count;
             }
 
             public TElement Current => element;

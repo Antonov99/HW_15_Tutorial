@@ -30,25 +30,25 @@ namespace Game.Meta
 
         protected override void OnShow(object args)
         {
-            for (int i = 0, count = this.presenters.Count; i < count; i++)
+            for (int i = 0, count = presenters.Count; i < count; i++)
             {
-                var presenter = this.presenters[i];
+                var presenter = presenters[i];
                 presenter.Start();
             }
         }
 
         protected override void OnHide()
         {
-            for (int i = 0, count = this.presenters.Count; i < count; i++)
+            for (int i = 0, count = presenters.Count; i < count; i++)
             {
-                var presenter = this.presenters[i];
+                var presenter = presenters[i];
                 presenter.Stop();
             }
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.CreateProducts(context);
+            CreateProducts(context);
         }
 
         private void CreateProducts(GameContext context)
@@ -57,17 +57,17 @@ namespace Game.Meta
             var moneyStorage = context.GetService<MoneyStorage>();
             var resourceStorage = context.GetService<ResourceStorage>();
 
-            var productConfigs = this.productCatalog.GetAllProducts();
+            var productConfigs = productCatalog.GetAllProducts();
             for (int i = 0, count = productConfigs.Length; i < count; i++)
             {
                 var config = productConfigs[i];
-                var view = Instantiate(this.viewPrefab, this.container);
+                var view = Instantiate(viewPrefab, container);
                 
                 var presenter = new ProductPresenter(view);
-                presenter.Construct(buyManager, moneyStorage, resourceStorage, this.resourceCatalog, this.moneyIcon);
+                presenter.Construct(buyManager, moneyStorage, resourceStorage, resourceCatalog, moneyIcon);
                 presenter.SetProduct(config.Prototype);
                 
-                this.presenters.Add(presenter);
+                presenters.Add(presenter);
             }
         }
     }

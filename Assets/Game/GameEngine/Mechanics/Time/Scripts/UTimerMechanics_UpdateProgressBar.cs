@@ -13,7 +13,7 @@ namespace Game.GameEngine
 
         private void Awake()
         {
-            this.progressBar.SetVisible(false);
+            progressBar.SetVisible(false);
         }
 
         #endregion
@@ -22,23 +22,23 @@ namespace Game.GameEngine
 
         protected override void OnTimerStarted()
         {
-            this.progressBar.SetProgress(this.timer.Progress);
+            progressBar.SetProgress(timer.Progress);
         }
 
         protected override void OnTimeChanged()
         {
-            var progress = this.timer.Progress;
-            this.progressBar.SetProgress(progress);
+            var progress = timer.Progress;
+            progressBar.SetProgress(progress);
         }
 
         protected override void OnTimerFinished()
         {
-            this.progressBar.SetProgress(1.0f);
+            progressBar.SetProgress(1.0f);
         }
 
         protected override void OnTimerCanceled()
         {
-            this.progressBar.SetVisible(false);
+            progressBar.SetVisible(false);
         }
 
         #endregion

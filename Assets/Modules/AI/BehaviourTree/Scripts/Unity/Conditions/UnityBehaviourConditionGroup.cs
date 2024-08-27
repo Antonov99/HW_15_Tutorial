@@ -14,19 +14,19 @@ namespace AI.BTree
         
         public override bool IsTrue()
         {
-            return this.mode switch
+            return mode switch
             {
-                Mode.AND => this.All(),
-                Mode.OR => this.Any(),
-                _ => throw new Exception($"Mode is undefined {this.mode}")
+                Mode.AND => All(),
+                Mode.OR => Any(),
+                _ => throw new Exception($"Mode is undefined {mode}")
             };
         }
 
         private bool All()
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue())
                 {
                     return false;
@@ -38,9 +38,9 @@ namespace AI.BTree
 
         private bool Any()
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (condition.IsTrue())
                 {
                     return true;

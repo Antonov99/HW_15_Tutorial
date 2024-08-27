@@ -19,7 +19,7 @@ namespace Game.GameEngine.Mechanics
             var resourceObject = operation.targetResource;
             var resourceType = resourceObject.Get<IComponent_GetResourceType>().Type;
             var amount = resourceObject.Get<IComponent_GetResourceCount>().Count;
-            this.source.Plus(resourceType, amount);
+            source.Plus(resourceType, amount);
         }
     }
 }

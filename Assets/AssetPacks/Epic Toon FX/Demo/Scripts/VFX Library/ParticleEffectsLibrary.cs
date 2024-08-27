@@ -101,7 +101,7 @@ public class ParticleEffectsLibrary : MonoBehaviour {
 	public void SpawnParticleEffect(Vector3 positionInWorldToSpawn) {
 		// Spawn Currently Selected Particle Effect
 		spawnPosition = positionInWorldToSpawn + ParticleEffectSpawnOffsets[CurrentParticleEffectIndex];
-		GameObject newParticleEffect = GameObject.Instantiate(ParticleEffectPrefabs[CurrentParticleEffectIndex], spawnPosition, ParticleEffectPrefabs[CurrentParticleEffectIndex].transform.rotation) as GameObject;
+		GameObject newParticleEffect = Instantiate(ParticleEffectPrefabs[CurrentParticleEffectIndex], spawnPosition, ParticleEffectPrefabs[CurrentParticleEffectIndex].transform.rotation) as GameObject;
 		newParticleEffect.name = "PE_" + ParticleEffectPrefabs[CurrentParticleEffectIndex];
 		// Store Looping Particle Effects Systems
 		if (ParticleEffectLifetimes [CurrentParticleEffectIndex] == 0) {

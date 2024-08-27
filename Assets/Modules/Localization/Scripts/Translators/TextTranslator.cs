@@ -21,7 +21,7 @@ namespace LocalizationModule
 
         public string GetTranslation(string key, SystemLanguage language)
         {
-            if (!this.entities.TryGetValue(key, out var entity))
+            if (!entities.TryGetValue(key, out var entity))
             {
                 Debug.LogWarning($"Translation {key} is not found!");
                 return null;

@@ -14,13 +14,13 @@ namespace Game.GameEngine
 
         public void Enter()
         {
-            this.input.enabled = true;
+            input.enabled = true;
         }
 
         public void Exit()
         {
-            this.input.CancelInput();
-            this.input.enabled = false;
+            input.CancelInput();
+            input.enabled = false;
         }
     }
 }

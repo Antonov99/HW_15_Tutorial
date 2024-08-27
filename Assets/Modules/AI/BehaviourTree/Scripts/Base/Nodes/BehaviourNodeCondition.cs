@@ -21,7 +21,7 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            this.Return(this.condition.IsTrue());
+            Return(condition.IsTrue());
         }
     }
 }

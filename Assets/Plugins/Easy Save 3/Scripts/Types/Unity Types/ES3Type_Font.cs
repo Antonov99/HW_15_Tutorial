@@ -9,11 +9,11 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Font() : base(typeof(UnityEngine.Font)){ Instance = this; }
+		public ES3Type_Font() : base(typeof(Font)){ Instance = this; }
 
 		protected override void WriteUnityObject(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Font)obj;
+			var instance = (Font)obj;
 
 			writer.WriteProperty("name", instance.name, ES3Type_string.Instance);
             writer.WriteProperty("material", instance.material);
@@ -21,14 +21,14 @@ namespace ES3Types
 
 		protected override void ReadUnityObject<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.Font)obj;
+			var instance = (Font)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
 				switch(propertyName)
 				{
 				case "material":
-					instance.material = reader.Read<UnityEngine.Material>(ES3Type_Material.Instance);
+					instance.material = reader.Read<Material>(ES3Type_Material.Instance);
 					break;
 				default:
 					reader.Skip();
@@ -39,7 +39,7 @@ namespace ES3Types
 
 		protected override object ReadUnityObject<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.Font(reader.ReadProperty<string>(ES3Type_string.Instance));
+			var instance = new Font(reader.ReadProperty<string>(ES3Type_string.Instance));
 			ReadObject<T>(reader, instance);
 			return instance;
 		}
@@ -49,7 +49,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_FontArray() : base(typeof(UnityEngine.Font[]), ES3Type_Font.Instance)
+		public ES3Type_FontArray() : base(typeof(Font[]), ES3Type_Font.Instance)
 		{
 			Instance = this;
 		}

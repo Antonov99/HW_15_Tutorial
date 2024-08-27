@@ -15,7 +15,7 @@ namespace Game.App
 
         async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            await this.gameLauncher.LaunchGame();
+            await gameLauncher.LaunchGame();
             callback?.Invoke(LoadingResult.Success());
         }
     }

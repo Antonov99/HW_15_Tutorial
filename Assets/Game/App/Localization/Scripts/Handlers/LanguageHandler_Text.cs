@@ -31,14 +31,14 @@ namespace Game.Localization
 
         public void UpdateLanguage(SystemLanguage language)
         {
-            if (this.text != null)
+            if (text != null)
             {
-                this.text.text = LocalizationManager.GetText(this.key, language);
+                text.text = LocalizationManager.GetText(key, language);
             }
             
-            if (this.fontSizes.FindInt(language, out var value))
+            if (fontSizes.FindInt(language, out var value))
             {
-                this.text.fontSize = value;
+                text.fontSize = value;
             }
         }   
     }

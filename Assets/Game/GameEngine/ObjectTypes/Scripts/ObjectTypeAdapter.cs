@@ -10,7 +10,7 @@ namespace Game.GameEngine
     {
         public ObjectType Value
         {
-            get { return this.GetValue(); }
+            get { return GetValue(); }
         }
 
         [SerializeField]
@@ -29,17 +29,17 @@ namespace Game.GameEngine
 
         private ObjectType GetValue()
         {
-            if (this.mode == Mode.BASE)
+            if (mode == Mode.BASE)
             {
-                return this.baseObjectType;
+                return baseObjectType;
             }
 
-            if (this.mode == Mode.SCRIPTABLE_OBJECT)
+            if (mode == Mode.SCRIPTABLE_OBJECT)
             {
-                return this.scriptableObjectType.ObjectType;
+                return scriptableObjectType.ObjectType;
             }
 
-            throw new Exception($"Mode {this.mode} is undefined!");
+            throw new Exception($"Mode {mode} is undefined!");
         }
 
         private enum Mode

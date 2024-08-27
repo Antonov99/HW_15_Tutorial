@@ -26,48 +26,48 @@ namespace Game.GameEngine.Mechanics
 
         void IUpdateListener.Update(float deltaTime)
         {
-            if (this.isEnabled && this.mode == Mode.UPDATE)
+            if (isEnabled && mode == Mode.UPDATE)
             {
-                this.SyncPositions();
-                this.SyncRotations();
+                SyncPositions();
+                SyncRotations();
             }
         }
 
         void IFixedUpdateListener.FixedUpdate(float deltaTime)
         {
-            if (this.isEnabled && this.mode == Mode.FIXED_UPDATE)
+            if (isEnabled && mode == Mode.FIXED_UPDATE)
             {
-                this.SyncPositions();
-                this.SyncRotations();
+                SyncPositions();
+                SyncRotations();
             }
         }
 
         void ILateUpdateListener.LateUpdate(float deltaTime)
         {
-            if (this.isEnabled && this.mode == Mode.LATE_UPDATE)
+            if (isEnabled && mode == Mode.LATE_UPDATE)
             {
-                this.SyncPositions();
-                this.SyncRotations();
+                SyncPositions();
+                SyncRotations();
             }
         }
 
         private void SyncPositions()
         {
             
-            var position = this.sourcePosition.position;
-            for (int i = 0, count = this.syncPosiitions.Length; i < count; i++)
+            var position = sourcePosition.position;
+            for (int i = 0, count = syncPosiitions.Length; i < count; i++)
             {
-                var targetTransform = this.syncPosiitions[i];
+                var targetTransform = syncPosiitions[i];
                 targetTransform.position = position;
             }
         }
 
         private void SyncRotations()
         {
-            var rotation = this.sourceRotation.rotation;
-            for (int i = 0, count = this.syncRotations.Length; i < count; i++)
+            var rotation = sourceRotation.rotation;
+            for (int i = 0, count = syncRotations.Length; i < count; i++)
             {
-                var targetTransform = this.syncRotations[i];
+                var targetTransform = syncRotations[i];
                 targetTransform.rotation = rotation;
             }
         }

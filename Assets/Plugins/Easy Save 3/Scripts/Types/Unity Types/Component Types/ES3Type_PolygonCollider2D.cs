@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_PolygonCollider2D() : base(typeof(UnityEngine.PolygonCollider2D))
+		public ES3Type_PolygonCollider2D() : base(typeof(PolygonCollider2D))
 		{
 			Instance = this;
 		}
 
 		protected override void WriteComponent(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.PolygonCollider2D)obj;
+			var instance = (PolygonCollider2D)obj;
 
 			writer.WriteProperty("points", instance.points, ES3Type_Vector2Array.Instance);
 			writer.WriteProperty("pathCount", instance.pathCount, ES3Type_int.Instance);
@@ -35,37 +35,37 @@ namespace ES3Types
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.PolygonCollider2D)obj;
+			var instance = (PolygonCollider2D)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
 				{
 					
 					case "points":
-						instance.points = reader.Read<UnityEngine.Vector2[]>(ES3Type_Vector2Array.Instance);
+						instance.points = reader.Read<Vector2[]>(ES3Type_Vector2Array.Instance);
 						break;
 					case "pathCount":
-						int pathCount = reader.Read<System.Int32>(ES3Type_int.Instance);
+						int pathCount = reader.Read<Int32>(ES3Type_int.Instance);
 						for(int i=0; i<pathCount; i++)
-							instance.SetPath(i, reader.ReadProperty<UnityEngine.Vector2[]>(ES3Type_Vector2Array.Instance));
+							instance.SetPath(i, reader.ReadProperty<Vector2[]>(ES3Type_Vector2Array.Instance));
 						break;
 					case "density":
-						instance.density = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.density = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "isTrigger":
-						instance.isTrigger = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.isTrigger = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "usedByEffector":
-						instance.usedByEffector = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.usedByEffector = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "offset":
-						instance.offset = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.offset = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "sharedMaterial":
-						instance.sharedMaterial = reader.Read<UnityEngine.PhysicsMaterial2D>(ES3Type_PhysicsMaterial2D.Instance);
+						instance.sharedMaterial = reader.Read<PhysicsMaterial2D>(ES3Type_PhysicsMaterial2D.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					default:
 						reader.Skip();
@@ -79,7 +79,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_PolygonCollider2DArray() : base(typeof(UnityEngine.PolygonCollider2D[]), ES3Type_PolygonCollider2D.Instance)
+		public ES3Type_PolygonCollider2DArray() : base(typeof(PolygonCollider2D[]), ES3Type_PolygonCollider2D.Instance)
 		{
 			Instance = this;
 		}

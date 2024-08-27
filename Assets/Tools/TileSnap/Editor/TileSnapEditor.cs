@@ -13,7 +13,7 @@ namespace Game.Development
 
         private void OnEnable()
         {
-            this.targetObject = (TileSnap) this.target;
+            targetObject = (TileSnap) target;
         }
 
         private void OnSceneGUI()
@@ -21,7 +21,7 @@ namespace Game.Development
             var e = Event.current;
             if (e.type == EventType.MouseUp)
             {
-                var targetTransform = this.targetObject.transform;
+                var targetTransform = targetObject.transform;
                 TileSnapper.Snap(targetTransform, TILE_SIZE);
             }
         }

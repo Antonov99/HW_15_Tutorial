@@ -12,7 +12,7 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.targetComponent = this.combatOperator.Current
+            targetComponent = combatOperator.Current
                 .targetEntity
                 .Get<IComponent_GetPosition>();
             base.Enter();
@@ -22,13 +22,13 @@ namespace Game.GameEngine.Mechanics
         {
             if (!distanceReached)
             {
-                this.combatOperator.Stop();
+                combatOperator.Stop();
             }
         }
 
         protected override Vector3 GetTargetPosition()
         {
-            return this.targetComponent.Position;
+            return targetComponent.Position;
         }
     }
 }

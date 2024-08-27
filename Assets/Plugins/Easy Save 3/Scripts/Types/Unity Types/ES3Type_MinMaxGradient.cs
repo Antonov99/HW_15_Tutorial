@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_MinMaxGradient() : base(typeof(UnityEngine.ParticleSystem.MinMaxGradient))
+		public ES3Type_MinMaxGradient() : base(typeof(ParticleSystem.MinMaxGradient))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.MinMaxGradient)obj;
+			var instance = (ParticleSystem.MinMaxGradient)obj;
 			
 			writer.WriteProperty("mode", instance.mode);
 			writer.WriteProperty("gradientMax", instance.gradientMax, ES3Type_Gradient.Instance);
@@ -29,7 +29,7 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.MinMaxGradient();
+			var instance = new ParticleSystem.MinMaxGradient();
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -37,25 +37,25 @@ namespace ES3Types
 				{
 
 					case "mode":
-						instance.mode = reader.Read<UnityEngine.ParticleSystemGradientMode>();
+						instance.mode = reader.Read<ParticleSystemGradientMode>();
 						break;
 					case "gradientMax":
-						instance.gradientMax = reader.Read<UnityEngine.Gradient>(ES3Type_Gradient.Instance);
+						instance.gradientMax = reader.Read<Gradient>(ES3Type_Gradient.Instance);
 						break;
 					case "gradientMin":
-						instance.gradientMin = reader.Read<UnityEngine.Gradient>(ES3Type_Gradient.Instance);
+						instance.gradientMin = reader.Read<Gradient>(ES3Type_Gradient.Instance);
 						break;
 					case "colorMax":
-						instance.colorMax = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
+						instance.colorMax = reader.Read<Color>(ES3Type_Color.Instance);
 						break;
 					case "colorMin":
-						instance.colorMin = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
+						instance.colorMin = reader.Read<Color>(ES3Type_Color.Instance);
 						break;
 					case "color":
-						instance.color = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
+						instance.color = reader.Read<Color>(ES3Type_Color.Instance);
 						break;
 					case "gradient":
-						instance.gradient = reader.Read<UnityEngine.Gradient>(ES3Type_Gradient.Instance);
+						instance.gradient = reader.Read<Gradient>(ES3Type_Gradient.Instance);
 						break;
 					default:
 						reader.Skip();

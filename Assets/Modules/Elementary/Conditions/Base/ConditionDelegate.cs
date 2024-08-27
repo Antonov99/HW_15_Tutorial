@@ -13,7 +13,7 @@ namespace Elementary
 
         public bool IsTrue()
         {
-            return this.condition.Invoke();
+            return condition.Invoke();
         }
     }
 
@@ -28,7 +28,7 @@ namespace Elementary
 
         public bool IsTrue(T args)
         {
-            return this.condition.Invoke(args);
+            return condition.Invoke(args);
         }
     }
 }

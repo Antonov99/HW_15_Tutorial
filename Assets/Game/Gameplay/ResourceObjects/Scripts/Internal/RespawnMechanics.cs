@@ -15,7 +15,7 @@ namespace Game.Gameplay.ResourceObjects
 
         public void ConstructDuration(float duration)
         {
-            this.countdown.Duration = duration;
+            countdown.Duration = duration;
         }
 
         public void ConstructRespawnEvent(IEmitter respawnEvent)
@@ -30,25 +30,25 @@ namespace Game.Gameplay.ResourceObjects
 
         void IEnableListener.OnEnable()
         {
-            this.destroyEvent.OnEvent += this.OnDeactivate;
-            this.countdown.OnEnded += this.OnActivate;
+            destroyEvent.OnEvent += OnDeactivate;
+            countdown.OnEnded += OnActivate;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.destroyEvent.OnEvent -= this.OnDeactivate;
-            this.countdown.OnEnded -= this.OnActivate;
+            destroyEvent.OnEvent -= OnDeactivate;
+            countdown.OnEnded -= OnActivate;
         }
 
         private void OnDeactivate()
         {
-            this.countdown.ResetTime();
-            this.countdown.Play();
+            countdown.ResetTime();
+            countdown.Play();
         }
 
         private void OnActivate()
         {
-            this.respawnEvent.Call();
+            respawnEvent.Call();
         }
     }
 }

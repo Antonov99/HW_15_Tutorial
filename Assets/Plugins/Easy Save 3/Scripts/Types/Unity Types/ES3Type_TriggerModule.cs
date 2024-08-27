@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_TriggerModule() : base(typeof(UnityEngine.ParticleSystem.TriggerModule))
+		public ES3Type_TriggerModule() : base(typeof(ParticleSystem.TriggerModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.TriggerModule)obj;
+			var instance = (ParticleSystem.TriggerModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("inside", instance.inside);
@@ -28,14 +28,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.TriggerModule();
+			var instance = new ParticleSystem.TriggerModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.TriggerModule)obj;
+			var instance = (ParticleSystem.TriggerModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -43,22 +43,22 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "inside":
-						instance.inside = reader.Read<UnityEngine.ParticleSystemOverlapAction>();
+						instance.inside = reader.Read<ParticleSystemOverlapAction>();
 						break;
 					case "outside":
-						instance.outside = reader.Read<UnityEngine.ParticleSystemOverlapAction>();
+						instance.outside = reader.Read<ParticleSystemOverlapAction>();
 						break;
 					case "enter":
-						instance.enter = reader.Read<UnityEngine.ParticleSystemOverlapAction>();
+						instance.enter = reader.Read<ParticleSystemOverlapAction>();
 						break;
 					case "exit":
-						instance.exit = reader.Read<UnityEngine.ParticleSystemOverlapAction>();
+						instance.exit = reader.Read<ParticleSystemOverlapAction>();
 						break;
 					case "radiusScale":
-						instance.radiusScale = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.radiusScale = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					default:
 						reader.Skip();

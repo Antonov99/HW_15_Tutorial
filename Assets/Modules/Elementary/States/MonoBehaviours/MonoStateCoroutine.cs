@@ -9,18 +9,18 @@ namespace Elementary
         
         public override void Enter()
         {
-            if (this.coroutine == null)
+            if (coroutine == null)
             {
-                this.coroutine = this.StartCoroutine(this.Do());
+                coroutine = StartCoroutine(Do());
             }
         }
 
         public override void Exit()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                this.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
 

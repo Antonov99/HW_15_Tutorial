@@ -9,14 +9,14 @@ namespace Game.GameEngine
         [ShowInInspector]
         public bool IsSurfaceExists
         {
-            get { return this.surfaceExists; }
+            get { return surfaceExists; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public IWalkableSurface Surface
         {
-            get { return this.surface; }
+            get { return surface; }
         }
 
         private IWalkableSurface surface;
@@ -26,13 +26,13 @@ namespace Game.GameEngine
         public void SetSurface(IWalkableSurface surface)
         {
             this.surface = surface;
-            this.surfaceExists = true;
+            surfaceExists = true;
         }
 
         public void ResetSurface()
         {
-            this.surface = null;
-            this.surfaceExists = false;
+            surface = null;
+            surfaceExists = false;
         }
     }
 }

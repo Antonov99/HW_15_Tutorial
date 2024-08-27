@@ -19,12 +19,12 @@ namespace Game.Meta
 
         protected override void OnStart()
         {
-            this.vendorInteractor.IncomeMultiplier *= this.config.incomeCoefficient;
+            vendorInteractor.IncomeMultiplier *= config.incomeCoefficient;
         }
 
         protected override void OnStop()
         {
-            this.vendorInteractor.IncomeMultiplier /= this.config.incomeCoefficient; 
+            vendorInteractor.IncomeMultiplier /= config.incomeCoefficient; 
         }
     }
 }

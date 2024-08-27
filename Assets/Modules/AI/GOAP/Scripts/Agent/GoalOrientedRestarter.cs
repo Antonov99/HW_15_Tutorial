@@ -25,31 +25,31 @@ namespace AI.GOAP
 
         private void Awake()
         {
-            this.agent = this.GetComponent<GoalOrientedAgent>();
+            agent = GetComponent<GoalOrientedAgent>();
         }
 
         private void Start()
         {
-            if (this.playOnStart)
+            if (playOnStart)
             {
-                this.Play();
+                Play();
             }
         }
 
         public void Play()
         {
-            if (this.coroutine == null)
+            if (coroutine == null)
             {
-                this.coroutine = this.StartCoroutine(this.CheckState());
+                coroutine = StartCoroutine(CheckState());
             }
         }
 
         public void Stop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                this.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
 
@@ -57,9 +57,9 @@ namespace AI.GOAP
         {
             while (true)
             {
-                var period = Random.Range(this.minScanPeriod, this.maxScanPeriod);
+                var period = Random.Range(minScanPeriod, maxScanPeriod);
                 yield return new WaitForSeconds(period);
-                this.agent.Replay();
+                agent.Replay();
             }
         }
     }

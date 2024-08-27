@@ -9,7 +9,7 @@ namespace Game.Gameplay.Conveyors
 
         public Component_Id(string id)
         {
-            this.Id = id;
+            Id = id;
         }
     }
 }

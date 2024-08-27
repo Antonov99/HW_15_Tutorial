@@ -13,30 +13,30 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<int> OnLevelUp
         {
-            add { this.levelEngine.OnLevelUp += value; }
-            remove { this.levelEngine.OnLevelUp -= value; }
+            add { levelEngine.OnLevelUp += value; }
+            remove { levelEngine.OnLevelUp -= value; }
         }
 
         public event Action<int> OnLevelSetuped
         {
-            add { this.levelEngine.OnLevelSetuped += value; }
-            remove { this.levelEngine.OnLevelSetuped -= value; }
+            add { levelEngine.OnLevelSetuped += value; }
+            remove { levelEngine.OnLevelSetuped -= value; }
         }
 
         public event Action<int> OnLevelReset
         {
-            add { this.levelEngine.OnLevelReset += value; }
-            remove { this.levelEngine.OnLevelReset -= value; }
+            add { levelEngine.OnLevelReset += value; }
+            remove { levelEngine.OnLevelReset -= value; }
         }
 
         public int Level
         {
-            get { return this.levelEngine.CurrentLevel; }
+            get { return levelEngine.CurrentLevel; }
         }
 
         public int MaxLevel
         {
-            get { return this.levelEngine.MaxLevel; }
+            get { return levelEngine.MaxLevel; }
         }
 
         [SerializeField]
@@ -44,17 +44,17 @@ namespace Game.GameEngine.Mechanics
 
         public void SetupLevel(int level)
         {
-            this.levelEngine.SetupLevel(level);
+            levelEngine.SetupLevel(level);
         }
 
         public void LevelUp()
         {
-            this.levelEngine.LevelUp();
+            levelEngine.LevelUp();
         }
 
         public void ResetLevel()
         {
-            this.levelEngine.ResetLevel();
+            levelEngine.ResetLevel();
         }
     }
 }

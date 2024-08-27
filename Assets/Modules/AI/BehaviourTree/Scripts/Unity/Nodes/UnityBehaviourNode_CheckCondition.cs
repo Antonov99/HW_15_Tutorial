@@ -14,19 +14,19 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            var isConditionPerforms = this.IsConditionTrue();
-            this.Return(isConditionPerforms);
+            var isConditionPerforms = IsConditionTrue();
+            Return(isConditionPerforms);
         }
 
         private bool IsConditionTrue()
         {
             var conditionPerforms = true;
-            if (this.conditions != null)
+            if (conditions != null)
             {
-                conditionPerforms = this.CheckConditions();
+                conditionPerforms = CheckConditions();
             }
             
-            if (this.invertCondition)
+            if (invertCondition)
             {
                 conditionPerforms = !conditionPerforms;
             }
@@ -36,9 +36,9 @@ namespace AI.BTree
 
         private bool CheckConditions()
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue())
                 {
                     return false;

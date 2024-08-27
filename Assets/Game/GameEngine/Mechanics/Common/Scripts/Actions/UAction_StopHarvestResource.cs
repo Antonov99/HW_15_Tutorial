@@ -11,9 +11,9 @@ namespace Game.GameEngine.Mechanics
     
         public override void Do()
         {
-            if (this.engine.IsActive)
+            if (engine.IsActive)
             {
-                this.engine.Stop();
+                engine.Stop();
             }
         }
     }

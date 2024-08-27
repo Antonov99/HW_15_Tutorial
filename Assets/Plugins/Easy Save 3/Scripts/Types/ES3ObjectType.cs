@@ -43,7 +43,7 @@ namespace ES3Types
 			{
 				propertyName = ReadPropertyName(reader);
 
-				if(propertyName == ES3Type.typeFieldName)
+				if(propertyName == typeFieldName)
 					return ES3TypeMgr.GetOrCreateES3Type(reader.ReadType()).Read<T>(reader);
 				else if(propertyName == null)
 					return null;
@@ -63,7 +63,7 @@ namespace ES3Types
 			{
 				propertyName = ReadPropertyName(reader);
 
-				if(propertyName == ES3Type.typeFieldName)
+				if(propertyName == typeFieldName)
 				{
 					ES3TypeMgr.GetOrCreateES3Type(reader.ReadType()).ReadInto<T>(reader, obj);
 					return;

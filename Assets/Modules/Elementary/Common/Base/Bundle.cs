@@ -14,7 +14,7 @@ namespace Elementary
 
         public Bundle()
         {
-            this.items = new Dictionary<string, object>();
+            items = new Dictionary<string, object>();
         }
 
         public Bundle(IDictionary<string, object> items)
@@ -24,12 +24,12 @@ namespace Elementary
 
         public T Get<T>(string key)
         {
-            return (T) this.items[key];
+            return (T) items[key];
         }
 
         public bool TryGet<T>(string key, out T result)
         {
-            if (this.items.TryGetValue(key, out var value))
+            if (items.TryGetValue(key, out var value))
             {
                 result = (T) value;
                 return true;
@@ -41,30 +41,30 @@ namespace Elementary
 
         public bool Has(string key)
         {
-            return this.items.ContainsKey(key);
+            return items.ContainsKey(key);
         }
 
         public Bundle Add(string key)
         {
-            this.items.Add(key, FLAG);
+            items.Add(key, FLAG);
             return this;
         }
 
         public Bundle Add(string key, object element)
         {
-            this.items.Add(key, element);
+            items.Add(key, element);
             return this;
         }
 
         public Bundle Remove(string key)
         {
-            this.items.Remove(key);
+            items.Remove(key);
             return this;
         }
 
         public IEnumerator GetEnumerator()
         {
-            return this.items.GetEnumerator();
+            return items.GetEnumerator();
         }
     }
 }

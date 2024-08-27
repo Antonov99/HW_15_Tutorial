@@ -11,15 +11,15 @@ namespace Game.GameEngine.Entities
         [GameInject]
         public void Construct(GameContext context)
         {
-            this.gameContext = context;
+            gameContext = context;
         }
 
         public MonoEntity Spawn(MonoEntity prefab, Transform parent, Vector3 position, Quaternion rotation)
         {
-            var entity = GameObject.Instantiate(prefab, position, rotation, parent);
+            var entity = Object.Instantiate(prefab, position, rotation, parent);
             if (entity.TryGetComponent(out IGameElement gameElement))
             {
-                this.gameContext.RegisterElement(gameElement);
+                gameContext.RegisterElement(gameElement);
             }
 
             return entity;

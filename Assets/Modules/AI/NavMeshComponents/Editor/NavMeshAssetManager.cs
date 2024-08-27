@@ -108,7 +108,7 @@ namespace UnityEditor.AI
                 AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(assetToDelete));
         }
 
-        public void StartBakingSurfaces(UnityEngine.Object[] surfaces)
+        public void StartBakingSurfaces(Object[] surfaces)
         {
             // Remove first to avoid double registration of the callback
             EditorApplication.update -= UpdateAsyncBuildOperations;
@@ -181,7 +181,7 @@ namespace UnityEditor.AI
             return false;
         }
 
-        public void ClearSurfaces(UnityEngine.Object[] surfaces)
+        public void ClearSurfaces(Object[] surfaces)
         {
             foreach (NavMeshSurface s in surfaces)
                 ClearSurface(s);

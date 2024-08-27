@@ -10,7 +10,7 @@ namespace Game.Meta
         
         public MissionConfig SelectNextMission(MissionDifficulty difficulty, string excludeMissionId)
         {
-            var missions = this.catalog.FindMissions(it => it.Difficulty == difficulty &&
+            var missions = catalog.FindMissions(it => it.Difficulty == difficulty &&
                                                                  it.Id != excludeMissionId);
             var randomIndex = Random.Range(0, missions.Length);
             var config = missions[randomIndex];

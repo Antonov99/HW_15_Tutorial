@@ -16,7 +16,7 @@ namespace Game.Gameplay.Hero
         [Construct]
         private void Construct(HeroModel_Core core, MonoBehaviour monoContext)
         {
-            this.hitPointsBarAdapterV2.Construct(core.life.hitPoints, this.hitPointsBar, monoContext);
+            hitPointsBarAdapterV2.Construct(core.life.hitPoints, hitPointsBar, monoContext);
         }
     }
 }

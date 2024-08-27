@@ -14,7 +14,7 @@ namespace Game.Tutorial.Development
             var debugConfig = DebugTutorialConfig.Instance;
             if (debugConfig.isDebug)
             {
-                this.tutorialManager.Initialize(debugConfig.isCompleted, (int) debugConfig.currentStep);
+                tutorialManager.Initialize(debugConfig.isCompleted, (int) debugConfig.currentStep);
             }
             else
             {

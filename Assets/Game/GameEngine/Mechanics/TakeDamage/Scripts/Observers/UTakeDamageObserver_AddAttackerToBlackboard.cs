@@ -22,14 +22,14 @@ namespace Game.GameEngine.Mechanics
                 return;
             }
 
-            if (this.Blackboard.HasVariable(this.attackerKey))
+            if (Blackboard.HasVariable(attackerKey))
             {
                 return;
             }
 
             if (damageArgs.source is IEntity attacker)
             {
-                this.Blackboard.AddVariable(this.attackerKey, attacker);
+                Blackboard.AddVariable(attackerKey, attacker);
             }
         }
     }

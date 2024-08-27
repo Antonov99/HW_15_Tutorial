@@ -10,8 +10,8 @@ namespace Game.GameEngine
     {
         public event Action<TakeDamageArgs> OnDamageTaken
         {
-            add { this.emitter.OnEvent += value; }
-            remove { this.emitter.OnEvent -= value; }
+            add { emitter.OnEvent += value; }
+            remove { emitter.OnEvent -= value; }
         }
 
         private readonly IEmitter<TakeDamageArgs> emitter;
@@ -23,7 +23,7 @@ namespace Game.GameEngine
 
         public void TakeDamage(TakeDamageArgs damageArgs)
         {
-            this.emitter.Call(damageArgs);
+            emitter.Call(damageArgs);
         }
     }
 }

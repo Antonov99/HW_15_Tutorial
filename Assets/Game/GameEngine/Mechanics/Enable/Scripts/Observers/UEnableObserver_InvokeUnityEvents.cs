@@ -17,11 +17,11 @@ namespace Game.GameEngine.Mechanics
         {
             if (isEnable)
             {
-                this.onEnable?.Invoke();
+                onEnable?.Invoke();
             }
             else
             {
-                this.onDisable?.Invoke();
+                onDisable?.Invoke();
             }
         }
     }

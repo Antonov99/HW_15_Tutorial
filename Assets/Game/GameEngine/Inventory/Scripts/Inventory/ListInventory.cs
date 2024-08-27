@@ -18,26 +18,26 @@ namespace Game.GameEngine.InventorySystem
 
         public ListInventory()
         {
-            this.items = new List<InventoryItem>();
+            items = new List<InventoryItem>();
         }
 
         public void SetupItems(InventoryItem[] item)
         {            
-            this.items.Clear();
-            this.items.AddRange(item);
+            items.Clear();
+            items.AddRange(item);
         }
 
         public void AddItem(InventoryItem item)
         {
-            this.items.Add(item);
-            this.OnItemAdded?.Invoke(item);
+            items.Add(item);
+            OnItemAdded?.Invoke(item);
         }
 
         public bool RemoveItem(InventoryItem item)
         {
-            if (this.items.Remove(item))
+            if (items.Remove(item))
             {
-                this.OnItemRemoved?.Invoke(item);
+                OnItemRemoved?.Invoke(item);
                 return true;
             }
             
@@ -46,29 +46,29 @@ namespace Game.GameEngine.InventorySystem
 
         public bool IsItemExists(InventoryItem item)
         {
-            return this.items.Contains(item);
+            return items.Contains(item);
         }
 
         public bool IsEmpty()
         {
-            return this.items.Count <= 0;
+            return items.Count <= 0;
         }
 
         public InventoryItem[] GetAllItems()
         {
-            return this.items.ToArray();
+            return items.ToArray();
         }
 
         public List<InventoryItem> GetAllItemsUnsafe()
         {
-            return this.items;
+            return items;
         }
 
         public bool FindItemFirst(InventoryItemFlags flags, out InventoryItem item)
         {
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                item = this.items[i];
+                item = items[i];
                 if (item.FlagsExists(flags))
                 {
                     return true;
@@ -81,9 +81,9 @@ namespace Game.GameEngine.InventorySystem
 
         public bool FindItemFirst(string name, out InventoryItem item)
         {
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                item = this.items[i];
+                item = items[i];
                 if (item.Name == name)
                 {
                     return true;
@@ -96,9 +96,9 @@ namespace Game.GameEngine.InventorySystem
 
         public bool FindItemLast(string name, out InventoryItem item)
         {
-            for (var i = this.items.Count - 1; i >= 0; i--)
+            for (var i = items.Count - 1; i >= 0; i--)
             {
-                item = this.items[i];
+                item = items[i];
                 if (item.Name == name)
                 {
                     return true;
@@ -111,9 +111,9 @@ namespace Game.GameEngine.InventorySystem
 
         public bool FindItemFirst(Func<InventoryItem, bool> predicate, out InventoryItem item)
         {
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                item = this.items[i];
+                item = items[i];
                 if (predicate.Invoke(item))
                 {
                     return true;
@@ -127,9 +127,9 @@ namespace Game.GameEngine.InventorySystem
         public InventoryItem[] FindItems(InventoryItemFlags flags)
         {
             var result = new List<InventoryItem>();
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 if (item.FlagsExists(flags))
                 {
                     result.Add(item);
@@ -142,9 +142,9 @@ namespace Game.GameEngine.InventorySystem
         public InventoryItem[] FindItems(string name)
         {
             var result = new List<InventoryItem>();
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 if (item.Name == name)
                 {
                     result.Add(item);
@@ -157,9 +157,9 @@ namespace Game.GameEngine.InventorySystem
         public int CountItems(InventoryItemFlags flags)
         {
             var result = 0;
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 if (item.FlagsExists(flags))
                 {
                     result++;
@@ -172,9 +172,9 @@ namespace Game.GameEngine.InventorySystem
         public int CountItems(string itemName)
         {
             var result = 0;
-            for (int i = 0, count = this.items.Count; i < count; i++)
+            for (int i = 0, count = items.Count; i < count; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 if (item.Name == itemName)
                 {
                     result++;

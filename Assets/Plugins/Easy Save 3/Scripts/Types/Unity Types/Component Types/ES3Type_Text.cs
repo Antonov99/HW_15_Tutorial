@@ -60,7 +60,7 @@ namespace ES3Types
 						reader.SetPrivateField("m_LastTrackedFont", reader.Read<UnityEngine.Font>(), instance);
 						break;
 					case "m_Text":
-						reader.SetPrivateField("m_Text", reader.Read<System.String>(), instance);
+						reader.SetPrivateField("m_Text", reader.Read<String>(), instance);
 						break;
 					case "m_TextCache":
 						reader.SetPrivateField("m_TextCache", reader.Read<UnityEngine.TextGenerator>(), instance);
@@ -75,28 +75,28 @@ namespace ES3Types
 						instance.font = reader.Read<UnityEngine.Font>();
 						break;
 					case "text":
-						instance.text = reader.Read<System.String>();
+						instance.text = reader.Read<String>();
 						break;
 					case "supportRichText":
-						instance.supportRichText = reader.Read<System.Boolean>();
+						instance.supportRichText = reader.Read<Boolean>();
 						break;
 					case "resizeTextForBestFit":
-						instance.resizeTextForBestFit = reader.Read<System.Boolean>();
+						instance.resizeTextForBestFit = reader.Read<Boolean>();
 						break;
 					case "resizeTextMinSize":
-						instance.resizeTextMinSize = reader.Read<System.Int32>();
+						instance.resizeTextMinSize = reader.Read<Int32>();
 						break;
 					case "resizeTextMaxSize":
-						instance.resizeTextMaxSize = reader.Read<System.Int32>();
+						instance.resizeTextMaxSize = reader.Read<Int32>();
 						break;
 					case "alignment":
 						instance.alignment = reader.Read<UnityEngine.TextAnchor>();
 						break;
 					case "alignByGeometry":
-						instance.alignByGeometry = reader.Read<System.Boolean>();
+						instance.alignByGeometry = reader.Read<Boolean>();
 						break;
 					case "fontSize":
-						instance.fontSize = reader.Read<System.Int32>();
+						instance.fontSize = reader.Read<Int32>();
 						break;
 					case "horizontalOverflow":
 						instance.horizontalOverflow = reader.Read<UnityEngine.HorizontalWrapMode>();
@@ -105,7 +105,7 @@ namespace ES3Types
 						instance.verticalOverflow = reader.Read<UnityEngine.VerticalWrapMode>();
 						break;
 					case "lineSpacing":
-						instance.lineSpacing = reader.Read<System.Single>();
+						instance.lineSpacing = reader.Read<Single>();
 						break;
 					case "fontStyle":
 						instance.fontStyle = reader.Read<UnityEngine.FontStyle>();
@@ -114,22 +114,22 @@ namespace ES3Types
 						instance.onCullStateChanged = reader.Read<UnityEngine.UI.MaskableGraphic.CullStateChangedEvent>();
 						break;
 					case "maskable":
-						instance.maskable = reader.Read<System.Boolean>();
+						instance.maskable = reader.Read<Boolean>();
 						break;
 					case "color":
 						instance.color = reader.Read<UnityEngine.Color>();
 						break;
 					case "raycastTarget":
-						instance.raycastTarget = reader.Read<System.Boolean>();
+						instance.raycastTarget = reader.Read<Boolean>();
 						break;
 					case "material":
 						instance.material = reader.Read<UnityEngine.Material>();
 						break;
 					case "useGUILayout":
-						instance.useGUILayout = reader.Read<System.Boolean>();
+						instance.useGUILayout = reader.Read<Boolean>();
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>();
+						instance.enabled = reader.Read<Boolean>();
 						break;
 					case "hideFlags":
 						instance.hideFlags = reader.Read<UnityEngine.HideFlags>();

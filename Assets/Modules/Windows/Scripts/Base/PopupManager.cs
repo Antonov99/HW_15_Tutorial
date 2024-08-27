@@ -12,7 +12,7 @@ namespace Windows
 
         public bool HasActivePopups
         {
-            get { return this.activePopups.Count > 0; }
+            get { return activePopups.Count > 0; }
         }
 
         private IWindowSupplier<TKey, TPopup> supplier;
@@ -24,77 +24,77 @@ namespace Windows
         public PopupManager(IWindowSupplier<TKey, TPopup> supplier = null)
         {
             this.supplier = supplier;
-            this.activePopups = new Dictionary<TKey, TPopup>();
-            this.cache = new List<TKey>();
+            activePopups = new Dictionary<TKey, TPopup>();
+            cache = new List<TKey>();
         }
 
         [Button]
         public void ShowPopup(TKey key, object args = default)
         {
-            if (!this.IsPopupActive(key))
+            if (!IsPopupActive(key))
             {
-                this.ShowPopupInternal(key, args);
+                ShowPopupInternal(key, args);
             }
         }
 
         [Button]
         public void HidePopup(TKey key)
         {
-            if (this.IsPopupActive(key))
+            if (IsPopupActive(key))
             {
-                this.HidePopupInternal(key);
+                HidePopupInternal(key);
             }
         }
 
         [Button]
         public void HideAllPopups()
         {
-            this.cache.Clear();
-            this.cache.AddRange(this.activePopups.Keys);
+            cache.Clear();
+            cache.AddRange(activePopups.Keys);
 
-            for (int i = 0, count = this.cache.Count; i < count; i++)
+            for (int i = 0, count = cache.Count; i < count; i++)
             {
-                var popupName = this.cache[i];
-                this.HidePopupInternal(popupName);
+                var popupName = cache[i];
+                HidePopupInternal(popupName);
             }
         }
 
         public bool IsPopupActive(TKey key)
         {
-            return this.activePopups.ContainsKey(key);
+            return activePopups.ContainsKey(key);
         }
 
         void IWindow.Callback.OnClose(IWindow window)
         {
             var popup = (TPopup) window;
-            if (this.TryFindName(popup, out var popupName))
+            if (TryFindName(popup, out var popupName))
             {
-                this.HidePopup(popupName);
+                HidePopup(popupName);
             }
         }
 
         private void ShowPopupInternal(TKey name, object args)
         {
-            var popup = this.supplier.LoadWindow(name);
+            var popup = supplier.LoadWindow(name);
             popup.Show(args, callback: this);
 
-            this.activePopups.Add(name, popup);
-            this.OnPopupShown?.Invoke(name);
+            activePopups.Add(name, popup);
+            OnPopupShown?.Invoke(name);
         }
 
         private void HidePopupInternal(TKey name)
         {
-            var popup = this.activePopups[name];
+            var popup = activePopups[name];
             popup.Hide();
 
-            this.activePopups.Remove(name);
-            this.supplier.UnloadWindow(popup);
-            this.OnPopupHidden?.Invoke(name);
+            activePopups.Remove(name);
+            supplier.UnloadWindow(popup);
+            OnPopupHidden?.Invoke(name);
         }
 
         private bool TryFindName(TPopup popup, out TKey name)
         {
-            foreach (var (key, otherPopup) in this.activePopups)
+            foreach (var (key, otherPopup) in activePopups)
             {
                 if (ReferenceEquals(popup, otherPopup))
                 {

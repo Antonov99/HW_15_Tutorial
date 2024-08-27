@@ -18,7 +18,7 @@ namespace Game.GameEngine.AI
             
         public IEnumerator<Vector3> CreateIterator()
         {
-            return IteratorFactory.CreateIterator(this.patrolMode, this.patrolPoints);
+            return IteratorFactory.CreateIterator(patrolMode, patrolPoints);
         }
     }
 }

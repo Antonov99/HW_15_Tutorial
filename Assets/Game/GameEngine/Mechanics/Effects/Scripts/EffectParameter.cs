@@ -18,12 +18,12 @@ namespace Game.GameEngine.Mechanics
     {
         public EffectId Name
         {
-            get { return this.name; }
+            get { return name; }
         }
 
         public T Value
         {
-            get { return this.value; }
+            get { return value; }
         }
 
         [SerializeField]

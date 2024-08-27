@@ -14,12 +14,12 @@ namespace Game.GameEngine.Mechanics
 
         void IGameStartElement.StartGame()
         {
-            this.unit.Get<IComponent_Enable>().SetEnable(true);
+            unit.Get<IComponent_Enable>().SetEnable(true);
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.unit.Get<IComponent_Enable>().SetEnable(false);
+            unit.Get<IComponent_Enable>().SetEnable(false);
         }
     }
 }

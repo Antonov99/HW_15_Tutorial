@@ -11,17 +11,17 @@ namespace Game.Meta
     {
         public Sprite Icon
         {
-            get { return this.config.Metadata.icon; }
+            get { return config.Metadata.icon; }
         }
 
         public string Title
         {
-            get { return this.config.Metadata.title; }
+            get { return config.Metadata.title; }
         }
 
         public string Decription
         {
-            get { return this.config.Metadata.decription; }
+            get { return config.Metadata.decription; }
         }
 
         [SerializeField]

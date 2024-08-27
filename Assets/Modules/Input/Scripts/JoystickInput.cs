@@ -33,13 +33,13 @@ namespace InputModule
 
         private void Awake()
         {
-            this.eventSystem = EventSystem.current;
+            eventSystem = EventSystem.current;
         }
 
         private void Update()
         {
 #if UNITY_EDITOR
-            this.UpdateMouse();
+            UpdateMouse();
 #else
             this.UpdateTouch();
 #endif
@@ -49,28 +49,28 @@ namespace InputModule
 #if UNITY_EDITOR
         private void UpdateMouse()
         {
-            if (Input.GetMouseButtonDown(MOUSE_BUTTON) && !this.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(MOUSE_BUTTON) && !IsPointerOverGameObject())
             {
-                this.StartInput(Input.mousePosition);
+                StartInput(Input.mousePosition);
             }
-            else if (this.isHoldStarted && Input.GetMouseButton(MOUSE_BUTTON))
+            else if (isHoldStarted && Input.GetMouseButton(MOUSE_BUTTON))
             {
-                this.ProcessMove(Input.mousePosition);
+                ProcessMove(Input.mousePosition);
             }
-            else if (this.isHoldStarted && Input.GetMouseButtonUp(MOUSE_BUTTON))
+            else if (isHoldStarted && Input.GetMouseButtonUp(MOUSE_BUTTON))
             {
-                this.EndInput(Input.mousePosition);
+                EndInput(Input.mousePosition);
             }
         }
         
         private bool IsPointerOverGameObject()
         {
-            if (this.eventSystem == null)
+            if (eventSystem == null)
             {
                 return false;
             }
 
-            return this.eventSystem.IsPointerOverGameObject();
+            return eventSystem.IsPointerOverGameObject();
         }
 #else
         private void UpdateTouch()
@@ -110,36 +110,36 @@ namespace InputModule
 
         private void StartInput(Vector2 inputPosition)
         {
-            this.isHoldStarted = true;
-            this.centerScreenPosition = inputPosition;
-            this.OnPositionStarted?.Invoke(inputPosition);
+            isHoldStarted = true;
+            centerScreenPosition = inputPosition;
+            OnPositionStarted?.Invoke(inputPosition);
         }
 
         private void ProcessMove(Vector2 inputPosition)
         {
-            var screenVector = inputPosition - this.centerScreenPosition;
-            if (this.isMoveStarted || screenVector.magnitude > MIN_MAGNITUDE)
+            var screenVector = inputPosition - centerScreenPosition;
+            if (isMoveStarted || screenVector.magnitude > MIN_MAGNITUDE)
             {
-                this.isMoveStarted = true;
-                this.OnPositionMoved?.Invoke(inputPosition);
-                this.OnDirectionMoved?.Invoke(screenVector.normalized);
+                isMoveStarted = true;
+                OnPositionMoved?.Invoke(inputPosition);
+                OnDirectionMoved?.Invoke(screenVector.normalized);
             }
         }
 
         private void EndInput(Vector2 inputPosition)
         {
-            this.isMoveStarted = false;
-            this.isHoldStarted = false;
-            this.OnPositionEnded?.Invoke(inputPosition);
+            isMoveStarted = false;
+            isHoldStarted = false;
+            OnPositionEnded?.Invoke(inputPosition);
         }
 
         public void CancelInput()
         {
-            if (this.isHoldStarted)
+            if (isHoldStarted)
             {
-                this.isMoveStarted = false;
-                this.isHoldStarted = false;
-                this.OnCanceled?.Invoke();
+                isMoveStarted = false;
+                isHoldStarted = false;
+                OnCanceled?.Invoke();
             }
         }
     }

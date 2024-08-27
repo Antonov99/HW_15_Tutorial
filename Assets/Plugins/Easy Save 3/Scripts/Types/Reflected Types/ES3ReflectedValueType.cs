@@ -22,10 +22,10 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var obj = ES3Reflection.CreateInstance(this.type);
+			var obj = ES3Reflection.CreateInstance(type);
 
 			if(obj == null)
-				throw new NotSupportedException("Cannot create an instance of "+this.type+". However, you may be able to add support for it using a custom ES3Type file. For more information see: http://docs.moodkie.com/easy-save-3/es3-guides/controlling-serialization-using-es3types/");
+				throw new NotSupportedException("Cannot create an instance of "+type+". However, you may be able to add support for it using a custom ES3Type file. For more information see: http://docs.moodkie.com/easy-save-3/es3-guides/controlling-serialization-using-es3types/");
 			// Make sure we return the result of ReadProperties as properties aren't assigned by reference.
 			return ReadProperties(reader, obj);
 		}

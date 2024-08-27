@@ -9,7 +9,7 @@ namespace AI.Agents
 
         public bool IsPathFinished
         {
-            get { return this.isPathFinished; }
+            get { return isPathFinished; }
         }
 
         private readonly List<T> currentPath = new ();
@@ -20,35 +20,35 @@ namespace AI.Agents
         
         public void SetPath(IEnumerable<T> points)
         {
-            this.currentPath.Clear();
-            this.currentPath.AddRange(points);
+            currentPath.Clear();
+            currentPath.AddRange(points);
 
-            this.pointer = 0;
-            this.isPathFinished = false;
+            pointer = 0;
+            isPathFinished = false;
         }
 
         protected override void Update()
         {
-            if (this.isPathFinished)
+            if (isPathFinished)
             {
                 return;
             }
 
-            if (this.pointer >= this.currentPath.Count)
+            if (pointer >= currentPath.Count)
             {
-                this.isPathFinished = true;
-                this.OnPathFinished?.Invoke();
+                isPathFinished = true;
+                OnPathFinished?.Invoke();
                 return;
             }
 
-            var targetPoint = this.currentPath[this.pointer];
-            if (this.CheckPointReached(targetPoint))
+            var targetPoint = currentPath[pointer];
+            if (CheckPointReached(targetPoint))
             {
-                this.pointer++;
+                pointer++;
             }
             else
             {
-                this.MoveToPoint(targetPoint);
+                MoveToPoint(targetPoint);
             }
         }
 

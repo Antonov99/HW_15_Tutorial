@@ -9,19 +9,19 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.enabled = true;
+            enabled = true;
         }
 
         public override void Exit()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         void IUpdateListener.Update(float deltaTime)
         {
-            if (this.enabled)
+            if (enabled)
             {
-                this.Update(deltaTime);
+                Update(deltaTime);
             }
         }
 

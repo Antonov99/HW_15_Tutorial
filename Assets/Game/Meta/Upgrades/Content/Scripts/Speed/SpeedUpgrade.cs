@@ -20,29 +20,29 @@ namespace Game.Meta
 
         public override string CurrentStats
         {
-            get { return this.config.speedTable.GetSpeed(this.Level).ToString("F2"); }
+            get { return config.speedTable.GetSpeed(Level).ToString("F2"); }
         }
 
         public override string NextImprovement
         {
-            get { return this.config.speedTable.SpeedStep.ToString("F2"); }
+            get { return config.speedTable.SpeedStep.ToString("F2"); }
         }
 
         protected override void LevelUp(int level)
         {
-            this.SetSpeed(level);
+            SetSpeed(level);
         }
 
         private void SetSpeed(int level)
         {
-            var speed = this.config.speedTable.GetSpeed(level);
-            this.heroComponent.SetSpeed(speed);
+            var speed = config.speedTable.GetSpeed(level);
+            heroComponent.SetSpeed(speed);
         }
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_SetMoveSpeed>();
-            this.SetSpeed(this.Level);
+            heroComponent = heroService.GetHero().Get<IComponent_SetMoveSpeed>();
+            SetSpeed(Level);
         }
     }
 }

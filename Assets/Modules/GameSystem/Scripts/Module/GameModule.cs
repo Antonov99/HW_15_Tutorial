@@ -25,12 +25,12 @@ namespace GameSystem
         {
             get
             {
-                if (this._cachedFields == null)
+                if (_cachedFields == null)
                 {
-                    this._cachedFields = this.CacheFields();
+                    _cachedFields = CacheFields();
                 }
 
-                return this._cachedFields;
+                return _cachedFields;
             }
         }
 
@@ -39,7 +39,7 @@ namespace GameSystem
         private List<Field> CacheFields()
         {
             var result = new List<Field>();
-            var type = this.GetType();
+            var type = GetType();
             var fields = type.GetFields(BindingFlags.Instance |
                                         BindingFlags.Public |
                                         BindingFlags.NonPublic |
@@ -62,22 +62,22 @@ namespace GameSystem
 
         public virtual IEnumerable<IGameElement> GetElements()
         {
-            return this.ScanElements();
+            return ScanElements();
         }
 
         public virtual IEnumerable<object> GetServices()
         {
-            return this.ScanServices();
+            return ScanServices();
         }
 
         public virtual void ConstructGame(GameContext context)
         {
-            this.Construct(context);
+            Construct(context);
         }
 
         protected IEnumerable<IGameElement> ScanElements()
         {
-            var fields = this.cachedFields;
+            var fields = cachedFields;
             for (int i = 0, count = fields.Count; i < count; i++)
             {
                 var field = fields[i];
@@ -90,7 +90,7 @@ namespace GameSystem
 
         private IEnumerable<object> ScanServices()
         {
-            var fields = this.cachedFields;
+            var fields = cachedFields;
             for (int i = 0, count = fields.Count; i < count; i++)
             {
                 var field = fields[i];
@@ -103,11 +103,11 @@ namespace GameSystem
         
         protected void Construct(GameContext context)
         {
-            var fields = this.cachedFields;
+            var fields = cachedFields;
             for (int i = 0, count = fields.Count; i < count; i++)
             {
                 var field = fields[i];
-                this.InjectObject(context, field.type, field.value);
+                InjectObject(context, field.type, field.value);
             }
         }
 
@@ -120,8 +120,8 @@ namespace GameSystem
                     break;
                 }
 
-                this.InjectByFields(source, target, type);
-                this.InjectByMethods(source, target, type);
+                InjectByFields(source, target, type);
+                InjectByMethods(source, target, type);
 
                 type = type.BaseType;
             }
@@ -139,15 +139,15 @@ namespace GameSystem
                 var field = fields[i];
                 if (field.IsDefined(INJECT_ATTRIBUTE))
                 {
-                    this.InjectByField(context, target, field);
+                    InjectByField(context, target, field);
                 }
             }
         }
 
-        private void InjectByField(GameContext context, object target, System.Reflection.FieldInfo field)
+        private void InjectByField(GameContext context, object target, FieldInfo field)
         {
             var fieldType = field.FieldType;
-            var value = this.ResolveReference(context, fieldType);
+            var value = ResolveReference(context, fieldType);
             field.SetValue(target, value);
         }
 
@@ -163,7 +163,7 @@ namespace GameSystem
                 var method = methods[i];
                 if (method.IsDefined(INJECT_ATTRIBUTE))
                 {
-                    this.InjectByMethod(context, target, method);
+                    InjectByMethod(context, target, method);
                 }
             }
         }
@@ -178,7 +178,7 @@ namespace GameSystem
             {
                 var parameter = parameters[i];
                 var parameterType = parameter.ParameterType;
-                args[i] = this.ResolveReference(context, parameterType);
+                args[i] = ResolveReference(context, parameterType);
             }
 
             method.Invoke(target, args);
@@ -186,7 +186,7 @@ namespace GameSystem
 
         private object ResolveReference(GameContext context, Type type)
         {
-            if (this.ResolveReferenceFromCache(type, out var arg))
+            if (ResolveReferenceFromCache(type, out var arg))
             {
                 return arg;
             }
@@ -197,7 +197,7 @@ namespace GameSystem
 
         private bool ResolveReferenceFromCache(Type type, out object value)
         {
-            var fields = this.cachedFields;
+            var fields = cachedFields;
             for (int i = 0, count = fields.Count; i < count; i++)
             {
                 var metadata = fields[i];
@@ -214,14 +214,14 @@ namespace GameSystem
 
         protected T Instantiate<T>(GameContext context)
         {
-            return (T) this.Instantiate(context, typeof(T));
+            return (T) Instantiate(context, typeof(T));
         }
 
         protected object Instantiate(GameContext context, Type type)
         {
-            var constructors = type.GetConstructors(System.Reflection.BindingFlags.Instance |
-                                                    System.Reflection.BindingFlags.Public |
-                                                    System.Reflection.BindingFlags.DeclaredOnly);
+            var constructors = type.GetConstructors(BindingFlags.Instance |
+                                                    BindingFlags.Public |
+                                                    BindingFlags.DeclaredOnly);
 
             for (var i = 0; i < constructors.Length; i++)
             {
@@ -250,7 +250,7 @@ namespace GameSystem
             for (var i = 0; i < count; i++)
             {
                 var parameter = parameters[i];
-                args[i] = this.ResolveReference(context, parameter.ParameterType);
+                args[i] = ResolveReference(context, parameter.ParameterType);
             }
 
             return constructor.Invoke(args);

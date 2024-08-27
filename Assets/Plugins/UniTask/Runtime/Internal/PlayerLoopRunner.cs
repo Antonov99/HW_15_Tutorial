@@ -22,7 +22,7 @@ namespace Cysharp.Threading.Tasks.Internal
 
         public PlayerLoopRunner(PlayerLoopTiming timing)
         {
-            this.unhandledExceptionCallback = ex => Debug.LogException(ex);
+            unhandledExceptionCallback = ex => Debug.LogException(ex);
             this.timing = timing;
         }
 

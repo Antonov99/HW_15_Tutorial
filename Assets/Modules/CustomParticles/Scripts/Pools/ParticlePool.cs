@@ -19,38 +19,38 @@ namespace CustomParticles
 
         protected virtual void Awake()
         {
-            this.particlePool = new List<T>(this.initialSize);
-            for (var i = 0; i < this.initialSize; i++)
+            particlePool = new List<T>(initialSize);
+            for (var i = 0; i < initialSize; i++)
             {
-                var particle = Instantiate(this.particlePrefab, this.pool);
-                this.particlePool.Add(particle);
+                var particle = Instantiate(particlePrefab, pool);
+                particlePool.Add(particle);
             }
 
-            this.pool.gameObject.SetActive(false);
+            pool.gameObject.SetActive(false);
         }
 
         public virtual T Get(Transform parent)
         {
-            var count = this.particlePool.Count;
+            var count = particlePool.Count;
             if (count <= 0)
             {
-                return Instantiate(this.particlePrefab, parent);
+                return Instantiate(particlePrefab, parent);
             }
 
             var lastIndex = count - 1;
-            var particle = this.particlePool[lastIndex];
-            this.particlePool.RemoveAt(lastIndex);
+            var particle = particlePool[lastIndex];
+            particlePool.RemoveAt(lastIndex);
 
-            var transform = this.GetTransform(particle);
+            var transform = GetTransform(particle);
             transform.SetParent(parent);
             return particle;
         }
 
         public virtual void Release(T particle)
         {
-            var transform = this.GetTransform(particle);
-            transform.SetParent(this.pool);
-            this.particlePool.Add(particle);
+            var transform = GetTransform(particle);
+            transform.SetParent(pool);
+            particlePool.Add(particle);
         }
 
         protected abstract Transform GetTransform(T particle);

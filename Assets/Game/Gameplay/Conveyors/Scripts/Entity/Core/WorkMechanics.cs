@@ -32,40 +32,40 @@ namespace Game.Gameplay.Conveyors
 
         void IEnableListener.OnEnable()
         {
-            this.workTimer.OnFinished += this.OnWorkFinished;
+            workTimer.OnFinished += OnWorkFinished;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.workTimer.OnFinished -= this.OnWorkFinished;
+            workTimer.OnFinished -= OnWorkFinished;
         }
 
         void IFixedUpdateListener.FixedUpdate(float deltaTime)
         {
-            if (!this.isEnable.Current)
+            if (!isEnable.Current)
             {
                 return;
             }
             
-            if (this.CanStartWork())
+            if (CanStartWork())
             {
-                this.StartWork();
+                StartWork();
             }
         }
 
         private bool CanStartWork()
         {
-            if (this.workTimer.IsPlaying)
+            if (workTimer.IsPlaying)
             {
                 return false;
             }
 
-            if (this.loadStorage.Current == 0)
+            if (loadStorage.Current == 0)
             {
                 return false;
             }
 
-            if (this.unloadStorage.IsLimit)
+            if (unloadStorage.IsLimit)
             {
                 return false;
             }
@@ -75,14 +75,14 @@ namespace Game.Gameplay.Conveyors
 
         private void StartWork()
         {
-            this.loadStorage.Current--;
-            this.workTimer.ResetTime();
-            this.workTimer.Play();
+            loadStorage.Current--;
+            workTimer.ResetTime();
+            workTimer.Play();
         }
 
         private void OnWorkFinished()
         {
-            this.unloadStorage.Current++;
+            unloadStorage.Current++;
         }
     }
 }

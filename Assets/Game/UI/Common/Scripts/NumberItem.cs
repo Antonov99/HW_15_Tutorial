@@ -11,7 +11,7 @@ namespace Game.UI
     {
         public int CurrentValue
         {
-            get { return this.currentValue; }
+            get { return currentValue; }
         }
 
         [Header("Icon")]
@@ -44,37 +44,37 @@ namespace Game.UI
 
         public Vector3 GetIconCenter()
         {
-            return this.iconCenterPoint.position;
+            return iconCenterPoint.position;
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void SetupNumber(int number)
         {
-            this.currentValue = number;
-            this.UpdateText();
+            currentValue = number;
+            UpdateText();
         }
 
         public void UpdateNumber(int number)
         {
-            this.currentValue = number;
-            this.UpdateText();
+            currentValue = number;
+            UpdateText();
         }
 
         public void IncrementNumber(int range)
         {
             range = Math.Max(0, range);
-            this.currentValue += range;
-            this.UpdateText();
-            this.AnimateBounce();
+            currentValue += range;
+            UpdateText();
+            AnimateBounce();
         }
 
         private void AnimateBounce()
         {
-            var transform = this.iconImage.transform;
+            var transform = iconImage.transform;
             DOTween.Sequence()
                 .Append(transform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), 0.1f))
                 .Append(transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.15f));
@@ -83,19 +83,19 @@ namespace Game.UI
         public void DecrementNumber(int range)
         {
             range = Math.Max(0, range);
-            this.currentValue -= range;
-            this.UpdateText();
+            currentValue -= range;
+            UpdateText();
         }
 
         private void UpdateText()
         {
-            var number = Math.Max(this.currentValue, 0);
+            var number = Math.Max(currentValue, 0);
             var numberString = number.ToString();
 
-            if (this.textMeshPro)
-                this.numberTMP.text = numberString;
+            if (textMeshPro)
+                numberTMP.text = numberString;
             else
-                this.numberText.text = numberString;
+                numberText.text = numberString;
         }
     }
 }

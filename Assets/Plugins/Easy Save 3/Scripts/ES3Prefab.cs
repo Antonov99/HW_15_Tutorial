@@ -31,7 +31,7 @@ namespace ES3Internal
                     mgr.Add(kvp.Key);
         }
 
-        public long Get(UnityEngine.Object obj)
+        public long Get(Object obj)
         {
             long id;
             if (localRefs.TryGetValue(obj, out id))
@@ -39,13 +39,13 @@ namespace ES3Internal
             return -1;
         }
 
-        public long Add(UnityEngine.Object obj)
+        public long Add(Object obj)
         {
             long id;
             if (localRefs.TryGetValue(obj, out id))
                 return id;
 
-            if (!ES3ReferenceMgr.CanBeSaved(obj))
+            if (!ES3ReferenceMgrBase.CanBeSaved(obj))
                 return -1;
             id = GetNewRefID();
             localRefs.Add(obj, id);
@@ -56,7 +56,7 @@ namespace ES3Internal
         {
             var localToGlobal = new Dictionary<string, string>();
 
-            var refMgr = ES3ReferenceMgr.Current;
+            var refMgr = ES3ReferenceMgrBase.Current;
 
             if (refMgr == null)
                 return localToGlobal;
@@ -90,7 +90,7 @@ namespace ES3Internal
         public void GeneratePrefabReferences()
         {
 #if UNITY_2018_3_OR_NEWER
-            if (this.gameObject.scene.name != null || UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() != null)
+            if (gameObject.scene.name != null || UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() != null)
 #else
             if (this.gameObject.scene.name != null)
 #endif
@@ -106,10 +106,10 @@ namespace ES3Internal
                 gos[i] = transforms[i].gameObject;
 
             // Add the GameObject's dependencies to the reference list.
-            foreach (var obj in ES3ReferenceMgr.CollectDependencies(gos))
+            foreach (var obj in ES3ReferenceMgrBase.CollectDependencies(gos))
             {
-                var dependency = (UnityEngine.Object)obj;
-                if (obj == null || !ES3ReferenceMgr.CanBeSaved(dependency))
+                var dependency = (Object)obj;
+                if (obj == null || !ES3ReferenceMgrBase.CanBeSaved(dependency))
                     continue;
 
                 var id = Get(dependency);
@@ -182,7 +182,7 @@ namespace ES3Types
 #if UNITY_EDITOR
             // Use PrefabUtility.InstantiatePrefab if we're saving in the Editor and the application isn't playing.
             // This keeps the connection to the prefab, which is useful for Editor scripts saving data outside of runtime.
-            var instance = Application.isPlaying ? GameObject.Instantiate(es3Prefab.gameObject) : PrefabUtility.InstantiatePrefab(es3Prefab.gameObject);
+            var instance = Application.isPlaying ? Object.Instantiate(es3Prefab.gameObject) : PrefabUtility.InstantiatePrefab(es3Prefab.gameObject);
 #else
             var instance = GameObject.Instantiate(es3Prefab.gameObject);
 #endif

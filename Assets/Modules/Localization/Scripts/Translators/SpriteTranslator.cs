@@ -21,7 +21,7 @@ namespace LocalizationModule
 
         public Sprite GetTranslation(string key, SystemLanguage language)
         {
-            if (!this.entities.TryGetValue(key, out var entity))
+            if (!entities.TryGetValue(key, out var entity))
             {
                 return null;
             }

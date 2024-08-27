@@ -10,7 +10,7 @@ namespace Game.Gameplay.AI
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.Install(this.Blackboard, context);
+            Install(Blackboard, context);
         }
 
         protected abstract void Install(IBlackboard blackboard, GameContext context);

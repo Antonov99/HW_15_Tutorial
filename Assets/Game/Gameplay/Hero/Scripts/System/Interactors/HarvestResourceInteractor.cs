@@ -30,33 +30,33 @@ namespace Game.Gameplay.Hero
 
         public void TryStartHarvest(IEntity resourceObject)
         {
-            if (this.heroComponent.IsHarvesting)
+            if (heroComponent.IsHarvesting)
             {
                 return;
             }
 
-            if (this.delayCoroutine == null)
+            if (delayCoroutine == null)
             {
-                this.delayCoroutine = this.monoContext.StartCoroutine(this.HarvestRoutine(resourceObject));
+                delayCoroutine = monoContext.StartCoroutine(HarvestRoutine(resourceObject));
             }
         }
 
         private IEnumerator HarvestRoutine(IEntity resourceObject)
         {
-            yield return new WaitForSeconds(this.delay);
+            yield return new WaitForSeconds(delay);
 
             var operation = new HarvestResourceOperation(resourceObject);
-            if (this.heroComponent.CanStartHarvest(operation))
+            if (heroComponent.CanStartHarvest(operation))
             {
-                this.heroComponent.StartHarvest(operation);
+                heroComponent.StartHarvest(operation);
             }
 
-            this.delayCoroutine = null;
+            delayCoroutine = null;
         }
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_HarvestResource>();
+            heroComponent = heroService.GetHero().Get<IComponent_HarvestResource>();
         }
     }
 }

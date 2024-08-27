@@ -12,7 +12,7 @@ namespace Elementary
 
         private void Awake()
         {
-            this.transform.SetParent(this.parent, this.worldPositionStays);
+            transform.SetParent(parent, worldPositionStays);
         }
     }
 }

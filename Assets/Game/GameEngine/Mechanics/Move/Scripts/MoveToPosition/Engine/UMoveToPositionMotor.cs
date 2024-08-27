@@ -31,14 +31,14 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public bool CanStartMove(Vector3 operation)
         {
-            if (this.IsMove)
+            if (IsMove)
             {
                 return false;
             }
 
-            for (int i = 0, count = this.preconditions.Length; i < count; i++)
+            for (int i = 0, count = preconditions.Length; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(operation))
                 {
                     return false;
@@ -51,40 +51,40 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void StartMove(Vector3 operation)
         {
-            if (!this.CanStartMove(operation))
+            if (!CanStartMove(operation))
             {
                 return;
             }
 
-            for (int i = 0, count = this.startActions.Length; i < count; i++)
+            for (int i = 0, count = startActions.Length; i < count; i++)
             {
-                var action = this.startActions[i];
+                var action = startActions[i];
                 action.Do(operation);
             }
 
-            this.TargetPosition = operation;
-            this.IsMove = true;
-            this.OnMoveStarted?.Invoke(operation);
+            TargetPosition = operation;
+            IsMove = true;
+            OnMoveStarted?.Invoke(operation);
         }
 
         [Button]
         public void StopMove()
         {
-            if (!this.IsMove)
+            if (!IsMove)
             {
                 return;
             }
 
-            var operation = this.TargetPosition;
-            for (int i = 0, count = this.stopActions.Length; i < count; i++)
+            var operation = TargetPosition;
+            for (int i = 0, count = stopActions.Length; i < count; i++)
             {
-                var action = this.stopActions[i];
+                var action = stopActions[i];
                 action.Do(operation);
             }
 
-            this.IsMove = false;
-            this.TargetPosition = default;
-            this.OnMoveStopped?.Invoke(operation);
+            IsMove = false;
+            TargetPosition = default;
+            OnMoveStopped?.Invoke(operation);
         }
     }
 }

@@ -15,17 +15,17 @@ namespace Game.Tutorial
 
         public bool IsCompleted
         {
-            get { return this.isCompleted; }
+            get { return isCompleted; }
         }
 
         public TutorialStep CurrentStep
         {
-            get { return this.stepList[this.currentIndex]; }
+            get { return stepList[currentIndex]; }
         }
 
         public int CurrentIndex
         {
-            get { return this.currentIndex; }
+            get { return currentIndex; }
         }
 
         internal static TutorialManager Instance { get; private set; }
@@ -55,48 +55,48 @@ namespace Game.Tutorial
         public void Initialize(bool isCompleted = false, int stepIndex = 0)
         {
             this.isCompleted = isCompleted;
-            this.currentIndex = Mathf.Clamp(stepIndex, 0, this.stepList.LastIndex);
+            currentIndex = Mathf.Clamp(stepIndex, 0, stepList.LastIndex);
         }
 
         public void FinishCurrentStep()
         {
-            if (!this.isCompleted)
+            if (!isCompleted)
             {
-                this.OnStepFinished?.Invoke(this.CurrentStep);
+                OnStepFinished?.Invoke(CurrentStep);
             }
         }
 
         public void MoveToNextStep()
         {
-            if (this.isCompleted)
+            if (isCompleted)
             {
                 return;
             }
 
-            if (this.stepList.IsLast(this.currentIndex))
+            if (stepList.IsLast(currentIndex))
             {
-                this.isCompleted = true;
-                this.OnCompleted?.Invoke();
+                isCompleted = true;
+                OnCompleted?.Invoke();
                 return;
             }
 
-            this.currentIndex++;
-            this.OnNextStep?.Invoke(this.CurrentStep);
+            currentIndex++;
+            OnNextStep?.Invoke(CurrentStep);
         }
 
         public bool IsStepPassed(TutorialStep step)
         {
-            if (this.isCompleted)
+            if (isCompleted)
             {
                 return true;
             }
 
-            return this.stepList.IndexOf(step) < this.currentIndex;
+            return stepList.IndexOf(step) < currentIndex;
         }
 
         public int IndexOfStep(TutorialStep step)
         {
-            return this.stepList.IndexOf(step);
+            return stepList.IndexOf(step);
         }
     }
 }

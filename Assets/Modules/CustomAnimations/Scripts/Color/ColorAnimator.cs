@@ -20,49 +20,49 @@ namespace CustomAnimations
 
         public void SetAnimation(ColorAnimation animation)
         {
-            this.config = animation;
+            config = animation;
         }
 
         public void Play()
         {
-            this.ResetState();
-            this.animationCoroutine = this.StartCoroutine(this.AnimateRoutine());
+            ResetState();
+            animationCoroutine = StartCoroutine(AnimateRoutine());
         }
 
         public void Stop()
         {
-            if (this.animationCoroutine != null)
+            if (animationCoroutine != null)
             {
-                this.StopCoroutine(this.animationCoroutine);
-                this.animationCoroutine = null;
+                StopCoroutine(animationCoroutine);
+                animationCoroutine = null;
             }
         }
 
         public void ResetState()
         {
-            this.Stop();
-            this.SetColor(this.defaultColor);
+            Stop();
+            SetColor(defaultColor);
         }
 
         private IEnumerator AnimateRoutine()
         {
             const float end = 1.0f;
             var progress = 0f;
-            var dProgress = Time.deltaTime / this.config.duration;
-            var gradient = this.config.colorGradient;
+            var dProgress = Time.deltaTime / config.duration;
+            var gradient = config.colorGradient;
 
             while (progress < end)
             {
                 progress = Mathf.Min(progress + dProgress, end);
                 var color = gradient.Evaluate(progress);
-                this.SetColor(color);
+                SetColor(color);
                 yield return null;
             }
         }
         
         private void SetColor(Color color)
         {
-            foreach (var graphic in this.graphics)
+            foreach (var graphic in graphics)
             {
                 graphic.color = color;
             }

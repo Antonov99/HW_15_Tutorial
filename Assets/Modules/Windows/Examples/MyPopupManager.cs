@@ -6,7 +6,7 @@ namespace Windows.Examples
     {
         protected override IWindowSupplier<MyPopupId, MonoWindow> Supplier
         {
-            get { return this.supplier; }
+            get { return supplier; }
         }
 
         [SerializeField]

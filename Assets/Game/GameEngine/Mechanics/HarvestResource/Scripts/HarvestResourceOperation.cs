@@ -31,8 +31,8 @@ namespace Game.GameEngine.Mechanics
         public HarvestResourceOperation(IEntity targetResource)
         {
             this.targetResource = targetResource;
-            this.resourceType = targetResource.Get<IComponent_GetResourceType>().Type;
-            this.resourceCount = targetResource.Get<IComponent_GetResourceCount>().Count;
+            resourceType = targetResource.Get<IComponent_GetResourceType>().Type;
+            resourceCount = targetResource.Get<IComponent_GetResourceCount>().Count;
         }
     }
 }

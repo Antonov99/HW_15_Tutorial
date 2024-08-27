@@ -9,7 +9,7 @@ namespace Game.GameEngine.Development
         [MenuItem("Tools/GameEngine/Editor Camera")]
         private static void SelectEditorCamera()
         {
-            Selection.activeObject = GameObject.FindObjectOfType<EditorCamera>();
+            Selection.activeObject = Object.FindObjectOfType<EditorCamera>();
         }
     }
 }

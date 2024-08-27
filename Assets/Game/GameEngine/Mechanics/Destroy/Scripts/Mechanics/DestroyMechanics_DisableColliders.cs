@@ -11,9 +11,9 @@ namespace Game.GameEngine.Mechanics
 
         protected override void Destroy(DestroyArgs destroyArgs)
         {
-            for (int i = 0, count = this.colliders.Length; i < count; i++)
+            for (int i = 0, count = colliders.Length; i < count; i++)
             {
-                var collider = this.colliders[i];
+                var collider = colliders[i];
                 collider.enabled = false;
             }
         }

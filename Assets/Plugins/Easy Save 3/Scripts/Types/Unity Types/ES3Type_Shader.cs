@@ -9,11 +9,11 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Shader() : base(typeof(UnityEngine.Shader)){ Instance = this; }
+		public ES3Type_Shader() : base(typeof(Shader)){ Instance = this; }
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Shader)obj;
+			var instance = (Shader)obj;
 
 			writer.WriteProperty("name", instance.name, ES3Type_string.Instance);
 			writer.WriteProperty("maximumLOD", instance.maximumLOD, ES3Type_int.Instance);
@@ -30,7 +30,7 @@ namespace ES3Types
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.Shader)obj;
+			var instance = (Shader)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
@@ -39,7 +39,7 @@ namespace ES3Types
 						instance.name = reader.Read<string>(ES3Type_string.Instance);
 						break;
 					case "maximumLOD":
-						instance.maximumLOD = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.maximumLOD = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();
@@ -53,7 +53,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_ShaderArray() : base(typeof(UnityEngine.Shader[]), ES3Type_Shader.Instance)
+		public ES3Type_ShaderArray() : base(typeof(Shader[]), ES3Type_Shader.Instance)
 		{
 			Instance = this;
 		}

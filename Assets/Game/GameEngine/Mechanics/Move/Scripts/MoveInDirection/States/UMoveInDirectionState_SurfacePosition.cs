@@ -27,46 +27,46 @@ namespace Game.Gameplay.Hero
 
         public override void Enter()
         {
-            this.isEntered = true;
+            isEntered = true;
         }
 
         public override void Exit()
         {
-            this.isEntered = false;
+            isEntered = false;
         }
 
         private void FixedUpdate()
         {
-            if (this.isEntered)
+            if (isEntered)
             {
-                this.MoveInDirection();
+                MoveInDirection();
             }
         }
 
         private void MoveInDirection()
         {
-            var velocity = this.moveEngine.Direction * (this.speed.Current * Time.fixedDeltaTime);
-            if (this.surfaceHolder.IsSurfaceExists && this.surfaceEnabled)
+            var velocity = moveEngine.Direction * (speed.Current * Time.fixedDeltaTime);
+            if (surfaceHolder.IsSurfaceExists && surfaceEnabled)
             {
-                this.MoveBySurface(velocity);
+                MoveBySurface(velocity);
             }
             else
             {
-                this.transformEngine.MovePosition(velocity);
+                transformEngine.MovePosition(velocity);
             }
         }
 
         private void MoveBySurface(Vector3 velocity)
         {
-            var nextPosition = this.transformEngine.WorldPosition + velocity;
-            var surface = this.surfaceHolder.Surface;
+            var nextPosition = transformEngine.WorldPosition + velocity;
+            var surface = surfaceHolder.Surface;
             if (surface.IsAvailablePosition(nextPosition))
             {
-                this.transformEngine.SetPosiiton(nextPosition);
+                transformEngine.SetPosiiton(nextPosition);
             }
             else if (surface.FindAvailablePosition(nextPosition, out var clampedPosition))
             {
-                this.transformEngine.SetPosiiton(clampedPosition);
+                transformEngine.SetPosiiton(clampedPosition);
             }
         }
     }

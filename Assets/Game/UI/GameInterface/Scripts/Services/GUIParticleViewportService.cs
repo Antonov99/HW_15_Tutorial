@@ -6,12 +6,12 @@ namespace Game.GameEngine.GUI
     {
         public Transform WorldViewport
         {
-            get { return this.worldViewport; }
+            get { return worldViewport; }
         }
 
         public Transform OverlayViewport
         {
-            get { return this.overlayViewport; }
+            get { return overlayViewport; }
         }
 
         [SerializeField]

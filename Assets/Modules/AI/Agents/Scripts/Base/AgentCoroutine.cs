@@ -16,15 +16,15 @@ namespace AI.Agents
 
         protected override void OnStart()
         {
-            this.coroutine = MonoHelper.Instance.StartCoroutine(this.LoopCoroutine());
+            coroutine = MonoHelper.Instance.StartCoroutine(LoopCoroutine());
         }
 
         protected override void OnStop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                MonoHelper.Instance.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                MonoHelper.Instance.StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
 
@@ -32,8 +32,8 @@ namespace AI.Agents
         {
             while (true)
             {
-                yield return this.framePeriod;
-                this.Update();
+                yield return framePeriod;
+                Update();
             }
         }
 

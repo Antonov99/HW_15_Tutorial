@@ -10,19 +10,19 @@ namespace Game.GameEngine.InventorySystem
 
         public int Value
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
 
         public int Size
         {
-            get { return this.size; }
-            set { this.size = value; }
+            get { return size; }
+            set { size = value; }
         }
 
         public bool IsFull
         {
-            get { return this.value >= this.size; }
+            get { return value >= size; }
         }
 
         [SerializeField]
@@ -32,9 +32,9 @@ namespace Game.GameEngine.InventorySystem
 
         private void SetValue(int value)
         {
-            value = Mathf.Clamp(value, 0, this.size);
+            value = Mathf.Clamp(value, 0, size);
             this.value = value;
-            this.OnValueChanged?.Invoke(value);
+            OnValueChanged?.Invoke(value);
         }
 
         public Component_Stackable()
@@ -56,8 +56,8 @@ namespace Game.GameEngine.InventorySystem
         {
             return new Component_Stackable
             {
-                value = this.value,
-                size = this.size
+                value = value,
+                size = size
             };
         }
     }

@@ -9,15 +9,15 @@ namespace Game.GameEngine
 
         public void ResumeGame()
         {
-            if (this.gameContext.CurrentState == GameContext.State.PAUSE)
+            if (gameContext.CurrentState == GameContext.State.PAUSE)
             {
-                this.gameContext.ResumeGame();
+                gameContext.ResumeGame();
             }
         }
 
         void IGameAttachElement.AttachGame(GameContext context)
         {
-            this.gameContext = context;
+            gameContext = context;
         }
     }
 }

@@ -18,26 +18,26 @@ namespace Game.GameEngine
 
         void IGameStartElement.StartGame()
         {
-            this.popupManager.OnPopupShown += this.OnPopupShown;
-            this.popupManager.OnPopupHidden += this.OnPopupHidden;
+            popupManager.OnPopupShown += OnPopupShown;
+            popupManager.OnPopupHidden += OnPopupHidden;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.popupManager.OnPopupShown -= this.OnPopupShown;
-            this.popupManager.OnPopupHidden -= this.OnPopupHidden;
+            popupManager.OnPopupShown -= OnPopupShown;
+            popupManager.OnPopupHidden -= OnPopupHidden;
         }
 
         private void OnPopupShown(PopupName _)
         {
-            this.inputManager.SwitchState(InputStateId.LOCK);
+            inputManager.SwitchState(InputStateId.LOCK);
         }
 
         private void OnPopupHidden(PopupName _)
         {
-            if (!this.popupManager.HasActivePopups)
+            if (!popupManager.HasActivePopups)
             {
-                this.inputManager.SwitchState(InputStateId.BASE);
+                inputManager.SwitchState(InputStateId.BASE);
             }
         }
     }

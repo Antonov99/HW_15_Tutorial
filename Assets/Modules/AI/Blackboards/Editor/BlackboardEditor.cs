@@ -15,17 +15,17 @@ namespace AI.Blackboards.UnityEditor
 
         private void Awake()
         {
-            this.blackboard = (UnityBlackboard) this.target;
+            blackboard = (UnityBlackboard) target;
         }
 
         public override void OnInspectorGUI()
         {
             GUI.enabled = false;
 
-            var varibles = this.blackboard.Editor_GetVaribles();
+            var varibles = blackboard.Editor_GetVaribles();
             foreach (var variable in varibles)
             {
-                this.DrawVariable(variable);
+                DrawVariable(variable);
             }
 
             GUI.enabled = true;

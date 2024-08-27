@@ -10,7 +10,7 @@ namespace AI.BTree
         
         protected override void Run()
         {
-            this.Return(this.success);
+            Return(success);
         }
     }
 }

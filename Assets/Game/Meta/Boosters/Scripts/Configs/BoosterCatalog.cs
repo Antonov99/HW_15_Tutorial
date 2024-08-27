@@ -17,14 +17,14 @@ namespace Game.Meta
 
         public BoosterConfig[] GetAllBoosters()
         {
-            return this.boosters;
+            return boosters;
         }
 
         public BoosterConfig FindBooster(string id)
         {
-            for (int i = 0, count = this.boosters.Length; i < count; i++)
+            for (int i = 0, count = boosters.Length; i < count; i++)
             {
-                var booster = this.boosters[i];
+                var booster = boosters[i];
                 if (booster.id == id)
                 {
                     return booster;

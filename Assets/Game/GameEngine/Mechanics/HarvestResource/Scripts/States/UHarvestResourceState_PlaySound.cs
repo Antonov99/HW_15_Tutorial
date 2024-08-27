@@ -25,27 +25,27 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.hitReceiver.OnEvent += this.OnResourceHit;
+            hitReceiver.OnEvent += OnResourceHit;
         }
 
         public override void Exit()
         {
-            this.hitReceiver.OnEvent -= this.OnResourceHit;
+            hitReceiver.OnEvent -= OnResourceHit;
         }
 
         private void OnResourceHit()
         {
-            var resourceType = this.engine.Current.targetResource
+            var resourceType = engine.Current.targetResource
                 .Get<IComponent_GetResourceType>()
                 .Type;
 
             if (resourceType == ResourceType.WOOD)
             {
-                this.audioSource.PlayOneShot(this.chopSFX);
+                audioSource.PlayOneShot(chopSFX);
             }
             else if (resourceType == ResourceType.STONE)
             {
-                this.audioSource.PlayOneShot(this.mineSFX);
+                audioSource.PlayOneShot(mineSFX);
             }
         }
     }

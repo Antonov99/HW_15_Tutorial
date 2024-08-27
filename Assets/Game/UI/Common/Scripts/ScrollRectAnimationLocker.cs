@@ -16,33 +16,33 @@ namespace Game.UI
 
         private void OnEnable()
         {
-            this.animator.OnShowStarted += this.OnAnimationStarted;
-            this.animator.OnHideStarted += this.OnAnimationStarted;
-            this.animator.OnShowFinished += this.OnAnimationFinished;
-            this.animator.OnHideFinished += this.OnAnimationFinished;
+            animator.OnShowStarted += OnAnimationStarted;
+            animator.OnHideStarted += OnAnimationStarted;
+            animator.OnShowFinished += OnAnimationFinished;
+            animator.OnHideFinished += OnAnimationFinished;
         }
 
         private void OnDisable()
         {
-            this.animator.OnShowStarted -= this.OnAnimationStarted;
-            this.animator.OnHideStarted -= this.OnAnimationStarted;
-            this.animator.OnShowFinished -= this.OnAnimationFinished;
-            this.animator.OnHideFinished -= this.OnAnimationFinished;
+            animator.OnShowStarted -= OnAnimationStarted;
+            animator.OnHideStarted -= OnAnimationStarted;
+            animator.OnShowFinished -= OnAnimationFinished;
+            animator.OnHideFinished -= OnAnimationFinished;
         }
 
         private void OnAnimationStarted()
         {
-            this.rect.enabled = false;
+            rect.enabled = false;
         }
 
         private void OnAnimationFinished()
         {
-            this.rect.enabled = true;
+            rect.enabled = true;
         }
 
         private void Reset()
         {
-            this.rect = this.GetComponent<ScrollRect>();
+            rect = GetComponent<ScrollRect>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Elementary
     {
         public int Current
         {
-            get { return this.value; }
+            get { return value; }
         }
 
         [SerializeField]

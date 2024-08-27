@@ -52,7 +52,7 @@ namespace ES3Types
 			//writer.StartWriteDictionary(dict.Count);
 
 			int i=0;
-			foreach(System.Collections.DictionaryEntry kvp in dict)
+			foreach(DictionaryEntry kvp in dict)
 			{
 				writer.StartWriteDictionaryKey(i);
 				writer.Write(kvp.Key, keyType, memberReferenceMode);

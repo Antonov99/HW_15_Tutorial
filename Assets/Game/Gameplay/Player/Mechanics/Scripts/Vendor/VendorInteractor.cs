@@ -43,17 +43,17 @@ namespace Game.Gameplay.Player
             var vendorInfo = vendor.Get<IComponent_Info>();
             var resourceType = vendorInfo.ResourceType;
 
-            var amount = this.resourceStorage.GetResource(resourceType);
+            var amount = resourceStorage.GetResource(resourceType);
             if (amount <= 0)
             {
                 return;
             }
 
             var price = vendorInfo.PricePerOne;
-            this.resourceStorage.ExtractResource(resourceType, amount);
+            resourceStorage.ExtractResource(resourceType, amount);
 
-            var income = Mathf.RoundToInt(price * amount * this.IncomeMultiplier);
-            this.moneyStorage.EarnMoney(income);
+            var income = Mathf.RoundToInt(price * amount * IncomeMultiplier);
+            moneyStorage.EarnMoney(income);
 
             var result = new VendorSellResult
             {
@@ -63,11 +63,11 @@ namespace Game.Gameplay.Player
                 moneyIncome = income
             };
 
-            this.PlayParticlesToUI(result, income);
-            this.InteractWithVendor(vendor);
-            this.PlaySound();
+            PlayParticlesToUI(result, income);
+            InteractWithVendor(vendor);
+            PlaySound();
             
-            this.OnResourcesSold?.Invoke(result);
+            OnResourcesSold?.Invoke(result);
         }
 
         private void InteractWithVendor(IEntity vendor)
@@ -81,12 +81,12 @@ namespace Game.Gameplay.Player
         private void PlayParticlesToUI(VendorSellResult result, int income)
         {
             var emissionPosition = result.vendor.Get<IComponent_GetParticlePosition>().Position;
-            this.moneyAnimator.PlayIncomeFromWorld(emissionPosition, income);
+            moneyAnimator.PlayIncomeFromWorld(emissionPosition, income);
         }
 
         private void PlaySound()
         {
-            SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.saleSFX);
+            SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, saleSFX);
         }
     }
 }

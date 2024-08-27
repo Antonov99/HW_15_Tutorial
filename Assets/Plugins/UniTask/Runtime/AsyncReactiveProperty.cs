@@ -33,15 +33,15 @@ namespace Cysharp.Threading.Tasks
             }
             set
             {
-                this.latestValue = value;
+                latestValue = value;
                 triggerEvent.SetResult(value);
             }
         }
 
         public AsyncReactiveProperty(T value)
         {
-            this.latestValue = value;
-            this.triggerEvent = default;
+            latestValue = value;
+            triggerEvent = default;
         }
 
         public IUniTaskAsyncEnumerable<T> WithoutCurrent()
@@ -241,7 +241,7 @@ namespace Cysharp.Threading.Tasks
             {
                 this.parent = parent;
                 this.cancellationToken = cancellationToken;
-                this.firstCall = publishCurrentValue;
+                firstCall = publishCurrentValue;
 
                 parent.triggerEvent.Add(this);
                 TaskTracker.TrackActiveTask(this, 3);
@@ -346,7 +346,7 @@ namespace Cysharp.Threading.Tasks
                 while (await enumerator.MoveNextAsync())
                 {
                     var value = enumerator.Current;
-                    this.latestValue = value;
+                    latestValue = value;
                     triggerEvent.SetResult(value);
                 }
             }
@@ -559,7 +559,7 @@ namespace Cysharp.Threading.Tasks
             {
                 this.parent = parent;
                 this.cancellationToken = cancellationToken;
-                this.firstCall = publishCurrentValue;
+                firstCall = publishCurrentValue;
 
                 parent.triggerEvent.Add(this);
                 TaskTracker.TrackActiveTask(this, 3);

@@ -16,7 +16,7 @@ namespace AI.GOAP.UnityEditor
         protected override void OnEnable()
         {
             base.OnEnable();
-            this.agent = (GoalOrientedAgent) this.target;
+            agent = (GoalOrientedAgent) target;
         }
 
         public override void OnInspectorGUI()
@@ -25,25 +25,25 @@ namespace AI.GOAP.UnityEditor
 
             if (EditorApplication.isPlaying)
             {
-                this.DrawPlaymode();
+                DrawPlaymode();
             }
         }
 
         private void DrawPlaymode()
         {
             GUI.enabled = false;
-            this.DrawGoals();
-            this.DrawActions();
-            this.DrawWorldState();
+            DrawGoals();
+            DrawActions();
+            DrawWorldState();
             GUI.enabled = true;
-            this.DrawButtons();
+            DrawButtons();
         }
 
         private void DrawGoals()
         {
             EditorGUILayout.Space(4.0f);
             EditorGUILayout.LabelField("Active Goals");
-            var goals = this.agent.Goals
+            var goals = agent.Goals
                 .OrderByDescending(it => it.IsValid() ? it.EvaluatePriority() : -1);
 
             foreach (var goal in goals)
@@ -68,7 +68,7 @@ namespace AI.GOAP.UnityEditor
         {
             EditorGUILayout.Space(4.0f);
             EditorGUILayout.LabelField("Active Actions");
-            var actions = this.agent.Actions
+            var actions = agent.Actions
                 .OrderByDescending(it => it.IsValid() ? it.EvaluateCost() : -1);
 
             foreach (var action in actions)
@@ -94,12 +94,12 @@ namespace AI.GOAP.UnityEditor
             GUI.enabled = false;
             EditorGUILayout.Space(16);
 
-            this.worldStateFoldout = EditorGUILayout.Foldout(this.worldStateFoldout, "WorldState");
-            if (this.worldStateFoldout)
+            worldStateFoldout = EditorGUILayout.Foldout(worldStateFoldout, "WorldState");
+            if (worldStateFoldout)
             {
                 EditorGUI.indentLevel++;
 
-                var worldState = this.agent.WorldState;
+                var worldState = agent.WorldState;
                 foreach (var (id, value) in worldState)
                 {
                     EditorGUILayout.Toggle(id, value);
@@ -116,17 +116,17 @@ namespace AI.GOAP.UnityEditor
             EditorGUILayout.Space(8.0f);
             if (GUILayout.Button("Play"))
             {
-                this.agent.Play();
+                agent.Play();
             }
 
             if (GUILayout.Button("Replay"))
             {
-                this.agent.Replay();
+                agent.Replay();
             }
 
             if (GUILayout.Button("Cancel"))
             {
-                this.agent.Cancel();
+                agent.Cancel();
             }
         }
     }

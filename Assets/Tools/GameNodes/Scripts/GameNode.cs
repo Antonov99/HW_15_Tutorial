@@ -27,45 +27,45 @@ namespace GameNodes
 
         private void Update()
         {
-            if (!this.installed)
+            if (!installed)
             {
                 return;
             }
 
             var deltaTime = Time.deltaTime;
-            for (int i = 0, count = this.updaters.Count; i < count; i++)
+            for (int i = 0, count = updaters.Count; i < count; i++)
             {
-                var listener = this.updaters[i];
+                var listener = updaters[i];
                 listener.Update(deltaTime);
             }
         }
 
         private void FixedUpdate()
         {
-            if (!this.installed)
+            if (!installed)
             {
                 return;
             }
 
             var deltaTime = Time.fixedDeltaTime;
-            for (int i = 0, count = this.fixedUpdaters.Count; i < count; i++)
+            for (int i = 0, count = fixedUpdaters.Count; i < count; i++)
             {
-                var listener = this.fixedUpdaters[i];
+                var listener = fixedUpdaters[i];
                 listener.FixedUpdate(deltaTime);
             }
         }
 
         private void LateUpdate()
         {
-            if (!this.installed)
+            if (!installed)
             {
                 return;
             }
 
             var deltaTime = Time.deltaTime;
-            for (int i = 0, count = this.lateUpdaters.Count; i < count; i++)
+            for (int i = 0, count = lateUpdaters.Count; i < count; i++)
             {
-                var listener = this.lateUpdaters[i];
+                var listener = lateUpdaters[i];
                 listener.LateUpdate(deltaTime);
             }
         }
@@ -77,28 +77,28 @@ namespace GameNodes
         [ContextMenu("Install")]
         public Task InstallAsync()
         {
-            return Task.Run(this.Install);
+            return Task.Run(Install);
         }
 
         [ContextMenu("Install")]
         public void Install()
         {
-            if (this.installed)
+            if (installed)
             {
-                Debug.LogWarning($"Game Node {this.name} is already installed", this);
+                Debug.LogWarning($"Game Node {name} is already installed", this);
                 return;
             }
 
-            foreach (var service in this.LoadServices())
+            foreach (var service in LoadServices())
             {
-                this.SetupService(service);
+                SetupService(service);
             }
 
-            this.installed = true;
+            installed = true;
 
-            for (int i = 0, count = this.children.Count; i < count; i++)
+            for (int i = 0, count = children.Count; i < count; i++)
             {
-                var node = this.children[i];
+                var node = children[i];
                 node.parent = this;
                 node.Install();
             }
@@ -111,21 +111,21 @@ namespace GameNodes
 
         private void SetupService(object service)
         {
-            this.services.Add(service);
+            services.Add(service);
 
             if (service is IGameUpdater updater)
             {
-                this.updaters.Add(updater);
+                updaters.Add(updater);
             }
 
             if (service is IGameFixedUpdater fixedUpdater)
             {
-                this.fixedUpdaters.Add(fixedUpdater);
+                fixedUpdaters.Add(fixedUpdater);
             }
 
             if (service is IGameLateUpdater lateUpdater)
             {
-                this.lateUpdaters.Add(lateUpdater);
+                lateUpdaters.Add(lateUpdater);
             }
         }
 
@@ -135,32 +135,32 @@ namespace GameNodes
 
         public Task SendAsync<T>() where T : GameEvent
         {
-            return Task.Run(this.Send<T>);
+            return Task.Run(Send<T>);
         }
 
         public void Send<T>() where T : GameEvent
         {
-            if (!this.installed)
+            if (!installed)
             {
-                Debug.LogWarning($"Game Node {this.name} is not installed yet", this);
+                Debug.LogWarning($"Game Node {name} is not installed yet", this);
                 return;
             }
 
-            this.InvokeServices<T>();
+            InvokeServices<T>();
 
-            for (int i = 0, count = this.children.Count; i < count; i++)
+            for (int i = 0, count = children.Count; i < count; i++)
             {
-                var node = this.children[i];
+                var node = children[i];
                 node.Send<T>();
             }
         }
 
         private void InvokeServices<T>() where T : GameEvent
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
-                this.InvokeService<T>(service);
+                var service = services[i];
+                InvokeService<T>(service);
             }
         }
 
@@ -181,7 +181,7 @@ namespace GameNodes
                     var method = methods[i];
                     if (method.GetCustomAttribute<T>() != null)
                     {
-                        this.InvokeServiceMethod(service, method);
+                        InvokeServiceMethod(service, method);
                     }
                 }
 
@@ -199,7 +199,7 @@ namespace GameNodes
             {
                 var parameter = parameters[i];
                 var parameterType = parameter.ParameterType;
-                args[i] = this.Service(parameterType);
+                args[i] = Service(parameterType);
             }
 
             method.Invoke(service, args);
@@ -257,9 +257,9 @@ namespace GameNodes
 
         private bool FindService<T>(out T service)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var current = this.services[i];
+                var current = services[i];
                 if (current is T tService)
                 {
                     service = tService;
@@ -273,9 +273,9 @@ namespace GameNodes
 
         private bool FindService(Type targetType, out object service)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                service = this.services[i];
+                service = services[i];
                 var serviceType = service.GetType();
                 if (targetType.IsAssignableFrom(serviceType))
                 {
@@ -298,9 +298,9 @@ namespace GameNodes
                 predicate = _ => true;
             }
 
-            for (int i = 0, count = this.children.Count; i < count; i++)
+            for (int i = 0, count = children.Count; i < count; i++)
             {
-                var node = this.children[i];
+                var node = children[i];
                 if (node is not T tNode)
                 {
                     continue;
@@ -317,14 +317,14 @@ namespace GameNodes
 
         public void AddNode(GameNode node)
         {
-            this.children.Add(node);
+            children.Add(node);
             node.parent = this;
             node.Install();
         }
 
         public void RemoveNode(GameNode node)
         {
-            if (this.children.Remove(node))
+            if (children.Remove(node))
             {
                 node.parent = null;
             }

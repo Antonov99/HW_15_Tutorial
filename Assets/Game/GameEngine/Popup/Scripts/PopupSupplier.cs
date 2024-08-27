@@ -20,19 +20,19 @@ namespace Game.GameEngine
 
         public MonoWindow LoadWindow(PopupName key)
         {
-            if (this.cashedFrames.TryGetValue(key, out var popup))
+            if (cashedFrames.TryGetValue(key, out var popup))
             {
                 popup.gameObject.SetActive(true);
             }
             else
             {
-                popup = this.factory.CreateWindow(key);
-                this.cashedFrames.Add(key, popup);
+                popup = factory.CreateWindow(key);
+                cashedFrames.Add(key, popup);
             }
             
             if (popup.TryGetComponent(out IGameElement gameElement))
             {
-                this.gameContext.RegisterElement(gameElement);
+                gameContext.RegisterElement(gameElement);
             }
 
             popup.transform.SetAsLastSibling();
@@ -43,7 +43,7 @@ namespace Game.GameEngine
         {
             if (window.TryGetComponent(out IGameElement gameElement))
             {
-                this.gameContext.UnregisterElement(gameElement);
+                gameContext.UnregisterElement(gameElement);
             }
 
             window.gameObject.SetActive(false);

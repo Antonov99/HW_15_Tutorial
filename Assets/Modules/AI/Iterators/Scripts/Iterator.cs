@@ -8,12 +8,12 @@ namespace AI.Iterators
     {
         public T Current
         {
-            get { return this.movePoints[this.pointer]; }
+            get { return movePoints[pointer]; }
         }
 
         object IEnumerator.Current
         {
-            get { return this.Current; }
+            get { return Current; }
         }
 
         protected T[] movePoints;
@@ -22,18 +22,18 @@ namespace AI.Iterators
 
         public Iterator(T[] moveItems)
         {
-            this.SetPoints(moveItems);
+            SetPoints(moveItems);
         }
 
         public Iterator()
         {
-            this.movePoints = new T[0];
+            movePoints = new T[0];
         }
 
         public void SetPoints(T[] movePoints)
         {
             this.movePoints = movePoints;
-            this.pointer = 0;
+            pointer = 0;
         }
 
         public abstract bool MoveNext();

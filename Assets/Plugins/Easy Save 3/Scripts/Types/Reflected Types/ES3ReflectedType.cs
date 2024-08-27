@@ -30,7 +30,7 @@ namespace ES3Types
 
 			// If this is a derived type, write the type as a property and use it's specific ES3Type.
 			var objType = obj.GetType();
-			if(objType != this.type)
+			if(objType != type)
 			{
 				writer.WriteType(objType);
 				ES3TypeMgr.GetOrCreateES3Type(objType).Write(obj, writer);
@@ -67,7 +67,7 @@ namespace ES3Types
 			string propertyName = reader.ReadPropertyName();
 
 			// If we're loading a derived type, use it's specific ES3Type.
-			if(propertyName == ES3Type.typeFieldName)
+			if(propertyName == typeFieldName)
 				return ES3TypeMgr.GetOrCreateES3Type(reader.ReadType()).Read<T>(reader);
 
 			// If we're loading a reference, load it. Else, create an instance.
@@ -78,14 +78,14 @@ namespace ES3Types
 				if(obj == null)
 				{
 					// If an instance isn't already registered for this object, create an instance and register the reference.
-					obj = ES3Reflection.CreateInstance(this.type);
+					obj = ES3Reflection.CreateInstance(type);
 					ES3ReferenceMgrBase.Current.Add((UnityEngine.Object)obj, id);
 				}
 			}
 			else
 			{
 				reader.overridePropertiesName = propertyName;
-				obj = ES3Reflection.CreateInstance(this.type);
+				obj = ES3Reflection.CreateInstance(type);
 			}
 
 			// Iterate through each property in the file and try to load it using the appropriate
@@ -103,7 +103,7 @@ namespace ES3Types
 			string propertyName = reader.ReadPropertyName();
 
 			// If we're loading a derived type, use it's specific ES3Type.
-			if(propertyName == ES3Type.typeFieldName)
+			if(propertyName == typeFieldName)
 			{
 				ES3TypeMgr.GetOrCreateES3Type(reader.ReadType()).ReadInto<T>(reader, obj);
 				return;

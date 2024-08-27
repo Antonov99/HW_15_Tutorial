@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Keyframe() : base(typeof(UnityEngine.Keyframe))
+		public ES3Type_Keyframe() : base(typeof(Keyframe))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Keyframe)obj;
+			var instance = (Keyframe)obj;
 			
 			writer.WriteProperty("time", instance.time, ES3Type_float.Instance);
 			writer.WriteProperty("value", instance.value, ES3Type_float.Instance);
@@ -26,10 +26,10 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			return new UnityEngine.Keyframe(reader.ReadProperty<System.Single>(ES3Type_float.Instance),
-											reader.ReadProperty<System.Single>(ES3Type_float.Instance),
-											reader.ReadProperty<System.Single>(ES3Type_float.Instance),
-											reader.ReadProperty<System.Single>(ES3Type_float.Instance));
+			return new Keyframe(reader.ReadProperty<Single>(ES3Type_float.Instance),
+											reader.ReadProperty<Single>(ES3Type_float.Instance),
+											reader.ReadProperty<Single>(ES3Type_float.Instance),
+											reader.ReadProperty<Single>(ES3Type_float.Instance));
 		}
 	}
 

@@ -28,50 +28,50 @@ namespace PolyAndCode.UI
 
         protected override void Start()
         {
-            this.vertical = Direction == DirectionType.Vertical;
-            this.horizontal = Direction == DirectionType.Horizontal;
+            vertical = Direction == DirectionType.Vertical;
+            horizontal = Direction == DirectionType.Horizontal;
         }
 
         public void Initialize<T>(IDataAdapter<T> adapter) where T : Component
         {
-            this._prevAnchoredPos = content.anchoredPosition;
-            this.onValueChanged.RemoveListener(OnPositionChanged);
-            this.StartCoroutine(this.InitializeRoutine(adapter));
+            _prevAnchoredPos = content.anchoredPosition;
+            onValueChanged.RemoveListener(OnPositionChanged);
+            StartCoroutine(InitializeRoutine(adapter));
         }
 
         private IEnumerator InitializeRoutine<T>(IDataAdapter<T> adapter) where T : Component
         {
-            if (this.Direction == DirectionType.Vertical)
+            if (Direction == DirectionType.Vertical)
             {
-                yield return this.InitializeAsVertical(adapter);
+                yield return InitializeAsVertical(adapter);
             }
-            else if (this.Direction == DirectionType.Horizontal)
+            else if (Direction == DirectionType.Horizontal)
             {
-                yield return this.InitializeAsHorizontal(adapter);
+                yield return InitializeAsHorizontal(adapter);
             }
 
-            this.onValueChanged.AddListener(this.OnPositionChanged);
+            onValueChanged.AddListener(OnPositionChanged);
         }
 
         private IEnumerator InitializeAsVertical<T>(IDataAdapter<T> adapter) where T : Component
         {
-            var scroller = new VerticalScroller<T>(this.viewport, this.content, adapter, this.IsGrid, this.Segments);
+            var scroller = new VerticalScroller<T>(viewport, content, adapter, IsGrid, Segments);
             yield return scroller.Start();
             this.scroller = scroller;
         }
 
         private IEnumerator InitializeAsHorizontal<T>(IDataAdapter<T> adapter) where T : Component
         {
-            var scroller = new HorizontalScroller<T>(this.viewport, this.content, adapter, this.IsGrid, this.Segments);
+            var scroller = new HorizontalScroller<T>(viewport, content, adapter, IsGrid, Segments);
             yield return scroller.Start();
             this.scroller = scroller;
         }
 
         private void OnPositionChanged(Vector2 normalizedPos)
         {
-            var direction = this.content.anchoredPosition - this._prevAnchoredPos;
-            this.m_ContentStartPosition += this.scroller.DoScroll(direction);
-            this._prevAnchoredPos = this.content.anchoredPosition;
+            var direction = content.anchoredPosition - _prevAnchoredPos;
+            m_ContentStartPosition += scroller.DoScroll(direction);
+            _prevAnchoredPos = content.anchoredPosition;
         }
 
         public enum DirectionType

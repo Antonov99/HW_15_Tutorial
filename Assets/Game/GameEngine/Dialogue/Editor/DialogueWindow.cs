@@ -19,20 +19,20 @@ namespace Game.GameEngine.UnityEditor
 
         private void OnEnable()
         {
-            this.InitGraphView();
-            this.InitToolbar();
+            InitGraphView();
+            InitToolbar();
         }
 
         private void InitGraphView()
         {
-            this.graphView = new DialogueGraph();
-            this.graphView.StretchToParentSize();
-            this.rootVisualElement.Add(this.graphView);
+            graphView = new DialogueGraph();
+            graphView.StretchToParentSize();
+            rootVisualElement.Add(graphView);
         }
 
         private void InitToolbar()
         {
-            this.dialogField = new ObjectField("Selected Dialog")
+            dialogField = new ObjectField("Selected Dialog")
             {
                 objectType = typeof(DialogueConfig),
                 allowSceneObjects = false
@@ -43,7 +43,7 @@ namespace Game.GameEngine.UnityEditor
                 text = "Load",
                 clickable = new Clickable(() =>
                 {
-                    DialogueManager.LoadDialog(this.graphView, this.dialogField.value as DialogueConfig);
+                    DialogueManager.LoadDialog(graphView, dialogField.value as DialogueConfig);
                 })
             };
 
@@ -52,25 +52,25 @@ namespace Game.GameEngine.UnityEditor
                 text = "Save",
                 clickable = new Clickable(() =>
                 {
-                    var config = this.dialogField.value as DialogueConfig;
+                    var config = dialogField.value as DialogueConfig;
                     if (config != null)
                     {
-                        DialogueManager.SaveDialog(this.graphView, config);
+                        DialogueManager.SaveDialog(graphView, config);
                     }
                     else
                     {
-                        DialogueManager.CreateDialog(this.graphView, out config);
-                        this.dialogField.value = config;
+                        DialogueManager.CreateDialog(graphView, out config);
+                        dialogField.value = config;
                     }
                 })
             };
 
             var toolbar = new Toolbar();
-            toolbar.Add(this.dialogField);
+            toolbar.Add(dialogField);
             toolbar.Add(loadButton);
             toolbar.Add(saveButton);
 
-            this.rootVisualElement.Add(toolbar);
+            rootVisualElement.Add(toolbar);
         }
     }
 }

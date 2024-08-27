@@ -6,6 +6,7 @@ using GameSystem;
 using Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 namespace Game.App
 {
@@ -25,8 +26,8 @@ namespace Game.App
         {
             await LoadScene();
             
-            var gameContext = GameObject.FindObjectOfType<GameContext>();
-            this.gameFacade.SetupGame(gameContext);
+            var gameContext = Object.FindObjectOfType<GameContext>();
+            gameFacade.SetupGame(gameContext);
             
             callback?.Invoke(LoadingResult.Success());
         }

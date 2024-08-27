@@ -302,16 +302,16 @@ public static class ES3
         // Get the file extension to determine what format we want to save the image as.
         string extension = ES3IO.GetExtension(settings.path).ToLower();
         if (string.IsNullOrEmpty(extension))
-            throw new System.ArgumentException("File path must have a file extension when using ES3.SaveImage.");
+            throw new ArgumentException("File path must have a file extension when using ES3.SaveImage.");
         byte[] bytes;
         if (extension == ".jpg" || extension == ".jpeg")
             bytes = texture.EncodeToJPG(quality);
         else if (extension == ".png")
             bytes = texture.EncodeToPNG();
         else
-            throw new System.ArgumentException("File path must have extension of .png, .jpg or .jpeg when using ES3.SaveImage.");
+            throw new ArgumentException("File path must have extension of .png, .jpg or .jpeg when using ES3.SaveImage.");
 
-        ES3.SaveRaw(bytes, settings);
+        SaveRaw(bytes, settings);
     }
 
     #endregion
@@ -640,7 +640,7 @@ public static class ES3
     /// <param name="settings">The settings we want to use to override the default settings.</param>
     public static string LoadRawString(ES3Settings settings)
     {
-        var bytes = ES3.LoadRawBytes(settings);
+        var bytes = LoadRawBytes(settings);
         return settings.encoding.GetString(bytes, 0, bytes.Length);
     }
 
@@ -664,7 +664,7 @@ public static class ES3
     /// <param name="settings">The settings we want to use to override the default settings.</param>
     public static Texture2D LoadImage(ES3Settings settings)
     {
-        byte[] bytes = ES3.LoadRawBytes(settings);
+        byte[] bytes = LoadRawBytes(settings);
         return LoadImage(bytes);
     }
 
@@ -710,12 +710,12 @@ public static class ES3
         string extension = ES3IO.GetExtension(audioFilePath).ToLower();
 
         if (extension == ".mp3" && (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer))
-            throw new System.InvalidOperationException("You can only load Ogg, WAV, XM, IT, MOD or S3M on Unity Standalone");
+            throw new InvalidOperationException("You can only load Ogg, WAV, XM, IT, MOD or S3M on Unity Standalone");
 
         if (extension == ".ogg" && (Application.platform == RuntimePlatform.IPhonePlayer
                                     || Application.platform == RuntimePlatform.Android
                                     || Application.platform == RuntimePlatform.WSAPlayerARM))
-            throw new System.InvalidOperationException("You can only load MP3, WAV, XM, IT, MOD or S3M on Unity Standalone");
+            throw new InvalidOperationException("You can only load MP3, WAV, XM, IT, MOD or S3M on Unity Standalone");
 
         var newSettings = new ES3Settings(audioFilePath, settings);
 
@@ -730,7 +730,7 @@ public static class ES3
             }
 
             if (ES3WebClass.IsNetworkError(www))
-                throw new System.Exception(www.error);
+                throw new Exception(www.error);
             else
                 return DownloadHandlerAudioClip.GetContent(www);
         }
@@ -874,7 +874,7 @@ public static class ES3
         else if (settings.location == Location.Cache)
             ES3File.RemoveCachedFile(settings);
         else if (settings.location == Location.Resources)
-            throw new System.NotSupportedException("Deleting files from Resources is not supported.");
+            throw new NotSupportedException("Deleting files from Resources is not supported.");
     }
 
     /// <summary>Copies a file from one path to another.</summary>
@@ -920,7 +920,7 @@ public static class ES3
             ES3File.CopyCachedFile(oldSettings, newSettings);
         }
         else if (oldSettings.location == Location.Resources)
-            throw new System.NotSupportedException("Modifying files from Resources is not allowed.");
+            throw new NotSupportedException("Modifying files from Resources is not allowed.");
     }
 
     /// <summary>Renames a file.</summary>
@@ -968,7 +968,7 @@ public static class ES3
             ES3File.RemoveCachedFile(oldSettings);
         }
         else if (oldSettings.location == Location.Resources)
-            throw new System.NotSupportedException("Modifying files from Resources is not allowed.");
+            throw new NotSupportedException("Modifying files from Resources is not allowed.");
     }
 
     /// <summary>Copies a file from one path to another.</summary>
@@ -1003,7 +1003,7 @@ public static class ES3
         if (!DirectoryExists(newSettings))
             ES3IO.CreateDirectory(newSettings.FullPath);
 
-        foreach (var fileName in ES3.GetFiles(oldSettings))
+        foreach (var fileName in GetFiles(oldSettings))
             CopyFile(ES3IO.CombinePathAndFilename(oldSettings.path, fileName),
                         ES3IO.CombinePathAndFilename(newSettings.path, fileName));
 
@@ -1044,9 +1044,9 @@ public static class ES3
             }
         }
         else if (oldSettings.location == Location.PlayerPrefs || oldSettings.location == Location.Cache)
-            throw new System.NotSupportedException("Directories cannot be renamed when saving to Cache, PlayerPrefs, tvOS or using WebGL.");
+            throw new NotSupportedException("Directories cannot be renamed when saving to Cache, PlayerPrefs, tvOS or using WebGL.");
         else if (oldSettings.location == Location.Resources)
-            throw new System.NotSupportedException("Modifying files from Resources is not allowed.");
+            throw new NotSupportedException("Modifying files from Resources is not allowed.");
     }
 
     /// <summary>Deletes the directory at the given path using the settings provided.</summary>
@@ -1071,9 +1071,9 @@ public static class ES3
         if (settings.location == Location.File)
             ES3IO.DeleteDirectory(settings.FullPath);
         else if (settings.location == Location.PlayerPrefs || settings.location == Location.Cache)
-            throw new System.NotSupportedException("Deleting Directories using Cache or PlayerPrefs is not supported.");
+            throw new NotSupportedException("Deleting Directories using Cache or PlayerPrefs is not supported.");
         else if (settings.location == Location.Resources)
-            throw new System.NotSupportedException("Deleting directories from Resources is not allowed.");
+            throw new NotSupportedException("Deleting directories from Resources is not allowed.");
     }
 
     /// <summary>Deletes a key in the default file.</summary>
@@ -1103,10 +1103,10 @@ public static class ES3
     public static void DeleteKey(string key, ES3Settings settings)
     {
         if (settings.location == Location.Resources)
-            throw new System.NotSupportedException("Modifying files in Resources is not allowed.");
+            throw new NotSupportedException("Modifying files in Resources is not allowed.");
         else if (settings.location == Location.Cache)
             ES3File.DeleteKey(key, settings);
-        else if (ES3.FileExists(settings))
+        else if (FileExists(settings))
         {
             using (var writer = ES3Writer.Create(settings))
             {
@@ -1227,9 +1227,9 @@ public static class ES3
         if (settings.location == Location.File)
             return ES3IO.DirectoryExists(settings.FullPath);
         else if (settings.location == Location.PlayerPrefs || settings.location == Location.Cache)
-            throw new System.NotSupportedException("Directories are not supported for the Cache and PlayerPrefs location.");
+            throw new NotSupportedException("Directories are not supported for the Cache and PlayerPrefs location.");
         else if (settings.location == Location.Resources)
-            throw new System.NotSupportedException("Checking existence of folder in Resources not supported.");
+            throw new NotSupportedException("Checking existence of folder in Resources not supported.");
         return false;
     }
 
@@ -1278,9 +1278,9 @@ public static class ES3
     public static string[] GetFiles()
     {
         var settings = new ES3Settings();
-        if (settings.location == ES3.Location.File)
+        if (settings.location == Location.File)
         {
-            if (settings.directory == ES3.Directory.PersistentDataPath)
+            if (settings.directory == Directory.PersistentDataPath)
                 settings.path = Application.persistentDataPath;
             else 
                 settings.path = Application.dataPath;
@@ -1309,8 +1309,8 @@ public static class ES3
     {
         if (settings.location == Location.Cache)
             return ES3File.GetFiles();
-        else if (settings.location != ES3.Location.File)
-            throw new System.NotSupportedException("ES3.GetFiles can only be used when the location is set to File or Cache.");
+        else if (settings.location != Location.File)
+            throw new NotSupportedException("ES3.GetFiles can only be used when the location is set to File or Cache.");
         return ES3IO.GetFiles(settings.FullPath, false);
     }
 
@@ -1339,8 +1339,8 @@ public static class ES3
     /// <param name="settings">The settings we want to use to override the default settings.</param>
     public static string[] GetDirectories(ES3Settings settings)
     {
-        if (settings.location != ES3.Location.File)
-            throw new System.NotSupportedException("ES3.GetDirectories can only be used when the location is set to File.");
+        if (settings.location != Location.File)
+            throw new NotSupportedException("ES3.GetDirectories can only be used when the location is set to File.");
         return ES3IO.GetDirectories(settings.FullPath, false);
     }
 
@@ -1378,7 +1378,7 @@ public static class ES3
     public static void CreateBackup(ES3Settings settings)
     {
         var backupSettings = new ES3Settings(settings.path + ES3IO.backupFileSuffix, settings);
-        ES3.CopyFile(settings, backupSettings);
+        CopyFile(settings, backupSettings);
     }
 
     /// <summary>Restores a backup of a file.</summary>
@@ -1408,7 +1408,7 @@ public static class ES3
         if (!FileExists(backupSettings))
             return false;
 
-        ES3.RenameFile(backupSettings, settings);
+        RenameFile(backupSettings, settings);
 
         return true;
     }

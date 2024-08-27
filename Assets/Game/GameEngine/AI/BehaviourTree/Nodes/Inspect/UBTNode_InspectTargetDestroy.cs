@@ -19,28 +19,28 @@ namespace Game.GameEngine.AI
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!Blackboard.TryGetVariable(targetKey, out IEntity target))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.targetComponent = target.Get<IComponent_OnDestroyed<DestroyArgs>>();
-            this.targetComponent.OnDestroyed += this.OnDestroyed;
+            targetComponent = target.Get<IComponent_OnDestroyed<DestroyArgs>>();
+            targetComponent.OnDestroyed += OnDestroyed;
         }
 
         protected override void OnDispose()
         {
-            if (this.targetComponent != null)
+            if (targetComponent != null)
             {
-                this.targetComponent.OnDestroyed -= this.OnDestroyed;
-                this.targetComponent = null;
+                targetComponent.OnDestroyed -= OnDestroyed;
+                targetComponent = null;
             }
         }
 
         private void OnDestroyed(DestroyArgs destroyArgs)
         {
-            this.Return(false);
+            Return(false);
         }
     }
 }

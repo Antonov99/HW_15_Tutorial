@@ -8,19 +8,19 @@ namespace AI.Commands
     {
         public event Action<T, object> OnEnqueued
         {
-            add { this.enqueuer.OnEnqueued += value; }
-            remove { this.enqueuer.OnEnqueued -= value; }
+            add { enqueuer.OnEnqueued += value; }
+            remove { enqueuer.OnEnqueued -= value; }
         }
 
         public event Action<T, object> OnInterrupted
         {
-            add { this.enqueuer.OnInterrupted += value; }
-            remove { this.enqueuer.OnInterrupted -= value; }
+            add { enqueuer.OnInterrupted += value; }
+            remove { enqueuer.OnInterrupted -= value; }
         }
 
         public bool IsRunning
         {
-            get { return this.enqueuer.IsRunning; }
+            get { return enqueuer.IsRunning; }
         }
 
         [SerializeField]
@@ -30,22 +30,22 @@ namespace AI.Commands
 
         private void Awake()
         {
-            this.enqueuer = new AICommandEnqueuer<T>(this.executor);
+            enqueuer = new AICommandEnqueuer<T>(executor);
         }
 
         public void Enqueue(T key, object args)
         {
-            this.enqueuer.Enqueue(key, args);
+            enqueuer.Enqueue(key, args);
         }
 
         public void Interrupt()
         {
-            this.enqueuer.Interrupt();
+            enqueuer.Interrupt();
         }
 
         public IEnumerable<(T, object)> GetQueue()
         {
-            return this.enqueuer.GetQueue();
+            return enqueuer.GetQueue();
         }
     }
 }

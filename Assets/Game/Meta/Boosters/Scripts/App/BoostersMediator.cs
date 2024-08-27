@@ -15,7 +15,7 @@ namespace Game.Meta
             for (int i = 0, count = dataSet.Length; i < count; i++)
             {
                 var data = dataSet[i];
-                var config = this.assetSupplier.GetBooster(data.id);
+                var config = assetSupplier.GetBooster(data.id);
                 var booster = service.SetupBooster(config);
                 booster.RemainingTime = data.remainingTime;
             }

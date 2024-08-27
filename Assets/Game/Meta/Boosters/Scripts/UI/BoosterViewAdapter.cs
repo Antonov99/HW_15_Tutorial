@@ -23,22 +23,22 @@ namespace Game.Meta
 
         public void Show()
         {
-            var metadata = this.booster.Metadata;
-            this.view.SetIcon(metadata.icon);
-            this.view.SetLabel(metadata.viewLabel);
-            this.view.SetColor(metadata.viewColor);
+            var metadata = booster.Metadata;
+            view.SetIcon(metadata.icon);
+            view.SetLabel(metadata.viewLabel);
+            view.SetColor(metadata.viewColor);
             
-            this.UpdateRemainingTime();
+            UpdateRemainingTime();
 
-            this.timeCoroutine = this.coroutineDispatcher.StartCoroutine(this.UpdateTimeRoutine());
+            timeCoroutine = coroutineDispatcher.StartCoroutine(UpdateTimeRoutine());
         }
 
         public void Hide()
         {
-            if (this.timeCoroutine != null)
+            if (timeCoroutine != null)
             {
-                this.coroutineDispatcher.StopCoroutine(this.timeCoroutine);
-                this.timeCoroutine = null;
+                coroutineDispatcher.StopCoroutine(timeCoroutine);
+                timeCoroutine = null;
             }
         }
 
@@ -48,15 +48,15 @@ namespace Game.Meta
             while (true)
             {
                 yield return period;
-                this.UpdateRemainingTime();
+                UpdateRemainingTime();
             }
         }
 
         private void UpdateRemainingTime()
         {
-            var remainingTime = this.booster.RemainingTime;
-            var progress = remainingTime / this.booster.Duration;
-            this.view.SetProgress(progress);
+            var remainingTime = booster.RemainingTime;
+            var progress = remainingTime / booster.Duration;
+            view.SetProgress(progress);
 
             var timeSpan = TimeSpan.FromSeconds(remainingTime);
             var remainingText = string.Format("{0:D1}h:{1:D2}m:{2:D2}s",
@@ -64,7 +64,7 @@ namespace Game.Meta
                 timeSpan.Minutes,
                 timeSpan.Seconds
             );
-            this.view.SetRemainingText(remainingText);
+            view.SetRemainingText(remainingText);
         }
     }
 }

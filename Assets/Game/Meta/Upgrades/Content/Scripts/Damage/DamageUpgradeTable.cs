@@ -9,7 +9,7 @@ namespace Game.Meta
     {
         public int DamageStep
         {
-            get { return this.damageStep; }
+            get { return damageStep; }
         }
 
         [InfoBox("Damage: Linear Function")]
@@ -31,18 +31,18 @@ namespace Game.Meta
         public int GetDamage(int level)
         {
             var index = level - 1;
-            return this.levels[index];
+            return levels[index];
         }
 
         public void OnValidate(int maxLevel)
         {
-            this.levels = new int[maxLevel];
+            levels = new int[maxLevel];
 
-            var currentDamage = this.startDamage;
+            var currentDamage = startDamage;
             for (var i = 0; i < maxLevel; i++)
             {
-                this.levels[i] = currentDamage;
-                currentDamage += this.damageStep;
+                levels[i] = currentDamage;
+                currentDamage += damageStep;
             }
         }
 

@@ -28,45 +28,45 @@ namespace Game.Tutorial.Gameplay
 
         private void Awake()
         {
-            this.arrow.Hide();
+            arrow.Hide();
         }
 
         private void Update()
         {
-            if (this.isActive)
+            if (isActive)
             {
-                this.arrow.SetPosition(this.heroComponent.Position);
-                this.arrow.LookAt(this.targetPosition);
+                arrow.SetPosition(heroComponent.Position);
+                arrow.LookAt(targetPosition);
             }
         }
         
         [Button]
         public void StartLookAt(Transform targetPoint)
         {
-            this.StartLookAt(targetPoint.position);
+            StartLookAt(targetPoint.position);
         }
 
         public void StartLookAt(Vector3 targetPosition)
         {
-            this.arrow.Show();
-            this.isActive = true;
+            arrow.Show();
+            isActive = true;
             this.targetPosition = targetPosition;
         }
 
         public void Stop()
         {
-            this.arrow.Hide();
-            this.isActive = false;
+            arrow.Hide();
+            isActive = false;
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.heroService = context.GetService<HeroService>();
+            heroService = context.GetService<HeroService>();
         }
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_GetPosition>();
+            heroComponent = heroService.GetHero().Get<IComponent_GetPosition>();
         }
     }
 }

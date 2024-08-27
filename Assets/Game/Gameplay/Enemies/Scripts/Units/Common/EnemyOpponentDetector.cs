@@ -18,20 +18,20 @@ namespace Game.Gameplay.Enemies
         {
             this.blackboard = blackboard;
             this.targetKey = targetKey;
-            this.conditions = detectConditions;
+            conditions = detectConditions;
         }
 
         protected override void ProcessTarget(bool targetFound, IEntity target)
         {
-            if (targetFound && !this.blackboard.HasVariable(this.targetKey))
+            if (targetFound && !blackboard.HasVariable(targetKey))
             {
-                this.blackboard.AddVariable(this.targetKey, target);
+                blackboard.AddVariable(targetKey, target);
                 return;
             }
 
-            if (!targetFound && this.blackboard.HasVariable(this.targetKey))
+            if (!targetFound && blackboard.HasVariable(targetKey))
             {
-                this.blackboard.RemoveVariable(this.targetKey);
+                blackboard.RemoveVariable(targetKey);
             }
         }
     }

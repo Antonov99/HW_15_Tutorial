@@ -55,23 +55,23 @@ namespace Game.Gameplay.ResourceObjects
             [Construct]
             private void ConstructActiveMechanics()
             {
-                this.activeMechanics.Construct(this.isActive, this.collisionLayer.SetActive);
+                activeMechanics.Construct(isActive, collisionLayer.SetActive);
             }
 
             [Construct]
             private void ConstructDestroy()
             {
-                this.destroyEvent.AddListener(() => this.isActive.Current = false);
+                destroyEvent.AddListener(() => isActive.Current = false);
             }
 
             [Construct]
             private void ConstructRespawn(MonoBehaviour context, ScriptableResource config)
             {
-                this.respawnMechanics.ConstructDuration(config.respawnTime);
-                this.respawnMechanics.ConstructDestroyEvent(this.destroyEvent);
-                this.respawnMechanics.ConstructRespawnEvent(this.respawnEvent);
+                respawnMechanics.ConstructDuration(config.respawnTime);
+                respawnMechanics.ConstructDestroyEvent(destroyEvent);
+                respawnMechanics.ConstructRespawnEvent(respawnEvent);
 
-                this.respawnEvent.AddListener(() => this.isActive.Current = true);
+                respawnEvent.AddListener(() => isActive.Current = true);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Game.Gameplay.ResourceObjects
             [Construct]
             private void Construct(ScriptableResource config, Core core)
             {
-                this.entity.AddRange(
+                entity.AddRange(
                     new Component_Transform(core.rootTransform),
                     new Component_ObjectType(config.objectType),
                     new Component_ResourceInfo(config),
@@ -108,7 +108,7 @@ namespace Game.Gameplay.ResourceObjects
             [Construct]
             private void Construct(Core core)
             {
-                core.isActive.AddListener(this.visualObject.SetActive);
+                core.isActive.AddListener(visualObject.SetActive);
             }
         }
 
@@ -121,7 +121,7 @@ namespace Game.Gameplay.ResourceObjects
             [Construct]
             private void Construct(Core core)
             {
-                core.takeHitEvent.AddListener(() => this.animator.Play("Chop", -1, 0));
+                core.takeHitEvent.AddListener(() => animator.Play("Chop", -1, 0));
             }
         }
     }

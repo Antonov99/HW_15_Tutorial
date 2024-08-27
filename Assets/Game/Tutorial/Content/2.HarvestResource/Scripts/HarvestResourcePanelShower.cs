@@ -19,22 +19,22 @@ namespace Game.Tutorial
 
         protected override void OnShow()
         {
-            var title = LocalizationManager.GetCurrentText(this.config.title);
-            this.view.SetTitle(title);
-            this.view.SetIcon(this.config.icon);
+            var title = LocalizationManager.GetCurrentText(config.title);
+            view.SetTitle(title);
+            view.SetIcon(config.icon);
 
-            LanguageManager.OnLanguageChanged += this.OnLanguageChanged;
+            LanguageManager.OnLanguageChanged += OnLanguageChanged;
         }
 
         protected override void OnHide()
         {
-            LanguageManager.OnLanguageChanged -= this.OnLanguageChanged;
+            LanguageManager.OnLanguageChanged -= OnLanguageChanged;
         }
 
         private void OnLanguageChanged(SystemLanguage language)
         {
-            var title = LocalizationManager.GetText(this.config.title, language);
-            this.view.SetTitle(title);
+            var title = LocalizationManager.GetText(config.title, language);
+            view.SetTitle(title);
         }
     }
 }

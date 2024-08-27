@@ -11,14 +11,14 @@ namespace AI.GOAP
 
         private void Awake()
         {
-            this.agent = this.GetComponent<GoalOrientedAgent>();
+            agent = GetComponent<GoalOrientedAgent>();
         }
 
         private void FixedUpdate()
         {
-            if (!this.agent.IsPlaying)
+            if (!agent.IsPlaying)
             {
-                this.agent.Play();
+                agent.Play();
             }
         }
     }

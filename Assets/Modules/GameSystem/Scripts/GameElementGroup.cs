@@ -17,21 +17,21 @@ namespace GameSystem
 
         public IEnumerable<IGameElement> GetElements()
         {
-            for (int i = 0, count = this.gameElements.Count; i < count; i++)
+            for (int i = 0, count = gameElements.Count; i < count; i++)
             {
-                yield return (IGameElement) this.gameElements[i];
+                yield return (IGameElement) gameElements[i];
             }
         }
 
 #if UNITY_EDITOR
         public void Editor_AddElement(IGameElement element)
         {
-            this.gameElements.Add((MonoBehaviour) element);
+            gameElements.Add((MonoBehaviour) element);
         }
 
         private void OnValidate()
         {
-            EditorValidator.ValidateElements(ref this.gameElements);
+            EditorValidator.ValidateElements(ref gameElements);
         }
 #endif
     }

@@ -29,15 +29,15 @@ namespace Polygons
             for (var i = 0; i < length; i++)
             {
                 var point = polygon.GetPoint(i);
-                posiitons[i] = this.ConvertToWorldPosition(point);
+                posiitons[i] = ConvertToWorldPosition(point);
             }
             
             var color = Handles.color;
-            Handles.color = this.strokeColor;
-            Handles.DrawAAPolyLine(this.strokeThickness, posiitons);
-            Handles.DrawAAPolyLine(this.strokeThickness, posiitons[0], posiitons[^1]);
+            Handles.color = strokeColor;
+            Handles.DrawAAPolyLine(strokeThickness, posiitons);
+            Handles.DrawAAPolyLine(strokeThickness, posiitons[0], posiitons[^1]);
 
-            Handles.color = this.fillColor;
+            Handles.color = fillColor;
             Handles.DrawAAConvexPolygon(posiitons);
 
             Handles.color = color;

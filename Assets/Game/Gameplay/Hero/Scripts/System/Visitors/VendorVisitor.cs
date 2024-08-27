@@ -20,7 +20,7 @@ namespace Game.Gameplay.Hero
 
         public VendorVisitor()
         {
-            this.stayCondition = new Condition(true);
+            stayCondition = new Condition(true);
         }
 
         [GameInject]
@@ -31,17 +31,17 @@ namespace Game.Gameplay.Hero
 
         protected override bool CanEnter(IEntity target)
         {
-            return this.vendorCondition.IsTrue(target);
+            return vendorCondition.IsTrue(target);
         }
 
         protected override ICondition ProvideConditions(IEntity target)
         {
-            return this.stayCondition;
+            return stayCondition;
         }
 
         protected override void OnHeroVisit(IEntity entity)
         {
-            this.vendorInteractor.SellResources(entity);
+            vendorInteractor.SellResources(entity);
         }
 
         protected override void OnHeroQuit(IEntity target)

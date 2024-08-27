@@ -18,12 +18,12 @@ namespace Game.Gameplay.Hero
         [GameInject]
         public void Construct(HarvestResourceInteractor interactor)
         {
-            this.resourceInteractor = interactor;
+            resourceInteractor = interactor;
         }
 
         protected override bool MatchesEntity(IEntity entity)
         {
-            return this.resourceCondition.IsTrue(entity);
+            return resourceCondition.IsTrue(entity);
         }
 
         protected override void OnEntitesChanged(List<IEntity> entities)
@@ -31,7 +31,7 @@ namespace Game.Gameplay.Hero
             if (entities.Count > 0)
             {
                 var targetResource = entities[0];
-                this.resourceInteractor.TryStartHarvest(targetResource);
+                resourceInteractor.TryStartHarvest(targetResource);
             }
         }
     }

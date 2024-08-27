@@ -36,28 +36,28 @@ namespace Windows
 
         public void Show()
         {
-            this.OnShowStarted?.Invoke();
-            this.animator.Play(SHOW_ANIMATION_NAME, -1, 0);
+            OnShowStarted?.Invoke();
+            animator.Play(SHOW_ANIMATION_NAME, -1, 0);
         }
 
         public void Hide()
         {
-            this.OnHideStarted?.Invoke();
-            this.animator.Play(HIDE_ANIMATION_NAME, -1, 0);
+            OnHideStarted?.Invoke();
+            animator.Play(HIDE_ANIMATION_NAME, -1, 0);
         }
 
         [UsedImplicitly]
         private void OnShown()
         {
-            this.onShown?.Invoke();
-            this.OnShowFinished?.Invoke();
+            onShown?.Invoke();
+            OnShowFinished?.Invoke();
         }
 
         [UsedImplicitly]
         private void OnHidden()
         {
-            this.onHidden?.Invoke();
-            this.OnHideFinished?.Invoke();
+            onHidden?.Invoke();
+            OnHideFinished?.Invoke();
         }
 
         #endregion
@@ -65,7 +65,7 @@ namespace Windows
 #if UNITY_EDITOR
         private void Reset()
         {
-            this.animator = this.GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
 #endif
     }

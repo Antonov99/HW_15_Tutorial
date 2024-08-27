@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
         public void Do(CombatOperation operation)
         {
             var targetPosition = operation.targetEntity.Get<IComponent_GetPosition>().Position;
-            this.transform.LookAtPosition(targetPosition);
+            transform.LookAtPosition(targetPosition);
         }
     }
 }

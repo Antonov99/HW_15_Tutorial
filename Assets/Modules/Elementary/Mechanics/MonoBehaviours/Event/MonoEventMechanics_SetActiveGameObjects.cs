@@ -18,16 +18,16 @@ namespace Elementary
 
         protected override void OnEvent()
         {
-            this.StartCoroutine(this.EnableObjects());
+            StartCoroutine(EnableObjects());
         }
 
         private IEnumerator EnableObjects()
         {
-            yield return new WaitForSeconds(this.hideDelay);
-            for (int i = 0, count = this.gameObjects.Length; i < count; i++)
+            yield return new WaitForSeconds(hideDelay);
+            for (int i = 0, count = gameObjects.Length; i < count; i++)
             {
-                var visual = this.gameObjects[i];
-                visual.SetActive(this.setActive);
+                var visual = gameObjects[i];
+                visual.SetActive(setActive);
             }
         }
     }

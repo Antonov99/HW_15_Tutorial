@@ -11,17 +11,17 @@ namespace Game.Meta
 
         public UpgradeConfig GetUpgrade(string id)
         {
-            return this.catalog.FindUpgrade(id);
+            return catalog.FindUpgrade(id);
         }
 
         public UpgradeConfig[] GetAllUpgrades()
         {
-            return this.catalog.GetAllUpgrades();
+            return catalog.GetAllUpgrades();
         }
 
         void IConfigLoader.LoadConfigs()
         {
-            this.catalog = Resources.Load<UpgradeCatalog>(UPGRADE_CATALOG);
+            catalog = Resources.Load<UpgradeCatalog>(UPGRADE_CATALOG);
         }
     }
 }

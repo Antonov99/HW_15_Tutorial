@@ -20,7 +20,7 @@ namespace Game.Meta
         protected override void Validate()
         {
             base.Validate();
-            this.speedTable.OnValidate(this.maxLevel);
+            speedTable.OnValidate(maxLevel);
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Game.Gameplay.Conveyors
 
         public IEntity FindConveyor(string id)
         {
-            for (int i = 0, count = this.conveyors.Length; i < count; i++)
+            for (int i = 0, count = conveyors.Length; i < count; i++)
             {
-                var conveyour = this.conveyors[i];
+                var conveyour = conveyors[i];
                 var conveyourId = conveyour.Get<IComponent_GetId>().Id;
                 if (conveyourId == id)
                 {
@@ -30,7 +30,7 @@ namespace Game.Gameplay.Conveyors
 
         public IEntity[] GetAllConveyors()
         {
-            return this.conveyors;
+            return conveyors;
         }
 
         public void SetupConveyours(IEnumerable<IEntity> conveyors)

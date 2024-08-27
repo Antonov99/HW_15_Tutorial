@@ -24,111 +24,111 @@ namespace Game.App
         [ShowInInspector]
         public bool IsActive
         {
-            get { return this.isActive; }
+            get { return isActive; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public bool IsPaused
         {
-            get { return this.isPaused; }
+            get { return isPaused; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public long RealtimeSeconds
         {
-            get { return this.realtimeSeconds; }
+            get { return realtimeSeconds; }
         }
 
         [Title("Methods")]
         [Button]
         public void Play(long realtimeSeconds, long sleepSeconds = 0)
         {
-            this.isActive = true;
-            this.isPaused = false;
+            isActive = true;
+            isPaused = false;
             this.realtimeSeconds = realtimeSeconds;
 
             sleepSeconds = Math.Max(sleepSeconds, 0);
-            this.OnStarted?.Invoke(sleepSeconds);
+            OnStarted?.Invoke(sleepSeconds);
         }
 
         [Button]
         public void End()
         {
-            this.isActive = false;
-            this.isPaused = false;
-            this.OnEnded?.Invoke();
+            isActive = false;
+            isPaused = false;
+            OnEnded?.Invoke();
         }
 
         private void Update()
         {
-            if (this.isActive && !this.isPaused)
+            if (isActive && !isPaused)
             {
-                this.UpdateTime(Time.deltaTime);
+                UpdateTime(Time.deltaTime);
             }
         }
 
         private void OnApplicationPause(bool pauseStatus)
         {
-            if (!this.isActive)
+            if (!isActive)
             {
                 return;
             }
 
             if (pauseStatus)
             {
-                this.Pause();
+                Pause();
             }
             else
             {
-                this.Resume();
+                Resume();
             }
         }
 
         private void OnApplicationQuit()
         {
-            this.End();
+            End();
         }
 
         private void UpdateTime(float deltaTime)
         {
-            this.secondAcc += deltaTime;
-            if (this.secondAcc < 1)
+            secondAcc += deltaTime;
+            if (secondAcc < 1)
             {
                 return;
             }
 
-            var seconds = (int) this.secondAcc;
-            this.secondAcc -= seconds;
-            this.realtimeSeconds += seconds;
+            var seconds = (int) secondAcc;
+            secondAcc -= seconds;
+            realtimeSeconds += seconds;
         }
 
         [Button]
         private void Pause()
         {
-            if (this.isPaused)
+            if (isPaused)
             {
                 return;
             }
 
-            this.realtimeSinceStartupCache = Time.realtimeSinceStartup;
-            this.isPaused = true;
-            this.OnPaused?.Invoke();
+            realtimeSinceStartupCache = Time.realtimeSinceStartup;
+            isPaused = true;
+            OnPaused?.Invoke();
         }
 
         [Button]
         private void Resume()
         {
-            if (!this.isPaused)
+            if (!isPaused)
             {
                 return;
             }
 
-            var sleepSeconds = (long) (Time.realtimeSinceStartup - this.realtimeSinceStartupCache);
-            this.realtimeSeconds += sleepSeconds;
-            this.isPaused = false;
-            this.OnResumed?.Invoke(sleepSeconds);
+            var sleepSeconds = (long) (Time.realtimeSinceStartup - realtimeSinceStartupCache);
+            realtimeSeconds += sleepSeconds;
+            isPaused = false;
+            OnResumed?.Invoke(sleepSeconds);
         }
     }
 }

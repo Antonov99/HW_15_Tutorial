@@ -9,7 +9,7 @@ namespace Game.GameEngine.AI
     {
         public string TargetKey
         {
-            set { this.targetKey = value; }
+            set { targetKey = value; }
         }
 
         [Space]
@@ -26,13 +26,13 @@ namespace Game.GameEngine.AI
 
         protected override void Execute(CommandArgs_HarvestTarget args)
         {
-            this.blackboard.ReplaceVariable(this.targetKey, args.target);
+            blackboard.ReplaceVariable(targetKey, args.target);
             base.Execute(args);
         }
 
         protected override void OnInterrupt()
         {
-            this.blackboard.RemoveVariable(this.targetKey);
+            blackboard.RemoveVariable(targetKey);
             base.OnInterrupt();
         }
     }

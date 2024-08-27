@@ -9,7 +9,7 @@ namespace Game.GameEngine.Entities
     {
         public override IEnumerable<IEntity> ProvideEntities()
         {
-            foreach (Transform child in this.transform)
+            foreach (Transform child in transform)
             {
                 if (child.TryGetComponent(out IEntity entity))
                 {

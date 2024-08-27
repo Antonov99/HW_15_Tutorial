@@ -7,7 +7,7 @@ namespace Game.GameEngine
     {
         public ObjectType ObjectType
         {
-            get { return this.objectType.Value; }
+            get { return objectType.Value; }
         }
 
 

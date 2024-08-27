@@ -95,7 +95,7 @@ public class ES3AutoSaveMgr : MonoBehaviour
     {
         autoSaves = new HashSet<ES3AutoSave>();
 
-        foreach (var go in this.gameObject.scene.GetRootGameObjects())
+        foreach (var go in gameObject.scene.GetRootGameObjects())
             autoSaves.UnionWith(go.GetComponentsInChildren<ES3AutoSave>(true));
 
         _current = this;
@@ -120,14 +120,14 @@ public class ES3AutoSaveMgr : MonoBehaviour
 	/* Register an ES3AutoSave with the ES3AutoSaveMgr, if there is one */
 	public static void AddAutoSave(ES3AutoSave autoSave)
 	{
-		if(ES3AutoSaveMgr.Current != null)
-			ES3AutoSaveMgr.Current.autoSaves.Add(autoSave);
+		if(Current != null)
+			Current.autoSaves.Add(autoSave);
 	}
 
 	/* Remove an ES3AutoSave from the ES3AutoSaveMgr, for example if it's GameObject has been destroyed */
 	public static void RemoveAutoSave(ES3AutoSave autoSave)
 	{
-		if(ES3AutoSaveMgr.Current != null)
-			ES3AutoSaveMgr.Current.autoSaves.Remove(autoSave);
+		if(Current != null)
+			Current.autoSaves.Remove(autoSave);
 	}
 }

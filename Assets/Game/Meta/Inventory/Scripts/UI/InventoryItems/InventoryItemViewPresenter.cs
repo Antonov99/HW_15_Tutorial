@@ -29,43 +29,43 @@ namespace Game.Meta
 
         public void Start()
         {
-            var metadata = this.item.Metadata;
-            this.view.SetTitle(metadata.title);
-            this.view.SetIcon(metadata.icon);
+            var metadata = item.Metadata;
+            view.SetTitle(metadata.title);
+            view.SetIcon(metadata.icon);
 
-            var flagsExists = this.item.FlagsExists(InventoryItemFlags.STACKABLE);
-            this.view.Stack.SetVisible(flagsExists);
+            var flagsExists = item.FlagsExists(InventoryItemFlags.STACKABLE);
+            view.Stack.SetVisible(flagsExists);
 
             if (flagsExists)
             {
-                this.stackableComponent = this.item.GetComponent<IComponent_Stackable>();
-                this.stackableComponent.OnValueChanged += this.OnAmountChanged;
+                stackableComponent = item.GetComponent<IComponent_Stackable>();
+                stackableComponent.OnValueChanged += OnAmountChanged;
                 
-                this.view.Stack.SetAmount(this.stackableComponent.Value, this.stackableComponent.Size);
+                view.Stack.SetAmount(stackableComponent.Value, stackableComponent.Size);
             }
 
-            this.view.AddClickListener(this.OnItemClicked);
+            view.AddClickListener(OnItemClicked);
         }
 
         public void Stop()
         {
-            if (this.item.FlagsExists(InventoryItemFlags.STACKABLE))
+            if (item.FlagsExists(InventoryItemFlags.STACKABLE))
             {
-                this.stackableComponent.OnValueChanged -= this.OnAmountChanged;
+                stackableComponent.OnValueChanged -= OnAmountChanged;
             }
 
-            this.view.RemoveClickListener(this.OnItemClicked);
+            view.RemoveClickListener(OnItemClicked);
         }
 
         private void OnAmountChanged(int newCount)
         {
-            this.view.Stack.SetAmount(newCount, this.stackableComponent.Size);
+            view.Stack.SetAmount(newCount, stackableComponent.Size);
         }
 
         private void OnItemClicked()
         {
-            var presenter = new InventoryItemPresentationModel(this.item, this.consumeManager);
-            this.popupManager.ShowPopup(PopupName.INVENTORY_ITEM, presenter);
+            var presenter = new InventoryItemPresentationModel(item, consumeManager);
+            popupManager.ShowPopup(PopupName.INVENTORY_ITEM, presenter);
         }
     }
 }

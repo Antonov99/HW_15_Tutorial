@@ -32,24 +32,24 @@ namespace Game.Gameplay.Player
         
         void IGameReadyElement.ReadyGame()
         {
-            this.visitInteractor.OnVisitStarted += this.OnVisitStarted;
+            visitInteractor.OnVisitStarted += OnVisitStarted;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.visitInteractor.OnVisitStarted -= this.OnVisitStarted;
+            visitInteractor.OnVisitStarted -= OnVisitStarted;
         }
 
         private void OnVisitStarted(WorldPlaceType placeType)
         {
-            if (!this.enabled)
+            if (!enabled)
             {
                 return;
             }
             
-            if (this.config.FindPopupName(placeType, out var popupName))
+            if (config.FindPopupName(placeType, out var popupName))
             {
-                this.popupManager.ShowPopup(popupName);
+                popupManager.ShowPopup(popupName);
             }
         }
     }

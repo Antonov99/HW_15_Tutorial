@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         
         public override bool IsTrue()
         {
-            return this.engine.Current >= this.engine.Max;
+            return engine.Current >= engine.Max;
         }
     }
 }

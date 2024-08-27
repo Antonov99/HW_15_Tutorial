@@ -12,25 +12,25 @@ namespace Elementary
         [Button, GUIColor(0, 1, 0)]
         public virtual void Call()
         {
-            this.actions?.Do();
-            this.OnEvent?.Invoke();
+            actions?.Do();
+            OnEvent?.Invoke();
         }
 
         public IAction AddListener(Action action)
         {
             var actionDelegate = new ActionDelegate(action);
-            this.actions += actionDelegate;
+            actions += actionDelegate;
             return actionDelegate;
         }
 
         public void AddListener(IAction listener)
         {
-            this.actions += listener;
+            actions += listener;
         }
 
         public void RemoveListener(IAction listener)
         {
-            this.actions -= listener;
+            actions -= listener;
         }
     }
     
@@ -43,25 +43,25 @@ namespace Elementary
         [Button, GUIColor(0, 1, 0)]
         public virtual void Call(T value)
         {
-            this.actions?.Do(value);
-            this.OnEvent?.Invoke(value);
+            actions?.Do(value);
+            OnEvent?.Invoke(value);
         }
 
         public IAction<T> AddListener(Action<T> action)
         {
             var actionDelegate = new ActionDelegate<T>(action);
-            this.actions += actionDelegate;
+            actions += actionDelegate;
             return actionDelegate;
         }
 
         public void AddListener(IAction<T> listener)
         {
-            this.actions += listener;
+            actions += listener;
         }
 
         public void RemoveListener(IAction<T> listener)
         {
-            this.actions -= listener;
+            actions -= listener;
         }
     }
 }

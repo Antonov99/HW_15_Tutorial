@@ -18,28 +18,28 @@ namespace Game.GameEngine
         [GUIColor(0, 1, 0)]
         public void EmitEvent(TimeShiftReason reason, float shiftSeconds)
         {
-            if (!this.isEnable)
+            if (!isEnable)
             {
                 return;
             }
 
-            for (int i = 0, count = this.handlers.Count; i < count; i++)
+            for (int i = 0, count = handlers.Count; i < count; i++)
             {
-                var listener = this.handlers[i];
+                var listener = handlers[i];
                 listener.OnTimeShifted(reason, shiftSeconds);
             }
 
-            this.OnTimeShifted?.Invoke(reason, shiftSeconds);
+            OnTimeShifted?.Invoke(reason, shiftSeconds);
         }
 
         public void AddHandler(ITimeShiftHandler handler)
         {
-            this.handlers.Add(handler);
+            handlers.Add(handler);
         }
 
         public void RemoveHandler(ITimeShiftHandler handler)
         {
-            this.handlers.Remove(handler);
+            handlers.Remove(handler);
         }
     }
 }

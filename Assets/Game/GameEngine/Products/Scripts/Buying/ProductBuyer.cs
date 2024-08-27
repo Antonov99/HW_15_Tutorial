@@ -19,16 +19,16 @@ namespace Game.GameEngine.Products
 
         public ProductBuyer()
         {
-            this.conditions = new List<IProductBuyCondition>();
-            this.processors = new List<IProductBuyProcessor>();
-            this.completors = new List<IProductBuyCompletor>();
+            conditions = new List<IProductBuyCondition>();
+            processors = new List<IProductBuyProcessor>();
+            completors = new List<IProductBuyCompletor>();
         }
 
         public bool CanBuyProduct(Product product)
         {
-            for (int i = 0, count = this.conditions.Count; i < count; i++)
+            for (int i = 0, count = conditions.Count; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.CanBuy(product))
                 {
                     return false;
@@ -41,64 +41,64 @@ namespace Game.GameEngine.Products
         [Button]
         public void BuyProduct(ProductConfig config)
         {
-            this.BuyProduct(config.Prototype);
+            BuyProduct(config.Prototype);
         }
 
         public void BuyProduct(Product product)
         {
-            if (!this.CanBuyProduct(product))
+            if (!CanBuyProduct(product))
             {
                 Debug.LogWarning($"Can't buy product {product.Id}!");
                 return;
             }
             
-            this.OnBuyStarted?.Invoke(product);
+            OnBuyStarted?.Invoke(product);
             
             //Process buy:
-            for (int i = 0, count = this.processors.Count; i < count; i++)
+            for (int i = 0, count = processors.Count; i < count; i++)
             {
-                var processor = this.processors[i];
+                var processor = processors[i];
                 processor.ProcessBuy(product);
             }
             
             //Complete buy:
-            for (int i = 0, count = this.completors.Count; i < count; i++)
+            for (int i = 0, count = completors.Count; i < count; i++)
             {
-                var completor = this.completors[i];
+                var completor = completors[i];
                 completor.CompleteBuy(product);
             }
             
-            this.OnBuyCompleted?.Invoke(product);
+            OnBuyCompleted?.Invoke(product);
         }
 
         public void AddCondition(IProductBuyCondition condition)
         {
-            this.conditions.Add(condition);
+            conditions.Add(condition);
         }
 
         public void RemoveChecker(IProductBuyCondition condition)
         {
-            this.conditions.Remove(condition);
+            conditions.Remove(condition);
         }
 
         public void AddProcessor(IProductBuyProcessor processor)
         {
-            this.processors.Add(processor);
+            processors.Add(processor);
         }
 
         public void RemoveProcessor(IProductBuyProcessor processor)
         {
-            this.processors.Remove(processor);
+            processors.Remove(processor);
         }
 
         public void AddCompletor(IProductBuyCompletor completor)
         {
-            this.completors.Add(completor);
+            completors.Add(completor);
         }
 
         public void RemoveCompletor(IProductBuyCompletor completor)
         {
-            this.completors.Remove(completor);
+            completors.Remove(completor);
         }
     }
 }

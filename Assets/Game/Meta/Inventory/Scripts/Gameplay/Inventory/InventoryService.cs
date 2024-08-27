@@ -16,7 +16,7 @@ namespace Game.Meta
 
         public StackableInventory GetInventory()
         {
-            return this.inventory;
+            return inventory;
         }
     }
 }

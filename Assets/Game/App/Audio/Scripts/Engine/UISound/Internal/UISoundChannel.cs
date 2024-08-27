@@ -10,14 +10,14 @@ namespace Game
 
         public bool IsEnable
         {
-            get { return this.isEnable; }
-            set { this.SetEnable(value); }
+            get { return isEnable; }
+            set { SetEnable(value); }
         }
 
         public float Volume
         {
-            get { return this.volume; }
-            set { this.SetVolume(value); }
+            get { return volume; }
+            set { SetVolume(value); }
         }
 
         [SerializeField]
@@ -33,28 +33,28 @@ namespace Game
 
         public void PlaySound(AudioClip clip)
         {
-            if (this.isEnable)
+            if (isEnable)
             {
-                this.source.PlayOneShot(clip);
+                source.PlayOneShot(clip);
             }
         }
 
         private void Awake()
         {
-            this.source.volume = this.volume;
-            this.source.enabled = this.isEnable;
+            source.volume = volume;
+            source.enabled = isEnable;
         }
 
         private void SetEnable(bool enable)
         {
-            if (this.isEnable == enable)
+            if (isEnable == enable)
             {
                 return;
             }
 
-            this.isEnable = enable;
-            this.source.enabled = enable;
-            this.OnEnabled?.Invoke(enable);
+            isEnable = enable;
+            source.enabled = enable;
+            OnEnabled?.Invoke(enable);
         }
 
         private void SetVolume(float volume)
@@ -66,8 +66,8 @@ namespace Game
             }
 
             this.volume = volume;
-            this.source.volume = volume;
-            this.OnVolumeChanged?.Invoke(volume);
+            source.volume = volume;
+            OnVolumeChanged?.Invoke(volume);
         }
 
 #if UNITY_EDITOR
@@ -75,8 +75,8 @@ namespace Game
         {
             try
             {
-                this.source.volume = this.volume;
-                this.source.enabled = this.isEnable;
+                source.volume = volume;
+                source.enabled = isEnable;
             }
             catch (Exception)
             {

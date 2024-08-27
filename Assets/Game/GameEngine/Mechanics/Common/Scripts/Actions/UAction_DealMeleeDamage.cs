@@ -21,12 +21,12 @@ namespace Game.GameEngine.Mechanics
         [GUIColor(0, 1, 0)]
         public override void Do()
         {
-            if (!this.combatOperator.IsActive)
+            if (!combatOperator.IsActive)
             {
                 return;
             }
         
-            var target = this.combatOperator.Current.targetEntity;
+            var target = combatOperator.Current.targetEntity;
             var aliveComponent = target.Get<IComponent_IsAlive>();
             if (!aliveComponent.IsAlive)
             {
@@ -35,9 +35,9 @@ namespace Game.GameEngine.Mechanics
 
             var takeDamageComponent = target.Get<IComponent_TakeDamage>();
             var damageEvent = new TakeDamageArgs(
-                this.damage.Current,
+                damage.Current,
                 TakeDamageReason.MELEE,
-                this.attacker
+                attacker
             );
             takeDamageComponent.TakeDamage(damageEvent);
         }

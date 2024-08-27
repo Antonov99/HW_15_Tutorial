@@ -100,8 +100,8 @@ namespace Cysharp.Threading.Tasks.Linq
                     if (this.period <= 0) this.period = 1;
                 }
 
-                this.initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
-                this.dueTimePhase = true;
+                initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
+                dueTimePhase = true;
                 this.updateTiming = updateTiming;
                 this.ignoreTimeScale = ignoreTimeScale;
                 this.cancellationToken = cancellationToken;
@@ -117,7 +117,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 if (disposed || cancellationToken.IsCancellationRequested || completed) return CompletedTasks.False;
 
                 // reset value here.
-                this.elapsed = 0;
+                elapsed = 0;
 
                 completionSource.Reset();
                 return new UniTask<bool>(this, completionSource.Version);
@@ -152,7 +152,7 @@ namespace Cysharp.Threading.Tasks.Linq
                         }
                     }
 
-                    elapsed += (ignoreTimeScale) ? UnityEngine.Time.unscaledDeltaTime : UnityEngine.Time.deltaTime;
+                    elapsed += (ignoreTimeScale) ? Time.unscaledDeltaTime : Time.deltaTime;
 
                     if (elapsed >= dueTime)
                     {
@@ -169,7 +169,7 @@ namespace Cysharp.Threading.Tasks.Linq
                         return false;
                     }
 
-                    elapsed += (ignoreTimeScale) ? UnityEngine.Time.unscaledDeltaTime : UnityEngine.Time.deltaTime;
+                    elapsed += (ignoreTimeScale) ? Time.unscaledDeltaTime : Time.deltaTime;
 
                     if (elapsed >= period)
                     {
@@ -220,8 +220,8 @@ namespace Cysharp.Threading.Tasks.Linq
                     if (periodFrameCount <= 0) periodFrameCount = 1;
                 }
 
-                this.initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
-                this.dueTimePhase = true;
+                initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
+                dueTimePhase = true;
                 this.dueTimeFrameCount = dueTimeFrameCount;
                 this.periodFrameCount = periodFrameCount;
                 this.cancellationToken = cancellationToken;
@@ -239,7 +239,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
 
                 // reset value here.
-                this.currentFrame = 0;
+                currentFrame = 0;
 
                 completionSource.Reset();
                 return new UniTask<bool>(this, completionSource.Version);

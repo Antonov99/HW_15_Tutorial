@@ -35,36 +35,36 @@ namespace AI.GOAP
             this.worldState = worldState;
             this.goal = goal;
             this.actions = actions;
-            this.openList = new Dictionary<IActor, Node>();
-            this.closedList = new HashSet<IActor>();
+            openList = new Dictionary<IActor, Node>();
+            closedList = new HashSet<IActor>();
 
-            return this.MakePlanInternal(out plan);
+            return MakePlanInternal(out plan);
         }
 
         private bool MakePlanInternal(out List<IActor> plan)
         {
-            this.VisitStartActions();
+            VisitStartActions();
 
-            if (this.CheckFinish(out var endNode))
+            if (CheckFinish(out var endNode))
             {
                 plan = new List<IActor> {endNode.action};
                 return true;
             }
 
-            this.actionGraph = PlannerUtils.CreateActionGraph(this.actions, this.worldState);
+            actionGraph = PlannerUtils.CreateActionGraph(actions, worldState);
 
-            while (this.SelectNextAction(out var node))
+            while (SelectNextAction(out var node))
             {
-                this.closedList.Add(node.action);
-                this.VisitNeighbourActions(node);
+                closedList.Add(node.action);
+                VisitNeighbourActions(node);
 
-                if (this.CheckFinish(out endNode))
+                if (CheckFinish(out endNode))
                 {
-                    plan = this.CreatePlan(endNode);
+                    plan = CreatePlan(endNode);
                     return true;
                 }
 
-                this.openList.Remove(node.action);
+                openList.Remove(node.action);
             }
 
             plan = default;
@@ -73,31 +73,31 @@ namespace AI.GOAP
 
         private void VisitStartActions()
         {
-            foreach (var action in this.actions)
+            foreach (var action in actions)
             {
-                if (PlannerUtils.MatchesAction(action, this.goal, this.worldState))
+                if (PlannerUtils.MatchesAction(action, goal, worldState))
                 {
-                    this.VisitAction(action, null);
+                    VisitAction(action, null);
                 }
             }
         }
 
         private void VisitNeighbourActions(Node node)
         {
-            if (!this.actionGraph.TryGetValue(node.action, out var neighbours))
+            if (!actionGraph.TryGetValue(node.action, out var neighbours))
             {
                 return;
             }
 
             foreach (var action in neighbours)
             {
-                this.VisitAction(action, node);
+                VisitAction(action, node);
             }
         }
 
         private void VisitAction(IActor action, Node baseNode)
         {
-            if (this.closedList.Contains(action))
+            if (closedList.Contains(action))
             {
                 return;
             }
@@ -105,7 +105,7 @@ namespace AI.GOAP
             var actionCost = action.EvaluateCost();
             var pathCost = baseNode?.cost + actionCost ?? actionCost;
 
-            if (this.openList.TryGetValue(action, out var node))
+            if (openList.TryGetValue(action, out var node))
             {
                 if (node.cost > pathCost)
                 {
@@ -115,18 +115,18 @@ namespace AI.GOAP
             }
             else
             {
-                var heuristic = PlannerUtils.HeuristicDistance(action, this.worldState, UNDEFINED_HEURISTIC_DISTANCE);
+                var heuristic = PlannerUtils.HeuristicDistance(action, worldState, UNDEFINED_HEURISTIC_DISTANCE);
                 node = new Node(action, baseNode, pathCost, heuristic);
-                this.openList.Add(action, node);
+                openList.Add(action, node);
             }
         }
 
         private bool CheckFinish(out Node result)
         {
             var endActions = new List<Node>();
-            foreach (var (action, node) in this.openList)
+            foreach (var (action, node) in openList)
             {
-                if (action.RequiredState.EqualsTo(this.worldState))
+                if (action.RequiredState.EqualsTo(worldState))
                 {
                     endActions.Add(node);
                 }
@@ -162,7 +162,7 @@ namespace AI.GOAP
             result = null;
             var minWeight = int.MaxValue;
 
-            foreach (var node in this.openList.Values)
+            foreach (var node in openList.Values)
             {
                 var weight = node.EvaluateWeight();
                 if (result == null || minWeight > weight)
@@ -195,7 +195,7 @@ namespace AI.GOAP
 
             public int EvaluateWeight()
             {
-                return this.cost + this.heuristic;
+                return cost + heuristic;
             }
         }
 

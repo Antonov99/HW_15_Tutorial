@@ -28,27 +28,27 @@ namespace Game.Gameplay.Player
         
             public void Enter(IEntity conveyor)
             {
-                if (this.IsEntered)
+                if (IsEntered)
                 {
                     throw new Exception("Already entered into conveyor!");
                 }
 
-                this.TargetConveyor = conveyor;
-                this.IsEntered = true;
-                this.OnEntered?.Invoke(conveyor);
+                TargetConveyor = conveyor;
+                IsEntered = true;
+                OnEntered?.Invoke(conveyor);
             }
 
             public void Exit()
             {
-                if (!this.IsEntered)
+                if (!IsEntered)
                 {
                     return;
                 }
 
-                var previousConveyor = this.TargetConveyor;
-                this.TargetConveyor = null;
-                this.IsEntered = false;
-                this.OnExited?.Invoke(previousConveyor);
+                var previousConveyor = TargetConveyor;
+                TargetConveyor = null;
+                IsEntered = false;
+                OnExited?.Invoke(previousConveyor);
             }
         }
     }

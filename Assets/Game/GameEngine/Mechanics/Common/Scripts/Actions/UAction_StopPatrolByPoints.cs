@@ -11,9 +11,9 @@ namespace Game.GameEngine.Mechanics
         
         public override void Do()
         {
-            if (this.engine.IsPatrol)
+            if (engine.IsPatrol)
             {
-                this.engine.StopPatrol();
+                engine.StopPatrol();
             }
         }
     }

@@ -10,18 +10,18 @@ namespace Game.GameEngine.Mechanics
 
         public override void Activate()
         {
-            this.root.SetActive(true);
+            root.SetActive(true);
         }
 
         public override void SetActive(bool isVisible)
         {
-            this.root.SetActive(isVisible);
+            root.SetActive(isVisible);
         }
 
 #if UNITY_EDITOR
         private void Reset()
         {
-            this.root = this.gameObject;
+            root = gameObject;
         }
 #endif
     }

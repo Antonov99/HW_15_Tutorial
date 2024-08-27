@@ -17,7 +17,7 @@ namespace Game.App
 
         public bool IsAuthorized
         {
-            get { return this.authorized; }
+            get { return authorized; }
         }
 
         private readonly GameServer server;
@@ -36,10 +36,10 @@ namespace Game.App
             if (ES3.KeyExists(USER_KEY))
             {
                 var user = ES3.Load<UserData>(USER_KEY);
-                return await this.SignIn(user.id, user.password);
+                return await SignIn(user.id, user.password);
             }
 
-            return await this.SignUp();
+            return await SignUp();
         }
 
         public async Task<bool> SignIn(string userId, string password)
@@ -50,7 +50,7 @@ namespace Game.App
                 password = password
             };
 
-            using (UnityWebRequest request = this.server.Post("signIn", body))
+            using (UnityWebRequest request = server.Post("signIn", body))
             {
                 Debug.Log($"SIGN IN {userId} {password}");
                 await request.SendWebRequest();
@@ -69,8 +69,8 @@ namespace Game.App
                 var response = JsonConvert.DeserializeObject<SignInResponse>(responseJson);
 
                 this.userId = userId;
-                this.token = response.token;
-                this.authorized = true;
+                token = response.token;
+                authorized = true;
 
                 ES3.Save(USER_KEY, new UserData
                 {
@@ -90,7 +90,7 @@ namespace Game.App
             //TODO: Использовать рекламный идентификатор
             // Application.RequestAdvertisingIdentifierAsync();
 
-            using (UnityWebRequest request = this.server.Get($"signUp/?deviceId={deviceId}"))
+            using (UnityWebRequest request = server.Get($"signUp/?deviceId={deviceId}"))
             {
                 Debug.Log($"SIGN UP {deviceId}");
                 
@@ -115,7 +115,7 @@ namespace Game.App
 
                 this.userId = userId;
                 this.token = token;
-                this.authorized = true;
+                authorized = true;
 
                 ES3.Save(USER_KEY, new UserData
                 {
@@ -129,13 +129,13 @@ namespace Game.App
         
         public async Task<(bool, string)> GetPlayerData()
         {
-            if (!this.authorized)
+            if (!authorized)
             {
                 return (false, null);
             }
 
-            var route = $"load_player?userId={this.userId}&token={this.token}";
-            using (var request = this.server.Get(route))
+            var route = $"load_player?userId={userId}&token={token}";
+            using (var request = server.Get(route))
             {
                 await request.SendWebRequest();
 
@@ -156,13 +156,13 @@ namespace Game.App
 
         public async Task<bool> SetPlayerData(string playerState)
         {
-            if (!this.authorized)
+            if (!authorized)
             {
                 return false;
             }
             
-            var route = $"save_player?userId={this.userId}&token={this.token}";
-            using (var request = this.server.Put(route, playerState))
+            var route = $"save_player?userId={userId}&token={token}";
+            using (var request = server.Put(route, playerState))
             {
                 Debug.Log($"UPLOAD DATA {playerState}");
                 await request.SendWebRequest();

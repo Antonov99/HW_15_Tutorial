@@ -17,30 +17,30 @@ namespace Game.GameEngine.AI
         
         public void SetStoppingDistance(float stoppingDistance)
         {
-            this.sqrStoppingDistance = stoppingDistance * stoppingDistance;
+            sqrStoppingDistance = stoppingDistance * stoppingDistance;
         }
 
         public void SetMovingEntity(IEntity unit)
         {
-            this.positionComponent = unit.Get<IComponent_GetPosition>();
-            this.moveComponent = unit.Get<IComponent_MoveInDirection>();
+            positionComponent = unit.Get<IComponent_GetPosition>();
+            moveComponent = unit.Get<IComponent_MoveInDirection>();
         }
 
         protected override bool CheckTargetReached(Vector3 target)
         {
-            var moveVector = this.EvaluateMoveVector(target);
-            return moveVector.sqrMagnitude <= this.sqrStoppingDistance;
+            var moveVector = EvaluateMoveVector(target);
+            return moveVector.sqrMagnitude <= sqrStoppingDistance;
         }
 
         protected override void MoveToTarget(Vector3 target)
         {
-            var moveVector = this.EvaluateMoveVector(target);
-            this.moveComponent.Move(moveVector.normalized);
+            var moveVector = EvaluateMoveVector(target);
+            moveComponent.Move(moveVector.normalized);
         }
         
         private Vector3 EvaluateMoveVector(Vector3 targetPosition)
         {
-            var currentPosition = this.positionComponent.Position;
+            var currentPosition = positionComponent.Position;
             var moveVector = targetPosition - currentPosition;
             moveVector.y = 0;
             return moveVector;

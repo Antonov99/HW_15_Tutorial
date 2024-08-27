@@ -8,26 +8,26 @@ namespace AI.Commands
     {
         public event Action<T, object> OnStarted
         {
-            add { this.executor.OnStarted += value; }
-            remove { this.executor.OnStarted -= value; }
+            add { executor.OnStarted += value; }
+            remove { executor.OnStarted -= value; }
         }
 
         public event Action<T, object> OnFinished
         {
-            add { this.executor.OnFinished += value; }
-            remove { this.executor.OnFinished -= value; }
+            add { executor.OnFinished += value; }
+            remove { executor.OnFinished -= value; }
         }
 
         public event Action<T, object> OnInterrupted
         {
-            add { this.executor.OnInterrupted += value; }
-            remove { this.executor.OnInterrupted -= value; }
+            add { executor.OnInterrupted += value; }
+            remove { executor.OnInterrupted -= value; }
         }
 
         [ShowInInspector, ReadOnly]
         public bool IsRunning
         {
-            get { return this.executor.IsRunning; }
+            get { return executor.IsRunning; }
         }
 
         protected readonly AICommandExecutor<T> executor = new();
@@ -35,28 +35,28 @@ namespace AI.Commands
         [Button]
         public void Execute(T key, object args = null)
         {
-            this.executor.Execute(key, args);
+            executor.Execute(key, args);
         }
 
         [Button]
         public void Interrupt()
         {
-            this.executor.Interrupt();
+            executor.Interrupt();
         }
 
         public bool TryGetRunningInfo(out T key, out object args)
         {
-            return this.executor.TryGetRunningInfo(out key, out args);
+            return executor.TryGetRunningInfo(out key, out args);
         }
 
         public void RegisterCommand(T key, IAICommand command)
         {
-            this.executor.RegisterCommand(key, command);
+            executor.RegisterCommand(key, command);
         }
 
         public void UnregisterCommand(T key)
         {
-            this.executor.UnregisterCommand(key);
+            executor.UnregisterCommand(key);
         }
     }
 }

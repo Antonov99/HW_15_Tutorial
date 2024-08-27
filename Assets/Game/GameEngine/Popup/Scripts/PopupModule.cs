@@ -24,21 +24,21 @@ namespace Game.GameEngine
 
         public override IEnumerable<IGameElement> GetElements()
         {
-            yield return this.inputController;
+            yield return inputController;
         }
 
         public override IEnumerable<object> GetServices()
         {
-            yield return this.manager;
+            yield return manager;
         }
 
         public override void ConstructGame(GameContext context)
         {
-            this.factory.Construct(this.catalog, this.container);
-            this.supplier.Construct(context, this.factory);
-            this.manager.SetSupplier(this.supplier);
+            factory.Construct(catalog, container);
+            supplier.Construct(context, factory);
+            manager.SetSupplier(supplier);
             
-            this.inputController.Construct(this.manager, context.GetService<InputStateManager>());
+            inputController.Construct(manager, context.GetService<InputStateManager>());
         }
     }
 }

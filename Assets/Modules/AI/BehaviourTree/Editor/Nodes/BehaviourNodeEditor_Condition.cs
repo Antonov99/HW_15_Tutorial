@@ -14,20 +14,20 @@ namespace AI.BTree.UnityEditor
 
         private void Awake()
         {
-            this.node = (UnityBehaviourNode) this.target;
-            this.invertCondition = this.serializedObject.FindProperty(nameof(this.invertCondition));
-            this.conditions = this.serializedObject.FindProperty(nameof(this.conditions));
+            node = (UnityBehaviourNode) target;
+            invertCondition = serializedObject.FindProperty(nameof(invertCondition));
+            conditions = serializedObject.FindProperty(nameof(conditions));
         }
 
         public override void OnInspectorGUI()
         {
-            InspectorHelper.DrawRunningParameter(this.node.IsRunning);
+            InspectorHelper.DrawRunningParameter(node.IsRunning);
             EditorGUILayout.Space(4.0f);
             
-            this.invertCondition.boolValue = EditorGUILayout.Toggle("Invert Condition", this.invertCondition.boolValue);
-            EditorGUILayout.PropertyField(this.conditions, true);
+            invertCondition.boolValue = EditorGUILayout.Toggle("Invert Condition", invertCondition.boolValue);
+            EditorGUILayout.PropertyField(conditions, true);
 
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

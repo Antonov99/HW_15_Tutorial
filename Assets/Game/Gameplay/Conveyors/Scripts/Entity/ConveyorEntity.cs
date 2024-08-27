@@ -13,27 +13,27 @@ namespace Game.Gameplay.Conveyors
     
         private void Awake()
         {
-            this.CreateComponents();
-            this.InitTriggers();
+            CreateComponents();
+            InitTriggers();
         }
 
         private void CreateComponents()
         {
-            var model = this.GetComponent<ConveyorModel>();
+            var model = GetComponent<ConveyorModel>();
             var core = model.core;
             var config = model.config;
-            this.AddRange(
+            AddRange(
                 new Component_Id(config.id),
                 new Component_ObjectType(config.objectType),
                 new Component_Enable(core.enableVariable),
                 new Component_LoadZone(core.loadStorage, config.inputResourceType),
-                new Component_UnloadZone(core.unloadStorage, config.outputResourceType, this.unloadPoint)
+                new Component_UnloadZone(core.unloadStorage, config.outputResourceType, unloadPoint)
             );
         }
 
         private void InitTriggers()
         {
-            foreach (var trigger in this.GetComponentsInChildren<ConveyorTrigger>())
+            foreach (var trigger in GetComponentsInChildren<ConveyorTrigger>())
             {
                 trigger.Setup(this);
             }

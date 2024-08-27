@@ -44,26 +44,26 @@ namespace Game.Gameplay.Dummies
             private void ConstructHitPoints(ScriptableDummy config)
             {
                 var hitPoints = config.hitPoints;
-                this.hitPointsEngine.Max = hitPoints;
-                this.hitPointsEngine.Current = hitPoints;
+                hitPointsEngine.Max = hitPoints;
+                hitPointsEngine.Current = hitPoints;
             }
 
             [Construct]
             private void ConstructTakeDamage()
             {
-                this.takeDamageEngine.Construct(this.hitPointsEngine, this.destroyEmitter);
+                takeDamageEngine.Construct(hitPointsEngine, destroyEmitter);
             }
 
             [Construct]
             private void ConstructDestroy()
             {
-                this.destroyEmitter.AddListener(_ => this.collisionLayer.SetActive(false));
+                destroyEmitter.AddListener(_ => collisionLayer.SetActive(false));
             }
 
             [Construct]
             private void ConstructCollision()
             {
-                this.collisionLayer.SetActive(true);
+                collisionLayer.SetActive(true);
             }
         }
 
@@ -82,8 +82,8 @@ namespace Game.Gameplay.Dummies
             [Construct]
             private void Construct(Core core)
             {
-                core.takeDamageEngine.AddListener(_ => this.animator.Play(this.hitAnimation, -1, 0));
-                core.destroyEmitter.AddListener(_ => this.animator.Play(this.destroyAnimation, -1, 0));
+                core.takeDamageEngine.AddListener(_ => animator.Play(hitAnimation, -1, 0));
+                core.destroyEmitter.AddListener(_ => animator.Play(destroyAnimation, -1, 0));
             }
         }
 
@@ -98,7 +98,7 @@ namespace Game.Gameplay.Dummies
             [Construct]
             private void Construct(Core core)
             {
-                this.hitPointsViewAdapter.Construct(core.hitPointsEngine, this.hitPointsView);
+                hitPointsViewAdapter.Construct(core.hitPointsEngine, hitPointsView);
             }
         }
     }

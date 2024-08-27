@@ -6,7 +6,7 @@ namespace Elementary
     {
         public T Current
         {
-            get { return this.function.Invoke(); }
+            get { return function.Invoke(); }
         }
 
         private readonly Func<T> function;

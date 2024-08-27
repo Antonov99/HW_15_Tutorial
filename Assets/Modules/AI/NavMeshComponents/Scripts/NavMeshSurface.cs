@@ -74,7 +74,7 @@ namespace UnityEngine.AI
         public bool buildHeightMesh { get { return m_BuildHeightMesh; } set { m_BuildHeightMesh = value; } }
 
         // Reference to whole scene navmesh data asset.
-        [UnityEngine.Serialization.FormerlySerializedAs("m_BakedNavMeshData")]
+        [Serialization.FormerlySerializedAs("m_BakedNavMeshData")]
         [SerializeField]
         NavMeshData m_NavMeshData;
         public NavMeshData navMeshData { get { return m_NavMeshData; } set { m_NavMeshData = value; } }
@@ -433,7 +433,7 @@ namespace UnityEngine.AI
                 return false;
 
             // An instance can share asset reference only with its prefab parent
-            var prefab = UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource(this) as NavMeshSurface;
+            var prefab = PrefabUtility.GetCorrespondingObjectFromSource(this) as NavMeshSurface;
             if (prefab != null && prefab.navMeshData == navMeshData)
                 return false;
 

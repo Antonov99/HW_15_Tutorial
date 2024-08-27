@@ -19,28 +19,28 @@ namespace CustomAnimations
 
         public void SetAnimation(CurveAnimation animation)
         {
-            this.config = animation;
+            config = animation;
         }
 
         public void Play()
         {
-            this.ResetState();
-            this.animationCoroutine = this.StartCoroutine(this.AnimateRoutine());
+            ResetState();
+            animationCoroutine = StartCoroutine(AnimateRoutine());
         }
 
         public void Stop()
         {
-            if (this.animationCoroutine != null)
+            if (animationCoroutine != null)
             {
-                this.StopCoroutine(this.animationCoroutine);
-                this.animationCoroutine = null;
+                StopCoroutine(animationCoroutine);
+                animationCoroutine = null;
             }
         }
 
         public void ResetState()
         {
-            this.Stop();
-            this.SetValue(this.DefaultValue);
+            Stop();
+            SetValue(DefaultValue);
         }
 
         protected abstract void SetValue(T result);
@@ -48,26 +48,26 @@ namespace CustomAnimations
         private IEnumerator AnimateRoutine()
         {
             Func<float, T> function;
-            if (this.config.functionType == CurveFunctionType.SUM)
+            if (config.functionType == CurveFunctionType.SUM)
             {
-                function = this.SumFunction;
+                function = SumFunction;
             }
             else
             {
-                function = this.MultiplyFunction;
+                function = MultiplyFunction;
             }
 
             const float end = 1.0f;
             var progress = 0f;
-            var dProgress = Time.deltaTime / this.config.duration;
-            var curve = this.config.curve;
+            var dProgress = Time.deltaTime / config.duration;
+            var curve = config.curve;
 
             while (progress < end)
             {
                 progress = Mathf.Min(progress + dProgress, end);
                 var curveValue = curve.Evaluate(progress);
                 var value = function.Invoke(curveValue);
-                this.SetValue(value);
+                SetValue(value);
                 yield return null;
             }
         }

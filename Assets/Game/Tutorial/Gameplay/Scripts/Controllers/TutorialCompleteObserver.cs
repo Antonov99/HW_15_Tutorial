@@ -12,17 +12,17 @@ namespace Game.Tutorial.Gameplay
 
         public virtual void ConstructGame(GameContext context)
         {
-            this.tutorialManager = TutorialManager.Instance;
+            tutorialManager = TutorialManager.Instance;
         }
 
         public virtual void ReadyGame()
         {
-            this.tutorialManager.OnCompleted += this.OnTutorialComplete;
+            tutorialManager.OnCompleted += OnTutorialComplete;
         }
 
         public virtual void FinishGame()
         {
-            this.tutorialManager.OnCompleted -= this.OnTutorialComplete;
+            tutorialManager.OnCompleted -= OnTutorialComplete;
         }
         
         protected virtual void OnTutorialComplete()
@@ -31,7 +31,7 @@ namespace Game.Tutorial.Gameplay
 
         public bool IsCompleted()
         {
-            return this.tutorialManager.IsCompleted;
+            return tutorialManager.IsCompleted;
         }
     }
 }

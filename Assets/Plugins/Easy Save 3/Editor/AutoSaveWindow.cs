@@ -130,7 +130,7 @@ namespace ES3Editor
                 parentObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
             else // Prefabs
             {
-                var prefabs = ES3ReferenceMgr.Current.prefabs;
+                var prefabs = ES3ReferenceMgrBase.Current.prefabs;
                 parentObjects = new GameObject[prefabs.Count];
                 for (int i = 0; i < prefabs.Count; i++)
                     if(prefabs[i] != null)
@@ -154,9 +154,9 @@ namespace ES3Editor
 
             public HierarchyItem(Transform t, HierarchyItem parent, AutoSaveWindow window)
             {
-                this.autoSave = t.GetComponent<ES3AutoSave>();
+                autoSave = t.GetComponent<ES3AutoSave>();
                 this.t = t;
-                this.components = t.GetComponents<Component>();
+                components = t.GetComponents<Component>();
 
                 children = new HierarchyItem[t.childCount];
                 for (int i = 0; i < t.childCount; i++)

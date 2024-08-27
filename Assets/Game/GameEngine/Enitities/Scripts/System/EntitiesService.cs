@@ -15,7 +15,7 @@ namespace Game.GameEngine.Entities
         [PropertyOrder(-10), ReadOnly, ShowInInspector]
         public int EntityCount
         {
-            get { return this.entities.Count; }
+            get { return entities.Count; }
         }
 
         [Space, ReadOnly, ShowInInspector]
@@ -23,7 +23,7 @@ namespace Game.GameEngine.Entities
 
         public EntitiesService()
         {
-            this.entities = new HashSet<IEntity>();
+            entities = new HashSet<IEntity>();
         }
 
         public void Setup(IEnumerable<IEntity> entities)
@@ -34,9 +34,9 @@ namespace Game.GameEngine.Entities
 
         public void AddEntity(IEntity entity)
         {
-            if (this.entities.Add(entity))
+            if (entities.Add(entity))
             {
-                this.OnAdded?.Invoke(entity);
+                OnAdded?.Invoke(entity);
             }
         }
 
@@ -44,15 +44,15 @@ namespace Game.GameEngine.Entities
         {
             foreach (var entity in entities)
             {
-                this.AddEntity(entity);
+                AddEntity(entity);
             }
         }
 
         public void RemoveEntity(IEntity entity)
         {
-            if (this.entities.Remove(entity))
+            if (entities.Remove(entity))
             {
-                this.OnRemoved?.Invoke(entity);
+                OnRemoved?.Invoke(entity);
             }
         }
 
@@ -60,13 +60,13 @@ namespace Game.GameEngine.Entities
         {
             foreach (var entity in entities)
             {
-                this.RemoveEntity(entity);
+                RemoveEntity(entity);
             }
         }
 
         public bool FindEntity(out IEntity result, Func<IEntity, bool> predicate)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (predicate.Invoke(entity))
                 {
@@ -81,7 +81,7 @@ namespace Game.GameEngine.Entities
 
         public bool FindEntity(IEntityCondition condition, out IEntity result)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (condition.IsTrue(entity))
                 {
@@ -96,7 +96,7 @@ namespace Game.GameEngine.Entities
 
         public bool FindEntityWithElement<T>(out IEntity result)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (entity.TryGet(out T _))
                 {
@@ -111,7 +111,7 @@ namespace Game.GameEngine.Entities
 
         public bool FindEntityWithElement<T>(out IEntity result, Func<T, bool> predicate)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (entity.TryGet(out T component) && predicate.Invoke(component))
                 {
@@ -126,12 +126,12 @@ namespace Game.GameEngine.Entities
 
         public IEnumerable<IEntity> GetAllEntities()
         {
-            return this.entities;
+            return entities;
         }
 
         public IEnumerable<IEntity> FindEntities(IEntityCondition condition)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (condition.IsTrue(entity))
                 {
@@ -142,7 +142,7 @@ namespace Game.GameEngine.Entities
 
         public IEnumerable<IEntity> FindEntities(Func<IEntity, bool> predicate)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (predicate.Invoke(entity))
                 {
@@ -153,7 +153,7 @@ namespace Game.GameEngine.Entities
 
         public IEnumerable<IEntity> FindEntitiesWithElement<T>()
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (entity.TryGet(out T _))
                 {
@@ -164,7 +164,7 @@ namespace Game.GameEngine.Entities
 
         public IEnumerable<IEntity> FindEntitiesWithElement<T>(Func<T, bool> predicate)
         {
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 if (entity.TryGet(out T component) && predicate.Invoke(component))
                 {

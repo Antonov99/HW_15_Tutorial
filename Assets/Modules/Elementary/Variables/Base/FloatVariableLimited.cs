@@ -14,19 +14,19 @@ namespace Elementary
 
         public float Current
         {
-            get { return this.currentValue; }
-            set { this.SetValue(value); }
+            get { return currentValue; }
+            set { SetValue(value); }
         }
 
         public float MaxValue
         {
-            get { return this.maxValue; }
-            set { this.SetMaxValue(value); }
+            get { return maxValue; }
+            set { SetMaxValue(value); }
         }
 
         public bool IsLimit
         {
-            get { return this.currentValue >= this.maxValue; }
+            get { return currentValue >= maxValue; }
         }
 
         private ActionComposite<float> onValueChanged;
@@ -43,57 +43,57 @@ namespace Elementary
 
         public void AddListener(IAction<float> listener)
         {
-            this.onValueChanged += listener;
+            onValueChanged += listener;
         }
 
         public void RemoveListener(IAction<float> listener)
         {
-            this.onValueChanged -= listener;
+            onValueChanged -= listener;
         }
 
         public void AddMaxListener(IAction<float> listener)
         {
-            this.onMaxValueChanged += listener;
+            onMaxValueChanged += listener;
         }
 
         public void RemoveMaxListener(IAction<float> listener)
         {
-            this.onMaxValueChanged -= listener;
+            onMaxValueChanged -= listener;
         }
         
         public IAction<float> AddListener(Action<float> listener)
         {
             var actionDelegate = new ActionDelegate<float>(listener);
-            this.onValueChanged += actionDelegate;
+            onValueChanged += actionDelegate;
             return actionDelegate;
         }
 
         public IAction<float> AddMaxListener(Action<float> listener)
         {
             var actionDelegate = new ActionDelegate<float>(listener);
-            this.onMaxValueChanged += actionDelegate;
+            onMaxValueChanged += actionDelegate;
             return actionDelegate;
         }
 
         private void SetValue(float value)
         {
-            value = Mathf.Clamp(value, 0, this.maxValue);
-            this.currentValue = value;
-            this.onValueChanged?.Do(value);
-            this.OnValueChanged?.Invoke(value);
+            value = Mathf.Clamp(value, 0, maxValue);
+            currentValue = value;
+            onValueChanged?.Do(value);
+            OnValueChanged?.Invoke(value);
         }
         
         private void SetMaxValue(float value)
         {
             value = Math.Max(1, value);
-            if (this.currentValue > value)
+            if (currentValue > value)
             {
-                this.SetValue(value);
+                SetValue(value);
             }
 
-            this.maxValue = value;
-            this.onMaxValueChanged?.Do(value);
-            this.OnMaxValueChanged?.Invoke(value);
+            maxValue = value;
+            onMaxValueChanged?.Do(value);
+            OnMaxValueChanged?.Invoke(value);
         }
     }
 }

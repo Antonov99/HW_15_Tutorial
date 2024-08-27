@@ -14,23 +14,23 @@ namespace Game.App
         
         void IAppStartListener.Start()
         {
-            this.realtimeClock.OnPaused += this.SaveSession;
-            this.realtimeClock.OnEnded += this.SaveSession;
+            realtimeClock.OnPaused += SaveSession;
+            realtimeClock.OnEnded += SaveSession;
         }
 
         void IAppQuitListener.OnQuit()
         {
-            this.realtimeClock.OnPaused -= this.SaveSession;
-            this.realtimeClock.OnEnded -= this.SaveSession;
+            realtimeClock.OnPaused -= SaveSession;
+            realtimeClock.OnEnded -= SaveSession;
         }
 
         private void SaveSession()
         {
             var data = new RealtimeData
             {
-                nowSeconds = this.realtimeClock.RealtimeSeconds
+                nowSeconds = realtimeClock.RealtimeSeconds
             };
-            this.preferences.SaveData(data);
+            preferences.SaveData(data);
         }
     }
 }

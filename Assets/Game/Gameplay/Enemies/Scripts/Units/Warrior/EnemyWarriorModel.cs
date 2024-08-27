@@ -79,9 +79,9 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void Construct(Core core)
                 {
-                    this.fixedUpdateMechanics.Construct(_ =>
+                    fixedUpdateMechanics.Construct(_ =>
                         {
-                            if (core.isEnable.Current) this.motor.Update();
+                            if (core.isEnable.Current) motor.Update();
                         }
                     );
                 }
@@ -101,11 +101,11 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void Construct(Core core)
                 {
-                    this.enableMechanics.Construct(core.isEnable, this.collisionLayer.SetActive);
+                    enableMechanics.Construct(core.isEnable, collisionLayer.SetActive);
                     core.life.hitPoints.AddCurrentListener(hitPoints =>
                     {
                         var isActive = hitPoints > 0;
-                        this.colliders.ForEach(it => it.enabled = isActive);
+                        colliders.ForEach(it => it.enabled = isActive);
                     });
                 }
             }
@@ -128,20 +128,20 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructTakeDamage()
                 {
-                    this.takeDamageEngine.Construct(this.hitPoints, this.destroyEmitter);
+                    takeDamageEngine.Construct(hitPoints, destroyEmitter);
                 }
 
                 [Construct]
                 private void ConstructDeath(Combat combat, Move move)
                 {
-                    this.destroyEmitter.AddListener(_ => combat.combatOperator.Stop());
-                    this.destroyEmitter.AddListener(_ => move.motor.Interrupt());
+                    destroyEmitter.AddListener(_ => combat.combatOperator.Stop());
+                    destroyEmitter.AddListener(_ => move.motor.Interrupt());
                 }
 
                 [Construct]
                 private void ConstructRespawn(Combat combat)
                 {
-                    this.respawnEmitter.AddListener(() => this.hitPoints.RestoreToFull());
+                    respawnEmitter.AddListener(() => hitPoints.RestoreToFull());
                 }
 
                 [Construct]
@@ -163,7 +163,7 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructCombat(ScriptableEnemyWarrior config, Core core)
                 {
-                    this.combatOperator.AddConditions(
+                    combatOperator.AddConditions(
                         new CombatCondition_CheckDistance(
                             core.transformEngine, config.minCombatDistance
                         ),
@@ -175,7 +175,7 @@ namespace Game.Gameplay.Enemies
                         )
                     );
 
-                    this.combatOperator.AddStartActions(
+                    combatOperator.AddStartActions(
                         new CombatAction_LookAtTarget(core.transformEngine)
                     );
                 }
@@ -183,15 +183,15 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructDamageAction(GameObject attacker, ScriptableEnemyWarrior config)
                 {
-                    this.damageAction.attacker = attacker;
-                    this.damageAction.damage = new Value<int>(config.damage);
+                    damageAction.attacker = attacker;
+                    damageAction.damage = new Value<int>(config.damage);
                 }
 
                 public void DealDamage()
                 {
-                    if (this.combatOperator.IsActive)
+                    if (combatOperator.IsActive)
                     {
-                        this.damageAction.Do(this.combatOperator.Current);
+                        damageAction.Do(combatOperator.Current);
                     }
                 }
             }
@@ -209,13 +209,13 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void Construct(ScriptableEnemyWarrior config, Core core)
             {
-                this.entity.AddRange(
+                entity.AddRange(
                     new Component_GetName(new Value<string>(config.enemyName)),
                     new Component_ObjectType(config.objectType),
-                    new Component_GetPivot(this.movingPivot)
+                    new Component_GetPivot(movingPivot)
                 );
 
-                this.entity.AddRange(
+                entity.AddRange(
                     new Component_TransformEngine(core.transformEngine),
                     new Component_Enable(core.isEnable),
                     new Component_MoveInDirection(core.move.motor),
@@ -255,15 +255,15 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void ConstructStateMachine(Core core)
             {
-                this.stateMachine.states = new List<StateEntry<string>>
+                stateMachine.states = new List<StateEntry<string>>
                 {
-                    new(nameof(IdleState), this.idleState),
-                    new(nameof(MoveState), this.moveState),
-                    new(nameof(CombatState), this.combatState),
-                    new(nameof(DeathState), this.deathState)
+                    new(nameof(IdleState), idleState),
+                    new(nameof(MoveState), moveState),
+                    new(nameof(CombatState), combatState),
+                    new(nameof(DeathState), deathState)
                 };
 
-                this.stateMachine.orderedTransitions = new List<StateTransition<string>>
+                stateMachine.orderedTransitions = new List<StateTransition<string>>
                 {
                     new(nameof(DeathState), () => core.life.hitPoints.IsOver()),
                     new(nameof(MoveState), () => core.move.motor.IsMoving),
@@ -275,19 +275,19 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void ConstructMechanics(Core core)
             {
-                this.enableMechanics.Construct(core.isEnable, isEnable =>
+                enableMechanics.Construct(core.isEnable, isEnable =>
                 {
                     if (isEnable)
-                        this.stateMachine.Enter();
+                        stateMachine.Enter();
                     else
-                        this.stateMachine.Exit();
+                        stateMachine.Exit();
                 });
 
-                this.updateMechanics.Construct(_ =>
+                updateMechanics.Construct(_ =>
                 {
                     if (core.isEnable.Current)
                     {
-                        this.stateMachine.Update();
+                        stateMachine.Update();
                     }
                 });
             }
@@ -305,10 +305,10 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf()
                 {
-                    this.states = new List<IState>
+                    states = new List<IState>
                     {
-                        this.positionState,
-                        this.rotationState
+                        positionState,
+                        rotationState
                     };
                 }
 
@@ -319,14 +319,14 @@ namespace Game.Gameplay.Enemies
                     var transform = core.transformEngine;
                     var moveSpeed = new Value<float>(config.moveSpeed);
 
-                    this.positionState.ConstructMotor(moveMotor);
-                    this.positionState.ConstructTransform(transform);
-                    this.positionState.ConstructSpeed(moveSpeed);
+                    positionState.ConstructMotor(moveMotor);
+                    positionState.ConstructTransform(transform);
+                    positionState.ConstructSpeed(moveSpeed);
 
-                    this.rotationState.mode = MoveInDirectionState_Rotation.Mode.SMOOTH;
-                    this.rotationState.rotationSpeed = 45.0f;
-                    this.rotationState.ConstructMotor(moveMotor);
-                    this.rotationState.ConstructTransform(transform);
+                    rotationState.mode = MoveInDirectionState_Rotation.Mode.SMOOTH;
+                    rotationState.rotationSpeed = 45.0f;
+                    rotationState.ConstructMotor(moveMotor);
+                    rotationState.ConstructTransform(transform);
                 }
             }
 
@@ -341,11 +341,11 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf()
                 {
-                    this.states = new List<IState>
+                    states = new List<IState>
                     {
-                        this.controlDestroyState,
-                        this.controlDistanceState,
-                        this.updateRotationState
+                        controlDestroyState,
+                        controlDistanceState,
+                        updateRotationState
                     };
                 }
 
@@ -356,19 +356,19 @@ namespace Game.Gameplay.Enemies
                     var transform = core.transformEngine;
 
                     //Constrol destroy state:
-                    this.controlDestroyState.ConstructOperator(combatOperator);
-                    this.controlDestroyState.ConstructAttacker(attacker);
+                    controlDestroyState.ConstructOperator(combatOperator);
+                    controlDestroyState.ConstructAttacker(attacker);
 
                     //Check distance state:
-                    this.controlDistanceState.ConstructOperator(combatOperator);
-                    this.controlDistanceState.ConstructTransform(transform);
-                    this.controlDistanceState.ConstructMinDistance(configModule.minCombatDistance);
+                    controlDistanceState.ConstructOperator(combatOperator);
+                    controlDistanceState.ConstructTransform(transform);
+                    controlDistanceState.ConstructMinDistance(configModule.minCombatDistance);
 
                     //Control rotation:
-                    this.updateRotationState.ConstructOperator(combatOperator);
-                    this.updateRotationState.ConstructTransform(transform);
-                    this.updateRotationState.mode = CombatState_UpdateRotation.Mode.SMOOTH;
-                    this.updateRotationState.rotationSpeed = 45.0f;
+                    updateRotationState.ConstructOperator(combatOperator);
+                    updateRotationState.ConstructTransform(transform);
+                    updateRotationState.mode = CombatState_UpdateRotation.Mode.SMOOTH;
+                    updateRotationState.rotationSpeed = 45.0f;
                 }
             }
 
@@ -412,18 +412,18 @@ namespace Game.Gameplay.Enemies
                 const int COMBAT = 3;
                 const int DEATH = 5;
 
-                this.animatorMachine.Construct(this.animator, this.observable);
+                animatorMachine.Construct(animator, observable);
 
-                this.animatorMachine.states = new List<AnimatorMachine.StateEntry>
+                animatorMachine.states = new List<AnimatorMachine.StateEntry>
                 {
-                    new(IDLE, this.idleState),
-                    new(MOVE, this.moveState),
-                    new(COMBAT, this.combatState),
-                    new(DEATH, this.deathState)
+                    new(IDLE, idleState),
+                    new(MOVE, moveState),
+                    new(COMBAT, combatState),
+                    new(DEATH, deathState)
                 };
 
                 var fsm = states.stateMachine;
-                this.animatorMachine.orderedTransitions = new List<AnimatorMachine.StateTransition>
+                animatorMachine.orderedTransitions = new List<AnimatorMachine.StateTransition>
                 {
                     new(IDLE, () => fsm.CurrentState == nameof(States.IdleState)),
                     new(MOVE, () => fsm.CurrentState == nameof(States.MoveState)),
@@ -441,8 +441,8 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void Construct(Animations animations)
                 {
-                    this.applyRootMotionState.ConstructMachine(animations.animatorMachine);
-                    this.resetRootMotionState.ConstructMachine(animations.animatorMachine);
+                    applyRootMotionState.ConstructMachine(animations.animatorMachine);
+                    resetRootMotionState.ConstructMachine(animations.animatorMachine);
                 }
             }
 
@@ -451,7 +451,7 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void Construct(Common common)
                 {
-                    this.states = new List<IState>
+                    states = new List<IState>
                     {
                         common.resetRootMotionState
                     };
@@ -463,7 +463,7 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf(Common common)
                 {
-                    this.states = new List<IState>
+                    states = new List<IState>
                     {
                         common.resetRootMotionState
                     };
@@ -477,19 +477,19 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf(Common common)
                 {
-                    this.states = new List<IState>
+                    states = new List<IState>
                     {
                         common.resetRootMotionState,
-                        this.dealDamageListener
+                        dealDamageListener
                     };
                 }
 
                 [Construct]
                 private void ConstructDealDamageListener(Animations animations, Core core)
                 {
-                    this.dealDamageListener.ConstructAnimMachine(animations.animatorMachine);
-                    this.dealDamageListener.ConstructAnimEvents("attack");
-                    this.dealDamageListener.ConstructAction(core.combat.DealDamage);
+                    dealDamageListener.ConstructAnimMachine(animations.animatorMachine);
+                    dealDamageListener.ConstructAnimEvents("attack");
+                    dealDamageListener.ConstructAction(core.combat.DealDamage);
                 }
             }
 
@@ -499,7 +499,7 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf(Common common)
                 {
-                    this.states = new List<IState>
+                    states = new List<IState>
                     {
                         common.applyRootMotionState
                     };
@@ -524,13 +524,13 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void ConstructEmiiter()
             {
-                this.soundEmitter = new SoundEmitter(this.audioSource, this.soundCatalog);
+                soundEmitter = new SoundEmitter(audioSource, soundCatalog);
             }
 
             [Construct]
             private void ConstructSounds(Core core)
             {
-                core.life.destroyEmitter.AddListener(_ => this.soundEmitter.PlaySound(this.deathSFX));
+                core.life.destroyEmitter.AddListener(_ => soundEmitter.PlaySound(deathSFX));
             }
         }
 
@@ -545,7 +545,7 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void Construct(Core core)
             {
-                this.hitPointsViewAdapter.Construct(core.life.hitPoints, this.hitPointsView);
+                hitPointsViewAdapter.Construct(core.life.hitPoints, hitPointsView);
             }
         }
     }

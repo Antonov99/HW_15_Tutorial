@@ -20,7 +20,7 @@ namespace ES3Internal
         public static DateTime GetTimestamp(string filePath)
         {
             if (!FileExists(filePath))
-                return new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             return File.GetLastWriteTime(filePath).ToUniversalTime();
         }
 

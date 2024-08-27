@@ -10,20 +10,20 @@ namespace Game.GameEngine.Animation
 
         public void Add(IAnimatorMultiplier multiplier)
         {
-            this.multipliers.Add(multiplier);
+            multipliers.Add(multiplier);
         }
 
         public void Remove(IAnimatorMultiplier multiplier)
         {
-            this.multipliers.Remove(multiplier);
+            multipliers.Remove(multiplier);
         }
 
         public float GetValue()
         {
             var result = 1.0f;
-            for (int i = 0, count = this.multipliers.Count; i < count; i++)
+            for (int i = 0, count = multipliers.Count; i < count; i++)
             {
-                result *= this.multipliers[i].GetValue();
+                result *= multipliers[i].GetValue();
             }
 
             return result;

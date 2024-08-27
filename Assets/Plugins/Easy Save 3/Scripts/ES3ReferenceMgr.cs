@@ -23,7 +23,7 @@ public class ES3ReferenceMgr : ES3ReferenceMgrBase
             prefabs.Clear();
 
         // This will get the dependencies for all GameObjects and Components from the active scene.
-        AddDependencies(this.gameObject.scene.GetRootGameObjects());
+        AddDependencies(gameObject.scene.GetRootGameObjects());
         AddPrefabsToManager();
         RemoveNullOrInvalidValues();
 
@@ -33,7 +33,7 @@ public class ES3ReferenceMgr : ES3ReferenceMgrBase
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public void Optimize()
     {
-        var dependencies = CollectDependencies(this.gameObject.scene.GetRootGameObjects());
+        var dependencies = CollectDependencies(gameObject.scene.GetRootGameObjects());
         var notDependenciesOfScene = new HashSet<UnityEngine.Object>();
 
         foreach (var kvp in idRef)
@@ -94,7 +94,7 @@ public class ES3ReferenceMgr : ES3ReferenceMgrBase
         if (ES3Settings.defaultSettingsScriptableObject.addAllPrefabsToManager)
         {
             // Clear any null values. This isn't necessary if we're not adding all prefabs to manager as the list is cleared each time.
-            if (this.prefabs.RemoveAll(item => item == null) > 0)
+            if (prefabs.RemoveAll(item => item == null) > 0)
                 Undo.RecordObject(this, "Update Easy Save 3 Reference List");
 
             foreach (var es3Prefab in Resources.FindObjectsOfTypeAll<ES3Prefab>())

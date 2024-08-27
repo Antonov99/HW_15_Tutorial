@@ -11,7 +11,7 @@ namespace AI.BTree.UnityEditor
 
         private void Awake()
         {
-            this.node = (UnityBehaviourNode) this.target;
+            node = (UnityBehaviourNode) target;
         }
 
         public override void OnInspectorGUI()

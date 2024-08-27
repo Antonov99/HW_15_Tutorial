@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_CollisionModule() : base(typeof(UnityEngine.ParticleSystem.CollisionModule))
+		public ES3Type_CollisionModule() : base(typeof(ParticleSystem.CollisionModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.CollisionModule)obj;
+			var instance = (ParticleSystem.CollisionModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled);
 			writer.WriteProperty("type", instance.type);
@@ -40,72 +40,72 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.CollisionModule();
+			var instance = new ParticleSystem.CollisionModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.CollisionModule)obj;
+			var instance = (ParticleSystem.CollisionModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
 				switch(propertyName)
 				{
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>();
+						instance.enabled = reader.Read<Boolean>();
 						break;
 					case "type":
-						instance.type = reader.Read<UnityEngine.ParticleSystemCollisionType>();
+						instance.type = reader.Read<ParticleSystemCollisionType>();
 						break;
 					case "mode":
-						instance.mode = reader.Read<UnityEngine.ParticleSystemCollisionMode>();
+						instance.mode = reader.Read<ParticleSystemCollisionMode>();
 						break;
 					case "dampen":
-						instance.dampen = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.dampen = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "dampenMultiplier":
-						instance.dampenMultiplier = reader.Read<System.Single>();
+						instance.dampenMultiplier = reader.Read<Single>();
 						break;
 					case "bounce":
-						instance.bounce = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.bounce = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "bounceMultiplier":
-						instance.bounceMultiplier = reader.Read<System.Single>();
+						instance.bounceMultiplier = reader.Read<Single>();
 						break;
 					case "lifetimeLoss":
-						instance.lifetimeLoss = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.lifetimeLoss = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "lifetimeLossMultiplier":
-						instance.lifetimeLossMultiplier = reader.Read<System.Single>();
+						instance.lifetimeLossMultiplier = reader.Read<Single>();
 						break;
 					case "minKillSpeed":
-						instance.minKillSpeed = reader.Read<System.Single>();
+						instance.minKillSpeed = reader.Read<Single>();
 						break;
 					case "maxKillSpeed":
-						instance.maxKillSpeed = reader.Read<System.Single>();
+						instance.maxKillSpeed = reader.Read<Single>();
 						break;
 					case "collidesWith":
-						instance.collidesWith = reader.Read<UnityEngine.LayerMask>();
+						instance.collidesWith = reader.Read<LayerMask>();
 						break;
 					case "enableDynamicColliders":
-						instance.enableDynamicColliders = reader.Read<System.Boolean>();
+						instance.enableDynamicColliders = reader.Read<Boolean>();
 						break;
 					case "maxCollisionShapes":
-						instance.maxCollisionShapes = reader.Read<System.Int32>();
+						instance.maxCollisionShapes = reader.Read<Int32>();
 						break;
 					case "quality":
-						instance.quality = reader.Read<UnityEngine.ParticleSystemCollisionQuality>();
+						instance.quality = reader.Read<ParticleSystemCollisionQuality>();
 						break;
 					case "voxelSize":
-						instance.voxelSize = reader.Read<System.Single>();
+						instance.voxelSize = reader.Read<Single>();
 						break;
 					case "radiusScale":
-						instance.radiusScale = reader.Read<System.Single>();
+						instance.radiusScale = reader.Read<Single>();
 						break;
 					case "sendCollisionMessages":
-						instance.sendCollisionMessages = reader.Read<System.Boolean>();
+						instance.sendCollisionMessages = reader.Read<Boolean>();
 						break;
 					default:
 						reader.Skip();

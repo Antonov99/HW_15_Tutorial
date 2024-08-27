@@ -14,7 +14,7 @@ namespace AI.Commands
 
         public bool IsRunning
         {
-            get { return this.currentCommand != null; }
+            get { return currentCommand != null; }
         }
 
         private readonly Dictionary<T, IAICommand> commands = new();
@@ -36,58 +36,58 @@ namespace AI.Commands
 
         public void Execute(T key, object args = null)
         {
-            if (this.IsRunning)
+            if (IsRunning)
             {
-                Debug.LogWarning($"Other command {this.currentCommand.GetType().Name} is already run!");
+                Debug.LogWarning($"Other command {currentCommand.GetType().Name} is already run!");
                 return;
             }
 
-            if (!this.commands.TryGetValue(key, out this.currentCommand))
+            if (!commands.TryGetValue(key, out currentCommand))
             {
                 Debug.LogWarning($"Command with {key} is not found!");
                 return;
             }
 
-            this.currentKey = key;
-            this.currentArgs = args;
+            currentKey = key;
+            currentArgs = args;
 
-            this.OnStarted?.Invoke(key, args);
-            this.currentCommand.Execute(args, callback: this);
+            OnStarted?.Invoke(key, args);
+            currentCommand.Execute(args, callback: this);
         }
 
         public void Interrupt()
         {
-            if (!this.IsRunning)
+            if (!IsRunning)
             {
                 return;
             }
 
-            this.currentCommand.Interrupt();
-            this.currentCommand = null;
-            this.OnInterrupted?.Invoke(this.currentKey, this.currentArgs);
+            currentCommand.Interrupt();
+            currentCommand = null;
+            OnInterrupted?.Invoke(currentKey, currentArgs);
         }
 
         public bool TryGetRunningInfo(out T key, out object args)
         {
-            key = this.currentKey;
-            args = this.currentArgs;
-            return this.currentCommand != null;
+            key = currentKey;
+            args = currentArgs;
+            return currentCommand != null;
         }
 
         public void RegisterCommand(T key, IAICommand command)
         {
-            this.commands.Add(key, command);
+            commands.Add(key, command);
         }
 
         public void UnregisterCommand(T key)
         {
-            this.commands.Remove(key);
+            commands.Remove(key);
         }
 
         void IAICommandCallback.Invoke(IAICommand command, object args, bool success)
         {
-            this.currentCommand = null;
-            this.OnFinished?.Invoke(this.currentKey, this.currentArgs);
+            currentCommand = null;
+            OnFinished?.Invoke(currentKey, currentArgs);
         }
     }
 }

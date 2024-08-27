@@ -9,12 +9,12 @@ namespace Elementary
 
         protected virtual void OnEnable()
         {
-            this.receiver.OnEvent += this.OnEvent;
+            receiver.OnEvent += OnEvent;
         }
 
         protected virtual  void OnDisable()
         {
-            this.receiver.OnEvent -= this.OnEvent;
+            receiver.OnEvent -= OnEvent;
         }
 
         protected abstract void OnEvent();

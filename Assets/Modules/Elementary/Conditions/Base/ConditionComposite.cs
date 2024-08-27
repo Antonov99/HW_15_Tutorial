@@ -8,7 +8,7 @@ namespace Elementary
 
         public ConditionComposite()
         {
-            this.conditions = new List<ICondition>(1);
+            conditions = new List<ICondition>(1);
         }
 
         public ConditionComposite(params ICondition[] conditions)
@@ -51,9 +51,9 @@ namespace Elementary
 
         public bool IsTrue()
         {
-            for (int i = 0, count = this.conditions.Count; i < count; i++)
+            for (int i = 0, count = conditions.Count; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue())
                 {
                     return false;
@@ -70,7 +70,7 @@ namespace Elementary
 
         public ConditionComposite()
         {
-            this.conditions = new List<ICondition<T>>(1);
+            conditions = new List<ICondition<T>>(1);
         }
 
         public ConditionComposite(params ICondition<T>[] conditions)
@@ -113,9 +113,9 @@ namespace Elementary
 
         public bool IsTrue(T args)
         {
-            for (int i = 0, count = this.conditions.Count; i < count; i++)
+            for (int i = 0, count = conditions.Count; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue(args))
                 {
                     return false;

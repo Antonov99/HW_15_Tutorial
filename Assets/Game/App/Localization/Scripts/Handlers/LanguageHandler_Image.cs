@@ -15,9 +15,9 @@ namespace LocalizationModule
         
         public void UpdateLanguage(SystemLanguage language)
         {
-            if (this.sprites.FindSprite(language, out var sprite))
+            if (sprites.FindSprite(language, out var sprite))
             {
-                this.image.sprite = sprite;                
+                image.sprite = sprite;                
             }
         }
     }

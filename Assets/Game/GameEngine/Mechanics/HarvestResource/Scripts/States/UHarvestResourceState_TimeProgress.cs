@@ -21,34 +21,34 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.currentTime = this.engine.Current.progress * this.workTime.Current;
+            currentTime = engine.Current.progress * workTime.Current;
             base.Enter();
         }
 
         protected override IEnumerator Do()
         {
-            while (this.currentTime < this.workTime.Current)
+            while (currentTime < workTime.Current)
             {
                 yield return null;
-                this.UpdateProgress(Time.deltaTime);
+                UpdateProgress(Time.deltaTime);
             }
 
-            this.Complete();
+            Complete();
         }
 
         private void UpdateProgress(float deltaTime)
         {
-            this.currentTime += deltaTime;
-            var progress = this.currentTime / this.workTime.Current;
-            this.engine.Current.progress = progress;
+            currentTime += deltaTime;
+            var progress = currentTime / workTime.Current;
+            engine.Current.progress = progress;
         }
 
         private void Complete()
         {
-            var operation = this.engine.Current;
+            var operation = engine.Current;
             operation.isCompleted = true;
             operation.progress = 1.0f;
-            this.engine.Stop();
+            engine.Stop();
         }
     }
 }

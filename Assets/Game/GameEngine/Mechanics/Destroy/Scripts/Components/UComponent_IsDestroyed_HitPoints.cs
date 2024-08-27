@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         [ShowInInspector]
         public bool IsDestroyed
         {
-            get { return this.CheckIsDestroyed(); }
+            get { return CheckIsDestroyed(); }
         }
 
         [Space]
@@ -20,12 +20,12 @@ namespace Game.GameEngine.Mechanics
 
         private bool CheckIsDestroyed()
         {
-            if (this.hitPointsEngine == null)
+            if (hitPointsEngine == null)
             {
                 return default;
             }
 
-            return this.hitPointsEngine.Current <= 0;
+            return hitPointsEngine.Current <= 0;
         }
     }
 }

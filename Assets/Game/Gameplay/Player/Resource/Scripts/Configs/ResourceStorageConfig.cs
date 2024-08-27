@@ -11,7 +11,7 @@ namespace Game.Gameplay.Player
     {
         public ResourceData[] InitialResources
         {
-            get { return this.initialResources; }
+            get { return initialResources; }
         }
 
         [SerializeField]

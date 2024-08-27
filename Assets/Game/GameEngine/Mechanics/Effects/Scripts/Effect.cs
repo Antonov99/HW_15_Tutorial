@@ -12,7 +12,7 @@ namespace Game.GameEngine.Mechanics
 
         public Effect()
         {
-            this.parameters = new List<IEffectParameter>();
+            parameters = new List<IEffectParameter>();
         }
 
         public Effect(params IEffectParameter[] parameters)
@@ -22,9 +22,9 @@ namespace Game.GameEngine.Mechanics
 
         public T GetParameter<T>(EffectId name)
         {
-            for (int i = 0, count = this.parameters.Count; i < count; i++)
+            for (int i = 0, count = parameters.Count; i < count; i++)
             {
-                var parameter = this.parameters[i];
+                var parameter = parameters[i];
                 if (parameter.Name == name && parameter is IEffectParameter<T> tParameter)
                 {
                     return tParameter.Value;
@@ -36,9 +36,9 @@ namespace Game.GameEngine.Mechanics
 
         public bool TryGetParameter<T>(EffectId name, out T value)
         {
-            for (int i = 0, count = this.parameters.Count; i < count; i++)
+            for (int i = 0, count = parameters.Count; i < count; i++)
             {
-                var parameter = this.parameters[i];
+                var parameter = parameters[i];
                 if (parameter.Name == name && parameter is IEffectParameter<T> tParameter)
                 {
                     value = tParameter.Value;

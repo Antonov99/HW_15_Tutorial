@@ -9,17 +9,17 @@ namespace Elementary
 
         protected virtual void Awake()
         {
-            this.SetEnable(this.toggle.Current);
+            SetEnable(toggle.Current);
         }
 
         protected virtual void OnEnable()
         {
-            this.toggle.OnValueChanged += this.SetEnable;
+            toggle.OnValueChanged += SetEnable;
         }
 
         protected virtual void OnDisable()
         {
-            this.toggle.OnValueChanged -= this.SetEnable;
+            toggle.OnValueChanged -= SetEnable;
         }
 
         protected abstract void SetEnable(bool isEnable);
@@ -27,11 +27,11 @@ namespace Elementary
 #if UNITY_EDITOR
         protected virtual void OnValidate()
         {
-            if (this.toggle != null)
+            if (toggle != null)
             {
-                this.toggle.OnValueChanged -= this.SetEnable;
-                this.toggle.OnValueChanged += this.SetEnable;
-                this.SetEnable(this.toggle.Current);
+                toggle.OnValueChanged -= SetEnable;
+                toggle.OnValueChanged += SetEnable;
+                SetEnable(toggle.Current);
             }
         }
 #endif

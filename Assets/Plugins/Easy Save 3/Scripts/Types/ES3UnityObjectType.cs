@@ -10,7 +10,7 @@ namespace ES3Types
 	{
 		public ES3UnityObjectType(Type type) : base(type)
 		{
-			this.isValueType = false;
+			isValueType = false;
 			isES3TypeUnityObject = true;
 		}
 
@@ -106,7 +106,7 @@ namespace ES3Types
         {
             var objType = obj.GetType();
 
-            if (objType != this.type)
+            if (objType != type)
             {
                 writer.WriteType(objType);
 

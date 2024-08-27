@@ -18,27 +18,27 @@ namespace Elementary
 
         private void Awake()
         {
-            if (this.disableOnAwake)
+            if (disableOnAwake)
             {
-                this.SwitchObjects(false);
+                SwitchObjects(false);
             }
         }
 
         public override void Enter()
         {
-            this.SwitchObjects(true);
+            SwitchObjects(true);
         }
 
         public override void Exit()
         {
-            this.SwitchObjects(false);
+            SwitchObjects(false);
         }
 
         private void SwitchObjects(bool enabled)
         {
-            for (int i = 0, count = this.enableObjects.Length; i < count; i++)
+            for (int i = 0, count = enableObjects.Length; i < count; i++)
             {
-                var go = this.enableObjects[i];
+                var go = enableObjects[i];
                 if (go != null)
                 {
                     go.SetActive(enabled);
@@ -46,9 +46,9 @@ namespace Elementary
             }
 
             var disabled = !enabled;
-            for (int i = 0, count = this.disableObjects.Length; i < count; i++)
+            for (int i = 0, count = disableObjects.Length; i < count; i++)
             {
-                var go = this.disableObjects[i];
+                var go = disableObjects[i];
                 if (go != null)
                 {
                     go.SetActive(disabled);

@@ -10,7 +10,7 @@ namespace Game.Meta
     {
         public StackView Stack
         {
-            get { return this.stackView; }
+            get { return stackView; }
         }
 
         [SerializeField]
@@ -27,22 +27,22 @@ namespace Game.Meta
 
         public void SetTitle(string title)
         {
-            this.titleText.text = title;
+            titleText.text = title;
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void AddClickListener(UnityAction action)
         {
-            this.button.onClick.AddListener(action);
+            button.onClick.AddListener(action);
         }
 
         public void RemoveClickListener(UnityAction action)
         {
-            this.button.onClick.RemoveListener(action);
+            button.onClick.RemoveListener(action);
         }
     }
 }

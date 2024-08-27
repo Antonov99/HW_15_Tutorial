@@ -19,14 +19,14 @@ namespace Game.GameEngine.AI
 
         public override bool IsTrue()
         {
-            if (!this.Blackboard.TryGetVariable(this.entityKey, out IEntity entity))
+            if (!Blackboard.TryGetVariable(entityKey, out IEntity entity))
             {
                 return default;
             }
 
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue(entity))
                 {
                     return false;

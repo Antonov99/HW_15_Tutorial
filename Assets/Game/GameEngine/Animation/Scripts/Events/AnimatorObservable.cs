@@ -31,52 +31,52 @@ namespace Game.GameEngine.Animation
 
         public void OnEnterState(AnimatorStateInfo state, int stateId, int layerIndex)
         {
-            this.OnStateEntered?.Invoke(state, stateId, layerIndex);
+            OnStateEntered?.Invoke(state, stateId, layerIndex);
         }
         
         public void OnExitState(AnimatorStateInfo state, int stateId, int layerIndex)
         {
-            this.OnStateExited?.Invoke(state, stateId, layerIndex);
+            OnStateExited?.Invoke(state, stateId, layerIndex);
         }
 
         public void ReceiveStartAnimation(AnimationClip clip)
         {
-            this.OnAnimationStarted?.Invoke(clip);
+            OnAnimationStarted?.Invoke(clip);
         }
 
         public void ReceiveEndAnimation(AnimationClip clip)
         {
-            this.OnAnimationEnded?.Invoke(clip);
+            OnAnimationEnded?.Invoke(clip);
         }
         
         public void ReceiveString(string message) 
         {
-            this.OnStringReceived?.Invoke(message);
+            OnStringReceived?.Invoke(message);
         }
 
         public void ReceiveBool(bool message)
         {
-            this.OnBoolReceived?.Invoke(message);
+            OnBoolReceived?.Invoke(message);
         }
 
         public void ReceiveInt(int message)
         {
-            this.OnIntReceived?.Invoke(message);
+            OnIntReceived?.Invoke(message);
         }
 
         public void ReceiveFloat(float message)
         {
-            this.OnFloatReceived?.Invoke(message);
+            OnFloatReceived?.Invoke(message);
         }
 
         public void ReceiveReference(Object obj)
         {
-            this.OnObjectReceived?.Invoke(obj);
+            OnObjectReceived?.Invoke(obj);
         }
         
         public void ReceiveEvent()
         {
-            this.OnEventReceived?.Invoke();
+            OnEventReceived?.Invoke();
         }
     }
 }

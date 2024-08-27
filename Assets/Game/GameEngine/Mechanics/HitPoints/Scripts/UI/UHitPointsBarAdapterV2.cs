@@ -17,62 +17,62 @@ namespace Game.GameEngine.Mechanics
 
         private void Awake()
         {
-            this.SetupBar();
+            SetupBar();
         }
 
         private void OnEnable()
         {
-            this.hitPointsEngine.OnSetuped += this.SetupBar;
-            this.hitPointsEngine.OnCurrentPointsChanged += this.UpdateBar;
+            hitPointsEngine.OnSetuped += SetupBar;
+            hitPointsEngine.OnCurrentPointsChanged += UpdateBar;
         }
 
         private void OnDisable()
         {
-            this.hitPointsEngine.OnSetuped -= this.SetupBar;
-            this.hitPointsEngine.OnCurrentPointsChanged -= this.UpdateBar;
+            hitPointsEngine.OnSetuped -= SetupBar;
+            hitPointsEngine.OnCurrentPointsChanged -= UpdateBar;
         }
 
         private void SetupBar()
         {
-            this.ResetCoroutines();
+            ResetCoroutines();
 
-            var hitPoints = this.hitPointsEngine.Current;
-            var maxHitPoints = this.hitPointsEngine.Max;
+            var hitPoints = hitPointsEngine.Current;
+            var maxHitPoints = hitPointsEngine.Max;
             
             var showBar = hitPoints > 0 && hitPoints < maxHitPoints;
-            this.view.SetVisible(showBar);
-            this.view.SetHitPoints(hitPoints, maxHitPoints);
+            view.SetVisible(showBar);
+            view.SetHitPoints(hitPoints, maxHitPoints);
         }
 
         private void UpdateBar(int hitPoints)
         {
-            this.ResetCoroutines();
+            ResetCoroutines();
 
-            var maxHitPoints = this.hitPointsEngine.Max;
+            var maxHitPoints = hitPointsEngine.Max;
             
-            this.view.SetVisible(true);
-            this.view.SetHitPoints(hitPoints, maxHitPoints);
+            view.SetVisible(true);
+            view.SetHitPoints(hitPoints, maxHitPoints);
 
             if (hitPoints <= 0 || hitPoints == maxHitPoints)
             {
-                this.hideCoroutine = this.StartCoroutine(this.HideWithDelay());
+                hideCoroutine = StartCoroutine(HideWithDelay());
             }
         }
         
         private void ResetCoroutines()
         {
-            if (this.hideCoroutine != null)
+            if (hideCoroutine != null)
             {
-                this.StopCoroutine(this.hideCoroutine);
-                this.hideCoroutine = null;
+                StopCoroutine(hideCoroutine);
+                hideCoroutine = null;
             }
         }
 
         private IEnumerator HideWithDelay()
         {
             yield return new WaitForSeconds(1.0f);
-            this.view.SetVisible(false);
-            this.hideCoroutine = null;
+            view.SetVisible(false);
+            hideCoroutine = null;
         }
     }
 }

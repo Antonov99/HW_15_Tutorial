@@ -13,12 +13,12 @@ namespace Game.GameEngine.Animation
 
         public void ConstructAnimMachine(AnimatorMachine machine)
         {
-            this.animationSystem = machine;
+            animationSystem = machine;
         }
 
         public void ConstructAnimEvents(params string[] animEvents)
         {
-            this.animationEvents = animEvents;
+            animationEvents = animEvents;
         }
 
         public void ConstructAction(IAction action)
@@ -33,27 +33,27 @@ namespace Game.GameEngine.Animation
 
         public override void Enter()
         {
-            this.animationSystem.OnStringReceived += this.OnAnimationEvent;
+            animationSystem.OnStringReceived += OnAnimationEvent;
         }
 
         public override void Exit()
         {
-            this.animationSystem.OnStringReceived -= this.OnAnimationEvent;
+            animationSystem.OnStringReceived -= OnAnimationEvent;
         }
 
         private void OnAnimationEvent(string message)
         {
-            if (this.ContainsEvent(message))
+            if (ContainsEvent(message))
             {
-                this.action.Do();
+                action.Do();
             }
         }
 
         private bool ContainsEvent(string message)
         {
-            for (int i = 0, count = this.animationEvents.Length; i < count; i++)
+            for (int i = 0, count = animationEvents.Length; i < count; i++)
             {
-                if (this.animationEvents[i] == message)
+                if (animationEvents[i] == message)
                 {
                     return true;
                 }

@@ -13,12 +13,12 @@ namespace Game.Meta
 
         void ITimeShiftHandler.OnTimeShifted(TimeShiftReason reason, float shiftSeconds)
         {
-            this.SyncBoosters(shiftSeconds);
+            SyncBoosters(shiftSeconds);
         }
 
         private void SyncBoosters(float shiftSeconds)
         {
-            var boosters = this.boostersManager.GetActiveBoosters();
+            var boosters = boostersManager.GetActiveBoosters();
             for (int i = 0, count = boosters.Length; i < count; i++)
             {
                 var booster = boosters[i];

@@ -20,14 +20,14 @@ namespace Elementary
         {
             if (isEnable)
             {
-                this.onEnable?.Invoke();
+                onEnable?.Invoke();
             }
             else
             {
-                this.onDisable?.Invoke();
+                onDisable?.Invoke();
             }
             
-            this.onEvent.Invoke(isEnable);
+            onEvent.Invoke(isEnable);
         }
     }
 }

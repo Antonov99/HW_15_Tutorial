@@ -11,8 +11,8 @@ namespace Elementary
 
         public T Current
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
 
         [OnValueChanged("SetValue")]
@@ -27,19 +27,19 @@ namespace Elementary
         public void SetValue(T value)
         {
             this.value = value;
-            this.actions?.Do(value);
-            this.onValueChanged?.Invoke(value);
-            this.OnValueChanged?.Invoke(value);
+            actions?.Do(value);
+            onValueChanged?.Invoke(value);
+            OnValueChanged?.Invoke(value);
         }
 
         public void AddListener(IAction<T> listener)
         {
-            this.actions += listener;
+            actions += listener;
         }
 
         public void RemoveListener(IAction<T> listener)
         {
-            this.actions -= listener;
+            actions -= listener;
         }
     }
 }

@@ -9,21 +9,21 @@ namespace Game.GameEngine.Mechanics
 
         public sealed override void Enter()
         {
-            this.OnEnter();
-            this.enabled = true;
+            OnEnter();
+            enabled = true;
         }
 
         public sealed override void Exit()
         {
-            this.enabled = false;
-            this.OnExit();
+            enabled = false;
+            OnExit();
         }
 
         void IFixedUpdateListener.FixedUpdate(float deltaTime)
         {
-            if (this.enabled)
+            if (enabled)
             {
-                this.FixedUpdate(deltaTime);
+                FixedUpdate(deltaTime);
             }
         }
 

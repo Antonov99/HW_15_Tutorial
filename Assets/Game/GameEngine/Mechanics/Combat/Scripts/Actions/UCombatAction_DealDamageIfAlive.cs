@@ -23,9 +23,9 @@ namespace Game.GameEngine.Mechanics
 
             var takeDamageComponent = target.Get<IComponent_TakeDamage>();
             var damageEvent = new TakeDamageArgs(
-                this.damage.Current,
+                damage.Current,
                 TakeDamageReason.MELEE,
-                this.attacker
+                attacker
             );
             takeDamageComponent.TakeDamage(damageEvent);
         }

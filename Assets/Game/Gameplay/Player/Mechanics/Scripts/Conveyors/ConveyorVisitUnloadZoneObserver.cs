@@ -27,7 +27,7 @@ namespace Game.Gameplay.Player
             MonoBehaviour monContext
         )
         {
-            this.visitInteractor = conveyorVisitInteractor;
+            visitInteractor = conveyorVisitInteractor;
             this.resourceStorage = resourceStorage;
             this.uiAnimator = uiAnimator;
             this.monContext = monContext;
@@ -35,38 +35,38 @@ namespace Game.Gameplay.Player
 
         void IGameReadyElement.ReadyGame()
         {
-            this.visitInteractor.OutputZone.OnEntered += this.OnConveyorEntered;
-            this.visitInteractor.OutputZone.OnExited += this.OnConveyorExited;
+            visitInteractor.OutputZone.OnEntered += OnConveyorEntered;
+            visitInteractor.OutputZone.OnExited += OnConveyorExited;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.visitInteractor.OutputZone.OnEntered -= this.OnConveyorEntered;
-            this.visitInteractor.OutputZone.OnExited -= this.OnConveyorExited;
+            visitInteractor.OutputZone.OnEntered -= OnConveyorEntered;
+            visitInteractor.OutputZone.OnExited -= OnConveyorExited;
         }
 
         private void OnConveyorEntered(IEntity entity)
         {
-            this.targetUnloadZone = entity.Get<IComponent_UnloadZone>();
-            this.targetUnloadZone.OnAmountChanged += this.OnAmountChanged;
-            this.MoveResourcesFrom(this.targetUnloadZone);
+            targetUnloadZone = entity.Get<IComponent_UnloadZone>();
+            targetUnloadZone.OnAmountChanged += OnAmountChanged;
+            MoveResourcesFrom(targetUnloadZone);
         }
 
         private void OnConveyorExited(IEntity entity)
         {
-            this.targetUnloadZone.OnAmountChanged -= this.OnAmountChanged;
-            this.targetUnloadZone = null;
+            targetUnloadZone.OnAmountChanged -= OnAmountChanged;
+            targetUnloadZone = null;
         }
 
         private void OnAmountChanged(int currentAmount)
         {
-            this.monContext.StartCoroutine(this.MoveResourcesInNextFrame(this.targetUnloadZone));
+            monContext.StartCoroutine(MoveResourcesInNextFrame(targetUnloadZone));
         }
 
         private IEnumerator MoveResourcesInNextFrame(IComponent_UnloadZone unloadZone)
         {
             yield return new WaitForEndOfFrame();
-            this.MoveResourcesFrom(unloadZone);
+            MoveResourcesFrom(unloadZone);
         }
 
         private void MoveResourcesFrom(IComponent_UnloadZone unloadZone)
@@ -78,8 +78,8 @@ namespace Game.Gameplay.Player
 
             var resourceType = unloadZone.ResourceType;
             var income = unloadZone.ExtractAll();
-            this.resourceStorage.AddResource(resourceType, income);
-            this.uiAnimator.PlayIncomeFromWorld(unloadZone.ParticlePosition, resourceType, income);
+            resourceStorage.AddResource(resourceType, income);
+            uiAnimator.PlayIncomeFromWorld(unloadZone.ParticlePosition, resourceType, income);
         }
     }
 }

@@ -22,19 +22,19 @@ namespace Game.GameEngine.Development
 
         private void Awake()
         {
-            if (this.debugMode)
+            if (debugMode)
             {
-                this.onDebugMode.Invoke();
+                onDebugMode.Invoke();
             }
             else
             {
-                this.onReleaseMode?.Invoke();
+                onReleaseMode?.Invoke();
             }
         }
 
         private void Start()
         {
-            if (!this.debugMode)
+            if (!debugMode)
             {
                 return;
             }

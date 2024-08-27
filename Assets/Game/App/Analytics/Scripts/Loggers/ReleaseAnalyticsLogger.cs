@@ -15,11 +15,11 @@ namespace Game.App
             
             if (parameters == null || parameters.Length <= 0)
             {
-                this.LogEventOnly(eventName);
+                LogEventOnly(eventName);
             }
             else
             {
-                this.LogEventWithParams(eventName, parameters);
+                LogEventWithParams(eventName, parameters);
             }
         }
 

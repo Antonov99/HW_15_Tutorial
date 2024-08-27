@@ -10,8 +10,8 @@ namespace Game.Gameplay.Player
     {
         public event Action<ResourceType, int> OnResourceChanged
         {
-            add { this.source.OnValueChanged += value; }
-            remove { this.source.OnValueChanged -= value; }
+            add { source.OnValueChanged += value; }
+            remove { source.OnValueChanged -= value; }
         }
 
         public event Action<ResourceType, int> OnResourceAdded;
@@ -26,33 +26,33 @@ namespace Game.Gameplay.Player
         [Button]
         public void Setup(ResourceData[] resources)
         {
-            this.source.Setup(resources);
+            source.Setup(resources);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void AddResource(ResourceType resourceType, int range)
         {
-            this.source.Plus(resourceType, range);
-            this.OnResourceAdded?.Invoke(resourceType, range);
+            source.Plus(resourceType, range);
+            OnResourceAdded?.Invoke(resourceType, range);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void ExtractResource(ResourceType type, int range)
         {
-            this.source.Minus(type, range);
-            this.OnResourceExtracted?.Invoke(type, range);
+            source.Minus(type, range);
+            OnResourceExtracted?.Invoke(type, range);
         }
 
         public ResourceData[] GetAllResources()
         {
-            return this.source.GetAll();
+            return source.GetAll();
         }
 
         public int GetResource(ResourceType type)
         {
-            return this.source[type];
+            return source[type];
         }
     }
 }

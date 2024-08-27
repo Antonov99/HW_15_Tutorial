@@ -6,7 +6,7 @@ namespace Game.GameEngine
 
         public Component_ObjectType(ObjectType objectType)
         {
-            this.ObjectType = objectType;
+            ObjectType = objectType;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
         [ShowInInspector]
         public Vector3 WorldPosition
         {
-            get { return this.GetWorldPosition(); }
+            get { return GetWorldPosition(); }
         }
 
         [PropertyOrder(-9)]
@@ -22,7 +22,7 @@ namespace Game.GameEngine.Mechanics
         [ShowInInspector]
         public Quaternion WorldRotation
         {
-            get { return this.GetWorldRotation(); }
+            get { return GetWorldRotation(); }
         }
 
         [Space]
@@ -45,9 +45,9 @@ namespace Game.GameEngine.Mechanics
         public void SetPosiiton(Vector3 position)
         {
             position.y = 0;
-            for (int i = 0, count = this.movingTransforms.Length; i < count; i++)
+            for (int i = 0, count = movingTransforms.Length; i < count; i++)
             {
-                var transform = this.movingTransforms[i];
+                var transform = movingTransforms[i];
                 transform.position = position;
             }
         }
@@ -56,15 +56,15 @@ namespace Game.GameEngine.Mechanics
         [GUIColor(0, 1, 0)]
         public void MovePosition(Vector3 vector)
         {
-            var newPosition = this.sourcePositionTransform.position + vector;
-            this.SetPosiiton(newPosition);
+            var newPosition = sourcePositionTransform.position + vector;
+            SetPosiiton(newPosition);
         }
 
         [Button]
         [GUIColor(0, 1, 0)]
         public bool IsDistanceReached(Vector3 targetPosition, float minDistance)
         {
-            var distanceVector = this.sourcePositionTransform.position - targetPosition;
+            var distanceVector = sourcePositionTransform.position - targetPosition;
             distanceVector.y = 0.0f;
             return distanceVector.sqrMagnitude <= minDistance * minDistance;
         }
@@ -77,9 +77,9 @@ namespace Game.GameEngine.Mechanics
             eulerAngles.x = 0;
             eulerAngles.z = 0;
 
-            for (int i = 0, count = this.rotatingTransforms.Length; i < count; i++)
+            for (int i = 0, count = rotatingTransforms.Length; i < count; i++)
             {
-                var transform = this.rotatingTransforms[i];
+                var transform = rotatingTransforms[i];
                 transform.eulerAngles = eulerAngles;
             }
         }
@@ -88,9 +88,9 @@ namespace Game.GameEngine.Mechanics
         [GUIColor(0, 1, 0)]
         public void LookAtPosition(Vector3 targetPosition)
         {
-            var distanceVector = targetPosition - this.sourcePositionTransform.position;
+            var distanceVector = targetPosition - sourcePositionTransform.position;
             var direction = distanceVector.normalized;
-            this.LookInDirection(direction);
+            LookInDirection(direction);
         }
 
         [Button]
@@ -98,33 +98,33 @@ namespace Game.GameEngine.Mechanics
         public void LookInDirection(Vector3 direction)
         {
             var newRotation = Quaternion.LookRotation(direction, UP);
-            this.SetRotation(newRotation);
+            SetRotation(newRotation);
         }
 
         [Button]
         [GUIColor(0, 1, 0)]
         public void RotateTowardsAtPosition(Vector3 targetPosition, float speed, float deltaTime)
         {
-            var distanceVector = targetPosition - this.sourcePositionTransform.position;
+            var distanceVector = targetPosition - sourcePositionTransform.position;
             var direction = distanceVector.normalized;
-            this.RotateTowardsInDirection(direction, speed, deltaTime);
+            RotateTowardsInDirection(direction, speed, deltaTime);
         }
 
         [Button]
         [GUIColor(0, 1, 0)]
         public void RotateTowardsInDirection(Vector3 direction, float speed, float deltaTime)
         {
-            var currentRotation = this.sourceRotationTransform.rotation;
+            var currentRotation = sourceRotationTransform.rotation;
             var targetRotation = Quaternion.LookRotation(direction, UP);
             var newRotation = Quaternion.Slerp(currentRotation, targetRotation, speed * deltaTime);
-            this.SetRotation(newRotation);
+            SetRotation(newRotation);
         }
 
         private Vector3 GetWorldPosition()
         {
-            if (this.sourcePositionTransform != null)
+            if (sourcePositionTransform != null)
             {
-                return this.sourcePositionTransform.position;
+                return sourcePositionTransform.position;
             }
 
             return Vector3.zero;
@@ -132,9 +132,9 @@ namespace Game.GameEngine.Mechanics
 
         private Quaternion GetWorldRotation()
         {
-            if (this.sourceRotationTransform != null)
+            if (sourceRotationTransform != null)
             {
-                return this.sourceRotationTransform.rotation;
+                return sourceRotationTransform.rotation;
             }
 
             return Quaternion.identity;

@@ -10,7 +10,7 @@ namespace Cysharp.Threading.Tasks.Linq
         {
             Error.ThrowArgumentNullException(source, nameof(source));
 
-            return Cysharp.Threading.Tasks.Linq.ToList.ToListAsync(source, cancellationToken);
+            return ToList.ToListAsync(source, cancellationToken);
         }
     }
 

@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_TrailModule() : base(typeof(UnityEngine.ParticleSystem.TrailModule))
+		public ES3Type_TrailModule() : base(typeof(ParticleSystem.TrailModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.TrailModule)obj;
+			var instance = (ParticleSystem.TrailModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("ratio", instance.ratio, ES3Type_float.Instance);
@@ -37,14 +37,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.TrailModule();
+			var instance = new ParticleSystem.TrailModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.TrailModule)obj;
+			var instance = (ParticleSystem.TrailModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -52,49 +52,49 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "ratio":
-						instance.ratio = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.ratio = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "lifetime":
-						instance.lifetime = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.lifetime = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "lifetimeMultiplier":
-						instance.lifetimeMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.lifetimeMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "minVertexDistance":
-						instance.minVertexDistance = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.minVertexDistance = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "textureMode":
-						instance.textureMode = reader.Read<UnityEngine.ParticleSystemTrailTextureMode>();
+						instance.textureMode = reader.Read<ParticleSystemTrailTextureMode>();
 						break;
 					case "worldSpace":
-						instance.worldSpace = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.worldSpace = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "dieWithParticles":
-						instance.dieWithParticles = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.dieWithParticles = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "sizeAffectsWidth":
-						instance.sizeAffectsWidth = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.sizeAffectsWidth = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "sizeAffectsLifetime":
-						instance.sizeAffectsLifetime = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.sizeAffectsLifetime = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "inheritParticleColor":
-						instance.inheritParticleColor = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.inheritParticleColor = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "colorOverLifetime":
-						instance.colorOverLifetime = reader.Read<UnityEngine.ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
+						instance.colorOverLifetime = reader.Read<ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
 						break;
 					case "widthOverTrail":
-						instance.widthOverTrail = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.widthOverTrail = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "widthOverTrailMultiplier":
-						instance.widthOverTrailMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.widthOverTrailMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "colorOverTrail":
-						instance.colorOverTrail = reader.Read<UnityEngine.ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
+						instance.colorOverTrail = reader.Read<ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
 						break;
 					default:
 						reader.Skip();

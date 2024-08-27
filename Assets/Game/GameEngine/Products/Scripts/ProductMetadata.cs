@@ -9,17 +9,17 @@ namespace Game.GameEngine.Products
     {
         public Sprite Icon
         {
-            get { return this.icon; }
+            get { return icon; }
         }
 
         public string Title
         {
-            get { return this.title; }
+            get { return title; }
         }
 
         public string Decription
         {
-            get { return this.decription; }
+            get { return decription; }
         }
 
         [PreviewField]

@@ -8,7 +8,7 @@ namespace Elementary
 
         public StateComposite()
         {
-            this.states = new List<IState>(1);
+            states = new List<IState>(1);
         }
 
         public StateComposite(params IState[] states)
@@ -18,18 +18,18 @@ namespace Elementary
         
         public override void Enter()
         {
-            for (int i = 0, count = this.states.Count; i < count; i++)
+            for (int i = 0, count = states.Count; i < count; i++)
             {
-                var state = this.states[i];
+                var state = states[i];
                 state.Enter();
             }
         }
 
         public override void Exit()
         {
-            for (int i = 0, count = this.states.Count; i < count; i++)
+            for (int i = 0, count = states.Count; i < count; i++)
             {
-                var state = this.states[i];
+                var state = states[i];
                 state.Exit();
             }
         }

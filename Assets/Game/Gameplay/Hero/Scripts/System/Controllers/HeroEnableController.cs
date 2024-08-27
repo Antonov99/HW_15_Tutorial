@@ -21,17 +21,17 @@ namespace Game.Gameplay.Hero
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_Enable>();
+            heroComponent = heroService.GetHero().Get<IComponent_Enable>();
         }
 
         void IGameStartElement.StartGame()
         {
-            this.heroComponent.SetEnable(true);
+            heroComponent.SetEnable(true);
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.heroComponent.SetEnable(false);
+            heroComponent.SetEnable(false);
         }
     }
 }

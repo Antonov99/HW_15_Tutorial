@@ -60,27 +60,27 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructMotor(Life life, Harvest harvest, Combat combat)
             {
-                this.moveMotor.AddPrecondition(_ => life.hitPoints.IsExists());
-                this.moveMotor.AddStartAction(_ => harvest.harvestOperator.Stop());
-                this.moveMotor.AddStartAction(_ => combat.combatOperator.Stop());
+                moveMotor.AddPrecondition(_ => life.hitPoints.IsExists());
+                moveMotor.AddStartAction(_ => harvest.harvestOperator.Stop());
+                moveMotor.AddStartAction(_ => combat.combatOperator.Stop());
             }
 
             [Construct]
             private void ConstructMechanics(Main main)
             {
-                this.updateMechanics.Construct(_ =>
+                updateMechanics.Construct(_ =>
                 {
-                    if (main.isEnable.Current) this.moveMotor.Update();
+                    if (main.isEnable.Current) moveMotor.Update();
                 });
 
-                this.speedConnector.Construct(this.baseSpeed, this.multiplier, this.fullSpeed);
+                speedConnector.Construct(baseSpeed, multiplier, fullSpeed);
             }
 
             [Construct]
             private void ConstructSpeed(ScriptableHero config)
             {
-                this.baseSpeed.Current = config.baseSpeed;
-                this.multiplier.Current = config.baseSpeedMultiplier;
+                baseSpeed.Current = config.baseSpeed;
+                multiplier.Current = config.baseSpeedMultiplier;
             }
         }
 
@@ -98,16 +98,16 @@ namespace Game.Gameplay.Hero
                 var checkDistance = new HarvestResourceCondition_CheckDistance(transform, config.harvestDistance);
                 var checkTarget = new HarvestResourceCondition_CheckEntity(config.harvestConditions);
                 
-                this.harvestOperator.AddCondition(checkDistance);
-                this.harvestOperator.AddCondition(checkTarget);
-                this.harvestOperator.AddCondition(_ => life.hitPoints.IsExists());
-                this.harvestOperator.AddCondition(_ => !move.moveMotor.IsMoving);
-                this.harvestOperator.AddCondition(_ => !combat.combatOperator.IsActive);
+                harvestOperator.AddCondition(checkDistance);
+                harvestOperator.AddCondition(checkTarget);
+                harvestOperator.AddCondition(_ => life.hitPoints.IsExists());
+                harvestOperator.AddCondition(_ => !move.moveMotor.IsMoving);
+                harvestOperator.AddCondition(_ => !combat.combatOperator.IsActive);
 
-                this.harvestOperator.AddStartAction(_ => combat.combatOperator.Stop());
-                this.harvestOperator.AddStartAction(new HarvestResourceAction_LookAtResource(transform));
+                harvestOperator.AddStartAction(_ => combat.combatOperator.Stop());
+                harvestOperator.AddStartAction(new HarvestResourceAction_LookAtResource(transform));
 
-                this.harvestOperator.AddStopAction(new HarvestResourceAction_DestroyResourceIfCompleted());
+                harvestOperator.AddStopAction(new HarvestResourceAction_DestroyResourceIfCompleted());
             }
         }
 
@@ -135,35 +135,35 @@ namespace Game.Gameplay.Hero
                 var checkEntity = new CombatCondition_CheckEntity(config.combatConditions);
                 var checkDistance = new CombatCondition_CheckDistance(transformEngine, config.combatDistance);
 
-                this.combatOperator.AddCondition(_ => !move.moveMotor.IsMoving);
-                this.combatOperator.AddCondition(_ => life.hitPoints.IsExists());
-                this.combatOperator.AddCondition(checkEntity);
-                this.combatOperator.AddCondition(checkDistance);
+                combatOperator.AddCondition(_ => !move.moveMotor.IsMoving);
+                combatOperator.AddCondition(_ => life.hitPoints.IsExists());
+                combatOperator.AddCondition(checkEntity);
+                combatOperator.AddCondition(checkDistance);
 
-                this.combatOperator.AddStartAction(new CombatAction_LookAtTarget(transformEngine));
-                this.combatOperator.AddStartAction(_ => harvest.harvestOperator.Stop());
+                combatOperator.AddStartAction(new CombatAction_LookAtTarget(transformEngine));
+                combatOperator.AddStartAction(_ => harvest.harvestOperator.Stop());
             }
 
             [Construct]
             private void ConstructDamageStats(ScriptableHero config)
             {
-                this.damageConnector.Construct(this.baseDamage, this.multiplier, this.fullDamage);
-                this.baseDamage.Current = config.baseDamage;
-                this.multiplier.Current = config.baseDamageMultiplier;
+                damageConnector.Construct(baseDamage, multiplier, fullDamage);
+                baseDamage.Current = config.baseDamage;
+                multiplier.Current = config.baseDamageMultiplier;
             }
 
             [Construct]
             private void ConstructDamageAction(GameObject attacker)
             {
-                this.damageAction.attacker = attacker;
-                this.damageAction.damage = this.fullDamage;
+                damageAction.attacker = attacker;
+                damageAction.damage = fullDamage;
             }
 
             public void DealDamage()
             {
-                if (this.combatOperator.IsActive)
+                if (combatOperator.IsActive)
                 {
-                    this.damageAction.Do(this.combatOperator.Current);
+                    damageAction.Do(combatOperator.Current);
                 }
             }
         }
@@ -195,31 +195,31 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructRestoreMechanics()
             {
-                this.restoreMechanics.SetDelay(2.5f);
-                this.restoreMechanics.SetPeriod(1.0f);
-                this.restoreMechanics.SetRestoreAtTime(1);
-                this.restoreMechanics.Construct(this.hitPoints, this.takeDamageEngine);
+                restoreMechanics.SetDelay(2.5f);
+                restoreMechanics.SetPeriod(1.0f);
+                restoreMechanics.SetRestoreAtTime(1);
+                restoreMechanics.Construct(hitPoints, takeDamageEngine);
             }
 
             [Construct]
             private void ConstructDeath(Combat combat, Harvest harvest, Move move)
             {
-                this.deathEmitter.AddListener(_ => this.hitPoints.Setup(0, this.hitPoints.Max));
-                this.deathEmitter.AddListener(_ => combat.combatOperator.Stop());
-                this.deathEmitter.AddListener(_ => harvest.harvestOperator.Stop());
-                this.deathEmitter.AddListener(_ => move.moveMotor.Interrupt());
+                deathEmitter.AddListener(_ => hitPoints.Setup(0, hitPoints.Max));
+                deathEmitter.AddListener(_ => combat.combatOperator.Stop());
+                deathEmitter.AddListener(_ => harvest.harvestOperator.Stop());
+                deathEmitter.AddListener(_ => move.moveMotor.Interrupt());
             }
 
             [Construct]
             private void ConstructTakeDamage()
             {
-                this.takeDamageEngine.Construct(this.hitPoints, this.deathEmitter);
+                takeDamageEngine.Construct(hitPoints, deathEmitter);
             }
 
             [Construct]
             private void ConstructRespawn()
             {
-                this.respawnEmitter.AddListener(this.hitPoints.RestoreToFull);
+                respawnEmitter.AddListener(hitPoints.RestoreToFull);
             }
         }
 
@@ -232,8 +232,8 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void Construct(Combat combat, Move move)
             {
-                this.effector.AddHandler(new EffectHandler_MeleeDamage(combat.multiplier));
-                this.effector.AddHandler(new EffectHandler_MoveSpeed(move.multiplier));
+                effector.AddHandler(new EffectHandler_MeleeDamage(combat.multiplier));
+                effector.AddHandler(new EffectHandler_MoveSpeed(move.multiplier));
             }
         }
     }

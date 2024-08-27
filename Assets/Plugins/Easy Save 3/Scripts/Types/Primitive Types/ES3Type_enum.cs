@@ -32,7 +32,7 @@ namespace ES3Types
 			else if(underlyingType == typeof(ulong))	writer.WritePrimitive((ulong)obj);
 			else if(underlyingType == typeof(ushort))	writer.WritePrimitive((ushort)obj);
 			else
-				throw new System.InvalidCastException("The underlying type " + underlyingType + " of Enum "+type+" is not supported");
+				throw new InvalidCastException("The underlying type " + underlyingType + " of Enum "+type+" is not supported");
 
 		}
 
@@ -52,7 +52,7 @@ namespace ES3Types
 			else if(underlyingType == typeof(ulong))	return Enum.ToObject (type, reader.Read_ulong());
 			else if(underlyingType == typeof(ushort))	return Enum.ToObject (type, reader.Read_ushort());
 			else
-				throw new System.InvalidCastException("The underlying type " + underlyingType + " of Enum "+type+" is not supported");
+				throw new InvalidCastException("The underlying type " + underlyingType + " of Enum "+type+" is not supported");
 		}
 	}
 }

@@ -37,19 +37,19 @@ namespace Game.Meta
         
         void IGameInitElement.InitGame()
         {
-            if (!this.manager.IsMissionExists(MissionDifficulty.EASY))
+            if (!manager.IsMissionExists(MissionDifficulty.EASY))
             {
-                this.manager.SetupMission(this.easyMission);
+                manager.SetupMission(easyMission);
             }
 
-            if (!this.manager.IsMissionExists(MissionDifficulty.NORMAL))
+            if (!manager.IsMissionExists(MissionDifficulty.NORMAL))
             {
-                this.manager.SetupMission(this.normalMission);
+                manager.SetupMission(normalMission);
             }
 
-            if (!this.manager.IsMissionExists(MissionDifficulty.HARD))
+            if (!manager.IsMissionExists(MissionDifficulty.HARD))
             {
-                this.manager.SetupMission(this.hardMission);
+                manager.SetupMission(hardMission);
             }
         }
     }

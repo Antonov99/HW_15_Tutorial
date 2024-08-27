@@ -6,7 +6,7 @@ namespace Elementary
     {
         private void Awake()
         {
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
     }    
 }

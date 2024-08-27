@@ -27,23 +27,23 @@ namespace Game.Gameplay.Hero
         
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_MoveInDirection>();
+            heroComponent = heroService.GetHero().Get<IComponent_MoveInDirection>();
         }
 
         void IGameStartElement.StartGame()
         {
-            this.input.OnDirectionMoved += this.OnDirectionMoved;
+            input.OnDirectionMoved += OnDirectionMoved;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.input.OnDirectionMoved -= this.OnDirectionMoved;
+            input.OnDirectionMoved -= OnDirectionMoved;
         }
 
         private void OnDirectionMoved(Vector2 screenDirection)
         {
             var worldDirection = new Vector3(screenDirection.x, 0.0f, screenDirection.y);
-            this.heroComponent.Move(worldDirection);
+            heroComponent.Move(worldDirection);
         }
     }
 }

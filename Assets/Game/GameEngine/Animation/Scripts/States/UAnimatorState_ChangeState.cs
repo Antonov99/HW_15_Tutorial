@@ -25,14 +25,14 @@ namespace Game.GameEngine.Animation
         
         public override void Enter()
         {
-            this.system.ChangeState(this.enterId.Current);
+            system.ChangeState(enterId.Current);
         }
 
         public override void Exit()
         {
-            if (this.hasExitAnimation)
+            if (hasExitAnimation)
             {
-                this.system.ChangeState(this.exitId.Current);
+                system.ChangeState(exitId.Current);
             }
         }
     }

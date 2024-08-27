@@ -2,6 +2,7 @@
 
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 namespace Game.Development
 {
@@ -12,7 +13,7 @@ namespace Game.Development
         {
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
-                var name = EditorSceneManager.GetActiveScene().name;
+                var name = SceneManager.GetActiveScene().name;
                 if (name != "LoadingScene")
                 {
                     EditorSceneManager.OpenScene(SceneMenu.LOADING_SCENE_PATH);

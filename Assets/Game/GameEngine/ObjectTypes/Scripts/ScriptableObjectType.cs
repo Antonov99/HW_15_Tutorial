@@ -10,7 +10,7 @@ namespace Game.GameEngine
     {
         public ObjectType ObjectType
         {
-            get { return this.objectType; }
+            get { return objectType; }
         }
 
         [SerializeField]

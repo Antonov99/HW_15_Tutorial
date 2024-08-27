@@ -34,7 +34,7 @@ namespace Cysharp.Threading.Tasks
 
         public virtual UniTask<T> ReadAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (this.TryRead(out var item))
+            if (TryRead(out var item))
             {
                 return UniTask.FromResult(item);
             }
@@ -378,7 +378,7 @@ namespace Cysharp.Threading.Tasks
                 public ReadAllAsyncEnumerable(SingleConsumerUnboundedChannelReader parent, CancellationToken cancellationToken)
                 {
                     this.parent = parent;
-                    this.cancellationToken1 = cancellationToken;
+                    cancellationToken1 = cancellationToken;
                 }
 
                 public IUniTaskAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
@@ -388,19 +388,19 @@ namespace Cysharp.Threading.Tasks
                         throw new InvalidOperationException("Enumerator is already running, does not allow call GetAsyncEnumerator twice.");
                     }
 
-                    if (this.cancellationToken1 != cancellationToken)
+                    if (cancellationToken1 != cancellationToken)
                     {
-                        this.cancellationToken2 = cancellationToken;
+                        cancellationToken2 = cancellationToken;
                     }
 
-                    if (this.cancellationToken1.CanBeCanceled)
+                    if (cancellationToken1.CanBeCanceled)
                     {
-                        this.cancellationTokenRegistration1 =  this.cancellationToken1.RegisterWithoutCaptureExecutionContext(CancellationCallback1Delegate, this);
+                        cancellationTokenRegistration1 =  cancellationToken1.RegisterWithoutCaptureExecutionContext(CancellationCallback1Delegate, this);
                     }
 
-                    if (this.cancellationToken2.CanBeCanceled)
+                    if (cancellationToken2.CanBeCanceled)
                     {
-                        this.cancellationTokenRegistration2 = this.cancellationToken2.RegisterWithoutCaptureExecutionContext(CancellationCallback2Delegate, this);
+                        cancellationTokenRegistration2 = cancellationToken2.RegisterWithoutCaptureExecutionContext(CancellationCallback2Delegate, this);
                     }
 
                     running = true;

@@ -20,24 +20,24 @@ namespace Game.Gameplay.Conveyors
 
         void IEnableListener.OnEnable()
         {
-            this.workTimer.OnStarted += this.OnStartWork;
-            this.workTimer.OnFinished += this.OnFinishWork;
+            workTimer.OnStarted += OnStartWork;
+            workTimer.OnFinished += OnFinishWork;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.workTimer.OnStarted -= this.OnStartWork;
-            this.workTimer.OnFinished -= this.OnFinishWork;
+            workTimer.OnStarted -= OnStartWork;
+            workTimer.OnFinished -= OnFinishWork;
         }
 
         private void OnStartWork()
         {
-            this.conveyor.Play();
+            conveyor.Play();
         }
 
         private void OnFinishWork()
         {
-            this.conveyor.Stop();
+            conveyor.Stop();
         }
     }
 }

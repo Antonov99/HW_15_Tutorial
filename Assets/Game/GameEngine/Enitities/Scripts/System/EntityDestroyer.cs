@@ -20,11 +20,11 @@ namespace Game.GameEngine.Entities
         {
             if (entity.TryGetComponent(out IGameElement gameElement))
             {
-                this.gameContext.UnregisterElement(gameElement);
+                gameContext.UnregisterElement(gameElement);
             }
 
             entity.transform.position = OUTSCENE_POSITION;
-            GameObject.Destroy(entity.gameObject, 0.1f);
+            Object.Destroy(entity.gameObject, 0.1f);
         }
     }
 }

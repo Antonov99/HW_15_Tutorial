@@ -11,9 +11,9 @@ namespace Game.GameEngine.Mechanics
         
         protected override void Destroy(DestroyArgs destroyArgs)
         {
-            for (int i = 0, count = this.gameObjects.Length; i < count; i++)
+            for (int i = 0, count = gameObjects.Length; i < count; i++)
             {
-                var gameObject = this.gameObjects[i];
+                var gameObject = gameObjects[i];
                 gameObject.SetActive(false);
             }
         }

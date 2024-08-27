@@ -22,24 +22,24 @@ namespace Game.Meta
         [ShowInInspector]
         public int RequiredResources
         {
-            get { return this.config.RequiredResources; }
+            get { return config.RequiredResources; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public ResourceType ResourceType
         {
-            get { return this.config.ResourceType; }
+            get { return config.ResourceType; }
         }
 
         public override float NormalizedProgress
         {
-            get { return (float) this.CurrentResources / this.RequiredResources; }
+            get { return (float) CurrentResources / RequiredResources; }
         }
 
         public override string TextProgress
         {
-            get { return $"{this.CurrentResources}/{this.RequiredResources}"; }
+            get { return $"{CurrentResources}/{RequiredResources}"; }
         }
 
         private readonly CollectResourcesMissionConfig config;
@@ -50,34 +50,34 @@ namespace Game.Meta
         public CollectResourcesMission(CollectResourcesMissionConfig config) : base(config)
         {
             this.config = config;
-            this.CurrentResources = 0;
+            CurrentResources = 0;
         }
 
         public void Setup(int currentResources)
         {
-            this.CurrentResources = Math.Min(currentResources, this.RequiredResources);
+            CurrentResources = Math.Min(currentResources, RequiredResources);
         }
 
         protected override void OnStart()
         {
-            this.resourceStorage.OnResourceAdded += this.OnResourcesAdded;
+            resourceStorage.OnResourceAdded += OnResourcesAdded;
         }
 
         protected override void OnStop()
         {
-            this.resourceStorage.OnResourceAdded -= this.OnResourcesAdded;
+            resourceStorage.OnResourceAdded -= OnResourcesAdded;
         }
 
         private void OnResourcesAdded(ResourceType resourceType, int income)
         {
-            if (resourceType != this.config.ResourceType)
+            if (resourceType != config.ResourceType)
             {
                 return;
             }
 
-            this.CurrentResources = Math.Min(this.CurrentResources + income, this.RequiredResources);
-            this.OnProgressChanged?.Invoke(this);
-            this.TryComplete();
+            CurrentResources = Math.Min(CurrentResources + income, RequiredResources);
+            OnProgressChanged?.Invoke(this);
+            TryComplete();
         }
     }
 }

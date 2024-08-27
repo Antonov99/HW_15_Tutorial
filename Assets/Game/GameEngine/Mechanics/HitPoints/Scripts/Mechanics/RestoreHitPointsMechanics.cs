@@ -17,7 +17,7 @@ namespace Game.GameEngine.Mechanics
 
         public void SetRestoreAtTime(int value)
         {
-            this.restoreAtTime = value;
+            restoreAtTime = value;
         }
 
         public void SetDelay(float delay)
@@ -38,47 +38,47 @@ namespace Game.GameEngine.Mechanics
 
         void IEnableListener.OnEnable()
         {
-            this.takeDamageEmitter.OnEvent += this.OnDamageTaken;
-            this.delay.OnEnded += this.OnDelayEnded;
-            this.period.OnPeriodEvent += this.OnRestoreHitPoints;
+            takeDamageEmitter.OnEvent += OnDamageTaken;
+            delay.OnEnded += OnDelayEnded;
+            period.OnPeriodEvent += OnRestoreHitPoints;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.takeDamageEmitter.OnEvent -= this.OnDamageTaken;
-            this.delay.OnEnded -= this.OnDelayEnded;
-            this.period.OnPeriodEvent -= this.OnRestoreHitPoints;
+            takeDamageEmitter.OnEvent -= OnDamageTaken;
+            delay.OnEnded -= OnDelayEnded;
+            period.OnPeriodEvent -= OnRestoreHitPoints;
         }
 
         private void OnDamageTaken(TakeDamageArgs damageArgs)
         {
-            if (this.hitPoints.Current <= 0)
+            if (hitPoints.Current <= 0)
             {
                 return;
             }
 
             //Сброс задержки:
-            this.delay.ResetTime();
-            if (!this.delay.IsPlaying)
+            delay.ResetTime();
+            if (!delay.IsPlaying)
             {
-                this.delay.Play();
+                delay.Play();
             }
 
             //Сброс периода:
-            this.period.Stop();
+            period.Stop();
         }
 
         private void OnDelayEnded()
         {
-            this.period.Play();
+            period.Play();
         }
 
         private void OnRestoreHitPoints()
         {
-            this.hitPoints.Current += this.restoreAtTime;
-            if (this.hitPoints.Current >= this.hitPoints.Max)
+            hitPoints.Current += restoreAtTime;
+            if (hitPoints.Current >= hitPoints.Max)
             {
-                this.period.Stop();
+                period.Stop();
             }
         }
     }

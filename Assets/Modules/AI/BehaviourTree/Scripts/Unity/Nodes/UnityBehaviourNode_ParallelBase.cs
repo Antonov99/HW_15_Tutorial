@@ -6,7 +6,7 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            var children = this.Children;
+            var children = Children;
             if (children == null)
             {
                 return;
@@ -21,7 +21,7 @@ namespace AI.BTree
 
         protected override void OnAbort()
         {
-            var children = this.Children;
+            var children = Children;
             if (children == null)
             {
                 return;

@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
     
         public void Show()
         {
-            this.receiver.Call();
+            receiver.Call();
         }
     }
 }

@@ -8,19 +8,19 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<HarvestResourceOperation> OnHarvestStarted
         {
-            add { this.harvestEngine.OnStarted += value; }
-            remove { this.harvestEngine.OnStarted -= value; }
+            add { harvestEngine.OnStarted += value; }
+            remove { harvestEngine.OnStarted -= value; }
         }
 
         public event Action<HarvestResourceOperation> OnHarvestStopped
         {
-            add { this.harvestEngine.OnStopped += value; }
-            remove { this.harvestEngine.OnStopped -= value; }
+            add { harvestEngine.OnStopped += value; }
+            remove { harvestEngine.OnStopped -= value; }
         }
 
         public bool IsHarvesting
         {
-            get { return this.harvestEngine.IsActive; }
+            get { return harvestEngine.IsActive; }
         }
 
         [SerializeField]
@@ -28,17 +28,17 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanStartHarvest(HarvestResourceOperation operation)
         {
-            return this.harvestEngine.CanStart(operation);
+            return harvestEngine.CanStart(operation);
         }
 
         public void StartHarvest(HarvestResourceOperation operation)
         {
-            this.harvestEngine.DoStart(operation);
+            harvestEngine.DoStart(operation);
         }
 
         public void StopHarvest()
         {
-            this.harvestEngine.Stop();
+            harvestEngine.Stop();
         }
     }
 }

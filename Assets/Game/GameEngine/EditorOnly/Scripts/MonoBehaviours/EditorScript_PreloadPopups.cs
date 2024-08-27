@@ -11,7 +11,7 @@ namespace Game.GameEngine.Development
         
         public async void PreloadPrefabs()
         {
-            await this.popupCatalog.LoadAssets();
+            await popupCatalog.LoadAssets();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Game.GameEngine.Mechanics
     {
         public bool IsDestroyed
         {
-            get { return this.CheckDestroyed(); }
+            get { return CheckDestroyed(); }
         }
 
         [SerializeField]
@@ -19,12 +19,12 @@ namespace Game.GameEngine.Mechanics
 
         private bool CheckDestroyed()
         {
-            if (this.invert)
+            if (invert)
             {
-                return this.isDestroyed.Current;
+                return isDestroyed.Current;
             }
             
-            return this.isDestroyed.Current;
+            return isDestroyed.Current;
         }
     }
 }

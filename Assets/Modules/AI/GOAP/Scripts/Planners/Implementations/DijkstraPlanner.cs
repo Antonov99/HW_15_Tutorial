@@ -26,16 +26,16 @@ namespace AI.GOAP
             this.goal = goal;
             this.actions = actions;
             
-            return this.MakePlanInternal(out plan);
+            return MakePlanInternal(out plan);
         }
 
         private bool MakePlanInternal(out List<IActor> plan)
         {
-            var costMap = this.CreateCostMap();
+            var costMap = CreateCostMap();
             var costComparer = new CostComparer(costMap);
 
-            var openList = new List<IActor>(this.actions);
-            var actionGraph = PlannerUtils.CreateActionGraph(this.actions, this.worldState);
+            var openList = new List<IActor>(actions);
+            var actionGraph = PlannerUtils.CreateActionGraph(actions, worldState);
             var actionConnections = new Dictionary<IActor, IActor>();
             var endActions = new List<IActor>();
 
@@ -48,7 +48,7 @@ namespace AI.GOAP
                 openList.RemoveAt(0);
 
                 // Check if reached start:
-                if (current.RequiredState.EqualsTo(this.worldState))
+                if (current.RequiredState.EqualsTo(worldState))
                 {
                     endActions.Add(current);
                     continue;
@@ -94,9 +94,9 @@ namespace AI.GOAP
         {
             var result = new Dictionary<IActor, int>();
             
-            foreach (var action in this.actions)
+            foreach (var action in actions)
             {
-                if (PlannerUtils.MatchesAction(action, this.goal, this.worldState))
+                if (PlannerUtils.MatchesAction(action, goal, worldState))
                 {
                     result[action] = action.EvaluateCost();
                 }
@@ -120,7 +120,7 @@ namespace AI.GOAP
 
             public int Compare(IActor a, IActor b)
             {
-                return this.costMap[a!] - this.costMap[b!];
+                return costMap[a!] - costMap[b!];
             }
         }
     }

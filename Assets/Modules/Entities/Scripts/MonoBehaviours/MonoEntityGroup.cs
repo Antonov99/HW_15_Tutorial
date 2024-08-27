@@ -12,9 +12,9 @@ namespace Entities
 
         public override T Get<T>()
         {
-            for (int i = 0, count = this.entities.Length; i < count; i++)
+            for (int i = 0, count = entities.Length; i < count; i++)
             {
-                var entity = this.entities[i];
+                var entity = entities[i];
                 if (entity.TryGet(out T element))
                 {
                     return element;
@@ -26,9 +26,9 @@ namespace Entities
 
         public override bool TryGet<T>(out T element)
         {
-            for (int i = 0, count = this.entities.Length; i < count; i++)
+            for (int i = 0, count = entities.Length; i < count; i++)
             {
-                var entity = this.entities[i];
+                var entity = entities[i];
                 if (entity.TryGet(out element))
                 {
                     return true;
@@ -42,7 +42,7 @@ namespace Entities
         public override object[] GetAll()
         {
             var result = new List<object>();
-            foreach (var entity in this.entities)
+            foreach (var entity in entities)
             {
                 result.AddRange(entity.GetAll());
             }

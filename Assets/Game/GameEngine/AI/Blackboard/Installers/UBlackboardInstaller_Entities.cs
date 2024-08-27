@@ -14,9 +14,9 @@ namespace Game.Gameplay.AI
 
         protected override void Install(IBlackboard blackboard, GameContext context)
         {
-            for (int i = 0, count = this.variables.Length; i < count; i++)
+            for (int i = 0, count = variables.Length; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 blackboard.AddVariable(variable.key, variable.value);
             }
         }

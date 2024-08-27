@@ -10,14 +10,14 @@ namespace ES3Types
         public static int countRead = 0;
 		public static ES3Type Instance = null;
 
-		public ES3Type_Transform() : base(typeof(UnityEngine.Transform))
+		public ES3Type_Transform() : base(typeof(Transform))
 		{
 			Instance = this;
 		}
 
 		protected override void WriteComponent(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Transform)obj;
+			var instance = (Transform)obj;
 			writer.WritePropertyByRef("parent", instance.parent);
 			writer.WriteProperty("localPosition", instance.localPosition);
 			writer.WriteProperty("localRotation", instance.localRotation);

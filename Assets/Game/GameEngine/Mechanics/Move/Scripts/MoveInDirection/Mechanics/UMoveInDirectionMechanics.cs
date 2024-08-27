@@ -17,17 +17,17 @@ namespace Game.GameEngine.Mechanics
 
         private void FixedUpdate()
         {
-            if (this.moveEngine.IsMoving)
+            if (moveEngine.IsMoving)
             {
-                this.MoveTransform(this.moveEngine.Direction);
+                MoveTransform(moveEngine.Direction);
             }
         }
 
         private void MoveTransform(Vector3 direction)
         {
-            var velocity = direction * (this.moveSpeed.Current * Time.fixedDeltaTime);
-            this.transformEngine.MovePosition(velocity);
-            this.transformEngine.LookInDirection(direction);
+            var velocity = direction * (moveSpeed.Current * Time.fixedDeltaTime);
+            transformEngine.MovePosition(velocity);
+            transformEngine.LookInDirection(direction);
         }
     }
 }

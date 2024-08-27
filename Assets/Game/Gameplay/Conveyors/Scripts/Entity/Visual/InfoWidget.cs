@@ -9,7 +9,7 @@ namespace Game.Gameplay.Conveyors
     {
         public ProgressBar ProgressBar
         {
-            get { return this.progressBar; }
+            get { return progressBar; }
         }
 
         [SerializeField]
@@ -26,17 +26,17 @@ namespace Game.Gameplay.Conveyors
 
         public void SetVisible(bool isVisible)
         {
-            this.root.SetActive(isVisible);
+            root.SetActive(isVisible);
         }
 
         public void SetInputIcon(Sprite icon)
         {
-            this.inputImage.sprite = icon;
+            inputImage.sprite = icon;
         }
 
         public void SetOutputIcon(Sprite icon)
         {
-            this.outputImage.sprite = icon;
+            outputImage.sprite = icon;
         }
     }
 }

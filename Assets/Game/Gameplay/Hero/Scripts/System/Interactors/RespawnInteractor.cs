@@ -32,9 +32,9 @@ namespace Game.Gameplay.Hero
         
         void IGameInitElement.InitGame()
         {
-            this.hero = this.heroService.GetHero();
-            this.ResetPosition();
-            this.ResetRotation();
+            hero = heroService.GetHero();
+            ResetPosition();
+            ResetRotation();
         }
 
         public void SetupSpawnPoint(Transform spawnPoint)
@@ -44,40 +44,40 @@ namespace Game.Gameplay.Hero
 
         public void StartRespawn()
         {
-            if (this.respawnCoroutine == null)
+            if (respawnCoroutine == null)
             {
-                this.respawnCoroutine = this.monoContext.StartCoroutine(this.RespawnRoutine());
+                respawnCoroutine = monoContext.StartCoroutine(RespawnRoutine());
             }
         }
 
         private IEnumerator RespawnRoutine()
         {
-            yield return new WaitForSeconds(this.delay);
-            this.ResetPosition();
-            this.ResetRotation();
-            this.InvokeRespawn();
+            yield return new WaitForSeconds(delay);
+            ResetPosition();
+            ResetRotation();
+            InvokeRespawn();
 
-            this.respawnCoroutine = null;
+            respawnCoroutine = null;
         }
 
 
         private void ResetPosition()
         {
-            this.hero
+            hero
                 .Get<IComponent_SetPosition>()
-                .SetPosition(this.spawnPoint.position);
+                .SetPosition(spawnPoint.position);
         }
 
         private void ResetRotation()
         {
-            this.hero
+            hero
                 .Get<IComponent_SetRotation>()
-                .SetRotation(this.spawnPoint.rotation);
+                .SetRotation(spawnPoint.rotation);
         }
 
         private void InvokeRespawn()
         {
-            this.hero
+            hero
                 .Get<IComponent_Respawn>()
                 .Respawn();
         }

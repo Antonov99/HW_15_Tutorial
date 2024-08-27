@@ -20,7 +20,7 @@ namespace Game.Gameplay.Hero
         [GameInject]
         public void Construct(WorldPlaceVisitInteractor placeObservable)
         {
-            this.visitInteractor = placeObservable;
+            visitInteractor = placeObservable;
         }
 
         protected override bool CanEnter(WorldPlaceTrigger entity)
@@ -31,28 +31,28 @@ namespace Game.Gameplay.Hero
         protected override ICondition ProvideConditions(WorldPlaceTrigger target)
         {
             return new ConditionComposite(
-                new ConditionCountdown(this.monoContext, seconds: this.visitDelay, startInstantly: true),
-                new Condition_Entity_IsNotMoving(this.HeroService.GetHero())
+                new ConditionCountdown(monoContext, seconds: visitDelay, startInstantly: true),
+                new Condition_Entity_IsNotMoving(HeroService.GetHero())
             );
         }
 
         protected override void OnHeroVisit(WorldPlaceTrigger target)
         {
             var placeType = target.PlaceType;
-            if (this.visitInteractor.IsVisiting && this.visitInteractor.CurrentPlace != placeType)
+            if (visitInteractor.IsVisiting && visitInteractor.CurrentPlace != placeType)
             {
-                this.visitInteractor.EndVisit();
+                visitInteractor.EndVisit();
             }
 
-            this.visitInteractor.StartVisit(placeType);
+            visitInteractor.StartVisit(placeType);
         }
 
         protected override void OnHeroQuit(WorldPlaceTrigger target)
         {
             var placeType = target.PlaceType;
-            if (this.visitInteractor.IsVisiting && placeType == target.PlaceType)
+            if (visitInteractor.IsVisiting && placeType == target.PlaceType)
             {
-                this.visitInteractor.EndVisit();
+                visitInteractor.EndVisit();
             }
         }
     }

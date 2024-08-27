@@ -48,13 +48,13 @@ namespace ES3Types
 						instance.direction = reader.Read<int>(ES3Type_int.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "isTrigger":
-						instance.isTrigger = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.isTrigger = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "contactOffset":
-						instance.contactOffset = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.contactOffset = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "material":
                         instance.sharedMaterial = reader.Read<UnityEngine.PhysicMaterial>();

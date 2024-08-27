@@ -11,7 +11,7 @@ namespace Game.GameEngine.Products
     {
         public int ProductCount
         {
-            get { return this.products.Length; }
+            get { return products.Length; }
         }
 
         [SerializeField]
@@ -19,14 +19,14 @@ namespace Game.GameEngine.Products
 
         public ProductConfig GetProduct(int index)
         {
-            return this.products[index];
+            return products[index];
         }
 
         public ProductConfig FindProduct(string id)
         {
-            for (int i = 0, count = this.products.Length; i < count; i++)
+            for (int i = 0, count = products.Length; i < count; i++)
             {
-                var item = this.products[i];
+                var item = products[i];
                 if (item.Id == id)
                 {
                     return item;
@@ -38,7 +38,7 @@ namespace Game.GameEngine.Products
 
         public ProductConfig[] GetAllProducts()
         {
-            return this.products;
+            return products;
         }
     }
 }

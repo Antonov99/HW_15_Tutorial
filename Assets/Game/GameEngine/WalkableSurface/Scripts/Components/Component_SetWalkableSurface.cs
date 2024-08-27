@@ -13,7 +13,7 @@ namespace Game.GameEngine
 
         public void SetSurface(IWalkableSurface surface)
         {
-            this.variable.Current = surface;
+            variable.Current = surface;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Game.GameEngine.Entities
     {
         public override IEnumerable<IEntity> ProvideEntities()
         {
-            return this.GetComponentsInChildren<IEntity>();
+            return GetComponentsInChildren<IEntity>();
         }
     }
 }

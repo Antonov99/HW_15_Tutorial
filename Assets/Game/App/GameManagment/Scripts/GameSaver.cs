@@ -28,54 +28,54 @@ namespace Game.App
 
         void IGameStartListener.OnStartGame(GameFacade gameFacade)
         {
-            this.remainingSeconds = SAVE_PERIOD_IN_SECONDS;
+            remainingSeconds = SAVE_PERIOD_IN_SECONDS;
 
-            this.appManager.OnUpdate += this.OnApplicationUpdate;
-            this.appManager.OnPaused += this.OnApplicationPaused;
-            this.appManager.OnQuit += this.OnQuitApplication;
+            appManager.OnUpdate += OnApplicationUpdate;
+            appManager.OnPaused += OnApplicationPaused;
+            appManager.OnQuit += OnQuitApplication;
         }
 
         void IGameStopListener.OnStopGame(GameFacade gameFacade)
         {
-            this.appManager.OnUpdate -= this.OnApplicationUpdate;
-            this.appManager.OnPaused -= this.OnApplicationPaused;
-            this.appManager.OnQuit -= this.OnQuitApplication;
+            appManager.OnUpdate -= OnApplicationUpdate;
+            appManager.OnPaused -= OnApplicationPaused;
+            appManager.OnQuit -= OnQuitApplication;
         }
 
         private void OnApplicationUpdate(float deltaTime)
         {
-            this.remainingSeconds -= deltaTime;
-            if (this.remainingSeconds <= 0.0f)
+            remainingSeconds -= deltaTime;
+            if (remainingSeconds <= 0.0f)
             {
-                this.Save();
+                Save();
             }
         }
 
         private void OnApplicationPaused()
         {
-            this.Save();
+            Save();
         }
 
         private void OnQuitApplication()
         {
-            this.Save();
+            Save();
         }
 
         public void Save()
         {
-            if (this.IsPaused)
+            if (IsPaused)
             {
                 return;
             }
             
-            for (int i = 0, count = this.mediators.Length; i < count; i++)
+            for (int i = 0, count = mediators.Length; i < count; i++)
             {
-                var mediator = this.mediators[i];
-                mediator.SaveData(this.gameRepository);
+                var mediator = mediators[i];
+                mediator.SaveData(gameRepository);
             }
 
-            this.gameRepository.SaveAllStates();
-            this.remainingSeconds = SAVE_PERIOD_IN_SECONDS;
+            gameRepository.SaveAllStates();
+            remainingSeconds = SAVE_PERIOD_IN_SECONDS;
         }
     }
 }

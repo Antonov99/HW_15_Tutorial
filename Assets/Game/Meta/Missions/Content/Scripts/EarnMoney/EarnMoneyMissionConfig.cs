@@ -10,7 +10,7 @@ namespace Game.Meta
     {
         public int RequiredMoney
         {
-            get { return this.requiredMoney; }
+            get { return requiredMoney; }
         }
 
         [Header("Quest")]

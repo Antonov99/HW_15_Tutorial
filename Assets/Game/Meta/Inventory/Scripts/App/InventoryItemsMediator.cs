@@ -15,7 +15,7 @@ namespace Game.Meta
             for (int i = 0, count = dataSet.Length; i < count; i++)
             {
                 var data = dataSet[i];
-                var config = this.assetSupplier.GetItem(data.name);
+                var config = assetSupplier.GetItem(data.name);
                 inventory.AddItemsByPrototype(config.Prototype, data.count);
             }
         }

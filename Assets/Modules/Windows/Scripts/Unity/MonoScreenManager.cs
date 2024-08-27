@@ -18,47 +18,47 @@ namespace Windows
 
         protected virtual void Awake()
         {
-            this.manager = new ScreenManager<T, MonoWindow>(this.Supplier);
+            manager = new ScreenManager<T, MonoWindow>(Supplier);
         }
 
         protected virtual void OnEnable()
         {
-            this.manager.OnScreenShown += this.OnShowScreen;
-            this.manager.OnScreenChanged += this.OnChangeScreen;
-            this.manager.OnScrenHidden += this.OnHideScreen;
+            manager.OnScreenShown += OnShowScreen;
+            manager.OnScreenChanged += OnChangeScreen;
+            manager.OnScrenHidden += OnHideScreen;
         }
 
         protected virtual void OnDisable()
         {
-            this.manager.OnScreenShown -= this.OnShowScreen;
-            this.manager.OnScreenChanged -= this.OnChangeScreen;
-            this.manager.OnScrenHidden -= this.OnHideScreen;
+            manager.OnScreenShown -= OnShowScreen;
+            manager.OnScreenChanged -= OnChangeScreen;
+            manager.OnScrenHidden -= OnHideScreen;
         }
 
         [Button]
         public void ChangeScreen(T key, object args = default)
         {
-            this.manager.ChangeScreen(key, args);
+            manager.ChangeScreen(key, args);
         }
 
         public bool IsScreenActive(T key)
         {
-            return this.manager.IsScreenActive(key);
+            return manager.IsScreenActive(key);
         }
 
         private void OnShowScreen(T screenName)
         {
-            this.OnScreenShown?.Invoke(screenName);
+            OnScreenShown?.Invoke(screenName);
         }
 
         private void OnHideScreen(T screenName)
         {
-            this.OnScrenHidden?.Invoke(screenName);
+            OnScrenHidden?.Invoke(screenName);
         }
 
         private void OnChangeScreen(T screenName)
         {
-            this.OnScreenChanged?.Invoke(screenName);
+            OnScreenChanged?.Invoke(screenName);
         }
     }
 }

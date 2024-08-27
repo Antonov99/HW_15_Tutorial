@@ -25,29 +25,29 @@ namespace AI.Tasks
 
         protected override void Do()
         {
-            var sourcePosition = this.EvaluateStartPosition();
-            if (NavMesh.CalculatePath(sourcePosition, this.targetPosition, this.navMeshAreas, this.currentPath))
+            var sourcePosition = EvaluateStartPosition();
+            if (NavMesh.CalculatePath(sourcePosition, targetPosition, navMeshAreas, currentPath))
             {
-                this.MoveTask.SetPath(this.currentPath.corners);
-                this.MoveTask.Do(callback: this);
+                MoveTask.SetPath(currentPath.corners);
+                MoveTask.Do(callback: this);
             }
             else
             {
-                Debug.LogWarning($"Can not calculate path to {this.targetPosition}");
-                this.Return(false);
+                Debug.LogWarning($"Can not calculate path to {targetPosition}");
+                Return(false);
             }
         }
 
         protected override void OnCancel()
         {
-            this.MoveTask.Cancel();
+            MoveTask.Cancel();
         }
 
         protected abstract Vector3 EvaluateStartPosition();
 
         void IAITaskCallback.Invoke(IAITask task, bool success)
         {
-            this.Return(success);
+            Return(success);
         }
     }
 }

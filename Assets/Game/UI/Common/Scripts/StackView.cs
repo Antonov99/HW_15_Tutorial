@@ -14,12 +14,12 @@ namespace Game.UI
     
         public void SetVisible(bool isVisible)
         {
-            this.stackContainer.SetActive(isVisible);
+            stackContainer.SetActive(isVisible);
         }
 
         public void SetAmount(int count, int max)
         {
-            this.stackText.text = $"{count}/{max}";
+            stackText.text = $"{count}/{max}";
         }
     }
 }

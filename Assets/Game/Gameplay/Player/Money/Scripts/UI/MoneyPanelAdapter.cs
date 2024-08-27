@@ -23,48 +23,48 @@ namespace Game.Gameplay.Player
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.storage = context.GetService<MoneyStorage>();
+            storage = context.GetService<MoneyStorage>();
         }
 
         void IGameInitElement.InitGame()
         {
-            this.panel.SetupMoney(this.storage.Money);
+            panel.SetupMoney(storage.Money);
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            if (this.listenIncome)
+            if (listenIncome)
             {
-                this.storage.OnMoneyEarned += this.OnMoneyEarned;
+                storage.OnMoneyEarned += OnMoneyEarned;
             }
 
-            if (this.listenSpend)
+            if (listenSpend)
             {
-                this.storage.OnMoneySpent += this.OnMoneySpent;
+                storage.OnMoneySpent += OnMoneySpent;
             }
         }
 
         void IGameFinishElement.FinishGame()
         {
-            if (this.listenIncome)
+            if (listenIncome)
             {
-                this.storage.OnMoneyEarned -= this.OnMoneyEarned;
+                storage.OnMoneyEarned -= OnMoneyEarned;
             }
 
-            if (this.listenSpend)
+            if (listenSpend)
             {
-                this.storage.OnMoneySpent -= this.OnMoneySpent;
+                storage.OnMoneySpent -= OnMoneySpent;
             }
         }
 
         private void OnMoneySpent(int range)
         {
-            this.panel.DecrementMoney(range);
+            panel.DecrementMoney(range);
         }
 
         private void OnMoneyEarned(int range)
         {
-            this.panel.IncrementMoney(range);
+            panel.IncrementMoney(range);
         }
 
 #if UNITY_EDITOR
@@ -72,7 +72,7 @@ namespace Game.Gameplay.Player
         [Button]
         private void Editor_UpdateMoney()
         {
-            this.panel.SetupMoney(this.storage.Money);
+            panel.SetupMoney(storage.Money);
         }
 #endif
     }

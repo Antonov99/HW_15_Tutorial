@@ -20,7 +20,7 @@ namespace Game.Meta
 
         protected override void SetupByDefault(UpgradesManager service)
         {
-            var configs = this.assetSupplier.GetAllUpgrades();
+            var configs = assetSupplier.GetAllUpgrades();
             var count = configs.Length;
 
             for (var i = 0; i < count; i++)

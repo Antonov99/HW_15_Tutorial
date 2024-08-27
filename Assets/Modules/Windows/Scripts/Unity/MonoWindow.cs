@@ -18,28 +18,28 @@ namespace Windows
 
         public void Show(object args)
         {
-            this.OnShow(args);
-            this.onShow?.Invoke(args);
+            OnShow(args);
+            onShow?.Invoke(args);
         }
 
         public void Show(object args, IWindow.Callback callback)
         {
             this.callback = callback;
-            this.OnShow(args);
-            this.onShow?.Invoke(args);
+            OnShow(args);
+            onShow?.Invoke(args);
         }
 
         public void Hide()
         {
-            this.OnHide();
-            this.onHide?.Invoke();
+            OnHide();
+            onHide?.Invoke();
         }
 
         public void NotifyAboutClose()
         {
-            if (this.callback != null)
+            if (callback != null)
             {
-                this.callback.OnClose(this);
+                callback.OnClose(this);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Windows
         {
             if (args is TArgs tArgs)
             {
-                this.OnShow(tArgs);
+                OnShow(tArgs);
             }
             else
             {

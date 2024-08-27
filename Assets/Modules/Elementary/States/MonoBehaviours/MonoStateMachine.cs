@@ -13,7 +13,7 @@ namespace Elementary
 
         public T CurrentState
         {
-            get { return this.mode; }
+            get { return mode; }
         }
 
         [Space]
@@ -37,60 +37,60 @@ namespace Elementary
 
         protected virtual void OnEnable()
         {
-            if (this.enterOnEnable)
+            if (enterOnEnable)
             {
-                this.Enter();
+                Enter();
             }
         }
 
         protected virtual void OnDisable()
         {
-            if (this.exitOnDisable)
+            if (exitOnDisable)
             {
-                this.Exit();
+                Exit();
             }
         }
 
         public virtual void SwitchState(T state)
         {
-            if (!ReferenceEquals(this.currentState, null))
+            if (!ReferenceEquals(currentState, null))
             {
-                this.currentState.Exit();
+                currentState.Exit();
             }
 
-            if (this.stateMap.TryGetValue(state, out this.currentState))
+            if (stateMap.TryGetValue(state, out currentState))
             {
-                this.currentState.Enter();
+                currentState.Enter();
             }
 
-            this.mode = state;
-            this.OnStateSwitched?.Invoke(state);
+            mode = state;
+            OnStateSwitched?.Invoke(state);
         }
 
         public override void Enter()
         {
-            if (ReferenceEquals(this.currentState, null) &&
-                this.stateMap.TryGetValue(this.mode, out this.currentState))
+            if (ReferenceEquals(currentState, null) &&
+                stateMap.TryGetValue(mode, out currentState))
             {
-                this.currentState.Enter();
+                currentState.Enter();
             }
         }
 
         public override void Exit()
         {
-            if (!ReferenceEquals(this.currentState, null))
+            if (!ReferenceEquals(currentState, null))
             {
-                this.currentState.Exit();
-                this.currentState = null;
+                currentState.Exit();
+                currentState = null;
             }
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            this.stateMap = new Dictionary<T, MonoState>();
-            foreach (var info in this.states)
+            stateMap = new Dictionary<T, MonoState>();
+            foreach (var info in states)
             {
-                this.stateMap[info.mode] = info.state;
+                stateMap[info.mode] = info.state;
             }
         }
 

@@ -14,15 +14,15 @@ namespace Game.Meta
         
         public UpgradeConfig[] GetAllUpgrades()
         {
-            return this.configs;
+            return configs;
         }
 
         public UpgradeConfig FindUpgrade(string id)
         {
-            var length = this.configs.Length;
+            var length = configs.Length;
             for (var i = 0; i < length; i++)
             {
-                var config = this.configs[i];
+                var config = configs[i];
                 if (config.id == id)
                 {
                     return config;

@@ -14,9 +14,9 @@ namespace Game.GameEngine.InventorySystem
 
         public InventoryItemConfig FindItem(string name)
         {
-            for (int i = 0, count = this.items.Length; i < count; i++)
+            for (int i = 0, count = items.Length; i < count; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 if (item.ItemName == name)
                 {
                     return item;
@@ -28,7 +28,7 @@ namespace Game.GameEngine.InventorySystem
 
         public InventoryItemConfig[] GetAllItems()
         {
-            return this.items;
+            return items;
         }
     }
 }

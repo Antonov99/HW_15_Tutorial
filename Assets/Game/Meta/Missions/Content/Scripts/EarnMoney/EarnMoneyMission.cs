@@ -18,17 +18,17 @@ namespace Game.Meta
         [ShowInInspector]
         public int RequiredMoney
         {
-            get { return this.config.RequiredMoney; }
+            get { return config.RequiredMoney; }
         }
 
         public override float NormalizedProgress
         {
-            get { return (float) this.EarnedMoney / this.RequiredMoney; }
+            get { return (float) EarnedMoney / RequiredMoney; }
         }
 
         public override string TextProgress
         {
-            get { return $"{this.EarnedMoney}/{this.RequiredMoney}"; }
+            get { return $"{EarnedMoney}/{RequiredMoney}"; }
         }
 
         private readonly EarnMoneyMissionConfig config;
@@ -39,29 +39,29 @@ namespace Game.Meta
         public EarnMoneyMission(EarnMoneyMissionConfig config) : base(config)
         {
             this.config = config;
-            this.EarnedMoney = 0;
+            EarnedMoney = 0;
         }
 
         public void Setup(int currentResources)
         {
-            this.EarnedMoney = Math.Min(currentResources, this.RequiredMoney);
+            EarnedMoney = Math.Min(currentResources, RequiredMoney);
         }
 
         protected override void OnStart()
         {
-            this.moneyStorage.OnMoneyEarned += this.OnMoneyEarned;
+            moneyStorage.OnMoneyEarned += OnMoneyEarned;
         }
 
         protected override void OnStop()
         {
-            this.moneyStorage.OnMoneyEarned -= this.OnMoneyEarned;
+            moneyStorage.OnMoneyEarned -= OnMoneyEarned;
         }
 
         private void OnMoneyEarned(int income)
         {
-            this.EarnedMoney = Math.Min(this.EarnedMoney + income, this.RequiredMoney);
-            this.OnProgressChanged?.Invoke(this);
-            this.TryComplete();
+            EarnedMoney = Math.Min(EarnedMoney + income, RequiredMoney);
+            OnProgressChanged?.Invoke(this);
+            TryComplete();
         }
     }
 }

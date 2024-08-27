@@ -4,7 +4,7 @@ namespace Elementary
     {
         public T Current
         {
-            get { return this.value.Current; }
+            get { return value.Current; }
         }
 
         private readonly IValue<T> value;

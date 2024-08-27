@@ -19,37 +19,37 @@ namespace Game.Localization.UnityEditor
 
         private void OnEnable()
         {
-            this.titleContent = new GUIContent("Localization Texts");
-            this.config = Configs.TextConfig;
-            this.serializedObject = new SerializedObject(this.config);
-            this.spreadsheet = this.serializedObject.FindProperty(nameof(this.spreadsheet));
+            titleContent = new GUIContent("Localization Texts");
+            config = Configs.TextConfig;
+            serializedObject = new SerializedObject(config);
+            spreadsheet = serializedObject.FindProperty(nameof(spreadsheet));
         }
 
         private void OnGUI()
         {
-            var pageNames = this.GetPageNames();
+            var pageNames = GetPageNames();
             if (pageNames.Length <= 0)
             {
                 return;
             }
 
-            this.toolbarIndex = GUILayout.Toolbar(this.toolbarIndex, pageNames);
+            toolbarIndex = GUILayout.Toolbar(toolbarIndex, pageNames);
 
             EditorGUILayout.Space(8);
             EditorGUILayout.BeginVertical();
-            this.scrollPosition = EditorGUILayout.BeginScrollView(
-                this.scrollPosition,
+            scrollPosition = EditorGUILayout.BeginScrollView(
+                scrollPosition,
                 GUILayout.ExpandWidth(true),
                 GUILayout.ExpandHeight(true)
             );
             
-            var pages = this.spreadsheet.FindPropertyRelative("pages");
-            var page = pages.GetArrayElementAtIndex(this.toolbarIndex);
+            var pages = spreadsheet.FindPropertyRelative("pages");
+            var page = pages.GetArrayElementAtIndex(toolbarIndex);
 
             var entities = page.FindPropertyRelative("entities");
             EditorGUILayout.PropertyField(entities, includeChildren: true);
             
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
 
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
@@ -57,7 +57,7 @@ namespace Game.Localization.UnityEditor
 
         private string[] GetPageNames()
         {
-            return this.config.spreadsheet.pages
+            return config.spreadsheet.pages
                 .Select(it => it.name)
                 .ToArray();
         }

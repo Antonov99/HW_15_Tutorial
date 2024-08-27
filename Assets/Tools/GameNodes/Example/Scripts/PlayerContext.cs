@@ -14,8 +14,8 @@ namespace GameNodes
         
         protected override IEnumerable<object> LoadServices()
         {
-            yield return this.heroService;
-            yield return this.moveInput;
+            yield return heroService;
+            yield return moveInput;
             yield return new MoveController();
         }
     }

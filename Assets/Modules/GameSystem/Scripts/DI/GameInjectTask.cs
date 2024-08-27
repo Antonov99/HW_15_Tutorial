@@ -17,12 +17,12 @@ namespace GameSystem
         
         public override void Construct(GameContext gameContext)
         {
-            if (this.injectElements)
+            if (injectElements)
             {
                 GameInjector.InjectAll(gameContext, gameContext.GetAllElements());
             }
 
-            if (this.injectServices)
+            if (injectServices)
             {
                 GameInjector.InjectAll(gameContext, gameContext.GetAllServices());
             }

@@ -13,12 +13,12 @@ namespace Game.Gameplay.Dummies
 
         private void Awake()
         {
-            var model = this.GetComponent<DummyModel>();
+            var model = GetComponent<DummyModel>();
             var config = model.config;
             var core = model.core;
             
-            this.AddRange(
-                new Component_Transform(this.rootTransform),
+            AddRange(
+                new Component_Transform(rootTransform),
                 new Component_ObjectType(config.objectType),
                 new Component_GetName(config.dummyName),
                 new Component_HitPoints(core.hitPointsEngine),

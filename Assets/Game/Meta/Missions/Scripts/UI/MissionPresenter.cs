@@ -12,7 +12,7 @@ namespace Game.Meta
     {
         public bool IsShown
         {
-            get { return this.mission != null; }
+            get { return mission != null; }
         }
 
         [SerializeField]
@@ -42,33 +42,33 @@ namespace Game.Meta
 
             this.mission = mission;
 
-            this.view.SetIcon(this.mission.Metadata.icon);
-            this.view.gameObject.SetActive(true);
+            view.SetIcon(this.mission.Metadata.icon);
+            view.gameObject.SetActive(true);
 
-            this.SetupProgressBar();
-            this.SetupRewardButton();
+            SetupProgressBar();
+            SetupRewardButton();
 
-            this.view.RewardButton.AddListener(this.OnButtonClicked);
-            this.mission.OnProgressChanged += this.OnMissionProgressChanged;
-            this.mission.OnCompleted += this.OnMissionCompleted;
+            view.RewardButton.AddListener(OnButtonClicked);
+            this.mission.OnProgressChanged += OnMissionProgressChanged;
+            this.mission.OnCompleted += OnMissionCompleted;
 
-            LanguageManager.OnLanguageChanged += this.OnUpdateLanguage;
-            this.OnUpdateLanguage(LanguageManager.CurrentLanguage);
+            LanguageManager.OnLanguageChanged += OnUpdateLanguage;
+            OnUpdateLanguage(LanguageManager.CurrentLanguage);
         }
 
         public void Stop()
         {
-            this.view.RewardButton.RemoveListener(this.OnButtonClicked);
-            this.view.gameObject.SetActive(false);
+            view.RewardButton.RemoveListener(OnButtonClicked);
+            view.gameObject.SetActive(false);
 
-            if (this.mission != null)
+            if (mission != null)
             {
-                this.mission.OnProgressChanged -= this.OnMissionProgressChanged;
-                this.mission.OnCompleted -= this.OnMissionCompleted;
-                this.mission = null;
+                mission.OnProgressChanged -= OnMissionProgressChanged;
+                mission.OnCompleted -= OnMissionCompleted;
+                mission = null;
             }
 
-            LanguageManager.OnLanguageChanged -= this.OnUpdateLanguage;
+            LanguageManager.OnLanguageChanged -= OnUpdateLanguage;
         }
 
         #region UIEvents
@@ -76,10 +76,10 @@ namespace Game.Meta
         private void OnButtonClicked()
         {
             var mission = this.mission;
-            if (this.missionsManager.CanReceiveReward(mission))
+            if (missionsManager.CanReceiveReward(mission))
             {
-                this.missionsManager.ReceiveReward(mission);
-                this.AnimateIncome(mission);
+                missionsManager.ReceiveReward(mission);
+                AnimateIncome(mission);
             }
         }
 
@@ -91,34 +91,34 @@ namespace Game.Meta
         {
             var progress = mission.NormalizedProgress;
             var text = mission.TextProgress;
-            this.view.ProgressBar.SetProgress(progress, text);
+            view.ProgressBar.SetProgress(progress, text);
         }
 
         private void OnMissionCompleted(Mission mission)
         {
-            this.view.RewardButton.SetState(MissionRewardButton.State.COMPLETE);
+            view.RewardButton.SetState(MissionRewardButton.State.COMPLETE);
         }
 
         private void OnUpdateLanguage(SystemLanguage language)
         {
-            var title = LocalizationManager.GetText(this.mission.Metadata.localizedTitle, language);
-            this.view.SetTitle(title);
+            var title = LocalizationManager.GetText(mission.Metadata.localizedTitle, language);
+            view.SetTitle(title);
 
-            var difficultyKey = MissionExtensions.GetDifficultyLocalizationKey(this.mission.Difficulty);
+            var difficultyKey = MissionExtensions.GetDifficultyLocalizationKey(mission.Difficulty);
             var difficultyText = LocalizationManager.GetText(difficultyKey, language);
-            this.view.SetDifficulty(difficultyText);
+            view.SetDifficulty(difficultyText);
         }
 
         #endregion
 
         private void SetupRewardButton()
         {
-            var button = this.view.RewardButton;
+            var button = view.RewardButton;
 
-            var reward = this.mission.MoneyReward.ToString();
+            var reward = mission.MoneyReward.ToString();
             button.SetReward(reward);
 
-            var state = this.mission.State == MissionState.COMPLETED
+            var state = mission.State == MissionState.COMPLETED
                 ? MissionRewardButton.State.COMPLETE
                 : MissionRewardButton.State.PROCESSING;
             button.SetState(state);
@@ -126,17 +126,17 @@ namespace Game.Meta
 
         private void SetupProgressBar()
         {
-            var progress = this.mission.NormalizedProgress;
-            var text = this.mission.TextProgress;
-            this.view.ProgressBar.SetProgress(progress, text);
+            var progress = mission.NormalizedProgress;
+            var text = mission.TextProgress;
+            view.ProgressBar.SetProgress(progress, text);
         }
 
         private void AnimateIncome(Mission mission)
         {
-            var rectTransform = this.view.RewardButton.GetComponent<RectTransform>();
+            var rectTransform = view.RewardButton.GetComponent<RectTransform>();
             var startUIPosition = rectTransform.TransformPoint(rectTransform.rect.center);
             var reward = mission.MoneyReward;
-            this.moneyPanelAnimator.PlayIncomeFromUI(startUIPosition, reward);
+            moneyPanelAnimator.PlayIncomeFromUI(startUIPosition, reward);
         }
     }
 }

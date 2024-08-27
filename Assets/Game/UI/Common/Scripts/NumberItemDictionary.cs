@@ -26,90 +26,90 @@ namespace Game.UI
 
         public NumberItemDictionary()
         {
-            this.items = new Dictionary<K, NumberItem>();
+            items = new Dictionary<K, NumberItem>();
         }
 
         public void AddItem(K key, int amount)
         {
-            var view = Instantiate(this.itemPrefab, this.itemsContainer);
+            var view = Instantiate(itemPrefab, itemsContainer);
             view.name = key.ToString();
-            view.SetIcon(this.FindIcon(key));
+            view.SetIcon(FindIcon(key));
             view.SetupNumber(amount);
-            this.items.Add(key, view);
-            this.UpdateItemVisibility(view);
+            items.Add(key, view);
+            UpdateItemVisibility(view);
         }
 
         public void RemoveItem(K key)
         {
-            var view = this.items[key];
-            this.items.Remove(key);
+            var view = items[key];
+            items.Remove(key);
             Destroy(view.gameObject);
         }
 
         public void ResetAllItems()
         {
-            foreach (var view in this.items.Values)
+            foreach (var view in items.Values)
             {
                 view.SetupNumber(0);
-                this.UpdateItemVisibility(view);
+                UpdateItemVisibility(view);
             }
         }
 
         public void SetupItem(K key, int amount)
         {
-            var view = this.items[key];
+            var view = items[key];
             view.SetupNumber(amount);
-            this.UpdateItemVisibility(view);
+            UpdateItemVisibility(view);
         }
 
         public void UpdateItem(K key, int amount)
         {
-            var view = this.items[key];
+            var view = items[key];
             view.UpdateNumber(amount);
-            this.UpdateItemVisibility(view);
+            UpdateItemVisibility(view);
         }
 
         public void IncrementItem(K key, int range)
         {
-            var view = this.items[key];
+            var view = items[key];
             view.IncrementNumber(range);
-            this.UpdateItemVisibility(view);
+            UpdateItemVisibility(view);
         }
 
         public void DecrementItem(K key, int range)
         {
-            var view = this.items[key];
+            var view = items[key];
             view.DecrementNumber(range);
-            this.UpdateItemVisibility(view);
+            UpdateItemVisibility(view);
         }
 
         public bool IsItemShown(K key)
         {
-            var view = this.items[key];
+            var view = items[key];
             return view.gameObject.activeInHierarchy;
         }
 
         public void ShowItem(K key)
         {
-            var view = this.items[key];
+            var view = items[key];
             view.gameObject.SetActive(true);
         }
 
         public void HideItem(K key)
         {
-            var view = this.items[key];
+            var view = items[key];
             view.gameObject.SetActive(false);
         }
         
         public Vector3 GetIconCenter(K key)
         {
-            var view = this.items[key];
+            var view = items[key];
             return view.GetIconCenter();
         }
 
         public int GetCurrentValue(K key)
         {
-            var view = this.items[key];
+            var view = items[key];
             return view.CurrentValue;
         }
 
@@ -117,7 +117,7 @@ namespace Game.UI
 
         private void UpdateItemVisibility(NumberItem view)
         {
-            if (!this.controlItemVisibility)
+            if (!controlItemVisibility)
             {
                 return;
             }
@@ -131,7 +131,7 @@ namespace Game.UI
                 
             viewObject.SetActive(isVisible);
 
-            if (this.changeItemOrder)
+            if (changeItemOrder)
             {
                 view.transform.SetAsLastSibling();
             }

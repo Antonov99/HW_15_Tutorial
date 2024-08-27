@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
 
         protected override void OnEvent()
         {
-            this.hitPointsEngine.RestoreToFull();
+            hitPointsEngine.RestoreToFull();
         }
     }
 }

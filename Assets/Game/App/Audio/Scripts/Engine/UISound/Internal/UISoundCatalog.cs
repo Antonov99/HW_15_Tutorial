@@ -14,9 +14,9 @@ namespace Game
 
         public bool TryFindClip(UISoundType type, out AudioClip clip)
         {
-            for (int i = 0, count = this.sounds.Length; i < count; i++)
+            for (int i = 0, count = sounds.Length; i < count; i++)
             {
-                var sound = this.sounds[i];
+                var sound = sounds[i];
                 if (sound.type == type)
                 {
                     clip = sound.clip;
@@ -30,9 +30,9 @@ namespace Game
 
         public AudioClip FindClip(UISoundType type)
         {
-            for (int i = 0, count = this.sounds.Length; i < count; i++)
+            for (int i = 0, count = sounds.Length; i < count; i++)
             {
-                var sound = this.sounds[i];
+                var sound = sounds[i];
                 if (sound.type == type)
                 {
                     return sound.clip;

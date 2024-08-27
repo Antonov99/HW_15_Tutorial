@@ -95,7 +95,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.comparer = comparer;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
             }
 
             public TSource Current { get; private set; }
@@ -237,7 +237,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.keySelector = keySelector;
                 this.comparer = comparer;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
             }
 
             public TSource Current { get; private set; }
@@ -383,7 +383,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.keySelector = keySelector;
                 this.comparer = comparer;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
             }
 
             public TSource Current { get; private set; }
@@ -541,7 +541,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.keySelector = keySelector;
                 this.comparer = comparer;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
             }
 
             public TSource Current { get; private set; }

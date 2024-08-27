@@ -23,58 +23,58 @@ namespace Game.GameEngine.AI
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!Blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.Blackboard.TryGetVariable(this.resourceKey, out IEntity resource))
+            if (!Blackboard.TryGetVariable(resourceKey, out IEntity resource))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.harvestComponent = unit.Get<IComponent_HarvestResource>();
-            this.harvestComponent.OnHarvestStopped += this.OnHarvestFinished;
+            harvestComponent = unit.Get<IComponent_HarvestResource>();
+            harvestComponent.OnHarvestStopped += OnHarvestFinished;
             
-            this.StartHarvest(resource);
+            StartHarvest(resource);
         }
 
         private void StartHarvest(IEntity targetResource)
         {
             var operation = new HarvestResourceOperation(targetResource); 
-            this.harvestComponent.StartHarvest(operation);
+            harvestComponent.StartHarvest(operation);
         }
 
         private void OnHarvestFinished(HarvestResourceOperation operation)
         {
             if (operation.isCompleted)
             {
-                this.Return(true);
+                Return(true);
             }
             else
             {
-                this.Return(false);
+                Return(false);
             }
         }
 
         protected override void OnAbort()
         {
-            if (this.harvestComponent != null)
+            if (harvestComponent != null)
             {
-                this.harvestComponent.OnHarvestStopped -= this.OnHarvestFinished;
-                this.harvestComponent.StopHarvest();
-                this.harvestComponent = null;   
+                harvestComponent.OnHarvestStopped -= OnHarvestFinished;
+                harvestComponent.StopHarvest();
+                harvestComponent = null;   
             }
         }
 
         protected override void OnReturn(bool success)
         {
-            if (this.harvestComponent != null)
+            if (harvestComponent != null)
             {
-                this.harvestComponent.OnHarvestStopped -= this.OnHarvestFinished;
-                this.harvestComponent = null;
+                harvestComponent.OnHarvestStopped -= OnHarvestFinished;
+                harvestComponent = null;
             }
         }
     }

@@ -30,14 +30,14 @@ namespace Elementary
         [ProgressBar(0, 1)]
         public float Progress
         {
-            get { return this.currentTime / this.duration; }
-            set { this.SetProgress(value); }
+            get { return currentTime / duration; }
+            set { SetProgress(value); }
         }
 
         public float Duration
         {
-            get { return this.duration; }
-            set { this.duration = value; }
+            get { return duration; }
+            set { duration = value; }
         }
 
         [ReadOnly]
@@ -45,8 +45,8 @@ namespace Elementary
         [PropertyOrder(-8)]
         public float CurrentTime
         {
-            get { return this.currentTime; }
-            set { this.currentTime = Mathf.Clamp(value, 0, this.duration); }
+            get { return currentTime; }
+            set { currentTime = Mathf.Clamp(value, 0, duration); }
         }
 
         [Space]
@@ -64,59 +64,59 @@ namespace Elementary
         public Timer(float duration)
         {
             this.duration = duration;
-            this.currentTime = 0;
+            currentTime = 0;
         }
 
         public void Play()
         {
-            if (this.IsPlaying)
+            if (IsPlaying)
             {
                 return;
             }
 
-            this.IsPlaying = true;
-            this.OnStarted?.Invoke();
-            this.coroutine = MonoHelper.Instance.StartCoroutine(this.TimerRoutine());
+            IsPlaying = true;
+            OnStarted?.Invoke();
+            coroutine = MonoHelper.Instance.StartCoroutine(TimerRoutine());
         }
 
         public void Stop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                MonoHelper.Instance.StopCoroutine(this.coroutine);
+                MonoHelper.Instance.StopCoroutine(coroutine);
             }
 
-            if (this.IsPlaying)
+            if (IsPlaying)
             {
-                this.IsPlaying = false;
-                this.OnCanceled?.Invoke();
+                IsPlaying = false;
+                OnCanceled?.Invoke();
             }
         }
 
         public void ResetTime()
         {
-            this.currentTime = 0;
-            this.OnReset?.Invoke();
+            currentTime = 0;
+            OnReset?.Invoke();
         }
 
         private void SetProgress(float progress)
         {
             progress = Mathf.Clamp01(progress);
-            this.currentTime = this.duration * progress;
-            this.OnTimeChanged?.Invoke();
+            currentTime = duration * progress;
+            OnTimeChanged?.Invoke();
         }
 
         private IEnumerator TimerRoutine()
         {
-            while (this.currentTime < this.duration)
+            while (currentTime < duration)
             {
                 yield return null;
-                this.currentTime += Time.deltaTime;
-                this.OnTimeChanged?.Invoke();
+                currentTime += Time.deltaTime;
+                OnTimeChanged?.Invoke();
             }
 
-            this.IsPlaying = false;
-            this.OnFinished?.Invoke();
+            IsPlaying = false;
+            OnFinished?.Invoke();
         }
     }
 }

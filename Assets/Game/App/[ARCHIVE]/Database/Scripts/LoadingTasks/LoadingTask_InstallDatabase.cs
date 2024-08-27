@@ -17,7 +17,7 @@ namespace Game.App
 
         public void Do(Action<LoadingResult> callback)
         {
-            this.installer.Install();
+            installer.Install();
             callback?.Invoke(LoadingResult.Success());
         }
     }

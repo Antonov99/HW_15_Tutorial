@@ -10,13 +10,13 @@ namespace Game.GameEngine.AI
     {
         public event Action<bool> OnTargetReached
         {
-            add { this.moveAgent.OnTargetReached += value; }
-            remove { this.moveAgent.OnTargetReached -= value; }
+            add { moveAgent.OnTargetReached += value; }
+            remove { moveAgent.OnTargetReached -= value; }
         }
 
         public bool IsTargetReached
         {
-            get { return this.moveAgent.IsTargetReached; }
+            get { return moveAgent.IsTargetReached; }
         }
 
         private readonly Agent_Entity_MoveToPosition moveAgent = new();
@@ -25,43 +25,43 @@ namespace Game.GameEngine.AI
 
         public Agent_Entity_FollowEntity()
         {
-            this.SetFramePeriod(new WaitForFixedUpdate());
+            SetFramePeriod(new WaitForFixedUpdate());
         }
 
         public void SetStoppingDistance(float stoppingDistance)
         {
-            this.moveAgent.SetStoppingDistance(stoppingDistance);
+            moveAgent.SetStoppingDistance(stoppingDistance);
         }
 
         public void SetFollowingEntity(IEntity followingEntity)
         {
-            this.moveAgent.SetMovingEntity(followingEntity);
+            moveAgent.SetMovingEntity(followingEntity);
         }
 
         public void SetTargetEntity(IEntity targetEntity)
         {
-            this.targetComponent = targetEntity.Get<IComponent_GetPosition>();
+            targetComponent = targetEntity.Get<IComponent_GetPosition>();
 
-            var targetPosition = this.targetComponent.Position;
-            this.moveAgent.SetTarget(targetPosition);
+            var targetPosition = targetComponent.Position;
+            moveAgent.SetTarget(targetPosition);
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            this.moveAgent.Play();
+            moveAgent.Play();
         }
 
         protected override void OnStop()
         {
             base.OnStop();
-            this.moveAgent.Stop();
+            moveAgent.Stop();
         }
 
         protected override void Update()
         {
-            var targetPosition = this.targetComponent.Position;
-            this.moveAgent.SetTarget(targetPosition);
+            var targetPosition = targetComponent.Position;
+            moveAgent.SetTarget(targetPosition);
         }
     }
 }

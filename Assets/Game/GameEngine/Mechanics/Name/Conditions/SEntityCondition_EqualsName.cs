@@ -17,7 +17,7 @@ namespace Game.GameEngine.Mechanics
         {
             if (entity.TryGet(out IComponent_GetName component))
             {
-                return this.expectedName.Current == component.Name;
+                return expectedName.Current == component.Name;
             }
 
             Debug.LogWarning("Component «Get Name» is not found!");

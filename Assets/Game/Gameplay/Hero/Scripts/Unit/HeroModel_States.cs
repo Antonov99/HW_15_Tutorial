@@ -36,16 +36,16 @@ namespace Game.Gameplay.Hero
         [Construct]
         private void ConstructStateMachine(HeroModel_Core core)
         {
-            this.stateMachine.states = new List<StateEntry<HeroStateId>>
+            stateMachine.states = new List<StateEntry<HeroStateId>>
             {
-                new(HeroStateId.IDLE, this.idleState),
-                new(HeroStateId.MOVE, this.moveState),
-                new(HeroStateId.MELEE_COMBAT, this.combatState),
-                new(HeroStateId.HARVEST_RESOURCE, this.harvestState),
-                new(HeroStateId.DEATH, this.deathState)
+                new(HeroStateId.IDLE, idleState),
+                new(HeroStateId.MOVE, moveState),
+                new(HeroStateId.MELEE_COMBAT, combatState),
+                new(HeroStateId.HARVEST_RESOURCE, harvestState),
+                new(HeroStateId.DEATH, deathState)
             };
 
-            this.stateMachine.orderedTransitions = new List<StateTransition<HeroStateId>>
+            stateMachine.orderedTransitions = new List<StateTransition<HeroStateId>>
             {
                 new(HeroStateId.DEATH, () => core.life.hitPoints.IsOver()),
                 new(HeroStateId.MOVE, () => core.move.moveMotor.IsMoving),
@@ -59,19 +59,19 @@ namespace Game.Gameplay.Hero
         private void ConstructMechanics(HeroModel_Core core)
         {
             var enableVariable = core.main.isEnable;
-            this.boolMechanics.Construct(enableVariable, isEnable =>
+            boolMechanics.Construct(enableVariable, isEnable =>
             {
                 if (isEnable)
-                    this.stateMachine.Enter();
+                    stateMachine.Enter();
                 else
-                    this.stateMachine.Exit();
+                    stateMachine.Exit();
             });
 
-            this.updateMechanics.Construct(_ =>
+            updateMechanics.Construct(_ =>
             {
                 if (enableVariable.Current)
                 {
-                    this.stateMachine.Update();
+                    stateMachine.Update();
                 }
             });
         }
@@ -89,25 +89,25 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf()
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
-                    this.positionState,
-                    this.rotationState
+                    positionState,
+                    rotationState
                 };
             }
 
             [Construct]
             private void ConstructStates(HeroModel_Core core)
             {
-                this.positionState.ConstructMotor(core.move.moveMotor);
-                this.positionState.ConstructTransform(core.main.transformEngine);
-                this.positionState.ConstructSurface(core.main.walkableSurface);
-                this.positionState.ConstructSpeed(core.move.fullSpeed);
+                positionState.ConstructMotor(core.move.moveMotor);
+                positionState.ConstructTransform(core.main.transformEngine);
+                positionState.ConstructSurface(core.main.walkableSurface);
+                positionState.ConstructSpeed(core.move.fullSpeed);
 
-                this.rotationState.mode = MoveInDirectionState_Rotation.Mode.SMOOTH;
-                this.rotationState.rotationSpeed = 45.0f;
-                this.rotationState.ConstructMotor(core.move.moveMotor);
-                this.rotationState.ConstructTransform(core.main.transformEngine);
+                rotationState.mode = MoveInDirectionState_Rotation.Mode.SMOOTH;
+                rotationState.rotationSpeed = 45.0f;
+                rotationState.ConstructMotor(core.move.moveMotor);
+                rotationState.ConstructTransform(core.main.transformEngine);
             }
         }
 
@@ -118,17 +118,17 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf()
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
-                    this.progressState,
+                    progressState,
                 };
             }
 
             [Construct]
             private void ConstructProgressState(ScriptableHero config, HeroModel_Core core)
             {
-                this.progressState.ConstructOperator(core.harvest.harvestOperator);
-                this.progressState.ConstructDuration(new Value<float>(config.harvestDuration));
+                progressState.ConstructOperator(core.harvest.harvestOperator);
+                progressState.ConstructDuration(new Value<float>(config.harvestDuration));
             }
         }
 
@@ -143,11 +143,11 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf()
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
-                    this.distanceState,
-                    this.destroyState,
-                    this.updateRotationState
+                    distanceState,
+                    destroyState,
+                    updateRotationState
                 };
             }
 
@@ -157,18 +157,18 @@ namespace Game.Gameplay.Hero
                 var combatOperator = core.combat.combatOperator;
                 var transform = core.main.transformEngine;
                 
-                this.distanceState.ConstructOperator(combatOperator);
-                this.distanceState.ConstructTransform(transform);
-                this.distanceState.ConstructMinDistance(config.combatDistance);
+                distanceState.ConstructOperator(combatOperator);
+                distanceState.ConstructTransform(transform);
+                distanceState.ConstructMinDistance(config.combatDistance);
 
-                this.destroyState.ConstructOperator(combatOperator);
-                this.destroyState.ConstructAttacker(attacker);
+                destroyState.ConstructOperator(combatOperator);
+                destroyState.ConstructAttacker(attacker);
                 
                 //Control rotation:
-                this.updateRotationState.ConstructOperator(combatOperator);
-                this.updateRotationState.ConstructTransform(transform);
-                this.updateRotationState.mode = CombatState_UpdateRotation.Mode.SMOOTH;
-                this.updateRotationState.rotationSpeed = 45.0f;
+                updateRotationState.ConstructOperator(combatOperator);
+                updateRotationState.ConstructTransform(transform);
+                updateRotationState.mode = CombatState_UpdateRotation.Mode.SMOOTH;
+                updateRotationState.rotationSpeed = 45.0f;
             }
         }
 

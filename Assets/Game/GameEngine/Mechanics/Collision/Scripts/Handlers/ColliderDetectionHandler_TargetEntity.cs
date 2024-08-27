@@ -13,8 +13,8 @@ namespace Game.GameEngine.Mechanics
         
         public void OnCollidersUpdated(Collider[] buffer, int size)
         {
-            var targetFound = this.SelectTarget(buffer, size, out var target);
-            this.ProcessTarget(targetFound, target);
+            var targetFound = SelectTarget(buffer, size, out var target);
+            ProcessTarget(targetFound, target);
         }
 
         protected abstract void ProcessTarget(bool targetFound, IEntity target);
@@ -24,7 +24,7 @@ namespace Game.GameEngine.Mechanics
             for (var i = 0; i < size; i++)
             {
                 var collider = buffer[i];
-                if (collider.TryGetComponent(out IEntity entity) && this.MatchesEntity(entity))
+                if (collider.TryGetComponent(out IEntity entity) && MatchesEntity(entity))
                 {
                     target = entity;
                     return true;
@@ -37,9 +37,9 @@ namespace Game.GameEngine.Mechanics
 
         protected virtual bool MatchesEntity(IEntity entity)
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue(entity))
                 {
                     return false;

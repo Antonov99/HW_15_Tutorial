@@ -10,7 +10,7 @@ namespace Game.Meta
         public Booster CreateBooster(BoosterConfig config)
         {
             var booster = config.InstantiateBooster();
-            GameInjector.Inject(this.gameContext, booster);
+            GameInjector.Inject(gameContext, booster);
             return booster;
         }
     }

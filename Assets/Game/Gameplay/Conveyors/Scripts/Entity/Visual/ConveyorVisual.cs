@@ -23,22 +23,22 @@ namespace Game.Gameplay.Conveyors
 
         private void Awake()
         {
-            this.sawObject.SetActive(false);
-            this.woodObject.SetActive(false);
+            sawObject.SetActive(false);
+            woodObject.SetActive(false);
         }
 
         public void Play()
         {
-            this.workerAnimator.SetInteger(STATE, SAW_ANIMATION);
-            this.sawObject.SetActive(true);
-            this.woodObject.SetActive(true);
+            workerAnimator.SetInteger(STATE, SAW_ANIMATION);
+            sawObject.SetActive(true);
+            woodObject.SetActive(true);
         }
 
         public void Stop()
         {
-            this.workerAnimator.SetInteger(STATE, IDLE_ANIMATION);
-            this.sawObject.SetActive(false);
-            this.woodObject.SetActive(false);
+            workerAnimator.SetInteger(STATE, IDLE_ANIMATION);
+            sawObject.SetActive(false);
+            woodObject.SetActive(false);
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Game.GameEngine.Mechanics
 
         void IEnableListener.OnEnable()
         {
-            this.emitter.OnEvent += this.OnDamageTaken;
+            emitter.OnEvent += OnDamageTaken;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.emitter.OnEvent -= this.OnDamageTaken;
+            emitter.OnEvent -= OnDamageTaken;
         }
 
         protected abstract void OnDamageTaken(TakeDamageArgs damageArgs);

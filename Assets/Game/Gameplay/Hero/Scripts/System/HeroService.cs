@@ -11,12 +11,12 @@ namespace Game.Gameplay.Hero
 
         public void SetupHero(IEntity hero)
         {
-            this.currentHero = hero;
+            currentHero = hero;
         }
 
         public IEntity GetHero()
         {
-            return this.currentHero;
+            return currentHero;
         }
     }
 }

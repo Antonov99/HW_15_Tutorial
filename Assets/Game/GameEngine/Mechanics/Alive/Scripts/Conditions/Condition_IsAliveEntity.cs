@@ -13,17 +13,17 @@ namespace Game.GameEngine.Mechanics
 
         public Condition_IsAliveEntity(IEntity target)
         {
-            this.component = target.Get<IComponent_IsAlive>();
+            component = target.Get<IComponent_IsAlive>();
         }
         
         public void SetEntity(IEntity target)
         {
-            this.component = target.Get<IComponent_IsAlive>();
+            component = target.Get<IComponent_IsAlive>();
         }
 
         public bool IsTrue()
         {
-            return this.component.IsAlive;
+            return component.IsAlive;
         }
     }
 }

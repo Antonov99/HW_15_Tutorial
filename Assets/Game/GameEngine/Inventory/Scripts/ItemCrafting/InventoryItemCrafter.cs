@@ -31,7 +31,7 @@ namespace Game.GameEngine.InventorySystem
             for (int i = 0, count = ingredients.Length; i < count; i++)
             {
                 var ingredient = ingredients[i];
-                if (!this.IngredientExists(ingredient))
+                if (!IngredientExists(ingredient))
                 {
                     return false;
                 }
@@ -48,31 +48,31 @@ namespace Game.GameEngine.InventorySystem
             for (int i = 0, count = ingredients.Length; i < count; i++)
             {
                 var ingredient = ingredients[i];
-                this.ConsumeIngredient(ingredient);
+                ConsumeIngredient(ingredient);
             }
 
-            this.ProduceResult(receipt);
-            this.OnCraftFinished?.Invoke(receipt);
+            ProduceResult(receipt);
+            OnCraftFinished?.Invoke(receipt);
         }
 
         private bool IngredientExists(InventoryItemIngredient ingredient)
         {
             var count = ingredient.requiredCount;
             var itemName = ingredient.itemInfo.ItemName;
-            return this.inventory.CountItems(itemName) >= count;
+            return inventory.CountItems(itemName) >= count;
         }
 
         private void ConsumeIngredient(InventoryItemIngredient ingredient)
         {
             var itemName = ingredient.itemInfo.ItemName;
             var count = ingredient.requiredCount;
-            this.inventory.RemoveItems(itemName, count);
+            inventory.RemoveItems(itemName, count);
         }
 
         private void ProduceResult(InventoryItemReceipt receipt)
         {
             var resultItem = receipt.resultInfo.Prototype;
-            this.inventory.AddItemsByPrototype(resultItem, 1);
+            inventory.AddItemsByPrototype(resultItem, 1);
         }
     }
 }

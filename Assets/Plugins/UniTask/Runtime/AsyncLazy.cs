@@ -19,17 +19,17 @@ namespace Cysharp.Threading.Tasks
         public AsyncLazy(Func<UniTask> taskFactory)
         {
             this.taskFactory = taskFactory;
-            this.completionSource = new UniTaskCompletionSource();
-            this.syncLock = new object();
-            this.initialized = false;
+            completionSource = new UniTaskCompletionSource();
+            syncLock = new object();
+            initialized = false;
         }
 
         internal AsyncLazy(UniTask task)
         {
-            this.taskFactory = null;
-            this.completionSource = new UniTaskCompletionSource();
-            this.syncLock = null;
-            this.initialized = true;
+            taskFactory = null;
+            completionSource = new UniTaskCompletionSource();
+            syncLock = null;
+            initialized = true;
 
             var awaiter = task.GetAwaiter();
             if (awaiter.IsCompleted)
@@ -138,17 +138,17 @@ namespace Cysharp.Threading.Tasks
         public AsyncLazy(Func<UniTask<T>> taskFactory)
         {
             this.taskFactory = taskFactory;
-            this.completionSource = new UniTaskCompletionSource<T>();
-            this.syncLock = new object();
-            this.initialized = false;
+            completionSource = new UniTaskCompletionSource<T>();
+            syncLock = new object();
+            initialized = false;
         }
 
         internal AsyncLazy(UniTask<T> task)
         {
-            this.taskFactory = null;
-            this.completionSource = new UniTaskCompletionSource<T>();
-            this.syncLock = null;
-            this.initialized = true;
+            taskFactory = null;
+            completionSource = new UniTaskCompletionSource<T>();
+            syncLock = null;
+            initialized = true;
 
             var awaiter = task.GetAwaiter();
             if (awaiter.IsCompleted)

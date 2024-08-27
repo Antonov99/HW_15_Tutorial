@@ -9,12 +9,12 @@ namespace Game.GameEngine.Mechanics
 
         protected virtual void OnEnable()
         {
-            this.eventReceiver.OnDestroy += this.OnDestroyEvent;
+            eventReceiver.OnDestroy += OnDestroyEvent;
         }
 
         protected virtual void OnDisable()
         {
-            this.eventReceiver.OnDestroy -= this.OnDestroyEvent;
+            eventReceiver.OnDestroy -= OnDestroyEvent;
         }
 
         protected abstract void OnDestroyEvent(DestroyArgs destroyArgs);

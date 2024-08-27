@@ -25,13 +25,13 @@ namespace Game.Gameplay.Hero
         [Construct]
         private void ConstructEmiiter()
         {
-            this.soundEmitter = new SoundEmitter(this.audioSource, this.soundCatalog);
+            soundEmitter = new SoundEmitter(audioSource, soundCatalog);
         }
 
         [Construct]
         private void ConstructDeath(HeroModel_Core core)
         {
-            core.life.deathEmitter.AddListener(_ => this.soundEmitter.PlaySound(this.humanDeathSoundId));
+            core.life.deathEmitter.AddListener(_ => soundEmitter.PlaySound(humanDeathSoundId));
         }
     }
 }

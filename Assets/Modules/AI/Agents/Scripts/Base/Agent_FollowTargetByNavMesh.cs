@@ -35,44 +35,44 @@ namespace AI.Agents
 
         public void SetCheckTargetReachedPeriod(YieldInstruction period)
         {
-            this.checkTargetReachedPeriod = period;
+            checkTargetReachedPeriod = period;
         }
 
         public void SetCalculatePathPeriod(YieldInstruction period)
         {
-            this.calculatePathPeriod = period;
+            calculatePathPeriod = period;
         }
 
         public void SetStoppingDistance(float stoppingDistance)
         {
-            this.sqrStoppingDistance = Mathf.Pow(stoppingDistance, 2);
+            sqrStoppingDistance = Mathf.Pow(stoppingDistance, 2);
         }
 
         protected override void OnStart()
         {
-            this.isTargetReached = false;
+            isTargetReached = false;
 
             var context = MonoHelper.Instance;
-            this.calculatePathCoroutine = context.StartCoroutine(this.CalculatePathRoutine());
-            this.checkTargetReachedCoroutine = context.StartCoroutine(this.CheckTargetReachedRoutine());
-            this.MoveAgent.Play();
+            calculatePathCoroutine = context.StartCoroutine(CalculatePathRoutine());
+            checkTargetReachedCoroutine = context.StartCoroutine(CheckTargetReachedRoutine());
+            MoveAgent.Play();
         }
 
         protected override void OnStop()
         {
-            this.MoveAgent.Stop();
+            MoveAgent.Stop();
 
             var context = MonoHelper.Instance;
-            if (this.calculatePathCoroutine != null)
+            if (calculatePathCoroutine != null)
             {
-                context.StopCoroutine(this.calculatePathCoroutine);
-                this.calculatePathCoroutine = null;
+                context.StopCoroutine(calculatePathCoroutine);
+                calculatePathCoroutine = null;
             }
 
-            if (this.checkTargetReachedCoroutine != null)
+            if (checkTargetReachedCoroutine != null)
             {
-                context.StopCoroutine(this.checkTargetReachedCoroutine);
-                this.checkTargetReachedCoroutine = null;
+                context.StopCoroutine(checkTargetReachedCoroutine);
+                checkTargetReachedCoroutine = null;
             }
         }
 
@@ -80,8 +80,8 @@ namespace AI.Agents
         {
             while (true)
             {
-                yield return this.checkTargetReachedPeriod;
-                this.UpdateTargetReach();
+                yield return checkTargetReachedPeriod;
+                UpdateTargetReach();
             }
         }
 
@@ -89,52 +89,52 @@ namespace AI.Agents
         {
             while (true)
             {
-                yield return this.calculatePathPeriod;
-                this.CalculateNextPoint();
+                yield return calculatePathPeriod;
+                CalculateNextPoint();
             }
         }
 
         private void UpdateTargetReach()
         {
-            var isTargetReached = this.CheckTargetReached();
+            var isTargetReached = CheckTargetReached();
 
             if (isTargetReached && !this.isTargetReached)
             {
                 this.isTargetReached = true;
-                this.OnTargetReached?.Invoke(true);
+                OnTargetReached?.Invoke(true);
             }
 
             if (!isTargetReached && this.isTargetReached)
             {
                 this.isTargetReached = false;
-                this.OnTargetReached?.Invoke(false);
+                OnTargetReached?.Invoke(false);
             }
         }
 
         private void CalculateNextPoint()
         {
-            var currentPosition = this.EvaluateCurrentPosition();
-            var targetPosition = this.EvaluateTargetPosition();
+            var currentPosition = EvaluateCurrentPosition();
+            var targetPosition = EvaluateTargetPosition();
 
-            if (!NavMesh.CalculatePath(currentPosition, targetPosition, this.navMeshAreas, this.currentPath))
+            if (!NavMesh.CalculatePath(currentPosition, targetPosition, navMeshAreas, currentPath))
             {
                 return;
             }
 
-            var pathCorners = this.currentPath.corners;
+            var pathCorners = currentPath.corners;
             if (pathCorners.Length < 2)
             {
                 return;
             }
 
             var nextPosition = pathCorners[1];
-            this.MoveAgent.SetTarget(nextPosition);
+            MoveAgent.SetTarget(nextPosition);
         }
 
         private bool CheckTargetReached()
         {
-            var distanceVector = this.EvaluateTargetPosition() - this.EvaluateCurrentPosition();
-            return distanceVector.sqrMagnitude <= this.sqrStoppingDistance;
+            var distanceVector = EvaluateTargetPosition() - EvaluateCurrentPosition();
+            return distanceVector.sqrMagnitude <= sqrStoppingDistance;
         }
 
         protected abstract Vector3 EvaluateCurrentPosition();

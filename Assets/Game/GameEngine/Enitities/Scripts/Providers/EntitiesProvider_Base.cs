@@ -12,7 +12,7 @@ namespace Game.GameEngine.Entities
         
         public override IEnumerable<IEntity> ProvideEntities()
         {
-            return this.entities;
+            return entities;
         }
     }
 }

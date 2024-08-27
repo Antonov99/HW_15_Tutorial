@@ -13,17 +13,17 @@ namespace Game.UI
 
         private void Awake()
         {
-            this.InitDropdown();
+            InitDropdown();
         }
 
         private void OnEnable()
         {
-            this.dropdown.onValueChanged.AddListener(this.OnLanguageChanged);
+            dropdown.onValueChanged.AddListener(OnLanguageChanged);
         }
 
         private void OnDisable()
         {
-            this.dropdown.onValueChanged.RemoveListener(this.OnLanguageChanged);
+            dropdown.onValueChanged.RemoveListener(OnLanguageChanged);
         }
 
         private void OnLanguageChanged(int languageIndex)
@@ -51,9 +51,9 @@ namespace Game.UI
                 }
             }
 
-            this.dropdown.ClearOptions();
-            this.dropdown.AddOptions(options);
-            this.dropdown.value = targetIndex;
+            dropdown.ClearOptions();
+            dropdown.AddOptions(options);
+            dropdown.value = targetIndex;
         }
     }
 }

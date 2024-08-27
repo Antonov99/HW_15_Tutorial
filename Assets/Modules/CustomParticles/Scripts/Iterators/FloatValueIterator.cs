@@ -9,12 +9,12 @@ namespace CustomParticles
     {
         public int ParticleCount
         {
-            get { return this.particleCount; }
+            get { return particleCount; }
         }
 
         public float CurrentValue
         {
-            get { return this.currentValue; }
+            get { return currentValue; }
         }
 
         private readonly int particleCount;
@@ -29,7 +29,7 @@ namespace CustomParticles
 
         public FloatValueIterator(float previousValue, float newValue, int particleCount)
         {
-            this.currentValue = previousValue;
+            currentValue = previousValue;
 
             var diff = newValue - previousValue;
             if (diff == 0 || particleCount == 0)
@@ -41,35 +41,35 @@ namespace CustomParticles
             if (Mathf.Abs(valuePerParticle) > 0)
             {
                 this.valuePerParticle = valuePerParticle;
-                this.lastValuePerParticle = this.valuePerParticle + diff % particleCount;
+                lastValuePerParticle = this.valuePerParticle + diff % particleCount;
                 this.particleCount = particleCount;
             }
             else
             {
                 this.valuePerParticle = Mathf.Sign(diff);
-                this.lastValuePerParticle = this.valuePerParticle;
+                lastValuePerParticle = this.valuePerParticle;
                 this.particleCount = Mathf.RoundToInt(diff);
             }
         }
 
         public bool NextValue(out float value)
         {
-            if (this.pointer > this.particleCount)
+            if (pointer > particleCount)
             {
                 value = 0;
                 return false;
             }
 
-            this.pointer++;
-            if (this.pointer < this.particleCount)
+            pointer++;
+            if (pointer < particleCount)
             {
-                value = this.valuePerParticle;
-                this.currentValue += value;
+                value = valuePerParticle;
+                currentValue += value;
             }
             else
             {
-                value = this.lastValuePerParticle;
-                this.currentValue += value;
+                value = lastValuePerParticle;
+                currentValue += value;
             }
 
             return true;

@@ -25,9 +25,9 @@ namespace Game.App
         private void LogEventInternal(string eventKey, params AnalyticsParameter[] parameters)
         {
 #if UNITY_EDITOR
-            if (this.debugLog)
+            if (debugLog)
             {
-                this.logger.LogEvent(eventKey, parameters);
+                logger.LogEvent(eventKey, parameters);
             }
 #else
             this.logger.LogEvent(eventKey, parameters);
@@ -44,7 +44,7 @@ namespace Game.App
             instance = this;
 
 #if UNITY_EDITOR
-            this.logger = new DebugAnalyticsLogger(this.debugColor);
+            logger = new DebugAnalyticsLogger(debugColor);
 #else
             this.logger = new ReleaseAnalyticsLogger();
 #endif
@@ -65,7 +65,7 @@ namespace Game.App
 
         private void OnValidate()
         {
-            this.logger = new DebugAnalyticsLogger(this.debugColor);
+            logger = new DebugAnalyticsLogger(debugColor);
         }
 #endif
     }

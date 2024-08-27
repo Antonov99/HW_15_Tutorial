@@ -13,8 +13,8 @@ namespace Game.Tutorial.UnityEditor
 
         private void Awake()
         {
-            this.stepList = this.serializedObject.FindProperty(nameof(this.stepList));
-            this.manager = (TutorialManager) this.target;
+            stepList = serializedObject.FindProperty(nameof(stepList));
+            manager = (TutorialManager) target;
         }
 
         public override void OnInspectorGUI()
@@ -22,22 +22,22 @@ namespace Game.Tutorial.UnityEditor
             if (EditorApplication.isPlaying)
             {
                 GUI.enabled = false;
-                EditorGUILayout.Toggle("Completed", this.manager.IsCompleted);
-                EditorGUILayout.EnumPopup("Current Step", this.manager.CurrentStep);
+                EditorGUILayout.Toggle("Completed", manager.IsCompleted);
+                EditorGUILayout.EnumPopup("Current Step", manager.CurrentStep);
                 GUI.enabled = true;
                 
                 EditorGUILayout.Space(8);
                 if (GUILayout.Button("Move Next"))
                 {
-                    this.manager.FinishCurrentStep();
-                    this.manager.MoveToNextStep();
+                    manager.FinishCurrentStep();
+                    manager.MoveToNextStep();
                 }
             }
             
             EditorGUILayout.Space(4.0f);
-            EditorGUILayout.PropertyField(this.stepList, includeChildren: true);
+            EditorGUILayout.PropertyField(stepList, includeChildren: true);
 
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

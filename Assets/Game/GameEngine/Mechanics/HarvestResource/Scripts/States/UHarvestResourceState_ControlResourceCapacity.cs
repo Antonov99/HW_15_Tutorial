@@ -15,19 +15,19 @@ namespace Game.GameEngine.Mechanics
         
         public override void Enter()
         {
-            this.resourceStorage.OnValueChanged += this.OnResourceCountChanged;
+            resourceStorage.OnValueChanged += OnResourceCountChanged;
         }
 
         public override void Exit()
         {
-            this.resourceStorage.OnValueChanged -= this.OnResourceCountChanged;
+            resourceStorage.OnValueChanged -= OnResourceCountChanged;
         }
 
         private void OnResourceCountChanged(ResourceType resourceType, int newCount)
         {
-            if (this.resourceStorage.IsLimit)
+            if (resourceStorage.IsLimit)
             {
-                this.harvestEngine.Stop();
+                harvestEngine.Stop();
             }
         }
     }

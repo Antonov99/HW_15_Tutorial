@@ -33,29 +33,29 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            var animationId = this.SelectAnimation();
-            this.animatorEngine.ChangeState(animationId);
+            var animationId = SelectAnimation();
+            animatorEngine.ChangeState(animationId);
         }
 
         public override void Exit()
         {
-            if (this.hasExitAnimation)
+            if (hasExitAnimation)
             {
-                this.animatorEngine.ChangeState(this.exitAnimation.Current);
+                animatorEngine.ChangeState(exitAnimation.Current);
             }
         }
 
         private int SelectAnimation()
         {
-            var operation = this.mechanics.Current;
+            var operation = mechanics.Current;
             var resourceType = operation
                 .targetResource
                 .Get<IComponent_GetResourceType>()
                 .Type;
 
-            for (int i = 0, count = this.enterAnimations.Length; i < count; i++)
+            for (int i = 0, count = enterAnimations.Length; i < count; i++)
             {
-                var animation = this.enterAnimations[i];
+                var animation = enterAnimations[i];
                 if (animation.resourceType == resourceType)
                 {
                     return animation.info.Current;

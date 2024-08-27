@@ -25,7 +25,7 @@ public class ES3Cloud : ES3WebClass
     #region Downloaded Data Handling
 
     /// <summary>The encoding to use when encoding and decoding data as strings.</summary>
-    public System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+    public Encoding encoding = Encoding.UTF8;
 
 
 	private byte[] _data = null;
@@ -732,7 +732,7 @@ public class ES3Cloud : ES3WebClass
 
 	private long DateTimeToUnixTimestamp(DateTime dt)
 	{
-		return Convert.ToInt64((dt.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)).TotalSeconds);
+		return Convert.ToInt64((dt.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);
 	}
 
 	private long GetFileTimestamp(ES3Settings settings)

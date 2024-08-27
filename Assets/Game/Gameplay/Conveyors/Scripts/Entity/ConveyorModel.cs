@@ -48,19 +48,19 @@ namespace Game.Gameplay.Conveyors
             [Construct]
             private void ConstructStorages(ScriptableConveyour config)
             {
-                this.loadStorage.MaxValue = config.inputCapacity;
-                this.unloadStorage.MaxValue = config.outputCapacity;
+                loadStorage.MaxValue = config.inputCapacity;
+                unloadStorage.MaxValue = config.outputCapacity;
             }
 
             [Construct]
             private void ConstructWork(ScriptableConveyour config)
             {
-                this.workTimer.Duration = config.workTime;
-                this.workMechanics.Construct(
-                    isEnable: this.enableVariable,
-                    loadStorage: this.loadStorage,
-                    unloadStorage: this.unloadStorage,
-                    workTimer: this.workTimer
+                workTimer.Duration = config.workTime;
+                workMechanics.Construct(
+                    isEnable: enableVariable,
+                    loadStorage: loadStorage,
+                    unloadStorage: unloadStorage,
+                    workTimer: workTimer
                 );
             }
         }
@@ -86,9 +86,9 @@ namespace Game.Gameplay.Conveyors
             [Construct]
             private void Construct(Core core)
             {
-                this.conveyorViewAdapter.Construct(core.workTimer, this.conveyorView);
-                this.loadZoneViewAdapter.Construct(core.loadStorage, this.loadZoneView);
-                this.unloadZoneViewAdapter.Construct(core.unloadStorage, this.unloadZoneView);
+                conveyorViewAdapter.Construct(core.workTimer, conveyorView);
+                loadZoneViewAdapter.Construct(core.loadStorage, loadZoneView);
+                unloadZoneViewAdapter.Construct(core.unloadStorage, unloadZoneView);
             }
         }
 
@@ -103,15 +103,15 @@ namespace Game.Gameplay.Conveyors
             [Construct]
             private void Construct(ScriptableConveyour config, ResourceInfoCatalog resourceCatalog, Core core)
             {
-                this.infoViewAdapter.Construct(core.workTimer, this.infoView);
+                infoViewAdapter.Construct(core.workTimer, infoView);
 
                 var inputType = config.inputResourceType;
                 var inputIcon = resourceCatalog.FindResource(inputType).icon;
-                this.infoView.SetInputIcon(inputIcon);
+                infoView.SetInputIcon(inputIcon);
 
                 var outputType = config.outputResourceType;
                 var outputIcon = resourceCatalog.FindResource(outputType).icon;
-                this.infoView.SetOutputIcon(outputIcon);
+                infoView.SetOutputIcon(outputIcon);
             }
         }
     }

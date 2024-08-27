@@ -15,7 +15,7 @@ namespace Game.GameEngine.Mechanics
         [GUIColor(0, 1, 0)]
         public void Collect()
         {
-            this.collectReceiver.Call();
+            collectReceiver.Call();
         }
     }
 }

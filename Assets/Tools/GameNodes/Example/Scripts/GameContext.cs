@@ -7,30 +7,30 @@ namespace GameNodes
     {
         private void Awake()
         {
-            this.Install();
+            Install();
         }
 
         private void OnEnable()
         {
-            this.Send<GameInit>();
-            this.Send<GameStart>();
+            Send<GameInit>();
+            Send<GameStart>();
         }
 
         private void OnApplicationPause(bool pauseStatus)
         {
             if (pauseStatus)
             {
-                this.Send<GamePause>();
+                Send<GamePause>();
             }
             else
             {
-                this.Send<GameResume>();
+                Send<GameResume>();
             }
         }
 
         private void OnDisable()
         {
-            this.Send<GameFinish>();
+            Send<GameFinish>();
         }
 
         // public async void Start()

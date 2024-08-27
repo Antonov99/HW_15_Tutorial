@@ -8,7 +8,7 @@ namespace Game.GameEngine.Mechanics
     {
         public int Price
         {
-            get { return this.price; }
+            get { return price; }
         }
 
         [SerializeField]

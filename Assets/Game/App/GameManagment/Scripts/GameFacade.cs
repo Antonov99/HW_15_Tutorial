@@ -13,21 +13,21 @@ namespace Game.App
 
         public GameFacade()
         {
-            this.registeredServices = new List<object>();
-            this.registeredElements = new List<IGameElement>();
+            registeredServices = new List<object>();
+            registeredElements = new List<IGameElement>();
         }
         
         public void SetupGame(GameContext context)
         {
-            for (int i = 0, count = this.registeredServices.Count; i < count; i++)
+            for (int i = 0, count = registeredServices.Count; i < count; i++)
             {
-                var service = this.registeredServices[i];
+                var service = registeredServices[i];
                 context.RegisterService(service);
             }
         
-            for (int i = 0, count = this.registeredElements.Count; i < count; i++)
+            for (int i = 0, count = registeredElements.Count; i < count; i++)
             {
-                var element = this.registeredElements[i];
+                var element = registeredElements[i];
                 context.RegisterElement(element);
             }
 
@@ -36,72 +36,72 @@ namespace Game.App
 
         public void ConstructGame()
         {
-            this.context.ConstructGame();
+            context.ConstructGame();
         }
 
         public void InitGame()
         {
-            this.context.InitGame();
+            context.InitGame();
         }
 
         public void ReadyGame()
         {
-            this.context.ReadyGame();
+            context.ReadyGame();
         }
 
         public void StartGame()
         {
-            this.context.StartGame();
+            context.StartGame();
         }
 
         public T GetService<T>()
         {
-            return this.context.GetService<T>();
+            return context.GetService<T>();
         }
 
         public T[] GetServices<T>()
         {
-            return this.context.GetServices<T>();
+            return context.GetServices<T>();
         }
 
         public bool TryGetService<T>(out T result)
         {
-            return this.context.TryGetService(out result);
+            return context.TryGetService(out result);
         }
 
         public void RegisterService(object service)
         {
-            this.registeredServices.Add(service);
-            if (this.context != null)
+            registeredServices.Add(service);
+            if (context != null)
             {
-                this.context.RegisterService(service);
+                context.RegisterService(service);
             }
         }
 
         public void UnregisterService(object service)
         {
-            this.registeredServices.Remove(service);
-            if (this.context != null)
+            registeredServices.Remove(service);
+            if (context != null)
             {
-                this.context.UnregisterService(service);
+                context.UnregisterService(service);
             }
         }
 
         public void RegisterElement(IGameElement element)
         {
-            this.registeredElements.Add(element);
-            if (this.context != null)
+            registeredElements.Add(element);
+            if (context != null)
             {
-                this.context.RegisterElement(element);
+                context.RegisterElement(element);
             }
         }
 
         public void UnregisterElement(IGameElement element)
         {
-            this.registeredElements.Remove(element);
-            if (this.context != null)
+            registeredElements.Remove(element);
+            if (context != null)
             {
-                this.context.UnregisterElement(element);
+                context.UnregisterElement(element);
             }
         }
     }

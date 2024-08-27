@@ -20,27 +20,27 @@ namespace Game.UI
 
         public void Show()
         {
-            this.root.SetActive(true);
+            root.SetActive(true);
         }
 
         public void Hide()
         {
-            this.root.SetActive(false);
+            root.SetActive(false);
         }
 
         public void SetPrice(string price)
         {
-            this.priceText.text = price;
+            priceText.text = price;
         }
 
         public void SetProductIcon(Sprite icon)
         {
-            this.productIconImage.sprite = icon;
+            productIconImage.sprite = icon;
         }
 
         public void SetCurrencyIcon(Sprite icon)
         {
-            this.currencyIconImage.sprite = icon;
+            currencyIconImage.sprite = icon;
         }
     }
 }

@@ -15,8 +15,8 @@ namespace AI.Blackboards
 
         public object this[string key]
         {
-            get => this.variables[key];
-            set => this.ChangeVariable(key, value);
+            get => variables[key];
+            set => ChangeVariable(key, value);
         }
 
         [ShowInInspector, ReadOnly]
@@ -24,7 +24,7 @@ namespace AI.Blackboards
 
         public IEnumerable<KeyValuePair<string, object>> GetVariables()
         {
-            foreach (var variable in this.variables)
+            foreach (var variable in variables)
             {
                 yield return variable;
             }
@@ -32,7 +32,7 @@ namespace AI.Blackboards
 
         public bool TryGetVariable<T>(string key, out T value)
         {
-            if (this.variables.TryGetValue(key, out var result))
+            if (variables.TryGetValue(key, out var result))
             {
                 value = (T) result;
                 return true;
@@ -44,12 +44,12 @@ namespace AI.Blackboards
 
         public bool HasVariable(string key)
         {
-            return this.variables.ContainsKey(key);
+            return variables.ContainsKey(key);
         }
 
         public T GetVariable<T>(string key)
         {
-            if (!this.variables.TryGetValue(key, out var result))
+            if (!variables.TryGetValue(key, out var result))
             {
                 throw new Exception($"{key} value is not found!");
             }
@@ -59,43 +59,43 @@ namespace AI.Blackboards
 
         public void AddVariable(string key, object value)
         {
-            if (this.variables.ContainsKey(key))
+            if (variables.ContainsKey(key))
             {
                 throw new Exception($"Variable {key} is already added!");
             }
 
-            this.variables.Add(key, value);
-            this.OnVariableAdded?.Invoke(key, value);
+            variables.Add(key, value);
+            OnVariableAdded?.Invoke(key, value);
         }
 
         public void ChangeVariable(string key, object value)
         {
-            if (!this.variables.ContainsKey(key))
+            if (!variables.ContainsKey(key))
             {
                 throw new Exception($"Variable {key} is not found!");
             }
 
-            this.variables[key] = value;
-            this.OnVariableChanged?.Invoke(key, value);
+            variables[key] = value;
+            OnVariableChanged?.Invoke(key, value);
         }
 
         public void RemoveVariable(string key)
         {
-            if (this.variables.TryGetValue(key, out var value))
+            if (variables.TryGetValue(key, out var value))
             {
-                this.variables.Remove(key);
-                this.OnVariableRemoved?.Invoke(key, value);
+                variables.Remove(key);
+                OnVariableRemoved?.Invoke(key, value);
             }
         }
 
         public void Clear()
         {
-            foreach (var (key, value) in this.variables)
+            foreach (var (key, value) in variables)
             {
-                this.OnVariableRemoved?.Invoke(key, value);
+                OnVariableRemoved?.Invoke(key, value);
             }
             
-            this.variables.Clear();
+            variables.Clear();
         }
     }
 }

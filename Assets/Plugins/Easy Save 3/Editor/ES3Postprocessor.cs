@@ -19,13 +19,13 @@ using ES3Internal;
  * - Local references for prefabs are processed whenever a prefab with an ES3Prefab Component is deselected (SelectionChanged -> ProcessGameObject)
  */
 [InitializeOnLoad]
-public class ES3Postprocessor : UnityEditor.AssetModificationProcessor
+public class ES3Postprocessor : AssetModificationProcessor
 {
     private static bool refreshed = false;
 
     public static ES3ReferenceMgr RefMgr
     {
-        get { return (ES3ReferenceMgr)ES3ReferenceMgr.Current; }
+        get { return (ES3ReferenceMgr)ES3ReferenceMgrBase.Current; }
     }
 
     public static GameObject lastSelected = null;

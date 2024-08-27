@@ -17,21 +17,21 @@ namespace GameSystem
 
         public IEnumerable<object> GetServices()
         {
-            for (int i = 0, count = this.gameServices.Count; i < count; i++)
+            for (int i = 0, count = gameServices.Count; i < count; i++)
             {
-                yield return this.gameServices[i];
+                yield return gameServices[i];
             }
         }
 
 #if UNITY_EDITOR
         public void Editor_AddService(MonoBehaviour service)
         {
-            this.gameServices.Add(service);
+            gameServices.Add(service);
         }
         
         private void OnValidate()
         {
-            EditorValidator.ValidateServices(ref this.gameServices);
+            EditorValidator.ValidateServices(ref gameServices);
         }
 #endif
     }

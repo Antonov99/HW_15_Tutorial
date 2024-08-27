@@ -31,41 +31,41 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            if (this.children.Length <= 0)
+            if (children.Length <= 0)
             {
-                this.Return(true);
+                Return(true);
                 return;
             }
 
-            this.pointer = 0;
-            this.currentNode = this.children[this.pointer];
-            this.currentNode.Run(callback: this);
+            pointer = 0;
+            currentNode = children[pointer];
+            currentNode.Run(callback: this);
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
             if (!success)
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (this.pointer + 1 >= this.children.Length)
+            if (pointer + 1 >= children.Length)
             {
-                this.Return(true);
+                Return(true);
                 return;
             }
 
-            this.pointer++;
-            this.currentNode = this.children[this.pointer];
-            this.currentNode.Run(callback: this);
+            pointer++;
+            currentNode = children[pointer];
+            currentNode.Run(callback: this);
         }
 
         protected override void OnAbort()
         {
-            if (this.currentNode is {IsRunning: true})
+            if (currentNode is {IsRunning: true})
             {
-                this.currentNode.Abort();
+                currentNode.Abort();
             }
         }
     }

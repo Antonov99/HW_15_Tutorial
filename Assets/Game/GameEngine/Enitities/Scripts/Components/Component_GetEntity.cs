@@ -8,7 +8,7 @@ namespace Game.GameEngine.Enitities
 
         public Component_GetEntity(IEntity entity)
         {
-            this.Entity = entity;
+            Entity = entity;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Game.Gameplay.Player
         
         public int Money
         {
-            get { return this.money; }
+            get { return money; }
         }
 
         [ReadOnly]
@@ -35,12 +35,12 @@ namespace Game.Gameplay.Player
                 throw new Exception($"Can not earn negative money {amount}");
             }
 
-            var previousValue = this.money;
+            var previousValue = money;
             var newValue = previousValue + amount;
 
-            this.money = newValue;
-            this.OnMoneyChanged?.Invoke(newValue);
-            this.OnMoneyEarned?.Invoke(amount);
+            money = newValue;
+            OnMoneyChanged?.Invoke(newValue);
+            OnMoneyEarned?.Invoke(amount);
         }
 
         [Button]
@@ -57,7 +57,7 @@ namespace Game.Gameplay.Player
                 throw new Exception($"Can not spend negative money {amount}");
             }
 
-            var previousValue = this.money;
+            var previousValue = money;
             var newValue = previousValue - amount;
             if (newValue < 0)
             {
@@ -65,9 +65,9 @@ namespace Game.Gameplay.Player
                     $"Negative money after spend. Money in bank: {previousValue}, spend amount {amount} ");
             }
 
-            this.money = newValue;
-            this.OnMoneyChanged?.Invoke(newValue);
-            this.OnMoneySpent?.Invoke(amount);
+            money = newValue;
+            OnMoneyChanged?.Invoke(newValue);
+            OnMoneySpent?.Invoke(amount);
         }
 
         [Button]
@@ -75,12 +75,12 @@ namespace Game.Gameplay.Player
         public void SetupMoney(int money)
         {
             this.money = money;
-            this.OnMoneyChanged?.Invoke(money);
+            OnMoneyChanged?.Invoke(money);
         }
 
         public bool CanSpendMoney(int amount)
         {
-            return this.money >= amount;
+            return money >= amount;
         }
     }
 }

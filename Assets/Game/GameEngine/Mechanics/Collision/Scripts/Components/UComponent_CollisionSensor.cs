@@ -9,20 +9,20 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<Collision> OnCollisionEntered
         {
-            add { this.eventReceiver.OnCollisionEntered += value; }
-            remove { this.eventReceiver.OnCollisionEntered -= value; }
+            add { eventReceiver.OnCollisionEntered += value; }
+            remove { eventReceiver.OnCollisionEntered -= value; }
         }
 
         public event Action<Collision> OnCollisionStaying
         {
-            add { this.eventReceiver.OnCollisionStaying += value; }
-            remove { this.eventReceiver.OnCollisionStaying -= value; }
+            add { eventReceiver.OnCollisionStaying += value; }
+            remove { eventReceiver.OnCollisionStaying -= value; }
         }
 
         public event Action<Collision> OnCollisionExited
         {
-            add { this.eventReceiver.OnCollisionExited += value; }
-            remove { this.eventReceiver.OnCollisionExited -= value; }
+            add { eventReceiver.OnCollisionExited += value; }
+            remove { eventReceiver.OnCollisionExited -= value; }
         }
 
         [SerializeField]

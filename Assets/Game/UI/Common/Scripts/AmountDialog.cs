@@ -17,22 +17,22 @@ namespace Game.UI
         
         public void SetAmount(string amount)
         {
-            this.amountText.text = amount;
+            amountText.text = amount;
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void Show()
         {
-            this.root.SetActive(true);
+            root.SetActive(true);
         }
 
         public void Hide()
         {
-            this.root.SetActive(false);
+            root.SetActive(false);
         }
     }
 }

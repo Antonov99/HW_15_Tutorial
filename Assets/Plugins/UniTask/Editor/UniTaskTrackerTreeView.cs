@@ -88,10 +88,10 @@ namespace Cysharp.Threading.Tasks.Editor
 
         public void ReloadAndSort()
         {
-            var currentSelected = this.state.selectedIDs;
+            var currentSelected = state.selectedIDs;
             Reload();
-            Header_sortingChanged(this.multiColumnHeader);
-            this.state.selectedIDs = currentSelected;
+            Header_sortingChanged(multiColumnHeader);
+            state.selectedIDs = currentSelected;
         }
 
         private void Header_sortingChanged(MultiColumnHeader multiColumnHeader)

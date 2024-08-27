@@ -2,6 +2,7 @@ using System;
 using Game.GameEngine.GUI;
 using GameSystem;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.App
 {
@@ -9,7 +10,7 @@ namespace Game.App
     {
         async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            var gameSystem = GameObject.FindObjectOfType<GameContext>();
+            var gameSystem = Object.FindObjectOfType<GameContext>();
             await GameInterfaceDeployer.DeployInterface(gameSystem);
             callback?.Invoke(LoadingResult.Success());
         }

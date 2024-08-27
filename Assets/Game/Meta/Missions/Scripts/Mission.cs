@@ -16,7 +16,7 @@ namespace Game.Meta
         [ShowInInspector]
         public string Id
         {
-            get { return this.config.Id; }
+            get { return config.Id; }
         }
 
         [ReadOnly]
@@ -27,21 +27,21 @@ namespace Game.Meta
         [ShowInInspector]
         public MissionDifficulty Difficulty
         {
-            get { return this.config.Difficulty; }
+            get { return config.Difficulty; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public int MoneyReward
         {
-            get { return this.config.MoneyReward; }
+            get { return config.MoneyReward; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public MissionMetadata Metadata
         {
-            get { return this.config.Metadata; }
+            get { return config.Metadata; }
         }
 
         [ReadOnly]
@@ -57,37 +57,37 @@ namespace Game.Meta
         public Mission(MissionConfig config)
         {
             this.config = config;
-            this.State = MissionState.NOT_STARTED;
+            State = MissionState.NOT_STARTED;
         }
 
         public void Start()
         {
-            if (this.State == MissionState.STARTED)
+            if (State == MissionState.STARTED)
             {
                 throw new Exception("Mission is already started!");
             }
 
-            this.State = MissionState.STARTED;
-            this.OnStarted?.Invoke(this);
+            State = MissionState.STARTED;
+            OnStarted?.Invoke(this);
 
-            if (this.NormalizedProgress >= 1.0f)
+            if (NormalizedProgress >= 1.0f)
             {
-                this.Complete();
+                Complete();
                 return;
             }
 
-            this.OnStart();
+            OnStart();
         }
 
         public void Stop()
         {
-            if (this.State != MissionState.STARTED)
+            if (State != MissionState.STARTED)
             {
                 return;
             }
 
-            this.State = MissionState.NOT_STARTED;
-            this.OnStop();
+            State = MissionState.NOT_STARTED;
+            OnStop();
         }
 
         #region Callbacks
@@ -100,22 +100,22 @@ namespace Game.Meta
 
         protected void TryComplete()
         {
-            if (this.NormalizedProgress >= 1.0f)
+            if (NormalizedProgress >= 1.0f)
             {
-                this.Complete();
+                Complete();
             }
         }
 
         private void Complete()
         {
-            if (this.State != MissionState.STARTED)
+            if (State != MissionState.STARTED)
             {
                 throw new Exception("Mission is not started!");
             }
 
-            this.State = MissionState.COMPLETED;
-            this.OnStop();
-            this.OnCompleted?.Invoke(this);
+            State = MissionState.COMPLETED;
+            OnStop();
+            OnCompleted?.Invoke(this);
         }
     }
 }

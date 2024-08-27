@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_VelocityOverLifetimeModule() : base(typeof(UnityEngine.ParticleSystem.VelocityOverLifetimeModule))
+		public ES3Type_VelocityOverLifetimeModule() : base(typeof(ParticleSystem.VelocityOverLifetimeModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.VelocityOverLifetimeModule)obj;
+			var instance = (ParticleSystem.VelocityOverLifetimeModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("x", instance.x, ES3Type_MinMaxCurve.Instance);
@@ -30,42 +30,42 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.VelocityOverLifetimeModule();
+			var instance = new ParticleSystem.VelocityOverLifetimeModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.VelocityOverLifetimeModule)obj;
+			var instance = (ParticleSystem.VelocityOverLifetimeModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
 				switch(propertyName)
 				{
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "x":
-						instance.x = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.x = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "y":
-						instance.y = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.y = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "z":
-						instance.z = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.z = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "xMultiplier":
-						instance.xMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.xMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "yMultiplier":
-						instance.yMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.yMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "zMultiplier":
-						instance.zMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.zMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "space":
-						instance.space = reader.Read<UnityEngine.ParticleSystemSimulationSpace>();
+						instance.space = reader.Read<ParticleSystemSimulationSpace>();
 						break;
 					default:
 						reader.Skip();

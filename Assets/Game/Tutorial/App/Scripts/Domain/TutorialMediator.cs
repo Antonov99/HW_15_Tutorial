@@ -17,7 +17,7 @@ namespace Game.Tutorial.App
 
         void IAppInitListener.Init()
         {
-            this.SetupData();
+            SetupData();
         }
 
         protected virtual void SetupData()
@@ -26,29 +26,29 @@ namespace Game.Tutorial.App
             {
                 var json = PlayerPrefs.GetString(TUTORIAL_PREFS_KEY);
                 var data = JsonUtility.FromJson<TutorialData>(json);
-                this.tutorialManager.Initialize(data.isCompleted, data.stepIndex);
+                tutorialManager.Initialize(data.isCompleted, data.stepIndex);
             }
             else
             {
-                this.tutorialManager.Initialize();
+                tutorialManager.Initialize();
             }
         }
 
         void IAppStartListener.Start()
         {
-            this.tutorialManager.OnStepFinished += this.OnTutorialStepFinished;
-            this.tutorialManager.OnCompleted += this.OnTutorialCompleted;
+            tutorialManager.OnStepFinished += OnTutorialStepFinished;
+            tutorialManager.OnCompleted += OnTutorialCompleted;
         }
 
         void IAppQuitListener.OnQuit()
         {
-            this.tutorialManager.OnStepFinished -= this.OnTutorialStepFinished;
-            this.tutorialManager.OnCompleted -= this.OnTutorialCompleted;
+            tutorialManager.OnStepFinished -= OnTutorialStepFinished;
+            tutorialManager.OnCompleted -= OnTutorialCompleted;
         }
 
         private void OnTutorialStepFinished(TutorialStep step)
         {
-            var nextStepIndex = this.tutorialManager.IndexOfStep(step) + 1;
+            var nextStepIndex = tutorialManager.IndexOfStep(step) + 1;
 
             var data = new TutorialData
             {
@@ -65,7 +65,7 @@ namespace Game.Tutorial.App
             var data = new TutorialData
             {
                 isCompleted = true,
-                stepIndex = this.tutorialManager.IndexOfStep(this.tutorialManager.CurrentStep)
+                stepIndex = tutorialManager.IndexOfStep(tutorialManager.CurrentStep)
             };
 
             var json = JsonUtility.ToJson(data);

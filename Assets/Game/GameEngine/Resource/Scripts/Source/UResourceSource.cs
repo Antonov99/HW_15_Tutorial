@@ -10,25 +10,25 @@ namespace Game.GameEngine.GameResources
     {
         public event Action<ResourceType, int> OnValueChanged
         {
-            add { this.source.OnValueChanged += value; }
-            remove { this.source.OnValueChanged -= value; }
+            add { source.OnValueChanged += value; }
+            remove { source.OnValueChanged -= value; }
         }
 
         public event Action OnSetuped
         {
-            add { this.source.OnSetuped += value; }
-            remove { this.source.OnSetuped -= value; }
+            add { source.OnSetuped += value; }
+            remove { source.OnSetuped -= value; }
         }
 
         public event Action OnCleared
         {
-            add { this.source.OnCleared += value; }
-            remove { this.source.OnCleared -= value; }
+            add { source.OnCleared += value; }
+            remove { source.OnCleared -= value; }
         }
 
         public int Count
         {
-            get { return this.source.Count; }
+            get { return source.Count; }
         }
 
         [SerializeField]
@@ -36,23 +36,23 @@ namespace Game.GameEngine.GameResources
 
         public int this[ResourceType type]
         {
-            get { return this.source[type]; }
-            set { this.source[type] = value; }
+            get { return source[type]; }
+            set { source[type] = value; }
         }
 
         public ResourceData[] GetAll()
         {
-            return this.source.GetAll();
+            return source.GetAll();
         }
 
         public void GetAllNonAlloc(Dictionary<ResourceType, int> result)
         {
-            this.source.GetAllNonAlloc(result);
+            source.GetAllNonAlloc(result);
         }
 
         public void GetAllNonAlloc(List<ResourceData> result)
         {
-            this.source.GetAllNonAlloc(result);
+            source.GetAllNonAlloc(result);
         }
 
         [Title("Methods")]
@@ -60,47 +60,47 @@ namespace Game.GameEngine.GameResources
         [Button]
         public void Setup(ResourceData[] resources)
         {
-            this.source.Setup(resources);
+            source.Setup(resources);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Set(ResourceType type, int amount)
         {
-            this.source[type] = amount;
+            source[type] = amount;
         }
         
         [GUIColor(0, 1, 0)]
         [Button]
         public bool Exists(ResourceType type, int requiredCount)
         {
-            return this.source.Exists(type, requiredCount);
+            return source.Exists(type, requiredCount);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Plus(ResourceType type, int range)
         {
-            this.source.Plus(type, range);
+            source.Plus(type, range);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Minus(ResourceType type, int range)
         {
-            this.source.Minus(type, range);
+            source.Minus(type, range);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Clear()
         {
-            this.source.Clear();
+            source.Clear();
         }
 
         public int GetSum()
         {
-            return this.source.GetSum();
+            return source.GetSum();
         }
     }
 }

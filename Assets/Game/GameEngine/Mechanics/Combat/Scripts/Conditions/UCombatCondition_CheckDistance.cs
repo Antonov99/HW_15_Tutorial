@@ -15,7 +15,7 @@ namespace Game.GameEngine.Mechanics
         public override bool IsTrue(CombatOperation value)
         {
             var targetPosition = value.targetEntity.Get<IComponent_GetPosition>().Position;
-            return this.myTransform.IsDistanceReached(targetPosition, this.minDistance.Current);
+            return myTransform.IsDistanceReached(targetPosition, minDistance.Current);
         }
     }
 }

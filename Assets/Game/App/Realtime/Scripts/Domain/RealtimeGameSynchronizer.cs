@@ -15,21 +15,21 @@ namespace Game.App
 
         void IAppStartListener.Start()
         {
-            this.realtimeClock.OnStarted += this.OnSessionStarted;
-            this.realtimeClock.OnResumed += this.OnSessionResumed;
+            realtimeClock.OnStarted += OnSessionStarted;
+            realtimeClock.OnResumed += OnSessionResumed;
         }
 
         void IAppQuitListener.OnQuit()
         {
-            this.realtimeClock.OnStarted -= this.OnSessionStarted;
-            this.realtimeClock.OnResumed -= this.OnSessionResumed;
+            realtimeClock.OnStarted -= OnSessionStarted;
+            realtimeClock.OnResumed -= OnSessionResumed;
         }
 
         private void OnSessionStarted(long pauseSeconds)
         {
             if (pauseSeconds > 0)
             {
-                this.gameFacade
+                gameFacade
                     .GetService<TimeShiftEmitter>()
                     .EmitEvent(TimeShiftReason.START_GAME, pauseSeconds);
             }
@@ -39,7 +39,7 @@ namespace Game.App
         {
             if (pauseSeconds > 0)
             {
-                this.gameFacade
+                gameFacade
                     .GetService<TimeShiftEmitter>()
                     .EmitEvent(TimeShiftReason.RESUME_GAME, pauseSeconds);
             }

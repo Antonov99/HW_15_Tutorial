@@ -24,7 +24,7 @@ namespace ES3Internal
 
 		internal ES3JSONReader(Stream stream, ES3Settings settings, bool readHeaderAndFooter = true) : base(settings, readHeaderAndFooter)
 		{
-			this.baseReader = new StreamReader(stream);
+			baseReader = new StreamReader(stream);
 
 			// Read opening brace from file if we're loading straight from file.
 			if(readHeaderAndFooter)
@@ -35,7 +35,7 @@ namespace ES3Internal
 				}
 				catch
 				{
-					this.Dispose();
+					Dispose();
 					throw new FormatException("Cannot load from file because the data in it is not JSON data, or the data is encrypted.\nIf the save data is encrypted, please ensure that encryption is enabled when you load, and that you are using the same password used to encrypt the data.");
 				}
 			}
@@ -537,7 +537,7 @@ namespace ES3Internal
 
         internal override long Read_ref()
         {
-            if (ES3ReferenceMgr.Current == null)
+            if (ES3ReferenceMgrBase.Current == null)
                 throw new InvalidOperationException("An Easy Save 3 Manager is required to load references. To add one to your scene, exit playmode and go to Assets > Easy Save 3 > Add Manager to Scene");
             if (IsQuotationMark(PeekCharIgnoreWhitespace()))
                 return long.Parse(Read_string());
@@ -558,7 +558,7 @@ namespace ES3Internal
 		internal override short 	Read_short()	{ return (short)int.Parse(	GetValueString()); 	}
 		internal override ushort 	Read_ushort()	{ return (ushort)int.Parse(	GetValueString()); 	}
 
-		internal override byte[] 	Read_byteArray(){ return System.Convert.FromBase64String(Read_string()); }
+		internal override byte[] 	Read_byteArray(){ return Convert.FromBase64String(Read_string()); }
 
 		#endregion
 

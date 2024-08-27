@@ -39,13 +39,13 @@ namespace ES3Types
 						instance.size = reader.Read<UnityEngine.Vector2>();
 						break;
 					case "density":
-						instance.density = reader.Read<System.Single>();
+						instance.density = reader.Read<Single>();
 						break;
 					case "isTrigger":
-						instance.isTrigger = reader.Read<System.Boolean>();
+						instance.isTrigger = reader.Read<Boolean>();
 						break;
 					case "usedByEffector":
-						instance.usedByEffector = reader.Read<System.Boolean>();
+						instance.usedByEffector = reader.Read<Boolean>();
 						break;
 					case "offset":
 						instance.offset = reader.Read<UnityEngine.Vector2>();
@@ -54,7 +54,7 @@ namespace ES3Types
 						instance.sharedMaterial = reader.Read<UnityEngine.PhysicsMaterial2D>();
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>();
+						instance.enabled = reader.Read<Boolean>();
 						break;
 					default:
 						reader.Skip();

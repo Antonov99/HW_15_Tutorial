@@ -17,40 +17,40 @@ namespace Game.GameEngine.Mechanics
 
         private void Update()
         {
-            if (this.mode == Mode.UPDATE)
+            if (mode == Mode.UPDATE)
             {
-                this.SyncPositions();
-                this.SyncRotations();
+                SyncPositions();
+                SyncRotations();
             }
         }
 
         private void FixedUpdate()
         {
-            if (this.mode == Mode.FIXED_UPDATE)
+            if (mode == Mode.FIXED_UPDATE)
             {
-                this.SyncPositions();
-                this.SyncRotations();
+                SyncPositions();
+                SyncRotations();
             }
         }
 
         private void LateUpdate()
         {
-            if (this.mode == Mode.LATE_UPDATE)
+            if (mode == Mode.LATE_UPDATE)
             {
-                this.SyncPositions();
-                this.SyncRotations();
+                SyncPositions();
+                SyncRotations();
             }
         }
 
         private void SyncPositions()
         {
-            if (!this.posititonSettings.enabled)
+            if (!posititonSettings.enabled)
             {
                 return;
             }
         
-            var position = this.posititonSettings.source.position;
-            var targets = this.posititonSettings.targets;
+            var position = posititonSettings.source.position;
+            var targets = posititonSettings.targets;
             
             for (int i = 0, count = targets.Length; i < count; i++)
             {
@@ -61,13 +61,13 @@ namespace Game.GameEngine.Mechanics
 
         private void SyncRotations()
         {
-            if (!this.rotationSettings.enabled)
+            if (!rotationSettings.enabled)
             {
                 return;
             }
         
-            var rotation = this.rotationSettings.source.rotation;
-            var targets = this.rotationSettings.targets;
+            var rotation = rotationSettings.source.rotation;
+            var targets = rotationSettings.targets;
             
             for (int i = 0, count = targets.Length; i < count; i++)
             {

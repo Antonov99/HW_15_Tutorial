@@ -10,12 +10,12 @@ namespace Game.GameEngine.Products
     {
         public string Id
         {
-            get { return this.id; }
+            get { return id; }
         }
 
         public IProductMetadata Metadata
         {
-            get { return this.metadata; }
+            get { return metadata; }
         }
 
         [SerializeField]
@@ -30,8 +30,8 @@ namespace Game.GameEngine.Products
 
         public Product()
         {
-            this.id = string.Empty;
-            this.components = new object[0];
+            id = string.Empty;
+            components = new object[0];
         }
 
         public Product(string id, params object[] components)
@@ -42,9 +42,9 @@ namespace Game.GameEngine.Products
 
         public T GetComponent<T>()
         {
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            for (int i = 0, count = components.Length; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is T result)
                 {
                     return result;
@@ -57,9 +57,9 @@ namespace Game.GameEngine.Products
         public T[] GetComponents<T>()
         {
             var result = new List<T>();
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            for (int i = 0, count = components.Length; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is T tComponent)
                 {
                     result.Add(tComponent);
@@ -71,14 +71,14 @@ namespace Game.GameEngine.Products
 
         public object[] GetAllComponents()
         {
-            return this.components;
+            return components;
         }
 
         public bool TryGetComponent<T>(out T result)
         {
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            for (int i = 0, count = components.Length; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is T tComponent)
                 {
                     result = tComponent;

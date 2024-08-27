@@ -36,17 +36,17 @@ namespace Game.Meta
 
         protected override void OnShow(object args)
         {
-            this.recycleViewList.Initialize(adapter: this);
+            recycleViewList.Initialize(adapter: this);
         }
 
         protected override void OnHide()
         {
-            this.recycleViewList.Terminate();
+            recycleViewList.Terminate();
         }
 
         int RecyclableListView.IAdapter.GetDataCount()
         {
-            return this.productCatalog.ProductCount;
+            return productCatalog.ProductCount;
         }
 
         void RecyclableListView.IAdapter.OnCreateView(RectTransform view, int index)
@@ -54,38 +54,38 @@ namespace Game.Meta
             var viewComponent = view.GetComponent<ProductView>();
             var presenter = new ProductPresenter(viewComponent);
             presenter.Construct(
-                this.buyManager,
-                this.moneyStorage,
-                this.resourceStorage,
-                this.resourceCatalog,
-                this.moneyIcon
+                buyManager,
+                moneyStorage,
+                resourceStorage,
+                resourceCatalog,
+                moneyIcon
             );
-            this.presenterMap.Add(view, presenter);
+            presenterMap.Add(view, presenter);
 
-            var productConfig = this.productCatalog.GetProduct(index);
+            var productConfig = productCatalog.GetProduct(index);
             presenter.SetProduct(productConfig.Prototype);
             presenter.Start();
         }
 
         void RecyclableListView.IAdapter.OnUpdateView(RectTransform view, int index)
         {
-            var presenter = this.presenterMap[view];
-            var productConfig = this.productCatalog.GetProduct(index);
+            var presenter = presenterMap[view];
+            var productConfig = productCatalog.GetProduct(index);
             presenter.SetProduct(productConfig.Prototype);
         }
 
         void RecyclableListView.IAdapter.OnDestroyView(RectTransform view)
         {
-            var presenter = this.presenterMap[view];
+            var presenter = presenterMap[view];
             presenter.Stop();
-            this.presenterMap.Remove(view);
+            presenterMap.Remove(view);
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.buyManager = context.GetService<ProductBuyer>();
-            this.moneyStorage = context.GetService<MoneyStorage>();
-            this.resourceStorage = context.GetService<ResourceStorage>();
+            buyManager = context.GetService<ProductBuyer>();
+            moneyStorage = context.GetService<MoneyStorage>();
+            resourceStorage = context.GetService<ResourceStorage>();
         }
     }
 }

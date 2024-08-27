@@ -16,7 +16,7 @@ namespace Game.GameEngine
 
         public WorldPlaceObject GetPlace(WorldPlaceType type)
         {
-            foreach (var place in this.worldPlaces)
+            foreach (var place in worldPlaces)
             {
                 if (place.Type == type)
                 {
@@ -29,7 +29,7 @@ namespace Game.GameEngine
 
         public bool IsPlaceExists(WorldPlaceType type)
         {
-            foreach (var place in this.worldPlaces)
+            foreach (var place in worldPlaces)
             {
                 if (place.Type == type)
                 {

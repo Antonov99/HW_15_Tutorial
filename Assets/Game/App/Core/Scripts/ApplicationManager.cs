@@ -24,7 +24,7 @@ namespace Game.App
 
         private void Update()
         {
-            this.InvokeUpdate();
+            InvokeUpdate();
         }
 
 #if UNITY_EDITOR
@@ -32,11 +32,11 @@ namespace Game.App
         {
             if (hasFocus)
             {
-                this.InvokeResume();
+                InvokeResume();
             }
             else
             {
-                this.InvokePause();
+                InvokePause();
             }
         }
 
@@ -56,29 +56,29 @@ namespace Game.App
 
         private void OnApplicationQuit()
         {
-            this.InvokeQuit();
+            InvokeQuit();
         }
         
         public void AddListener(object listener)
         {
             if (listener is IAppUpdateListener updateListener)
             {
-                this.updateListeners.Add(updateListener);
+                updateListeners.Add(updateListener);
             }
 
             if (listener is IAppPauseListener pauseListener)
             {
-                this.pauseListeners.Add(pauseListener);
+                pauseListeners.Add(pauseListener);
             }
             
             if (listener is IAppResumeListener resumeListener)
             {
-                this.resumeListeners.Add(resumeListener);
+                resumeListeners.Add(resumeListener);
             }
 
             if (listener is IAppQuitListener quitListener)
             {
-                this.quitListeners.Add(quitListener);
+                quitListeners.Add(quitListener);
             }
         }
         
@@ -86,68 +86,68 @@ namespace Game.App
         {
             if (listener is IAppUpdateListener updateListener)
             {
-                this.updateListeners.Remove(updateListener);
+                updateListeners.Remove(updateListener);
             }
 
             if (listener is IAppPauseListener pauseListener)
             {
-                this.pauseListeners.Remove(pauseListener);
+                pauseListeners.Remove(pauseListener);
             }
             
             if (listener is IAppResumeListener resumeListener)
             {
-                this.resumeListeners.Remove(resumeListener);
+                resumeListeners.Remove(resumeListener);
             }
 
             if (listener is IAppQuitListener quitListener)
             {
-                this.quitListeners.Remove(quitListener);
+                quitListeners.Remove(quitListener);
             }
         }
 
         private void InvokeUpdate()
         {
             var deltaTime = Time.deltaTime;
-            for (int i = 0, count = this.updateListeners.Count; i < count; i++)
+            for (int i = 0, count = updateListeners.Count; i < count; i++)
             {
-                var listener = this.updateListeners[i];
+                var listener = updateListeners[i];
                 listener.OnUpdate(deltaTime);
             }
 
-            this.OnUpdate?.Invoke(deltaTime);
+            OnUpdate?.Invoke(deltaTime);
         }
 
         private void InvokePause()
         {
-            for (int i = 0, count = this.pauseListeners.Count; i < count; i++)
+            for (int i = 0, count = pauseListeners.Count; i < count; i++)
             {
-                var listener = this.pauseListeners[i];
+                var listener = pauseListeners[i];
                 listener.OnPaused();
             }
 
-            this.OnPaused?.Invoke();
+            OnPaused?.Invoke();
         }
 
         private void InvokeResume()
         {
-            for (int i = 0, count = this.resumeListeners.Count; i < count; i++)
+            for (int i = 0, count = resumeListeners.Count; i < count; i++)
             {
-                var listener = this.resumeListeners[i];
+                var listener = resumeListeners[i];
                 listener.OnResumed();
             }
 
-            this.OnResumed?.Invoke();
+            OnResumed?.Invoke();
         }
 
         private void InvokeQuit()
         {
-            for (int i = 0, count = this.quitListeners.Count; i < count; i++)
+            for (int i = 0, count = quitListeners.Count; i < count; i++)
             {
-                var listener = this.quitListeners[i];
+                var listener = quitListeners[i];
                 listener.OnQuit();
             }
 
-            this.OnQuit?.Invoke();
+            OnQuit?.Invoke();
         }
     }
 }

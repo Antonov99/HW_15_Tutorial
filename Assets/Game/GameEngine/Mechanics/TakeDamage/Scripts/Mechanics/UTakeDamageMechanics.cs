@@ -9,12 +9,12 @@ namespace Game.GameEngine.Mechanics
         
         private void OnEnable()
         {
-            this.takeDamageEngine.OnDamageTaken += this.OnDamageTaken;
+            takeDamageEngine.OnDamageTaken += OnDamageTaken;
         }
 
         private void OnDisable()
         {
-            this.takeDamageEngine.OnDamageTaken -= this.OnDamageTaken;
+            takeDamageEngine.OnDamageTaken -= OnDamageTaken;
         }
 
         protected abstract void OnDamageTaken(TakeDamageArgs damageArgs);

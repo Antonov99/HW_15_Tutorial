@@ -20,9 +20,9 @@ namespace Game.GameEngine.Mechanics
             var period = new WaitForFixedUpdate();
             while (true)
             {
-                var targetPosiiton = this.GetTargetPosition();
-                var distanceReached = this.transformEngine.IsDistanceReached(targetPosiiton, this.minDistance.Current);
-                this.OnUpdate(distanceReached);
+                var targetPosiiton = GetTargetPosition();
+                var distanceReached = transformEngine.IsDistanceReached(targetPosiiton, minDistance.Current);
+                OnUpdate(distanceReached);
                 yield return period;
             }
         }

@@ -27,31 +27,31 @@ namespace AI.GOAP
 
         private void Awake()
         {
-            this.agent = this.GetComponent<GoalOrientedAgent>();
+            agent = GetComponent<GoalOrientedAgent>();
         }
 
         private void Start()
         {
-            if (this.playOnStart)
+            if (playOnStart)
             {
-                this.Play();
+                Play();
             }
         }
 
         public void Play()
         {
-            if (this.coroutine == null)
+            if (coroutine == null)
             {
-                this.coroutine = this.StartCoroutine(this.CheckState());
+                coroutine = StartCoroutine(CheckState());
             }
         }
 
         public void Stop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                this.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
 
@@ -59,26 +59,26 @@ namespace AI.GOAP
         {
             while (true)
             {
-                var period = Random.Range(this.minScanPeriod, this.maxScanPeriod);
+                var period = Random.Range(minScanPeriod, maxScanPeriod);
                 yield return new WaitForSeconds(period);
-                this.SynchronizeGoal();
+                SynchronizeGoal();
             }
         }
 
         private void SynchronizeGoal()
         {
-            var actualGoal = this.agent.Goals
+            var actualGoal = agent.Goals
                 .Where(it => it.IsValid())
                 .OrderByDescending(it => it.EvaluatePriority())
                 .FirstOrDefault();
 
             if (actualGoal == null)
             {
-                this.agent.Cancel();
+                agent.Cancel();
             }
-            else if (!actualGoal.Equals(this.agent.CurrentGoal))
+            else if (!actualGoal.Equals(agent.CurrentGoal))
             {
-                this.agent.Replay();
+                agent.Replay();
             }
         }
     }

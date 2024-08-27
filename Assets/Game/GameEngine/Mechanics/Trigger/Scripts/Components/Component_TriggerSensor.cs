@@ -8,20 +8,20 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<Collider> OnEntered
         {
-            add { this.sensor.OnTriggerEntered += value; }
-            remove { this.sensor.OnTriggerEntered -= value; }
+            add { sensor.OnTriggerEntered += value; }
+            remove { sensor.OnTriggerEntered -= value; }
         }
 
         public event Action<Collider> OnStaying
         {
-            add { this.sensor.OnTriggerStaying += value; }
-            remove { this.sensor.OnTriggerStaying -= value; }
+            add { sensor.OnTriggerStaying += value; }
+            remove { sensor.OnTriggerStaying -= value; }
         }
 
         public event Action<Collider> OnExited
         {
-            add { this.sensor.OnTriggerExited += value; }
-            remove { this.sensor.OnTriggerExited -= value; }
+            add { sensor.OnTriggerExited += value; }
+            remove { sensor.OnTriggerExited -= value; }
         }
 
         private readonly TriggerSensor sensor;

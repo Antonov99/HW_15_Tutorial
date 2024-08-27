@@ -23,28 +23,28 @@ namespace Game.GameEngine.AI
         
         public UBTNode_FindMovePath()
         {
-            this.pointsBuffer = new List<Vector3>(POINT_BUFFER_SIZE);
+            pointsBuffer = new List<Vector3>(POINT_BUFFER_SIZE);
         }
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.endPositionKey, out Vector3 endPosition))
+            if (!Blackboard.TryGetVariable(endPositionKey, out Vector3 endPosition))
             {
                 Debug.LogWarning("End Point is not found!");
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.FindPath(this.ProvideStartPosition(), endPosition, ref this.pointsBuffer))
+            if (!FindPath(ProvideStartPosition(), endPosition, ref pointsBuffer))
             {
                 Debug.LogWarning("Path is not found!");
-                this.Return(false);
+                Return(false);
                 return;
             }
             
-            var movePoints = this.pointsBuffer.ToArray();
-            this.Blackboard.ReplaceVariable(this.movePathKey, movePoints);
-            this.Return(true);
+            var movePoints = pointsBuffer.ToArray();
+            Blackboard.ReplaceVariable(movePathKey, movePoints);
+            Return(true);
         }
 
         protected abstract Vector3 ProvideStartPosition();

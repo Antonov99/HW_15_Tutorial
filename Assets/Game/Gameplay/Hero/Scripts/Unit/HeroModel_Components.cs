@@ -19,7 +19,7 @@ namespace Game.Gameplay.Hero
         [Construct]
         private void Construct(HeroModel_Core core, HeroModel_Collision collision, ScriptableHero config)
         {
-            this.entity.AddRange(
+            entity.AddRange(
                 new Component_TransformEngine(core.main.transformEngine),
                 new Component_Enable(core.main.isEnable),
                 new Component_SetWalkableSurface(core.main.walkableSurface),
@@ -38,7 +38,7 @@ namespace Game.Gameplay.Hero
                 new Component_IsDestroyed_HitPoints(core.life.hitPoints),
                 new Component_Respawn(core.life.respawnEmitter),
                 new Component_Effector(core.effects.effector),
-                new Component_GetPivot(this.movingPivot)
+                new Component_GetPivot(movingPivot)
             );
         }
     }

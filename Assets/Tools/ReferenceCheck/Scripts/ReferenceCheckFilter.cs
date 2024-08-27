@@ -33,7 +33,7 @@ namespace Tools.UnityEditor
                 return true;
             }
             
-            foreach (var asset in this.definitions)
+            foreach (var asset in definitions)
             {
                 if (targetName == asset.name)
                 {

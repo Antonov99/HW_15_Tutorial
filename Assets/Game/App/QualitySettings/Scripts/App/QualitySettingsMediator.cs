@@ -21,12 +21,12 @@ namespace Game.App
 
         void IAppStartListener.Start()
         {
-            QualitySettingsManager.OnLevelChanged += this.SaveSettings;
+            QualitySettingsManager.OnLevelChanged += SaveSettings;
         }
 
         void IAppQuitListener.OnQuit()
         {
-            QualitySettingsManager.OnLevelChanged -= this.SaveSettings;
+            QualitySettingsManager.OnLevelChanged -= SaveSettings;
         }
 
         private void SaveSettings(int level)

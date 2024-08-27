@@ -10,18 +10,18 @@ namespace Game.UI
 
         protected virtual void OnEnable()
         {
-            this.slider.onValueChanged.AddListener(this.OnVolumeChanged);
-            this.slider.value = this.GetVolume();
+            slider.onValueChanged.AddListener(OnVolumeChanged);
+            slider.value = GetVolume();
         }
 
         protected virtual void OnDisable()
         {
-            this.slider.onValueChanged.RemoveListener(this.OnVolumeChanged);
+            slider.onValueChanged.RemoveListener(OnVolumeChanged);
         }
 
         private void OnVolumeChanged(float volume)
         {
-            this.SetVolume(volume);
+            SetVolume(volume);
         }
 
         protected abstract void SetVolume(float volume);
@@ -30,7 +30,7 @@ namespace Game.UI
         
         protected void UpdateSlider(float volume)
         {
-            this.slider.value = volume;
+            slider.value = volume;
         }
     }
 }

@@ -26,24 +26,24 @@ namespace Game.UI
 
         public void SetVisible(bool isVisible)
         {
-            this.root.SetActive(isVisible);
+            root.SetActive(isVisible);
         }
 
         public void SetProgress(float progress)
         {
-            if (this.hasMask)
+            if (hasMask)
             {
-                this.maskImage.fillAmount = progress;
+                maskImage.fillAmount = progress;
             }
             else
             {
-                this.fillImage.fillAmount = progress;
+                fillImage.fillAmount = progress;
             }
         }
 
         public void SetColor(Color color)
         {
-            this.fillImage.color = color;
+            fillImage.color = color;
         }
     }
 }

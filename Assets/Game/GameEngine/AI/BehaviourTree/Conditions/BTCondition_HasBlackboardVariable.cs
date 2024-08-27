@@ -32,7 +32,7 @@ namespace Game.GameEngine.AI
 
         public bool IsTrue()
         {
-            return this.blackboard.HasVariable(this.blackboardKey);
+            return blackboard.HasVariable(blackboardKey);
         }
     }
 }

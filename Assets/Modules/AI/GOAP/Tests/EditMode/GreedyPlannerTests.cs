@@ -28,7 +28,7 @@ namespace AI.GOAP
             };
 
             //Act:
-            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
+            var success = planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);

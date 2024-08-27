@@ -19,19 +19,19 @@ namespace Elementary
         [Button, GUIColor(0, 1, 0)]
         public void Call()
         {
-            this.actions?.Do();
-            this.onEvent.Invoke();
-            this.OnEvent?.Invoke();
+            actions?.Do();
+            onEvent.Invoke();
+            OnEvent?.Invoke();
         }
 
         public void AddListener(IAction listener)
         {
-            this.actions += listener;
+            actions += listener;
         }
 
         public void RemoveListener(IAction listener)
         {
-            this.actions -= listener;
+            actions -= listener;
         }
     }
 
@@ -47,19 +47,19 @@ namespace Elementary
         [Button, GUIColor(0, 1, 0)]
         public void Call(T value)
         {
-            this.actions?.Do(value);
-            this.onEvent?.Invoke(value);
-            this.OnEvent?.Invoke(value);
+            actions?.Do(value);
+            onEvent?.Invoke(value);
+            OnEvent?.Invoke(value);
         }
 
         public void AddListener(IAction<T> listener)
         {
-            this.actions += listener;
+            actions += listener;
         }
 
         public void RemoveListener(IAction<T> listener)
         {
-            this.actions -= listener;
+            actions -= listener;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Entities
 
         public ListEntity()
         {
-            this.elements = new List<object>();
+            elements = new List<object>();
         }
 
         public ListEntity(IEnumerable<object> elements)
@@ -23,9 +23,9 @@ namespace Entities
 
         public T Get<T>()
         {
-            for (int i = 0, count = this.elements.Count; i < count; i++)
+            for (int i = 0, count = elements.Count; i < count; i++)
             {
-                if (this.elements[i] is T result)
+                if (elements[i] is T result)
                 {
                     return result;
                 }
@@ -37,9 +37,9 @@ namespace Entities
         public T[] GetAll<T>()
         {
             var result = new List<T>();
-            for (int i = 0, count = this.elements.Count; i < count; i++)
+            for (int i = 0, count = elements.Count; i < count; i++)
             {
-                if (this.elements[i] is T element)
+                if (elements[i] is T element)
                 {
                     result.Add(element);
                 }
@@ -50,12 +50,12 @@ namespace Entities
 
         public object[] GetAll()
         {
-            return this.elements.ToArray();
+            return elements.ToArray();
         }
 
         public void Add(object element)
         {
-            this.elements.Add(element);
+            elements.Add(element);
         }
 
         public void AddRange(IEnumerable<object> elements)
@@ -70,14 +70,14 @@ namespace Entities
 
         public void Remove(object element)
         {
-            this.elements.Remove(element);
+            elements.Remove(element);
         }
 
         public bool TryGet<T>(out T element)
         {
-            for (int i = 0, count = this.elements.Count; i < count; i++)
+            for (int i = 0, count = elements.Count; i < count; i++)
             {
-                if (this.elements[i] is T result)
+                if (elements[i] is T result)
                 {
                     element = result;
                     return true;

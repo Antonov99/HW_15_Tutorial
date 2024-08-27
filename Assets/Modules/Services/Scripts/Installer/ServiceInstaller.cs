@@ -19,18 +19,18 @@ namespace Services
 
         private void Awake()
         {
-            if (this.installOnAwake)
+            if (installOnAwake)
             {
-                this.Install();
+                Install();
             }
         }
 
         public void Install()
         {
-            this.InstallServicesFromBehaviours();
-            this.InstallServicesFromPacks();
+            InstallServicesFromBehaviours();
+            InstallServicesFromPacks();
 
-            if (this.resolveDependencies)
+            if (resolveDependencies)
             {
                 ServiceInjector.ResolveDependencies();
             }
@@ -38,14 +38,14 @@ namespace Services
 
         private void InstallServicesFromBehaviours()
         {
-            ServiceLocator.AddServices(this.monoServices);
+            ServiceLocator.AddServices(monoServices);
         }
 
         private void InstallServicesFromPacks()
         {
-            for (int i = 0, count = this.servicePacks.Length; i < count; i++)
+            for (int i = 0, count = servicePacks.Length; i < count; i++)
             {
-                var pack = this.servicePacks[i];
+                var pack = servicePacks[i];
                 var services = pack.ProvideServices();
                 ServiceLocator.AddServices(services);
             }

@@ -28,42 +28,42 @@ namespace Game.GameEngine.AI
 
         private void Awake()
         {
-            this.moveAgent = new Agent_Entity_MoveToPosition();
-            this.moveAgent.SetStoppingDistance(this.stoppingDistance.Current);
+            moveAgent = new Agent_Entity_MoveToPosition();
+            moveAgent.SetStoppingDistance(stoppingDistance.Current);
         }
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.unitKey, out IEntity entity))
+            if (!Blackboard.TryGetVariable(unitKey, out IEntity entity))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.Blackboard.TryGetVariable(this.movePositionKey, out Vector3 targetPosition))
+            if (!Blackboard.TryGetVariable(movePositionKey, out Vector3 targetPosition))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.moveAgent.OnTargetReached += this.OnTargetReached;
-            this.moveAgent.SetMovingEntity(entity);
-            this.moveAgent.SetTarget(targetPosition);
-            this.moveAgent.Play();
+            moveAgent.OnTargetReached += OnTargetReached;
+            moveAgent.SetMovingEntity(entity);
+            moveAgent.SetTarget(targetPosition);
+            moveAgent.Play();
         }
 
         private void OnTargetReached(bool isReached)
         {
             if (isReached)
             {
-                this.Return(true);
+                Return(true);
             }
         }
 
         protected override void OnDispose()
         {
-            this.moveAgent.OnTargetReached -= this.OnTargetReached;
-            this.moveAgent.Stop();
+            moveAgent.OnTargetReached -= OnTargetReached;
+            moveAgent.Stop();
         }
     }
 }

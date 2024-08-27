@@ -41,7 +41,7 @@ namespace KevinIglesias {
     
         public void Start()
         {
-            characterRoot = this.transform;
+            characterRoot = transform;
             
             zeroPosition = spear.localPosition;
             zeroRotation = spear.localEulerAngles;

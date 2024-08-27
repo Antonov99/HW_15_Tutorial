@@ -13,19 +13,19 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action OnStarted
         {
-            add { this.engine.OnStartMove += value; }
-            remove { this.engine.OnStartMove -= value; }
+            add { engine.OnStartMove += value; }
+            remove { engine.OnStartMove -= value; }
         }
 
         public event Action OnStopped
         {
-            add { this.engine.OnStopMove += value; }
-            remove { this.engine.OnStopMove -= value; }
+            add { engine.OnStopMove += value; }
+            remove { engine.OnStopMove -= value; }
         }
 
         public bool IsMoving
         {
-            get { return this.engine.IsMoving; }
+            get { return engine.IsMoving; }
         }
 
         private readonly IMoveInDirectionMotor engine;
@@ -37,12 +37,12 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanMove(Vector3 direction)
         {
-            return this.engine.CanMove(direction);
+            return engine.CanMove(direction);
         }
 
         public void Move(Vector3 direction)
         {
-            this.engine.RequestMove(direction);
+            engine.RequestMove(direction);
         }
     }
 }

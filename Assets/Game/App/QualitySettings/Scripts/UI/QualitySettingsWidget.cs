@@ -11,17 +11,17 @@ namespace Game.App
 
         private void Awake()
         {
-            this.InitDropdown();
+            InitDropdown();
         }
 
         private void OnEnable()
         {
-            this.dropdown.onValueChanged.AddListener(this.OnLevelChanged);
+            dropdown.onValueChanged.AddListener(OnLevelChanged);
         }
 
         private void OnDisable()
         {
-            this.dropdown.onValueChanged.RemoveListener(this.OnLevelChanged);
+            dropdown.onValueChanged.RemoveListener(OnLevelChanged);
         }
 
         private void OnLevelChanged(int level)
@@ -36,9 +36,9 @@ namespace Game.App
                 .Select(it => it.ToUpper())
                 .ToList();
             
-            this.dropdown.ClearOptions();
-            this.dropdown.AddOptions(options);
-            this.dropdown.value = QualitySettingsManager.GetLevel();
+            dropdown.ClearOptions();
+            dropdown.AddOptions(options);
+            dropdown.value = QualitySettingsManager.GetLevel();
         }
     }
 }

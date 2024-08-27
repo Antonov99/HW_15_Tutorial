@@ -9,11 +9,11 @@ namespace ES3Types
     {
         public static ES3Type Instance = null;
 
-        public ES3Type_Sprite() : base(typeof(UnityEngine.Sprite)) { Instance = this; }
+        public ES3Type_Sprite() : base(typeof(Sprite)) { Instance = this; }
 
         protected override void WriteUnityObject(object obj, ES3Writer writer)
         {
-            var instance = (UnityEngine.Sprite)obj;
+            var instance = (Sprite)obj;
 
             writer.WriteProperty("texture", instance.texture, ES3Type_Texture2D.Instance);
             writer.WriteProperty("textureRect", instance.textureRect, ES3Type_Rect.Instance);
@@ -42,16 +42,16 @@ namespace ES3Types
                 switch (propertyName)
                 {
                     case "texture":
-                        texture = reader.Read<UnityEngine.Texture2D>(ES3Type_Texture2D.Instance);
+                        texture = reader.Read<Texture2D>(ES3Type_Texture2D.Instance);
                         break;
                     case "textureRect":
                         textureRect = reader.Read<Rect>(ES3Type_Rect.Instance);
                         break;
                     case "pivot":
-                        pivot = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+                        pivot = reader.Read<Vector2>(ES3Type_Vector2.Instance);
                         break;
                     case "pixelsPerUnit":
-                        pixelsPerUnit = reader.Read<System.Single>(ES3Type_float.Instance);
+                        pixelsPerUnit = reader.Read<Single>(ES3Type_float.Instance);
                         break;
                     case "border":
                         border = reader.Read<Vector4>(ES3Type_Vector4.Instance);

@@ -31,14 +31,14 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public bool CanStartMove(Vector3 operation)
         {
-            if (this.IsMove)
+            if (IsMove)
             {
                 return false;
             }
 
-            for (int i = 0, count = this.preconditions.Count; i < count; i++)
+            for (int i = 0, count = preconditions.Count; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(operation))
                 {
                     return false;
@@ -51,75 +51,75 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void StartMove(Vector3 operation)
         {
-            if (!this.CanStartMove(operation))
+            if (!CanStartMove(operation))
             {
                 return;
             }
 
-            for (int i = 0, count = this.startActions.Count; i < count; i++)
+            for (int i = 0, count = startActions.Count; i < count; i++)
             {
-                var action = this.startActions[i];
+                var action = startActions[i];
                 action.Do(operation);
             }
 
-            this.TargetPosition = operation;
-            this.IsMove = true;
-            this.OnMoveStarted?.Invoke(operation);
+            TargetPosition = operation;
+            IsMove = true;
+            OnMoveStarted?.Invoke(operation);
         }
 
         [Button]
         public void StopMove()
         {
-            if (!this.IsMove)
+            if (!IsMove)
             {
                 return;
             }
 
-            var operation = this.TargetPosition;
-            for (int i = 0, count = this.stopActions.Count; i < count; i++)
+            var operation = TargetPosition;
+            for (int i = 0, count = stopActions.Count; i < count; i++)
             {
-                var action = this.stopActions[i];
+                var action = stopActions[i];
                 action.Do(operation);
             }
 
-            this.IsMove = false;
-            this.TargetPosition = default;
-            this.OnMoveStopped?.Invoke(operation);
+            IsMove = false;
+            TargetPosition = default;
+            OnMoveStopped?.Invoke(operation);
         }
 
         public void AddPreconditions(params ICondition<Vector3>[] conditions)
         {
-            this.preconditions.AddRange(conditions);
+            preconditions.AddRange(conditions);
         }
 
         public void AddPreconditions(IEnumerable<ICondition<Vector3>> conditions)
         {
-            this.preconditions.AddRange(conditions);
+            preconditions.AddRange(conditions);
         }
 
         public void AddPreconditon(ICondition<Vector3> condition)
         {
-            this.preconditions.Add(condition);
+            preconditions.Add(condition);
         }
 
         public void AddStartActions(IEnumerable<IAction<Vector3>> actions)
         {
-            this.startActions.AddRange(actions);
+            startActions.AddRange(actions);
         }
 
         public void AddStartAction(IAction<Vector3> action)
         {
-            this.startActions.Add(action);
+            startActions.Add(action);
         }
 
         public void AddStopActions(IEnumerable<IAction<Vector3>> actions)
         {
-            this.stopActions.AddRange(actions);
+            stopActions.AddRange(actions);
         }
 
         public void AddStopAction(IAction<Vector3> action)
         {
-            this.stopActions.Add(action);
+            stopActions.Add(action);
         }
     }
 }

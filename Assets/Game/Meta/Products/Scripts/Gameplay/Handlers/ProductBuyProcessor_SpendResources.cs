@@ -19,7 +19,7 @@ namespace Game.Meta
             if (product.TryGetComponent(out IComponent_ResourcePrice component))
             {
                 var requiredResources = component.GetPrice();
-                this.SpendResources(requiredResources);
+                SpendResources(requiredResources);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Game.Meta
             for (int i = 0, count = requiredResources.Length; i < count; i++)
             {
                 var resourceData = requiredResources[i];
-                this.resourceStorage.ExtractResource(resourceData.type, resourceData.amount);
+                resourceStorage.ExtractResource(resourceData.type, resourceData.amount);
             }
         }
     }

@@ -11,22 +11,22 @@ namespace AI.Agents
 
         public bool IsPlaying
         {
-            get { return this.isPlaying; }
+            get { return isPlaying; }
         }
 
         protected bool isPlaying;
 
         public void Play()
         {
-            if (this.isPlaying)
+            if (isPlaying)
             {
-                Debug.LogWarning($"Agent {this.GetType().Name} is already playing!");
+                Debug.LogWarning($"Agent {GetType().Name} is already playing!");
                 return;
             }
 
-            this.OnStart();
-            this.isPlaying = true;
-            this.OnStarted?.Invoke();
+            OnStart();
+            isPlaying = true;
+            OnStarted?.Invoke();
         }
 
         protected abstract void OnStart();
@@ -35,15 +35,15 @@ namespace AI.Agents
 
         public void Stop()
         {
-            if (!this.isPlaying)
+            if (!isPlaying)
             {
-                Debug.LogWarning($"Agent {this.GetType().Name} is not playing!");
+                Debug.LogWarning($"Agent {GetType().Name} is not playing!");
                 return;
             }
 
-            this.OnStop();
-            this.isPlaying = false;
-            this.OnStopped?.Invoke();
+            OnStop();
+            isPlaying = false;
+            OnStopped?.Invoke();
         }
     }
 }

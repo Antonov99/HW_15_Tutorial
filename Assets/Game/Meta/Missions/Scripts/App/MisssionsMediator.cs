@@ -13,7 +13,7 @@ namespace Game.Meta
             for (int i = 0, count = dataSet.Length; i < count; i++)
             {
                 var data = dataSet[i];
-                var config = this.assetSupplier.GetMission(data.id);
+                var config = assetSupplier.GetMission(data.id);
                 var mission = service.SetupMission(config);
                 config.DeserializeTo(data.serializedState, mission);
             }
@@ -33,7 +33,7 @@ namespace Game.Meta
             for (var i = 0; i < count; i++)
             {
                 var mission = actualMissions[i];
-                var data = this.ConvertToData(mission);
+                var data = ConvertToData(mission);
                 dataArray[i] = data;
             }
 
@@ -43,7 +43,7 @@ namespace Game.Meta
         private MissionData ConvertToData(Mission mission)
         {
             var id = mission.Id;
-            var config = this.assetSupplier.GetMission(id);
+            var config = assetSupplier.GetMission(id);
             var data = new MissionData
             {
                 id = id,

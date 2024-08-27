@@ -24,34 +24,34 @@ namespace Windows
 
         public bool IsScreenActive(TKey key)
         {
-            return ReferenceEquals(this.currentScreenKey, key);
+            return ReferenceEquals(currentScreenKey, key);
         }
 
         [Button]
         public void ChangeScreen(TKey key, object args = default)
         {
-            if (!ReferenceEquals(this.currentScreen, null))
+            if (!ReferenceEquals(currentScreen, null))
             {
-                this.HideScreenInternal(this.currentScreenKey, this.currentScreen);
+                HideScreenInternal(currentScreenKey, currentScreen);
             }
 
-            this.currentScreenKey = key;
-            this.ShowScreenInternal(key, args);
-            this.OnScreenChanged?.Invoke(key);
+            currentScreenKey = key;
+            ShowScreenInternal(key, args);
+            OnScreenChanged?.Invoke(key);
         }
         
         private void ShowScreenInternal(TKey key, object args)
         {
-            this.currentScreen = this.supplier.LoadWindow(key);
-            this.currentScreen.Show(args);
-            this.OnScreenShown?.Invoke(key);
+            currentScreen = supplier.LoadWindow(key);
+            currentScreen.Show(args);
+            OnScreenShown?.Invoke(key);
         }
 
         private void HideScreenInternal(TKey key, TScreen screen)
         {
             screen.Hide();
-            this.supplier.UnloadWindow(screen);
-            this.OnScrenHidden?.Invoke(key);
+            supplier.UnloadWindow(screen);
+            OnScrenHidden?.Invoke(key);
         }
         
         public void SetSupplier(IWindowSupplier<TKey, TScreen> supplier)

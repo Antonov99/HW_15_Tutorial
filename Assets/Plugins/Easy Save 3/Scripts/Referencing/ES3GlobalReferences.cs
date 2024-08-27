@@ -39,7 +39,7 @@ namespace ES3Internal
 
                     if (_globalReferences == null)
                     {
-                        _globalReferences = ScriptableObject.CreateInstance<ES3GlobalReferences>();
+                        _globalReferences = CreateInstance<ES3GlobalReferences>();
 
                         // If this is the version being submitted to the Asset Store, don't include ES3Defaults.
                         if (Application.productName.Contains("ES3 Release"))
@@ -59,7 +59,7 @@ namespace ES3Internal
             }
         }
 
-        private long Get(UnityEngine.Object obj)
+        private long Get(Object obj)
         {
             if (obj == null)
                 return -1;
@@ -70,7 +70,7 @@ namespace ES3Internal
             return id;
         }
 
-        public UnityEngine.Object Get(long id)
+        public Object Get(long id)
         {
             foreach(var kvp in refId)
                 if (kvp.Value == id)
@@ -102,12 +102,12 @@ namespace ES3Internal
             refId = newRefId;
         }
 
-        public long GetOrAdd(UnityEngine.Object obj)
+        public long GetOrAdd(Object obj)
         {
             var id = Get(obj);
 
             // Only add items to global references when it's not playing.
-            if (!Application.isPlaying && id == -1 && UnityEditor.AssetDatabase.Contains(obj) && ES3ReferenceMgr.CanBeSaved(obj))
+            if (!Application.isPlaying && id == -1 && UnityEditor.AssetDatabase.Contains(obj) && ES3ReferenceMgrBase.CanBeSaved(obj))
             {
                 id = ES3ReferenceMgrBase.GetNewRefID();
                 refId.Add(obj, id);

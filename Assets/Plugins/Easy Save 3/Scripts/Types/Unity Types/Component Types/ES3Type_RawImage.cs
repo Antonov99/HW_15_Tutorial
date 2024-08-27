@@ -43,37 +43,37 @@ namespace ES3Types
 				{
 					
 					case "texture":
-						instance.texture = reader.Read<UnityEngine.Texture>(ES3Type_Texture.Instance);
+						instance.texture = reader.Read<Texture>(ES3Type_Texture.Instance);
 						break;
 					case "uvRect":
-						instance.uvRect = reader.Read<UnityEngine.Rect>(ES3Type_Rect.Instance);
+						instance.uvRect = reader.Read<Rect>(ES3Type_Rect.Instance);
 						break;
 					case "onCullStateChanged":
 						instance.onCullStateChanged = reader.Read<UnityEngine.UI.MaskableGraphic.CullStateChangedEvent>();
 						break;
 					case "maskable":
-						instance.maskable = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.maskable = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "color":
-						instance.color = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
+						instance.color = reader.Read<Color>(ES3Type_Color.Instance);
 						break;
 					case "raycastTarget":
-						instance.raycastTarget = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.raycastTarget = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "useLegacyMeshGeneration":
-					    reader.SetPrivateProperty("useLegacyMeshGeneration", reader.Read<System.Boolean>(), instance);
+					    reader.SetPrivateProperty("useLegacyMeshGeneration", reader.Read<Boolean>(), instance);
 					    break;
 					case "material":
-						instance.material = reader.Read<UnityEngine.Material>(ES3Type_Material.Instance);
+						instance.material = reader.Read<Material>(ES3Type_Material.Instance);
 						break;
 					case "useGUILayout":
-						instance.useGUILayout = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useGUILayout = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "hideFlags":
-						instance.hideFlags = reader.Read<UnityEngine.HideFlags>();
+						instance.hideFlags = reader.Read<HideFlags>();
 						break;
 					default:
 						reader.Skip();

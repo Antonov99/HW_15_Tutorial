@@ -10,7 +10,7 @@ namespace Elementary
 
         protected override void OnPeriodEvent()
         {
-            this.vfx.Play(withChildren: true);            
+            vfx.Play(withChildren: true);            
         }
     }
 }

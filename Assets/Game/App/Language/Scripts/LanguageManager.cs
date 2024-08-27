@@ -65,7 +65,7 @@ namespace Game.App
             }
 
             instance = this;
-            this.Initialize();
+            Initialize();
         }
 
         private void OnDestroy()
@@ -76,13 +76,13 @@ namespace Game.App
         private void Initialize()
         {
             var systemLanguage = Application.systemLanguage;
-            if (this.languageCatalog.LanguageExists(systemLanguage))
+            if (languageCatalog.LanguageExists(systemLanguage))
             {
-                this.currentLanguage = systemLanguage;
+                currentLanguage = systemLanguage;
             }
             else
             {
-                this.currentLanguage = this.languageCatalog.defaultLanguage;
+                currentLanguage = languageCatalog.defaultLanguage;
             }
         }
 

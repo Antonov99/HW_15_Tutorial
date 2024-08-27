@@ -7,7 +7,7 @@ namespace Polygons
     {
         public int Length
         {
-            get { return this.points.Length; }
+            get { return points.Length; }
         }
         
         private readonly Vector2[] points;
@@ -25,22 +25,22 @@ namespace Polygons
 
         public Vector2 GetPoint(int index)
         {
-            return this.points[index];
+            return points[index];
         }
 
         public Vector2[] GetAllPoints()
         {
-            return this.points.ToArray();
+            return points.ToArray();
         }
 
         public bool IsPointInside(Vector2 point)
         {
-            return PolygonAlgorithms.IsInsidePolygon(this.points, point);
+            return PolygonAlgorithms.IsInsidePolygon(points, point);
         }
 
         public bool ClampPosition(Vector2 position, out float distance, out Vector2 clampedPosition)
         {
-            return PolygonAlgorithms.ClampPosition(this.points, position, out distance, out clampedPosition);
+            return PolygonAlgorithms.ClampPosition(points, position, out distance, out clampedPosition);
         }
     }
 }

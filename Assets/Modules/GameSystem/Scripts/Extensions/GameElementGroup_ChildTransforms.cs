@@ -12,14 +12,14 @@ namespace GameSystem.Extensions
         
         public IEnumerable<IGameElement> GetElements()
         {
-            if (!this.gameObject.activeSelf)
+            if (!gameObject.activeSelf)
             {
                 yield break;
             }
 
-            if (this.includeInactive)
+            if (includeInactive)
             {
-                foreach (Transform child in this.transform)
+                foreach (Transform child in transform)
                 {
                     if (child.TryGetComponent(out IGameElement gameElement))
                     {
@@ -29,7 +29,7 @@ namespace GameSystem.Extensions
             }
             else
             {
-                foreach (Transform child in this.transform)
+                foreach (Transform child in transform)
                 {
                     if (child.gameObject.activeSelf && 
                         child.TryGetComponent(out IGameElement gameElement))

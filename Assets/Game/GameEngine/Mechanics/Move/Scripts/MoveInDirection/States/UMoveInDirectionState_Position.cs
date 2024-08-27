@@ -17,31 +17,31 @@ namespace Game.GameEngine.Mechanics
 
         private void Awake()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         private void FixedUpdate()
         {
-            if (this.moveEngine.IsMoving)
+            if (moveEngine.IsMoving)
             {
-                this.MoveInDirection();
+                MoveInDirection();
             }
         }
 
         public override void Enter()
         {
-            this.enabled = true;
+            enabled = true;
         }
 
         public override void Exit()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         private void MoveInDirection()
         {
-            var velocity = this.moveEngine.Direction * (this.speed.Current * Time.fixedDeltaTime);
-            this.transformEngine.MovePosition(velocity);
+            var velocity = moveEngine.Direction * (speed.Current * Time.fixedDeltaTime);
+            transformEngine.MovePosition(velocity);
         }
     }
 }

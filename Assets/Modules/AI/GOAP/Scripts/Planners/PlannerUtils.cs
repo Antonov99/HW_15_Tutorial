@@ -26,7 +26,7 @@ namespace AI.GOAP
 
         public static int HeuristicDistance(IActor action, IFactState worldState, int defaultDistance)
         {
-            return PlannerUtils.HeuristicDistance(action.RequiredState, worldState, defaultDistance);
+            return HeuristicDistance(action.RequiredState, worldState, defaultDistance);
         }
 
         public static int HeuristicDistance(IFactState requiredState, IFactState worldState, int defaultDistance)
@@ -69,7 +69,7 @@ namespace AI.GOAP
                     }
 
                     var requiredState = action.RequiredState;
-                    if (!PlannerUtils.MatchesAction(other, requiredState, worldState))
+                    if (!MatchesAction(other, requiredState, worldState))
                     {
                         continue;
                     }

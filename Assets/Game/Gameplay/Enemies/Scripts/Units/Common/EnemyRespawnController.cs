@@ -29,74 +29,74 @@ namespace Game.Gameplay.Enemies
         {
             this.unit = unit;
             this.ai = ai;
-            this.timer.Duration = respawnTime;
+            timer.Duration = respawnTime;
             this.respawnPoint = respawnPoint;
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.unit.Get<IComponent_OnDestroyed<DestroyArgs>>().OnDestroyed += this.OnDestroyed;
-            this.timer.OnFinished += this.OnTimerFinished;
+            unit.Get<IComponent_OnDestroyed<DestroyArgs>>().OnDestroyed += OnDestroyed;
+            timer.OnFinished += OnTimerFinished;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.unit.Get<IComponent_OnDestroyed<DestroyArgs>>().OnDestroyed -= this.OnDestroyed;
-            this.timer.OnFinished -= this.OnTimerFinished;
-            this.timer.Stop();
+            unit.Get<IComponent_OnDestroyed<DestroyArgs>>().OnDestroyed -= OnDestroyed;
+            timer.OnFinished -= OnTimerFinished;
+            timer.Stop();
         }
 
         private void OnDestroyed(DestroyArgs destroyArgs)
         {
-            this.DisableAI();
-            this.StartTimer();
+            DisableAI();
+            StartTimer();
         }
 
         private void DisableAI()
         {
-            this.ai.Get<IComponent_Enable>().SetEnable(false);
+            ai.Get<IComponent_Enable>().SetEnable(false);
         }
 
         private void StartTimer()
         {
-            this.timer.Stop();
-            this.timer.ResetTime();
-            this.timer.Play();
+            timer.Stop();
+            timer.ResetTime();
+            timer.Play();
         }
 
         private void OnTimerFinished()
         {
-            this.RespawnEntity();
+            RespawnEntity();
         }
 
         private void RespawnEntity()
         {
-            this.ResetPosition();
-            this.ResetRotation();
-            this.DoRespawn();
-            this.EnableAI();
+            ResetPosition();
+            ResetRotation();
+            DoRespawn();
+            EnableAI();
         }
 
         private void ResetPosition()
         {
-            var positionComponent = this.unit.Get<IComponent_SetPosition>();
-            positionComponent.SetPosition(this.respawnPoint.position);
+            var positionComponent = unit.Get<IComponent_SetPosition>();
+            positionComponent.SetPosition(respawnPoint.position);
         }
 
         private void ResetRotation()
         {
-            var rotationComponent = this.unit.Get<IComponent_SetRotation>();
-            rotationComponent.SetRotation(this.respawnPoint.rotation);
+            var rotationComponent = unit.Get<IComponent_SetRotation>();
+            rotationComponent.SetRotation(respawnPoint.rotation);
         }
 
         private void DoRespawn()
         {
-            this.unit.Get<IComponent_Respawn>().Respawn();
+            unit.Get<IComponent_Respawn>().Respawn();
         }
         
         private void EnableAI()
         {
-            this.ai.Get<IComponent_Enable>().SetEnable(true);
+            ai.Get<IComponent_Enable>().SetEnable(true);
         }
     }
 }

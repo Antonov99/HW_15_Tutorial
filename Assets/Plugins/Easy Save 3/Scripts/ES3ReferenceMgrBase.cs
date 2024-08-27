@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace ES3Internal
 {
-    [System.Serializable]
+    [Serializable]
     [DisallowMultipleComponent]
     public abstract class ES3ReferenceMgrBase : MonoBehaviour
     {
@@ -104,7 +104,7 @@ namespace ES3Internal
                 {
                     existing.Merge(this);
                     if (gameObject.name.Contains("Easy Save 3 Manager"))
-                        Destroy(this.gameObject);
+                        Destroy(gameObject);
                     else
                         Destroy(this);
                     _current = existing; // Undo the call to Current, which may have set it to NULL.
@@ -352,7 +352,7 @@ namespace ES3Internal
             rng.NextBytes(buf);
             long longRand = BitConverter.ToInt64(buf, 0);
 
-            return (System.Math.Abs(longRand % (long.MaxValue - 0)) + 0);
+            return (Math.Abs(longRand % (long.MaxValue - 0)) + 0);
         }
 
 #if UNITY_EDITOR
@@ -425,7 +425,7 @@ namespace ES3Internal
 
             var type = obj.GetType();
 
-            if (isEnteringPlayMode && type == typeof(UnityEngine.UI.Text))
+            if (isEnteringPlayMode && type == typeof(Text))
                 return;
 
             try
@@ -591,7 +591,7 @@ namespace ES3Internal
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ES3IdRefDictionary : ES3SerializableDictionary<long, UnityEngine.Object>
     {
         protected override bool KeysAreEqual(long a, long b)
@@ -606,7 +606,7 @@ namespace ES3Internal
     }
 
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-    [System.Serializable]
+    [Serializable]
     public class ES3RefIdDictionary : ES3SerializableDictionary<UnityEngine.Object, long>
     {
         protected override bool KeysAreEqual(UnityEngine.Object a, UnityEngine.Object b)

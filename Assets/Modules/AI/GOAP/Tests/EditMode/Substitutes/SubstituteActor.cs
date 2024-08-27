@@ -17,13 +17,13 @@ namespace AI.GOAP
         {
             this.id = id;
             this.cost = cost;
-            this.RequiredState = requiredState;
-            this.ResultState = resultState;
+            RequiredState = requiredState;
+            ResultState = resultState;
         }
         
         public int EvaluateCost()
         {
-            return this.cost;
+            return cost;
         }
 
         public bool IsValid()
@@ -41,7 +41,7 @@ namespace AI.GOAP
 
         public override string ToString()
         {
-            return this.id;
+            return id;
         }
     }
 }

@@ -23,22 +23,22 @@ namespace Game.Gameplay.Hero
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_OnDestroyed<DestroyArgs>>();
+            heroComponent = heroService.GetHero().Get<IComponent_OnDestroyed<DestroyArgs>>();
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.heroComponent.OnDestroyed += this.OnHeroDestroyed;
+            heroComponent.OnDestroyed += OnHeroDestroyed;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.heroComponent.OnDestroyed -= this.OnHeroDestroyed;
+            heroComponent.OnDestroyed -= OnHeroDestroyed;
         }
 
         private void OnHeroDestroyed(DestroyArgs destroyArgs)
         {
-            this.respawnInteractor.StartRespawn();
+            respawnInteractor.StartRespawn();
         }
     }
 }

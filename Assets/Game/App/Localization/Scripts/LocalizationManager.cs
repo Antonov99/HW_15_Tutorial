@@ -94,9 +94,9 @@ namespace Game.Localization
 
             instance = this;
 
-            this.textTranslator = new TextTranslator(this.textConfig);
-            this.spriteTranslator = new SpriteTranslator(this.spriteConfig.entities);
-            this.audioClipTranslator = new AudioClipTranslator(this.audioConfig.entities);
+            textTranslator = new TextTranslator(textConfig);
+            spriteTranslator = new SpriteTranslator(spriteConfig.entities);
+            audioClipTranslator = new AudioClipTranslator(audioConfig.entities);
         }
 
         private void OnDestroy()

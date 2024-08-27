@@ -8,7 +8,7 @@ namespace Game.Meta
     {
         public ProductBuyButton BuyButton
         {
-            get { return this.button; }
+            get { return button; }
         }
 
         [SerializeField]
@@ -25,17 +25,17 @@ namespace Game.Meta
 
         public void SetTitle(string title)
         {
-            this.titleText.text = title;
+            titleText.text = title;
         }
 
         public void SetDescription(string description)
         {
-            this.descriptionText.text = description;
+            descriptionText.text = description;
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
     }
 }

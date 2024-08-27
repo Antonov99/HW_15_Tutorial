@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         
         public void Hit()
         {
-            this.receiver.Call();
+            receiver.Call();
         }
     }
 }

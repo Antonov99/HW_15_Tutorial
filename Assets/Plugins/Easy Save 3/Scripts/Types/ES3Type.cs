@@ -28,7 +28,7 @@ namespace ES3Types
 		{
 			ES3TypeMgr.Add(type, this);
 			this.type = type;
-			this.isValueType = ES3Reflection.IsValueType(type);
+			isValueType = ES3Reflection.IsValueType(type);
 		}
 
 		public abstract void Write(object obj, ES3Writer writer);
@@ -43,7 +43,7 @@ namespace ES3Types
 		{
 			var objType = obj.GetType();
 				
-			if(objType != this.type)
+			if(objType != type)
 			{
 				writer.WriteType(objType);
 				ES3TypeMgr.GetOrCreateES3Type(objType).Write(obj, writer);
@@ -177,7 +177,7 @@ namespace ES3Types
 	}
 
 	[AttributeUsage(AttributeTargets.Class)]
-	public class ES3PropertiesAttribute : System.Attribute 
+	public class ES3PropertiesAttribute : Attribute 
 	{
 		public readonly string[] members;
 

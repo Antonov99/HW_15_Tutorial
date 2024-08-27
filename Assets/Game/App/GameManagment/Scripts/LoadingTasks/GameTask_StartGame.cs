@@ -18,12 +18,12 @@ namespace Game.App
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            this.gameFacade.StartGame();
+            gameFacade.StartGame();
             
-            for (int i = 0, count = this.startListeners.Length; i < count; i++)
+            for (int i = 0, count = startListeners.Length; i < count; i++)
             {
-                var listener = this.startListeners[i];
-                listener.OnStartGame(this.gameFacade);
+                var listener = startListeners[i];
+                listener.OnStartGame(gameFacade);
             }
             
             callback?.Invoke(LoadingResult.Success());

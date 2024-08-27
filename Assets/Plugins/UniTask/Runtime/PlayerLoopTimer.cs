@@ -177,8 +177,8 @@ namespace Cysharp.Threading.Tasks
 
         protected override void ResetCore(TimeSpan? interval)
         {
-            this.elapsed = 0.0f;
-            this.initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
+            elapsed = 0.0f;
+            initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
             if (interval != null)
             {
                 this.interval = (float)interval.Value.TotalSeconds;
@@ -219,8 +219,8 @@ namespace Cysharp.Threading.Tasks
 
         protected override void ResetCore(TimeSpan? interval)
         {
-            this.elapsed = 0.0f;
-            this.initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
+            elapsed = 0.0f;
+            initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
             if (interval != null)
             {
                 this.interval = (float)interval.Value.TotalSeconds;
@@ -251,10 +251,10 @@ namespace Cysharp.Threading.Tasks
 
         protected override void ResetCore(TimeSpan? interval)
         {
-            this.stopwatch = ValueStopwatch.StartNew();
+            stopwatch = ValueStopwatch.StartNew();
             if (interval != null)
             {
-                this.intervalTicks = interval.Value.Ticks;
+                intervalTicks = interval.Value.Ticks;
             }
         }
     }

@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_MeshRenderer() : base(typeof(UnityEngine.MeshRenderer))
+		public ES3Type_MeshRenderer() : base(typeof(MeshRenderer))
 		{
 			Instance = this;
 		}
 
 		protected override void WriteComponent(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.MeshRenderer)obj;
+			var instance = (MeshRenderer)obj;
 			
 			writer.WriteProperty("additionalVertexStreams", instance.additionalVertexStreams, ES3Type_Mesh.Instance);
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
@@ -39,62 +39,62 @@ namespace ES3Types
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.MeshRenderer)obj;
+			var instance = (MeshRenderer)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
 				{
 					
 					case "additionalVertexStreams":
-						instance.additionalVertexStreams = reader.Read<UnityEngine.Mesh>(ES3Type_Mesh.Instance);
+						instance.additionalVertexStreams = reader.Read<Mesh>(ES3Type_Mesh.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "shadowCastingMode":
 						instance.shadowCastingMode = reader.Read<UnityEngine.Rendering.ShadowCastingMode>();
 						break;
 					case "receiveShadows":
-						instance.receiveShadows = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.receiveShadows = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "sharedMaterials":
-						instance.sharedMaterials = reader.Read<UnityEngine.Material[]>();
+						instance.sharedMaterials = reader.Read<Material[]>();
 						break;
 					case "lightmapIndex":
-						instance.lightmapIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.lightmapIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "realtimeLightmapIndex":
-						instance.realtimeLightmapIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.realtimeLightmapIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "lightmapScaleOffset":
-						instance.lightmapScaleOffset = reader.Read<UnityEngine.Vector4>(ES3Type_Vector4.Instance);
+						instance.lightmapScaleOffset = reader.Read<Vector4>(ES3Type_Vector4.Instance);
 						break;
 					case "motionVectorGenerationMode":
-						instance.motionVectorGenerationMode = reader.Read<UnityEngine.MotionVectorGenerationMode>();
+						instance.motionVectorGenerationMode = reader.Read<MotionVectorGenerationMode>();
 						break;
 					case "realtimeLightmapScaleOffset":
-						instance.realtimeLightmapScaleOffset = reader.Read<UnityEngine.Vector4>(ES3Type_Vector4.Instance);
+						instance.realtimeLightmapScaleOffset = reader.Read<Vector4>(ES3Type_Vector4.Instance);
 						break;
 					case "lightProbeUsage":
 						instance.lightProbeUsage = reader.Read<UnityEngine.Rendering.LightProbeUsage>();
 						break;
 					case "lightProbeProxyVolumeOverride":
-						instance.lightProbeProxyVolumeOverride = reader.Read<UnityEngine.GameObject>(ES3Type_GameObject.Instance);
+						instance.lightProbeProxyVolumeOverride = reader.Read<GameObject>(ES3Type_GameObject.Instance);
 						break;
 					case "probeAnchor":
-						instance.probeAnchor = reader.Read<UnityEngine.Transform>(ES3Type_Transform.Instance);
+						instance.probeAnchor = reader.Read<Transform>(ES3Type_Transform.Instance);
 						break;
 					case "reflectionProbeUsage":
 						instance.reflectionProbeUsage = reader.Read<UnityEngine.Rendering.ReflectionProbeUsage>();
 						break;
 					case "sortingLayerName":
-						instance.sortingLayerName = reader.Read<System.String>(ES3Type_string.Instance);
+						instance.sortingLayerName = reader.Read<String>(ES3Type_string.Instance);
 						break;
 					case "sortingLayerID":
-						instance.sortingLayerID = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.sortingLayerID = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "sortingOrder":
-						instance.sortingOrder = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.sortingOrder = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();
@@ -108,7 +108,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_MeshRendererArray() : base(typeof(UnityEngine.MeshRenderer[]), ES3Type_MeshRenderer.Instance)
+		public ES3Type_MeshRendererArray() : base(typeof(MeshRenderer[]), ES3Type_MeshRenderer.Instance)
 		{
 			Instance = this;
 		}

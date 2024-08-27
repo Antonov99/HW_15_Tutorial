@@ -22,37 +22,37 @@ namespace Game.Gameplay.Conveyors
 
         void IAwakeListener.Awake()
         {
-            this.view.SetVisible(true);
-            this.view.ProgressBar.SetVisible(this.workTimer.IsPlaying);
+            view.SetVisible(true);
+            view.ProgressBar.SetVisible(workTimer.IsPlaying);
         }
 
         void IEnableListener.OnEnable()
         {
-            this.workTimer.OnStarted += this.OnWorkStarted;
-            this.workTimer.OnTimeChanged += this.OnWorkProgressChanged;
-            this.workTimer.OnFinished += this.OnWorkFinished;
+            workTimer.OnStarted += OnWorkStarted;
+            workTimer.OnTimeChanged += OnWorkProgressChanged;
+            workTimer.OnFinished += OnWorkFinished;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.workTimer.OnStarted -= this.OnWorkStarted;
-            this.workTimer.OnTimeChanged -= this.OnWorkProgressChanged;
-            this.workTimer.OnFinished -= this.OnWorkFinished;
+            workTimer.OnStarted -= OnWorkStarted;
+            workTimer.OnTimeChanged -= OnWorkProgressChanged;
+            workTimer.OnFinished -= OnWorkFinished;
         }
 
         private void OnWorkStarted()
         {
-            this.view.ProgressBar.SetVisible(true);
+            view.ProgressBar.SetVisible(true);
         }
 
         private void OnWorkProgressChanged()
         {
-            this.view.ProgressBar.SetProgress(this.workTimer.Progress);
+            view.ProgressBar.SetProgress(workTimer.Progress);
         }
 
         private void OnWorkFinished()
         {
-            this.view.ProgressBar.SetVisible(false);
+            view.ProgressBar.SetVisible(false);
         }
     }
 }

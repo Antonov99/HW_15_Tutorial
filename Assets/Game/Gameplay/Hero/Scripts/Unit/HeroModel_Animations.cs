@@ -55,7 +55,7 @@ namespace Game.Gameplay.Hero
         [Construct]
         private void Construct(HeroModel_States states, HeroModel_Core core)
         {
-            this.animatorMachine.Construct(this.animator, this.animatorObservable);
+            animatorMachine.Construct(animator, animatorObservable);
 
             const int IDLE_ANIM = 0;
             const int MOVE_ANIM = 1;
@@ -64,20 +64,20 @@ namespace Game.Gameplay.Hero
             const int MINE_ANIM = 4;
             const int DEATH_ANIM = 5;
 
-            this.animatorMachine.states = new List<AnimatorMachine.StateEntry>
+            animatorMachine.states = new List<AnimatorMachine.StateEntry>
             {
-                new(IDLE_ANIM, this.idleState),
-                new(MOVE_ANIM, this.moveState),
-                new(CHOP_ANIM, this.chopState),
-                new(MINE_ANIM, this.mineState),
-                new(COMBAT_ANIM, this.combatState),
-                new(DEATH_ANIM, this.deathState),
+                new(IDLE_ANIM, idleState),
+                new(MOVE_ANIM, moveState),
+                new(CHOP_ANIM, chopState),
+                new(MINE_ANIM, mineState),
+                new(COMBAT_ANIM, combatState),
+                new(DEATH_ANIM, deathState),
             };
 
             var fsm = states.stateMachine;
             var harvester = core.harvest.harvestOperator;
 
-            this.animatorMachine.orderedTransitions = new List<AnimatorMachine.StateTransition>
+            animatorMachine.orderedTransitions = new List<AnimatorMachine.StateTransition>
             {
                 new(IDLE_ANIM, () => fsm.CurrentState == IDLE),
                 new(MOVE_ANIM, () => fsm.CurrentState == MOVE),
@@ -125,8 +125,8 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructRootMotion(HeroModel_Animations animations)
             {
-                this.resetRootMotionState.ConstructMachine(animations.animatorMachine);
-                this.applyRootMotionState.ConstructMachine(animations.animatorMachine);
+                resetRootMotionState.ConstructMachine(animations.animatorMachine);
+                applyRootMotionState.ConstructMachine(animations.animatorMachine);
             }
         }
 
@@ -135,7 +135,7 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf(Common common)
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
                     common.resetRootMotionState,
                 };
@@ -153,19 +153,19 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf(Common common)
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
                     common.resetRootMotionState,
-                    this.stepListener
+                    stepListener
                 };
             }
 
             [Construct]
             private void ConstructStepListener(HeroModel_Animations animations, HeroModel_Audio audio)
             {
-                this.stepListener.ConstructAnimEvents("step");
-                this.stepListener.ConstructAnimMachine(animations.animatorMachine);
-                this.stepListener.ConstructAction(() => audio.soundEmitter.PlaySound(this.stepSoundId));
+                stepListener.ConstructAnimEvents("step");
+                stepListener.ConstructAnimMachine(animations.animatorMachine);
+                stepListener.ConstructAction(() => audio.soundEmitter.PlaySound(stepSoundId));
             }
         }
 
@@ -182,11 +182,11 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf(Common common)
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
                     common.resetRootMotionState,
-                    this.chopListener,
-                    this.stateObserver
+                    chopListener,
+                    stateObserver
                 };
             }
 
@@ -197,12 +197,12 @@ namespace Game.Gameplay.Hero
                 HeroModel_Audio audio
             )
             {
-                this.chopListener.ConstructAnimEvents("chop");
-                this.chopListener.ConstructAnimMachine(animations.animatorMachine);
-                this.chopListener.ConstructAction(() =>
+                chopListener.ConstructAnimEvents("chop");
+                chopListener.ConstructAnimMachine(animations.animatorMachine);
+                chopListener.ConstructAction(() =>
                 {
                     core.harvest.harvestOperator.Current?.targetResource.Get<IComponent_Hit>().Hit();
-                    audio.soundEmitter.PlaySound(this.chopSoundId);
+                    audio.soundEmitter.PlaySound(chopSoundId);
                     animations.common.chopVFX.Play(withChildren: true);
                 });
             }
@@ -212,7 +212,7 @@ namespace Game.Gameplay.Hero
             {
                 var axe = common.axe;
                 axe.SetActive(false);
-                this.stateObserver.Construct(axe.SetActive);
+                stateObserver.Construct(axe.SetActive);
             }
         }
 
@@ -229,22 +229,22 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf(Common common)
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
                     common.resetRootMotionState,
-                    this.mineListener,
-                    this.stateObserver
+                    mineListener,
+                    stateObserver
                 };
             }
 
             [Construct]
             private void ConstructMineListener(Common common, HeroModel_Animations animations, HeroModel_Audio audio)
             {
-                this.mineListener.ConstructAnimEvents("mine");
-                this.mineListener.ConstructAnimMachine(animations.animatorMachine);
-                this.mineListener.ConstructAction(() =>
+                mineListener.ConstructAnimEvents("mine");
+                mineListener.ConstructAnimMachine(animations.animatorMachine);
+                mineListener.ConstructAction(() =>
                 {
-                    audio.soundEmitter.PlaySound(this.mineSoundId);
+                    audio.soundEmitter.PlaySound(mineSoundId);
                     common.mineVFX.Play(withChildren: true);
                 });
             }
@@ -254,7 +254,7 @@ namespace Game.Gameplay.Hero
             {
                 var pickAxe = common.pickAxe;
                 pickAxe.SetActive(false);
-                this.stateObserver.Construct(pickAxe.SetActive);
+                stateObserver.Construct(pickAxe.SetActive);
             }
         }
 
@@ -271,11 +271,11 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf(Common common)
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
                     common.resetRootMotionState,
-                    this.dealDamageListener,
-                    this.stateObserver
+                    dealDamageListener,
+                    stateObserver
                 };
             }
 
@@ -285,12 +285,12 @@ namespace Game.Gameplay.Hero
                 HeroModel_Core core,
                 HeroModel_Audio audio)
             {
-                this.dealDamageListener.ConstructAnimEvents("attack");
-                this.dealDamageListener.ConstructAnimMachine(animations.animatorMachine);
-                this.dealDamageListener.ConstructAction(() =>
+                dealDamageListener.ConstructAnimEvents("attack");
+                dealDamageListener.ConstructAnimMachine(animations.animatorMachine);
+                dealDamageListener.ConstructAction(() =>
                 {
                     core.combat.DealDamage();
-                    audio.soundEmitter.PlaySound(this.hitSoundId);
+                    audio.soundEmitter.PlaySound(hitSoundId);
                 });
             }
 
@@ -299,7 +299,7 @@ namespace Game.Gameplay.Hero
             {
                 var sword = common.sword;
                 sword.SetActive(false);
-                this.stateObserver.Construct(sword.SetActive);
+                stateObserver.Construct(sword.SetActive);
             }
         }
 
@@ -308,7 +308,7 @@ namespace Game.Gameplay.Hero
             [Construct]
             private void ConstructSelf(Common common)
             {
-                this.states = new List<IState>
+                states = new List<IState>
                 {
                     common.applyRootMotionState,
                 };

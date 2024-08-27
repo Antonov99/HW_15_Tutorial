@@ -39,11 +39,11 @@ namespace Cysharp.Threading.Tasks.Linq
         {
             if (other2 != null)
             {
-                return new _TakeUntil(source, this.other2(cancellationToken), cancellationToken);
+                return new _TakeUntil(source, other2(cancellationToken), cancellationToken);
             }
             else
             {
-                return new _TakeUntil(source, this.other, cancellationToken);
+                return new _TakeUntil(source, other, cancellationToken);
             }
         }
 
@@ -68,7 +68,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 if (cancellationToken1.CanBeCanceled)
                 {
-                    this.cancellationTokenRegistration1 = cancellationToken1.RegisterWithoutCaptureExecutionContext(CancelDelegate1, this);
+                    cancellationTokenRegistration1 = cancellationToken1.RegisterWithoutCaptureExecutionContext(CancelDelegate1, this);
                 }
 
                 TaskTracker.TrackActiveTask(this, 3);

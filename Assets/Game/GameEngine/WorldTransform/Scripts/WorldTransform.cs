@@ -6,7 +6,7 @@ namespace Game.GameEngine
     {
         public Transform Value
         {
-            get { return this.value; }
+            get { return value; }
         }
 
         [SerializeField]

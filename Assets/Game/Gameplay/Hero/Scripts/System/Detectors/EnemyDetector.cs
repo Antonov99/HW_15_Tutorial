@@ -23,7 +23,7 @@ namespace Game.Gameplay.Hero
 
         protected override bool MatchesEntity(IEntity entity)
         {
-            return this.enemyCondition.IsTrue(entity);
+            return enemyCondition.IsTrue(entity);
         }
 
         protected override void OnEntitesChanged(List<IEntity> entities)
@@ -31,7 +31,7 @@ namespace Game.Gameplay.Hero
             if (entities.Count > 0)
             {
                 var targetEnemy = entities[0];
-                this.combatInteractor.TryStartCombat(targetEnemy);
+                combatInteractor.TryStartCombat(targetEnemy);
             }
         }
     }

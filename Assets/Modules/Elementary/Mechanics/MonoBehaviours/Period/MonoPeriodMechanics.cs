@@ -9,16 +9,16 @@ namespace Elementary
 
         protected virtual void OnEnable()
         {
-            this.behaviour.OnStarted += this.OnStarted;
-            this.behaviour.OnPeriodEvent += this.OnPeriodEvent;
-            this.behaviour.OnStoped += this.OnStopped;
+            behaviour.OnStarted += OnStarted;
+            behaviour.OnPeriodEvent += OnPeriodEvent;
+            behaviour.OnStoped += OnStopped;
         }
         
         protected virtual void OnDisable()
         {
-            this.behaviour.OnStarted -= this.OnStarted;
-            this.behaviour.OnPeriodEvent -= this.OnPeriodEvent;
-            this.behaviour.OnStoped -= this.OnStopped;
+            behaviour.OnStarted -= OnStarted;
+            behaviour.OnPeriodEvent -= OnPeriodEvent;
+            behaviour.OnStoped -= OnStopped;
         }
 
         protected virtual void OnStarted()

@@ -87,7 +87,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 : base(source, cancellationToken)
             {
-                this.set = new HashSet<TSource>(comparer);
+                set = new HashSet<TSource>(comparer);
             }
 
             protected override bool TryMoveNextCore(bool sourceHasCurrent, out bool result)
@@ -141,7 +141,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 : base(source, cancellationToken)
             {
-                this.set = new HashSet<TKey>(comparer);
+                set = new HashSet<TKey>(comparer);
                 this.keySelector = keySelector;
             }
 
@@ -196,7 +196,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 : base(source, cancellationToken)
             {
-                this.set = new HashSet<TKey>(comparer);
+                set = new HashSet<TKey>(comparer);
                 this.keySelector = keySelector;
             }
 
@@ -249,7 +249,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 : base(source, cancellationToken)
             {
-                this.set = new HashSet<TKey>(comparer);
+                set = new HashSet<TKey>(comparer);
                 this.keySelector = keySelector;
             }
 

@@ -86,7 +86,7 @@ public class ES3File
     /// <summary>Synchronises this ES3File with a file in storage.</summary>
     public void Sync()
     {
-        Sync(this.settings);
+        Sync(settings);
     }
 
     /// <summary>Synchronises this ES3File with a file in storage.</summary>
@@ -216,7 +216,7 @@ public class ES3File
         if (!cache.TryGetValue(key, out es3Data))
             throw new KeyNotFoundException("Key \"" + key + "\" was not found in this ES3File. Use Load<T>(key, defaultValue) if you want to return a default value if the key does not exist.");
 
-        var unencryptedSettings = (ES3Settings)this.settings.Clone();
+        var unencryptedSettings = (ES3Settings)settings.Clone();
         unencryptedSettings.encryptionType = ES3.EncryptionType.None;
         unencryptedSettings.compressionType = ES3.CompressionType.None;
 
@@ -234,7 +234,7 @@ public class ES3File
 
         if (!cache.TryGetValue(key, out es3Data))
             return defaultValue;
-        var unencryptedSettings = (ES3Settings)this.settings.Clone();
+        var unencryptedSettings = (ES3Settings)settings.Clone();
         unencryptedSettings.encryptionType = ES3.EncryptionType.None;
         unencryptedSettings.compressionType = ES3.CompressionType.None;
 
@@ -253,7 +253,7 @@ public class ES3File
         if (!cache.TryGetValue(key, out es3Data))
             throw new KeyNotFoundException("Key \"" + key + "\" was not found in this ES3File. Use Load<T>(key, defaultValue) if you want to return a default value if the key does not exist.");
 
-        var unencryptedSettings = (ES3Settings)this.settings.Clone();
+        var unencryptedSettings = (ES3Settings)settings.Clone();
         unencryptedSettings.encryptionType = ES3.EncryptionType.None;
         unencryptedSettings.compressionType = ES3.CompressionType.None;
 
@@ -295,7 +295,7 @@ public class ES3File
         if (settings == null)
             settings = this.settings;
 
-        using (var ms = new System.IO.MemoryStream())
+        using (var ms = new MemoryStream())
         {
             var memorySettings = (ES3Settings)settings.Clone();
             memorySettings.location = ES3.Location.InternalMS;

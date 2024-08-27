@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
 
         public CombatOperation(IEntity target)
         {
-            this.targetEntity = target;
+            targetEntity = target;
         }
 
         public CombatOperation()

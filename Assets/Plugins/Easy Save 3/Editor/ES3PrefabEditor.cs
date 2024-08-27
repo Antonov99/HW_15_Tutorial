@@ -6,7 +6,7 @@ using System.Collections;
 using ES3Internal;
 
 [CustomEditor(typeof(ES3Prefab))]
-[System.Serializable]
+[Serializable]
 public class ES3PrefabEditor : Editor
 {
 	bool showAdvanced = false;

@@ -12,13 +12,13 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<int> OnDamageChanged
         {
-            add { this.damage.OnValueChanged += value; }
-            remove { this.damage.OnValueChanged -= value; }
+            add { damage.OnValueChanged += value; }
+            remove { damage.OnValueChanged -= value; }
         }
 
         public int Damage
         {
-            get { return this.damage.Current; }
+            get { return damage.Current; }
         }
 
         [SerializeField]

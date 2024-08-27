@@ -713,7 +713,7 @@ namespace ES3Editor
 			public TypeListItem(string name, string namespaceName, Type type, bool showInList, bool hasExplicitES3Type)
 			{
 				this.name = name;
-                this.lowercaseName = name.ToLowerInvariant();
+                lowercaseName = name.ToLowerInvariant();
 				this.namespaceName = namespaceName;
 				this.type = type;
 				this.showInList = showInList;

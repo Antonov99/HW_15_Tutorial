@@ -13,14 +13,14 @@ namespace Game.Gameplay.Player
 
         public void EarnMoneySimple(int money)
         {
-            this.storage.EarnMoney(money);
-            this.view.IncrementMoney(money);
+            storage.EarnMoney(money);
+            view.IncrementMoney(money);
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.storage = context.GetService<MoneyStorage>();
-            this.view = context.GetService<MoneyPanel>();
+            storage = context.GetService<MoneyStorage>();
+            view = context.GetService<MoneyPanel>();
         }
     }
 }

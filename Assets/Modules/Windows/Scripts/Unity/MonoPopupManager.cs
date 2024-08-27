@@ -16,52 +16,52 @@ namespace Windows
 
         protected virtual void Awake()
         {
-            this.manager = new PopupManager<T, MonoWindow>(this.Supplier);
+            manager = new PopupManager<T, MonoWindow>(Supplier);
         }
 
         protected virtual void OnEnable()
         {
-            this.manager.OnPopupShown += this.OnShowPopup;
-            this.manager.OnPopupHidden += this.OnHidePopup;
+            manager.OnPopupShown += OnShowPopup;
+            manager.OnPopupHidden += OnHidePopup;
         }
 
         protected virtual void OnDisable()
         {
-            this.manager.OnPopupShown -= this.OnShowPopup;
-            this.manager.OnPopupHidden -= this.OnHidePopup;
+            manager.OnPopupShown -= OnShowPopup;
+            manager.OnPopupHidden -= OnHidePopup;
         }
 
         [Button]
         public void ShowPopup(T key, object args = null)
         {
-            this.manager.ShowPopup(key, args);
+            manager.ShowPopup(key, args);
         }
 
         [Button]
         public void HidePopup(T key)
         {
-            this.manager.HidePopup(key);
+            manager.HidePopup(key);
         }
 
         [Button]
         public void HideAllPopups()
         {
-            this.manager.HideAllPopups();
+            manager.HideAllPopups();
         }
 
         public bool IsPopupActive(T popupName)
         {
-            return this.manager.IsPopupActive(popupName);
+            return manager.IsPopupActive(popupName);
         }
 
         private void OnShowPopup(T popupName)
         {
-            this.OnPopupShown?.Invoke(popupName);
+            OnPopupShown?.Invoke(popupName);
         }
 
         private void OnHidePopup(T popupName)
         {
-            this.OnPopupHidden?.Invoke(popupName);
+            OnPopupHidden?.Invoke(popupName);
         }
     }
 }

@@ -47,40 +47,40 @@ namespace Game.Gameplay.Player
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_MeleeCombat>();
+            heroComponent = heroService.GetHero().Get<IComponent_MeleeCombat>();
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.heroComponent.OnCombatStopped += this.OnCombatEnded;
+            heroComponent.OnCombatStopped += OnCombatEnded;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.heroComponent.OnCombatStopped -= this.OnCombatEnded;
+            heroComponent.OnCombatStopped -= OnCombatEnded;
         }
 
         private void OnCombatEnded(CombatOperation operation)
         {
             if (operation.targetDestroyed)
             {
-                this.AddMoneyReward(operation.targetEntity);
+                AddMoneyReward(operation.targetEntity);
             }
         }
 
         private void AddMoneyReward(IEntity targetEnemy)
         {
-            var reward = Random.Range(this.minMoneyReward, this.maxMoneyReward + 1);
+            var reward = Random.Range(minMoneyReward, maxMoneyReward + 1);
 
             //Добавляем монеты в систему
-            this.moneyStorage.EarnMoney(reward);
+            moneyStorage.EarnMoney(reward);
 
             //Добавляем монеты в UI через партиклы
             var particlePosiiton = targetEnemy.Get<IComponent_GetPosition>().Position;
-            this.uiAnimator.PlayIncomeFromWorld(particlePosiiton, reward);
+            uiAnimator.PlayIncomeFromWorld(particlePosiiton, reward);
 
             //Звук
-            SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.moneySFX);
+            SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, moneySFX);
         }
     }
 }

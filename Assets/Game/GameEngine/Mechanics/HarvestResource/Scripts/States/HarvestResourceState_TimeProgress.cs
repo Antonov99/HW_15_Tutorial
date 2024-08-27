@@ -24,37 +24,37 @@ namespace Game.GameEngine.Mechanics
 
         protected override void OnEnter()
         {
-            this.currentTime = this.harvestOperator.Current.progress * this.duration.Current;
+            currentTime = harvestOperator.Current.progress * duration.Current;
         }
 
         protected override void FixedUpdate(float deltaTime)
         {
-            if (this.harvestOperator.IsActive)
+            if (harvestOperator.IsActive)
             {
-                if (this.currentTime < this.duration.Current)
+                if (currentTime < duration.Current)
                 {
-                    this.UpdateProgress(deltaTime);
+                    UpdateProgress(deltaTime);
                 }
                 else
                 {
-                    this.Complete();
+                    Complete();
                 }    
             }
         }
 
         private void UpdateProgress(float deltaTime)
         {
-            this.currentTime += deltaTime;
-            var progress = this.currentTime / this.duration.Current;
-            this.harvestOperator.Current.progress = progress;
+            currentTime += deltaTime;
+            var progress = currentTime / duration.Current;
+            harvestOperator.Current.progress = progress;
         }
 
         private void Complete()
         {
-            var operation = this.harvestOperator.Current;
+            var operation = harvestOperator.Current;
             operation.isCompleted = true;
             operation.progress = 1.0f;
-            this.harvestOperator.Stop();
+            harvestOperator.Stop();
         }
     }
 }

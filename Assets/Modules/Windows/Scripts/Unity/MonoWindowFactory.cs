@@ -9,9 +9,9 @@ namespace Windows
 
         public V CreateWindow(K key)
         {
-            var prefab = this.GetPrefab(key);
-            var popup = Instantiate(prefab, this.container);
-            this.OnFrameCreated(popup);
+            var prefab = GetPrefab(key);
+            var popup = Instantiate(prefab, container);
+            OnFrameCreated(popup);
             return popup;
         }
 

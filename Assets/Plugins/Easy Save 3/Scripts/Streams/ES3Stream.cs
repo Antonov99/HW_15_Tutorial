@@ -50,7 +50,7 @@ namespace ES3Internal
                             return null;
                         }
                     }
-                    else if (UnityEngine.Application.isEditor)
+                    else if (Application.isEditor)
                         throw new System.NotSupportedException("Cannot write directly to Resources folder. Try writing to a directory outside of Resources, and then manually move the file there.");
                     else
                         throw new System.NotSupportedException("Cannot write to Resources folder at runtime. Use a different save location at runtime instead.");

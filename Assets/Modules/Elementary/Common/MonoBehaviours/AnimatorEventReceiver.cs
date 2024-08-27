@@ -26,37 +26,37 @@ namespace Elementary
         [Button, GUIColor(0, 1, 0)]
         public void ReceiveEvent()
         {
-            this.OnEventReceived?.Invoke();
+            OnEventReceived?.Invoke();
         }
 
         [PropertySpace, Button, GUIColor(0, 1, 0)]
         public void ReceiveString(string message)
         {
-            this.OnStringReceived?.Invoke(message);
+            OnStringReceived?.Invoke(message);
         }
 
         [Button, GUIColor(0, 1, 0)]
         public void ReceiveBool(bool message)
         {
-            this.OnBoolReceived?.Invoke(message);
+            OnBoolReceived?.Invoke(message);
         }
 
         [Button, GUIColor(0, 1, 0)]
         public void ReceiveInt(int message)
         {
-            this.OnIntReceived?.Invoke(message);
+            OnIntReceived?.Invoke(message);
         }
 
         [Button, GUIColor(0, 1, 0)]
         public void ReceiveFloat(float message)
         {
-            this.OnFloatReceived?.Invoke(message);
+            OnFloatReceived?.Invoke(message);
         }
 
         [Button, GUIColor(0, 1, 0)]
         public void ReceiveObject(object obj)
         {
-            this.OnObjectReceived?.Invoke(obj);
+            OnObjectReceived?.Invoke(obj);
         }
     }
 }

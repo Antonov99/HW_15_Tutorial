@@ -11,7 +11,7 @@ namespace Game.GameEngine.Animation
         {
             if (animator.TryGetComponent(out AnimatorObservable eventDispatcher))
             {
-                eventDispatcher.OnEnterState(stateInfo, this.stateId, layerIndex);
+                eventDispatcher.OnEnterState(stateInfo, stateId, layerIndex);
             }
         }
 
@@ -19,7 +19,7 @@ namespace Game.GameEngine.Animation
         {
             if (animator.TryGetComponent(out AnimatorObservable eventDispatcher))
             {
-                eventDispatcher.OnExitState(stateInfo, this.stateId, layerIndex);
+                eventDispatcher.OnExitState(stateInfo, stateId, layerIndex);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
         {
             if (effect.TryGetParameter<float>(EffectId.DAMAGE, out var multiplier))
             {
-                this.damageMultiplier.Multiply(multiplier);
+                damageMultiplier.Multiply(multiplier);
             }
         }
 
@@ -21,7 +21,7 @@ namespace Game.GameEngine.Mechanics
         {
             if (effect.TryGetParameter<float>(EffectId.DAMAGE, out var multiplier))
             {
-                this.damageMultiplier.Divide(multiplier);
+                damageMultiplier.Divide(multiplier);
             }
         }
     }

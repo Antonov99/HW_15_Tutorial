@@ -32,7 +32,7 @@ namespace Game.Meta
         {
             try
             {
-                this.Validate();
+                Validate();
             }
             catch (Exception)
             {
@@ -42,7 +42,7 @@ namespace Game.Meta
         
         protected virtual void Validate()
         {
-            this.priceTable.OnValidate(this.maxLevel);
+            priceTable.OnValidate(maxLevel);
         }
     }
 }

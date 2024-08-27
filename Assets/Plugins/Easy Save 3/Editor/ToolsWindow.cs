@@ -43,7 +43,7 @@ namespace ES3Editor
         {
             if (EditorUtility.DisplayDialog("Clear Persistent Data Path", "Are you sure you wish to clear the persistent data path?\n This action cannot be reversed.", "Clear", "Cancel"))
             {
-                System.IO.DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
+                DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
 
                 foreach (FileInfo file in di.GetFiles())
                     file.Delete();
@@ -66,7 +66,7 @@ namespace ES3Editor
 		{
 			get
 			{
-				return UnityEngine.SystemInfo.operatingSystem.IndexOf("Mac OS") != -1;
+				return SystemInfo.operatingSystem.IndexOf("Mac OS") != -1;
 			}
 		}
 
@@ -74,7 +74,7 @@ namespace ES3Editor
 		{
 			get
 			{
-				return UnityEngine.SystemInfo.operatingSystem.IndexOf("Windows") != -1;
+				return SystemInfo.operatingSystem.IndexOf("Windows") != -1;
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace ES3Editor
 			// try mac
 			string macPath = path.Replace("\\", "/"); // mac finder doesn't like backward slashes
 
-			if ( System.IO.Directory.Exists(macPath) ) // if path requested is a folder, automatically open insides of that folder
+			if ( Directory.Exists(macPath) ) // if path requested is a folder, automatically open insides of that folder
 			{
 				openInsidesOfFolder = true;
 			}
@@ -122,7 +122,7 @@ namespace ES3Editor
 			// try windows
 			string winPath = path.Replace("/", "\\"); // windows explorer doesn't like forward slashes
 
-			if ( System.IO.Directory.Exists(winPath) ) // if path requested is a folder, automatically open insides of that folder
+			if ( Directory.Exists(winPath) ) // if path requested is a folder, automatically open insides of that folder
 				openInsidesOfFolder = true;
 
 			try

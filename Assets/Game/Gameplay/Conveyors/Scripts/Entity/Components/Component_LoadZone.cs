@@ -10,33 +10,33 @@ namespace Game.Gameplay
     {
         public event Action<int> OnAmountChanged
         {
-            add { this.storage.OnValueChanged += value; }
-            remove { this.storage.OnValueChanged -= value; }
+            add { storage.OnValueChanged += value; }
+            remove { storage.OnValueChanged -= value; }
         }
 
         public int MaxAmount
         {
-            get { return this.storage.MaxValue; }
+            get { return storage.MaxValue; }
         }
 
         public int CurrentAmount
         {
-            get { return this.storage.Current; }
+            get { return storage.Current; }
         }
 
         public int AvailableAmount
         {
-            get { return this.storage.MaxValue - this.storage.Current; }
+            get { return storage.MaxValue - storage.Current; }
         }
 
         public bool IsFull
         {
-            get { return this.storage.IsLimit; }
+            get { return storage.IsLimit; }
         }
 
         public bool IsEmpty
         {
-            get { return this.storage.Current <= 0; }
+            get { return storage.Current <= 0; }
         }
 
         public ResourceType ResourceType
@@ -56,12 +56,12 @@ namespace Game.Gameplay
 
         public void SetupAmount(int currentAmount)
         {
-            this.storage.Current = currentAmount;
+            storage.Current = currentAmount;
         }
 
         public void PutAmount(int range)
         {
-            this.storage.Current += range;
+            storage.Current += range;
         }
     }
 }

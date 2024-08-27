@@ -9,14 +9,14 @@ namespace Services
 
         public ServiceContext()
         {
-            this.services = new List<object>();
+            services = new List<object>();
         }
 
         public object GetService(Type serviceType)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var currentService = this.services[i];
+                var currentService = services[i];
                 var currentType = currentService.GetType(); 
                 
                 if (serviceType.IsAssignableFrom(currentType))
@@ -30,9 +30,9 @@ namespace Services
 
         public bool TryGetService<T>(out T result)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 if (service is T tService)
                 {
                     result = tService;
@@ -46,9 +46,9 @@ namespace Services
 
         public bool TryGetService(Type serviceType, out object service)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var currentService = this.services[i];
+                var currentService = services[i];
                 var currentType = currentService.GetType(); 
                 
                 if (serviceType.IsAssignableFrom(currentType))
@@ -64,9 +64,9 @@ namespace Services
 
         public T GetService<T>()
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 if (service is T result)
                 {
                     return result;
@@ -78,9 +78,9 @@ namespace Services
 
         public IEnumerable<T> GetServices<T>()
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 if (service is T tService)
                 {
                     yield return tService;
@@ -90,9 +90,9 @@ namespace Services
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 var currentType = service.GetType(); 
                 
                 if (serviceType.IsAssignableFrom(currentType))
@@ -104,14 +104,14 @@ namespace Services
 
         public IEnumerable<object> GetAllServices()
         {
-            return this.services;
+            return services;
         }
 
         public void AddServices(IEnumerable<object> services)
         {
             foreach (var service in services)
             {
-                this.AddService(service);
+                AddService(service);
             }
         }
 
@@ -119,13 +119,13 @@ namespace Services
         {
             if (service != null)
             {
-                this.services.Add(service);
+                services.Add(service);
             }
         }
 
         public void RemoveService(object service)
         {
-            this.services.Remove(service);
+            services.Remove(service);
         }
     }
 }

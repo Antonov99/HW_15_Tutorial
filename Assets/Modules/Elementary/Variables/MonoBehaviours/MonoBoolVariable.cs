@@ -13,8 +13,8 @@ namespace Elementary
 
         public bool Current
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
 
         private readonly List<IAction<bool>> listeners = new();
@@ -28,35 +28,35 @@ namespace Elementary
 
         public void SetValue(bool value)
         {
-            for (int i = 0, count = this.listeners.Count; i < count; i++)
+            for (int i = 0, count = listeners.Count; i < count; i++)
             {
-                var listener = this.listeners[i];
+                var listener = listeners[i];
                 listener.Do(value);
             }
 
             this.value = value;
-            this.onValueChanged?.Invoke(value);
-            this.OnValueChanged?.Invoke(value);
+            onValueChanged?.Invoke(value);
+            OnValueChanged?.Invoke(value);
         }
 
         public void SetTrue()
         {
-            this.SetValue(true);
+            SetValue(true);
         }
 
         public void SetFalse()
         {
-            this.SetValue(false);
+            SetValue(false);
         }
 
         public void AddListener(IAction<bool> listener)
         {
-            this.listeners.Add(listener);
+            listeners.Add(listener);
         }
 
         public void RemoveListener(IAction<bool> listener)
         {
-            this.listeners.Remove(listener);
+            listeners.Remove(listener);
         }
     }
 }

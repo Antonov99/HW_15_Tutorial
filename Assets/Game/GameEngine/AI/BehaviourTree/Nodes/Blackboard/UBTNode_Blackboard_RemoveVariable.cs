@@ -15,7 +15,7 @@ namespace Game.GameEngine.AI
 
         protected override void Run()
         {
-            this.Blackboard.RemoveVariable(this.key);
+            Blackboard.RemoveVariable(key);
         }
     }
 }

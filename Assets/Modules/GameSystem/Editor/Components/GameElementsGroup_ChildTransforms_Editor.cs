@@ -14,7 +14,7 @@ namespace GameSystem.UnityEditor
         
         private void Awake()
         {
-            this.includeInactive = this.serializedObject.FindProperty(nameof(this.includeInactive));
+            includeInactive = serializedObject.FindProperty(nameof(includeInactive));
         }
 
         public override void OnInspectorGUI()
@@ -22,8 +22,8 @@ namespace GameSystem.UnityEditor
             var target = (MonoBehaviour) this.target;
             if (target.gameObject.activeSelf)
             {
-                this.DrawIncludeField();
-                this.DrawInfo(target);
+                DrawIncludeField();
+                DrawInfo(target);
             }
             else
             {
@@ -34,8 +34,8 @@ namespace GameSystem.UnityEditor
         private void DrawIncludeField()
         {
             EditorGUILayout.Space(4.0f);
-            EditorGUILayout.PropertyField(this.includeInactive);
-            this.serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.PropertyField(includeInactive);
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void DrawInfo(MonoBehaviour target)
@@ -43,10 +43,10 @@ namespace GameSystem.UnityEditor
             EditorGUILayout.Space(4.0f);
             GUI.enabled = false;
 
-            this.showGameElements = EditorGUILayout.Foldout(this.showGameElements, "Game Elements");
-            if (this.showGameElements)
+            showGameElements = EditorGUILayout.Foldout(showGameElements, "Game Elements");
+            if (showGameElements)
             {
-                this.DrawGameElements(target);
+                DrawGameElements(target);
             }
             
             GUI.enabled = true;
@@ -55,7 +55,7 @@ namespace GameSystem.UnityEditor
         private void DrawGameElements(MonoBehaviour target)
         {
             var transform = target.transform;
-            if (this.includeInactive.boolValue)
+            if (includeInactive.boolValue)
             {
                 foreach (Transform child in transform)
                 {

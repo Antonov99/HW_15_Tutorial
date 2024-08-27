@@ -9,7 +9,7 @@ using UnityEditor.Compilation;
 
 namespace VContainer.Editor
 {
-    public sealed class ScriptTemplateProcessor : UnityEditor.AssetModificationProcessor
+    public sealed class ScriptTemplateProcessor : AssetModificationProcessor
     {
 #if UNITY_2020_2_OR_NEWER
         const string RootNamespaceBeginTag = "#ROOTNAMESPACEBEGIN#";

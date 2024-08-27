@@ -10,13 +10,13 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<float> OnSpeedChanged
         {
-            add { this.moveSpeed.OnValueChanged += value; }
-            remove { this.moveSpeed.OnValueChanged -= value; }
+            add { moveSpeed.OnValueChanged += value; }
+            remove { moveSpeed.OnValueChanged -= value; }
         }
 
         public float Speed
         {
-            get { return this.moveSpeed.Current; }
+            get { return moveSpeed.Current; }
         }
 
         private readonly IVariable<float> moveSpeed;
@@ -28,7 +28,7 @@ namespace Game.GameEngine.Mechanics
 
         public void SetSpeed(float speed)
         {
-            this.moveSpeed.Current = speed;
+            moveSpeed.Current = speed;
         }
     }
 }

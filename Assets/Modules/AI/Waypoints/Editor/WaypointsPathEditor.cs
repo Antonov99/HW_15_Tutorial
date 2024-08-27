@@ -15,21 +15,21 @@ namespace AI.UnityEditor
 
         private void Awake()
         {
-            this.drawGizmos = this.serializedObject.FindProperty(nameof(this.drawGizmos));
-            this.loop = this.serializedObject.FindProperty(nameof(this.loop));
-            this.color = this.serializedObject.FindProperty(nameof(this.color));
+            drawGizmos = serializedObject.FindProperty(nameof(drawGizmos));
+            loop = serializedObject.FindProperty(nameof(loop));
+            color = serializedObject.FindProperty(nameof(color));
         }
 
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space(4.0f);
             
-            this.drawGizmos.boolValue = EditorGUILayout.BeginToggleGroup("Draw Gizmos", this.drawGizmos.boolValue);
-            EditorGUILayout.PropertyField(this.loop);
-            EditorGUILayout.PropertyField(this.color);
+            drawGizmos.boolValue = EditorGUILayout.BeginToggleGroup("Draw Gizmos", drawGizmos.boolValue);
+            EditorGUILayout.PropertyField(loop);
+            EditorGUILayout.PropertyField(color);
             EditorGUILayout.EndToggleGroup();
             
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

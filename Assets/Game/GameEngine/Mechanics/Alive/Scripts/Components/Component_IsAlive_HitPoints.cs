@@ -4,7 +4,7 @@ namespace Game.GameEngine.Mechanics
     {
         public bool IsAlive
         {
-            get { return this.engine.Current > 0; }
+            get { return engine.Current > 0; }
         }
 
         private readonly IHitPoints engine;

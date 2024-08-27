@@ -27,12 +27,12 @@ namespace Game.GameEngine.InventorySystem
 
         public void AddHandler(IInventoryItemConsumeHandler handler)
         {
-            this.handlers.Add(handler);
+            handlers.Add(handler);
         }
 
         public void RemoveHandler(IInventoryItemConsumeHandler handler)
         {
-            this.handlers.Remove(handler);
+            handlers.Remove(handler);
         }
 
         [Button]
@@ -40,27 +40,27 @@ namespace Game.GameEngine.InventorySystem
         public bool CanConsumeItem(InventoryItem item)
         {
             return item.FlagsExists(InventoryItemFlags.CONSUMABLE) &&
-                   this.inventory.IsItemExists(item);
+                   inventory.IsItemExists(item);
         }
 
         [Button]
         [GUIColor(0, 1, 0)]
         public void ConsumeItem(InventoryItem item)
         {
-            if (!this.CanConsumeItem(item))
+            if (!CanConsumeItem(item))
             {
                 throw new Exception($"Can not consume item {item.Name}!");
             }
 
-            this.inventory.RemoveItem(item);
+            inventory.RemoveItem(item);
 
-            for (int i = 0, count = this.handlers.Count; i < count; i++)
+            for (int i = 0, count = handlers.Count; i < count; i++)
             {
-                var handler = this.handlers[i];
+                var handler = handlers[i];
                 handler.OnConsume(item);
             }
 
-            this.OnItemConsumed?.Invoke(item);
+            OnItemConsumed?.Invoke(item);
         }
     }
 }

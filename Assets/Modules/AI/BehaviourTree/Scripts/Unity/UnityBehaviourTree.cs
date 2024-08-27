@@ -14,8 +14,8 @@ namespace AI.BTree
 
         public bool IsEnable
         {
-            get { return this.enabled; }
-            set { this.enabled = value; }
+            get { return enabled; }
+            set { enabled = value; }
         }
 
         [SerializeField]
@@ -32,57 +32,57 @@ namespace AI.BTree
 
         private void Start()
         {
-            if (this.autoRun)
+            if (autoRun)
             {
-                this.Run();
+                Run();
             }
         }
 
         private void Update()
         {
-            if (this.loop && this.updateMode == UpdateMode.UPDATE)
+            if (loop && updateMode == UpdateMode.UPDATE)
             {
-                this.Run();
+                Run();
             }
         }
 
         private void FixedUpdate()
         {
-            if (this.loop && this.updateMode == UpdateMode.FIXED_UPDATE)
+            if (loop && updateMode == UpdateMode.FIXED_UPDATE)
             {
-                this.Run();
+                Run();
             }
         }
 
         private void LateUpdate()
         {
-            if (this.loop && this.updateMode == UpdateMode.LATE_UPDATE)
+            if (loop && updateMode == UpdateMode.LATE_UPDATE)
             {
-                this.Run();
+                Run();
             }
         }
 
         protected override void Run()
         {
-            if (!this.root.IsRunning)
+            if (!root.IsRunning)
             {
-                this.OnStarted?.Invoke();
-                this.root.Run(callback: this);
+                OnStarted?.Invoke();
+                root.Run(callback: this);
             }
         }
 
         protected override void OnAbort()
         {
-            if (this.IsRunning)
+            if (IsRunning)
             {
-                this.root.Abort();
-                this.OnAborted?.Invoke();
+                root.Abort();
+                OnAborted?.Invoke();
             }
         }
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
-            this.Return(success);
-            this.OnFinished?.Invoke(success);
+            Return(success);
+            OnFinished?.Invoke(success);
         }
 
         private enum UpdateMode
@@ -95,7 +95,7 @@ namespace AI.BTree
 #if UNITY_EDITOR
         public UnityBehaviourNode Editor_GetRoot()
         {
-            return this.root;
+            return root;
         }
 #endif
     }

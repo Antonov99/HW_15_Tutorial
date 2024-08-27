@@ -17,27 +17,27 @@ namespace Game.Meta
 
         public void SetVisible(bool visible)
         {
-            this.gameObject.SetActive(visible);
+            gameObject.SetActive(visible);
         }
 
         public void SetText(string text)
         {
-            this.contentText.text = text;
+            contentText.text = text;
         }
 
         public void SetClickAction(UnityAction action)
         {
-            this.ClearClickAction();
-            this.clickAction = action;
-            this.button.onClick.AddListener(action);
+            ClearClickAction();
+            clickAction = action;
+            button.onClick.AddListener(action);
         }
 
         public void ClearClickAction()
         {
-            if (this.clickAction != null)
+            if (clickAction != null)
             {
-                this.button.onClick.RemoveListener(this.clickAction);
-                this.clickAction = null;
+                button.onClick.RemoveListener(clickAction);
+                clickAction = null;
             }
         }
     }

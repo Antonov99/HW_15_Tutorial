@@ -20,15 +20,15 @@ namespace Game.App
         public override IEnumerable<object> ProvideServices()
         {
             var dbPath = $"URI=file:{DatabaseConfig.DestinationPath}";
-            this.database = new SqliteDatabase(dbPath);
+            database = new SqliteDatabase(dbPath);
 
             var adapter = new DatabaseAdapter();
-            this.databaseInstaller = new SqliteDatabaseInstaller(adapter);
-            this.databaseUpdater = new SqliteDatabaseUpdater(this.database, adapter);
+            databaseInstaller = new SqliteDatabaseInstaller(adapter);
+            databaseUpdater = new SqliteDatabaseUpdater(database, adapter);
 
-            yield return this.database;
-            yield return this.databaseInstaller;
-            yield return this.databaseUpdater;
+            yield return database;
+            yield return databaseInstaller;
+            yield return databaseUpdater;
         }
     }
 }

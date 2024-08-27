@@ -54,12 +54,12 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 if (cancellationToken1.CanBeCanceled)
                 {
-                    this.cancellationTokenRegistration1 = cancellationToken1.RegisterWithoutCaptureExecutionContext(CancelDelegate1, this);
+                    cancellationTokenRegistration1 = cancellationToken1.RegisterWithoutCaptureExecutionContext(CancelDelegate1, this);
                 }
 
                 if (cancellationToken1 != cancellationToken2 && cancellationToken2.CanBeCanceled)
                 {
-                    this.cancellationTokenRegistration2 = cancellationToken2.RegisterWithoutCaptureExecutionContext(CancelDelegate2, this);
+                    cancellationTokenRegistration2 = cancellationToken2.RegisterWithoutCaptureExecutionContext(CancelDelegate2, this);
                 }
                 TaskTracker.TrackActiveTask(this, 3);
             }

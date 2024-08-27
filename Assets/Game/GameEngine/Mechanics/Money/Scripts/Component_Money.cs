@@ -12,7 +12,7 @@ namespace Game.GameEngine.Mechanics
     {
         public int Money
         {
-            get { return this.money.Current; }
+            get { return money.Current; }
         }
 
         [SerializeField]
@@ -20,12 +20,12 @@ namespace Game.GameEngine.Mechanics
 
         public void EarnMoney(int range)
         {
-            this.money.Current += range;
+            money.Current += range;
         }
 
         public void SpendMoney(int range)
         {
-            this.money.Current -= range;
+            money.Current -= range;
         }
     }
 }

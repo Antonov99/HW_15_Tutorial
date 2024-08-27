@@ -19,12 +19,12 @@ namespace AI.GOAP
             this.worldState = worldState;
             this.actions = actions;
 
-            return this.MakePlanRecursively(goal, baseNode: null, out plan);
+            return MakePlanRecursively(goal, baseNode: null, out plan);
         }
 
         private bool MakePlanRecursively(IFactState goal, Node baseNode, out List<IActor> plan)
         {
-            var neighbours = this.FindNeighbours(goal);
+            var neighbours = FindNeighbours(goal);
             var orderedNeighbours = neighbours.OrderBy(it => it.EvaluateCost());
 
             foreach (var action in orderedNeighbours)
@@ -36,13 +36,13 @@ namespace AI.GOAP
                 };
                 
                 var requiredState = action.RequiredState;
-                if (requiredState.EqualsTo(this.worldState))
+                if (requiredState.EqualsTo(worldState))
                 {
-                    plan = this.CreatePlan(node);
+                    plan = CreatePlan(node);
                     return true;
                 }
 
-                if (this.MakePlanRecursively(requiredState, node, out plan))
+                if (MakePlanRecursively(requiredState, node, out plan))
                 {
                     return true;
                 }
@@ -56,9 +56,9 @@ namespace AI.GOAP
         {
             var result = new List<IActor>();
             
-            foreach (var action in this.actions)
+            foreach (var action in actions)
             {
-                if (PlannerUtils.MatchesAction(action, goal, this.worldState))
+                if (PlannerUtils.MatchesAction(action, goal, worldState))
                 {
                     result.Add(action);
                 }

@@ -23,41 +23,41 @@ namespace Elementary
         [Button]
         public void Apply(T effect)
         {
-            for (var i = 0; i < this.handlers.Count; i++)
+            for (var i = 0; i < handlers.Count; i++)
             {
-                var handler = this.handlers[i];
+                var handler = handlers[i];
                 handler.OnApply(effect);
             }
 
-            this.effects.Add(effect);
-            this.OnApplied?.Invoke(effect);
+            effects.Add(effect);
+            OnApplied?.Invoke(effect);
         }
 
         [Button]
         public void Discard(T effect)
         {
-            if (!this.effects.Remove(effect))
+            if (!effects.Remove(effect))
             {
                 return;
             }
 
-            for (var i = 0; i < this.handlers.Count; i++)
+            for (var i = 0; i < handlers.Count; i++)
             {
-                var handler = this.handlers[i];
+                var handler = handlers[i];
                 handler.OnDiscard(effect);
             }
 
-            this.OnDiscarded?.Invoke(effect);
+            OnDiscarded?.Invoke(effect);
         }
 
         public bool IsExists(T effect)
         {
-            return this.effects.Contains(effect);
+            return effects.Contains(effect);
         }
 
         public T[] GetEffects()
         {
-            return this.effects.ToArray();
+            return effects.ToArray();
         }
     }
 }

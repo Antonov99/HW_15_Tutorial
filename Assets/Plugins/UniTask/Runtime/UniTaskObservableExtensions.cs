@@ -125,7 +125,7 @@ namespace Cysharp.Threading.Tasks
 
                 if (this.cancellationToken.CanBeCanceled)
                 {
-                    this.registration = this.cancellationToken.RegisterWithoutCaptureExecutionContext(callback, this);
+                    registration = this.cancellationToken.RegisterWithoutCaptureExecutionContext(callback, this);
                 }
             }
 
@@ -195,7 +195,7 @@ namespace Cysharp.Threading.Tasks
 
                 if (this.cancellationToken.CanBeCanceled)
                 {
-                    this.registration = this.cancellationToken.RegisterWithoutCaptureExecutionContext(callback, this);
+                    registration = this.cancellationToken.RegisterWithoutCaptureExecutionContext(callback, this);
                 }
             }
 
@@ -447,8 +447,8 @@ namespace Cysharp.Threading.Tasks.Internal
                 ThrowIfDisposed();
                 if (isStopped) return;
 
-                this.hasValue = true;
-                this.lastValue = value;
+                hasValue = true;
+                lastValue = value;
             }
         }
 
@@ -741,7 +741,7 @@ namespace Cysharp.Threading.Tasks.Internal
             for (var i = 0; i < data.Length; ++i)
             {
                 // ImmutableList only use for IObserver(no worry for boxed)
-                if (object.Equals(data[i], value)) return i;
+                if (Equals(data[i], value)) return i;
             }
             return -1;
         }

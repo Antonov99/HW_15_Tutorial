@@ -16,7 +16,7 @@ namespace Elementary
         [ShowInInspector]
         public bool IsActive
         {
-            get { return this.Current != null; }
+            get { return Current != null; }
         }
 
         [PropertyOrder(-9)]
@@ -35,14 +35,14 @@ namespace Elementary
 
         public bool CanStart(T operation)
         {
-            if (this.IsActive)
+            if (IsActive)
             {
                 return false;
             }
 
-            for (int i = 0, count = this.preconditions.Length; i < count; i++)
+            for (int i = 0, count = preconditions.Length; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(operation))
                 {
                     return false;
@@ -56,40 +56,40 @@ namespace Elementary
         [Button]
         public void DoStart(T operation)
         {
-            if (!this.CanStart(operation))
+            if (!CanStart(operation))
             {
                 Debug.LogWarning("Can't start combat!", this);
                 return;
             }
 
-            for (int i = 0, count = this.startActions.Length; i < count; i++)
+            for (int i = 0, count = startActions.Length; i < count; i++)
             {
-                var action = this.startActions[i];
+                var action = startActions[i];
                 action.Do(operation);
             }
 
-            this.Current = operation;
-            this.OnStarted?.Invoke(operation);
+            Current = operation;
+            OnStarted?.Invoke(operation);
         }
 
         [Button]
         public void Stop()
         {
-            if (!this.IsActive)
+            if (!IsActive)
             {
                 Debug.LogWarning("Combat is not started!", this);
                 return;
             }
 
-            var operation = this.Current;
-            for (int i = 0, count = this.stopActions.Length; i < count; i++)
+            var operation = Current;
+            for (int i = 0, count = stopActions.Length; i < count; i++)
             {
-                var action = this.stopActions[i];
+                var action = stopActions[i];
                 action.Do(operation);
             }
 
-            this.Current = default;
-            this.OnStopped?.Invoke(operation);
+            Current = default;
+            OnStopped?.Invoke(operation);
         }
     }
 }

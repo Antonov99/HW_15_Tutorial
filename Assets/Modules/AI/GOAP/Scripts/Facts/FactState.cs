@@ -18,9 +18,9 @@ namespace AI.GOAP
 
         public bool GetFact(string id)
         {
-            for (int i = 0, count = this.variables.Count; i < count; i++)
+            for (int i = 0, count = variables.Count; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 if (variable.id == id)
                 {
                     return variable.value;
@@ -32,9 +32,9 @@ namespace AI.GOAP
 
         public bool TryGetFact(string id, out bool value)
         {
-            for (int i = 0, count = this.variables.Count; i < count; i++)
+            for (int i = 0, count = variables.Count; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 if (variable.id == id)
                 {
                     value = variable.value;
@@ -48,9 +48,9 @@ namespace AI.GOAP
 
         public bool ContainsFact(string id)
         {
-            for (int i = 0, count = this.variables.Count; i < count; i++)
+            for (int i = 0, count = variables.Count; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 if (variable.id == id)
                 {
                     return true;
@@ -62,9 +62,9 @@ namespace AI.GOAP
         
         public void SetFact(string id, bool value)
         {
-            for (int i = 0, count = this.variables.Count; i < count; i++)
+            for (int i = 0, count = variables.Count; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 if (variable.id == id)
                 {
                     variable.value = value;
@@ -72,17 +72,17 @@ namespace AI.GOAP
                 }
             }
             
-            this.variables.Add(new Fact(id, value));
+            variables.Add(new Fact(id, value));
         }
 
         public void RemoveFact(string id)
         {
-            for (int i = 0, count = this.variables.Count; i < count; i++)
+            for (int i = 0, count = variables.Count; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 if (variable.id == id)
                 {
-                    this.variables.Remove(variable);
+                    variables.Remove(variable);
                     return;
                 }
             }
@@ -90,9 +90,9 @@ namespace AI.GOAP
 
         public IEnumerator<KeyValuePair<string, bool>> GetEnumerator()
         {
-            for (int i = 0, count = this.variables.Count; i < count; i++)
+            for (int i = 0, count = variables.Count; i < count; i++)
             {
-                var variable = this.variables[i];
+                var variable = variables[i];
                 yield return new KeyValuePair<string, bool>(variable.id, variable.value);
             }
         }

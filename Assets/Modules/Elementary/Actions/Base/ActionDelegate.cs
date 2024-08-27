@@ -13,7 +13,7 @@ namespace Elementary
 
         public void Do()
         {
-            this.action?.Invoke();
+            action?.Invoke();
         }
     }
 
@@ -28,7 +28,7 @@ namespace Elementary
 
         public void Do(T args)
         {
-            this.action?.Invoke(args);
+            action?.Invoke(args);
         }
     }
 }

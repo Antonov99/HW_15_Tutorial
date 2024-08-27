@@ -7,17 +7,17 @@ namespace Game.GameEngine
     {
         public Sprite Icon
         {
-            get { return this.config.icon; }
+            get { return config.icon; }
         }
         
         public string CurrentMessage
         {
-            get { return this.currentNode.content; }
+            get { return currentNode.content; }
         }
 
         public string[] CurrentChoices
         {
-            get { return this.currentNode.choices; }
+            get { return currentNode.choices; }
         }
 
         private readonly DialogueConfig config;
@@ -32,14 +32,14 @@ namespace Game.GameEngine
             }
 
             this.config = config;
-            this.currentNode = node;
+            currentNode = node;
         }
 
         public bool MoveNext(int choiceIndex)
         {
-            if (this.config.FindNextNode(this.currentNode.id, choiceIndex, out var nextNode))
+            if (config.FindNextNode(currentNode.id, choiceIndex, out var nextNode))
             {
-                this.currentNode = nextNode;
+                currentNode = nextNode;
                 return true;
             }
 

@@ -9,13 +9,13 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<bool> OnEnabled
         {
-            add { this.isEnable.OnValueChanged += value; }
-            remove { this.isEnable.OnValueChanged -= value; }
+            add { isEnable.OnValueChanged += value; }
+            remove { isEnable.OnValueChanged -= value; }
         }
 
         public bool IsEnable
         {
-            get { return this.isEnable.Current; }
+            get { return isEnable.Current; }
         }
 
         public void SetEnable(bool isEnable)

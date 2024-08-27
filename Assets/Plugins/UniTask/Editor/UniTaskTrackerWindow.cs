@@ -50,7 +50,7 @@ namespace Cysharp.Threading.Tasks.Editor
             RenderHeadPanel();
 
             // Splittable
-            SplitterGUILayout.BeginVerticalSplit(this.splitterState, EmptyLayoutOption);
+            SplitterGUILayout.BeginVerticalSplit(splitterState, EmptyLayoutOption);
             {
                 // Column Tabble
                 RenderTable();
@@ -129,7 +129,7 @@ namespace Cysharp.Threading.Tasks.Editor
 
             EditorGUILayout.BeginVertical(tableListStyle, EmptyLayoutOption);
 
-            this.tableScroll = EditorGUILayout.BeginScrollView(this.tableScroll, new GUILayoutOption[]
+            tableScroll = EditorGUILayout.BeginScrollView(tableScroll, new GUILayoutOption[]
             {
                 GUILayout.ExpandWidth(true),
                 GUILayout.MaxWidth(2000f)
@@ -191,7 +191,7 @@ namespace Cysharp.Threading.Tasks.Editor
                 }
             }
 
-            detailsScroll = EditorGUILayout.BeginScrollView(this.detailsScroll, EmptyLayoutOption);
+            detailsScroll = EditorGUILayout.BeginScrollView(detailsScroll, EmptyLayoutOption);
             var vector = detailsStyle.CalcSize(new GUIContent(message));
             EditorGUILayout.SelectableLabel(message, detailsStyle, new GUILayoutOption[]
             {

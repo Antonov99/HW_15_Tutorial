@@ -25,13 +25,13 @@ namespace InputModule
 
         private void Awake()
         {
-            this.eventSystem = EventSystem.current;
+            eventSystem = EventSystem.current;
         }
 
         private void Update()
         {
 #if UNITY_EDITOR
-            this.UpdateMouse();
+            UpdateMouse();
 #else
             this.UpdateTouch();
 #endif
@@ -42,24 +42,24 @@ namespace InputModule
 #if UNITY_EDITOR
         private void UpdateMouse()
         {
-            if (Input.GetMouseButtonDown(0) && !this.IsPointerOverGameObject())
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverGameObject())
             {
-                this.StartInput(Input.mousePosition);
+                StartInput(Input.mousePosition);
             }
-            else if (this.isSwiping && Input.GetMouseButtonUp(0))
+            else if (isSwiping && Input.GetMouseButtonUp(0))
             {
-                this.EndInput(Input.mousePosition);
+                EndInput(Input.mousePosition);
             }
         }
         
         private bool IsPointerOverGameObject()
         {
-            if (ReferenceEquals(this.eventSystem, null))
+            if (ReferenceEquals(eventSystem, null))
             {
                 return false;
             }
 
-            return this.eventSystem.IsPointerOverGameObject();
+            return eventSystem.IsPointerOverGameObject();
         }
 #else
         private void UpdateTouch()
@@ -95,28 +95,28 @@ namespace InputModule
         
         private void StartInput(Vector3 inputPosition)
         {
-            this.startPosition = inputPosition;
-            this.isSwiping = true;
-            this.OnPositionStarted?.Invoke(inputPosition);
+            startPosition = inputPosition;
+            isSwiping = true;
+            OnPositionStarted?.Invoke(inputPosition);
         }
 
         private void EndInput(Vector2 inputPosition)
         {
-            var swipeVector = inputPosition - this.startPosition;
-            if (swipeVector.sqrMagnitude >= this.minSwipe * 2)
+            var swipeVector = inputPosition - startPosition;
+            if (swipeVector.sqrMagnitude >= minSwipe * 2)
             {
-                this.OnPositionEnded?.Invoke(inputPosition);
+                OnPositionEnded?.Invoke(inputPosition);
             }
             
-            this.isSwiping = false;
+            isSwiping = false;
         }
 
         public void Cancel()
         {
-            if (this.isSwiping)
+            if (isSwiping)
             {
-                this.isSwiping = false;
-                this.OnCanceled?.Invoke();
+                isSwiping = false;
+                OnCanceled?.Invoke();
             }
         }
     }

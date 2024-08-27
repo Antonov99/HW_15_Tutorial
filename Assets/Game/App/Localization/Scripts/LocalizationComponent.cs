@@ -13,20 +13,20 @@ namespace Game.Localization
 
         protected virtual void OnEnable()
         {
-            this.UpdateLanguage(LanguageManager.CurrentLanguage);
-            LanguageManager.OnLanguageChanged += this.UpdateLanguage;
+            UpdateLanguage(LanguageManager.CurrentLanguage);
+            LanguageManager.OnLanguageChanged += UpdateLanguage;
         }
 
         protected virtual void OnDisable()
         {
-            LanguageManager.OnLanguageChanged -= this.UpdateLanguage;
+            LanguageManager.OnLanguageChanged -= UpdateLanguage;
         }
 
         protected virtual void UpdateLanguage(SystemLanguage language)
         {
-            for (int i = 0, count = this.children.Length; i < count; i++)
+            for (int i = 0, count = children.Length; i < count; i++)
             {
-                var handler = this.children[i];
+                var handler = children[i];
                 handler.UpdateLanguage(language);
             }
         }

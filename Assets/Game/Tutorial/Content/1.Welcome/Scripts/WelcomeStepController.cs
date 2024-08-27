@@ -20,19 +20,19 @@ namespace Game.Tutorial
             base.ConstructGame(context);
             
             var popupManager = context.GetService<PopupManager>();
-            this.popupShower.Construct(popupManager, this.config);
+            popupShower.Construct(popupManager, config);
         }
         
         protected override void OnStart()
         {
             TutorialAnalytics.LogEventAndCache("tutorial_step_1__welcome_started");
-            this.popupShower.ShowPopup(this.OnPopupClicked);
+            popupShower.ShowPopup(OnPopupClicked);
         }
 
         private void OnPopupClicked()
         {
             TutorialAnalytics.LogEventAndCache("tutorial_step_1__welcome_completed");
-            this.NotifyAboutCompleteAndMoveNext();
+            NotifyAboutCompleteAndMoveNext();
         }
     }
 }

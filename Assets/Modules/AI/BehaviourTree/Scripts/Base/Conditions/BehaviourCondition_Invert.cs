@@ -20,7 +20,7 @@ namespace AI.BTree
 
         public bool IsTrue()
         {
-            return !this.condition.IsTrue();
+            return !condition.IsTrue();
         }
     }
 }

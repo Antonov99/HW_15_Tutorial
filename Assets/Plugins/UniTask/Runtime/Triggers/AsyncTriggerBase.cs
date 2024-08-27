@@ -202,8 +202,8 @@ namespace Cysharp.Threading.Tasks.Triggers
             }
 
             this.trigger = trigger;
-            this.cancellationToken = default;
-            this.registration = default;
+            cancellationToken = default;
+            registration = default;
             this.callOnce = callOnce;
 
             trigger.AddHandler(this);

@@ -18,7 +18,7 @@ namespace Elementary
         [ShowInInspector, ReadOnly]
         public bool IsActive
         {
-            get { return this.Current != null; }
+            get { return Current != null; }
         }
 
         [ShowInInspector, ReadOnly]
@@ -34,45 +34,45 @@ namespace Elementary
         [Button]
         public bool CanStart(T operation)
         {
-            if (this.IsActive)
+            if (IsActive)
             {
                 return false;
             }
 
-            if (this.conditions == null)
+            if (conditions == null)
             {
                 return true;
             }
 
-            return this.conditions.IsTrue(operation);
+            return conditions.IsTrue(operation);
         }
 
         [Button]
         public void DoStart(T operation)
         {
-            if (!this.CanStart(operation))
+            if (!CanStart(operation))
             {
                 return;
             }
 
-            this.Current = operation;
-            this.startActions?.Do(operation);
-            this.OnStarted?.Invoke(operation);
+            Current = operation;
+            startActions?.Do(operation);
+            OnStarted?.Invoke(operation);
         }
 
         [Button]
         public void Stop()
         {
-            if (!this.IsActive)
+            if (!IsActive)
             {
                 return;
             }
 
-            var operation = this.Current;
+            var operation = Current;
 
-            this.Current = default;
-            this.stopActions?.Do(operation);
-            this.OnStopped?.Invoke(operation);
+            Current = default;
+            stopActions?.Do(operation);
+            OnStopped?.Invoke(operation);
         }
 
         public void AddConditions(params ICondition<T>[] conditions)
@@ -88,67 +88,67 @@ namespace Elementary
         public ICondition<T> AddCondition(Func<T, bool> condition)
         {
             var conditionDelegate = new ConditionDelegate<T>(condition);
-            this.conditions += conditionDelegate;
+            conditions += conditionDelegate;
             return conditionDelegate;
         }
 
         public void AddCondition(ICondition<T> condition)
         {
-            this.conditions += condition;
+            conditions += condition;
         }
 
         public void RemoveCondition(ICondition<T> condition)
         {
-            this.conditions -= condition;
+            conditions -= condition;
         }
 
         public void AddStartActions(params IAction<T>[] actions)
         {
-            this.startActions += actions;
+            startActions += actions;
         }
 
         public void AddStartActions(IEnumerable<IAction<T>> actions)
         {
-            this.startActions += actions;
+            startActions += actions;
         }
 
         public ActionDelegate<T> AddStartAction(Action<T> action)
         {
             var actionDelegate = new ActionDelegate<T>(action);
-            this.startActions += actionDelegate;
+            startActions += actionDelegate;
             return actionDelegate;
         }
 
         public void AddStartAction(IAction<T> action)
         {
-            this.startActions += action;
+            startActions += action;
         }
         
         public void RemoveStartAction(IAction<T> action)
         {
-            this.startActions -= action;
+            startActions -= action;
         }
 
         public void AddStopActions(IEnumerable<IAction<T>> actions)
         {
-            this.stopActions += actions;
+            stopActions += actions;
         }
 
         public void AddStopAction(IAction<T> action)
         {
-            this.stopActions += action;
+            stopActions += action;
         }
         
         public ActionDelegate<T> AddStopAction(Action<T> action)
         {
             var actionDelegate = new ActionDelegate<T>(action);
-            this.stopActions += actionDelegate;
+            stopActions += actionDelegate;
             return actionDelegate;
         }
         
         public void RemoveStopAction(IAction<T> action)
         {
-            this.stopActions -= action;
+            stopActions -= action;
         }
     }
 }

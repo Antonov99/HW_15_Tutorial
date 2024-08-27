@@ -1,6 +1,7 @@
 using System;
 using Services;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.App
 {
@@ -8,7 +9,7 @@ namespace Game.App
     {
         public void Do(Action<LoadingResult> callback)
         {
-            var serviceInstaller = GameObject.FindObjectOfType<ServiceInstaller>();
+            var serviceInstaller = Object.FindObjectOfType<ServiceInstaller>();
             serviceInstaller.Install();
             callback.Invoke(LoadingResult.Success());
         }

@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109574175}
   m_Layer: 0
-  m_Name: HarvestStone
+  m_Name: HarvestWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109574174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.57, y: 3, z: -0.58}
+  m_LocalPosition: {x: -0.24, y: 0.36058, z: -1.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 3631100122495761853}
   - component: {fileID: 4911381372348552171}
   m_Layer: 0
-  m_Name: 3.SellResources
+  m_Name: 5.SellResources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3148927194187487716}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4911381372348552171
 MonoBehaviour:
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c796f5cd048a4496bdf2e71f33a08b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  step: 2
+  step: 4
   config: {fileID: 11400000, guid: cd3d63bcc07ef4a81a1e33ff9ecba274, type: 2}
   actionPanel:
     showDelay: 0.5
@@ -358,6 +358,68 @@ MonoBehaviour:
   - {fileID: 4911381372348552171}
   - {fileID: 2426757044515287115}
   - {fileID: 7165680554008715135}
+--- !u!1 &2173936365805031374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3084308968391940023}
+  m_Layer: 0
+  m_Name: 4.GetConvertedResources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3084308968391940023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173936365805031374}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3148927194187487716}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2202014033569338692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4209202774680577156}
+  m_Layer: 0
+  m_Name: 3.ConvertResources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4209202774680577156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2202014033569338692}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3148927194187487716}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4257378992284525787
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +483,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3148927194187487716}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8191445035365891073
 MonoBehaviour:
@@ -506,7 +568,7 @@ GameObject:
   - component: {fileID: 546143346056862684}
   - component: {fileID: 2426757044515287115}
   m_Layer: 0
-  m_Name: 4.UpgradeHero
+  m_Name: 6.UpgradeHero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -525,7 +587,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3148927194187487716}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2426757044515287115
 MonoBehaviour:
@@ -539,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9dcb3a50c1480793407b858f6e5a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  step: 3
+  step: 5
   config: {fileID: 11400000, guid: 69ff9f175d99e4ea78e74bed70869a1c, type: 2}
   actionPanel:
     showDelay: 0.5
@@ -594,7 +656,7 @@ GameObject:
   - component: {fileID: 5861923413027745657}
   - component: {fileID: 7165680554008715135}
   m_Layer: 0
-  m_Name: 5.DestroyEnemy
+  m_Name: 7.DestroyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -613,7 +675,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3148927194187487716}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7165680554008715135
 MonoBehaviour:
@@ -627,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801b2df91f742d6a5e1397ffee874e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  step: 4
+  step: 6
   config: {fileID: 11400000, guid: 6f49808826f3c46878fad426914e28c4, type: 2}
   enemyManager:
     enemyPrefab:
@@ -707,6 +769,8 @@ Transform:
   m_Children:
   - {fileID: 8651994101469306502}
   - {fileID: 4449728116692917961}
+  - {fileID: 4209202774680577156}
+  - {fileID: 3084308968391940023}
   - {fileID: 3631100122495761853}
   - {fileID: 546143346056862684}
   - {fileID: 5861923413027745657}

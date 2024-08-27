@@ -36,81 +36,81 @@ namespace Game.Meta
         [GUIColor(0, 1, 0)]
         public void LaunchBooster(BoosterConfig config)
         {
-            var booster = this.factory.CreateBooster(config);
-            booster.OnEnded += this.OnEndBooster;
+            var booster = factory.CreateBooster(config);
+            booster.OnEnded += OnEndBooster;
 
-            this.currentBoosters.Add(booster);
+            currentBoosters.Add(booster);
 
             booster.Start();
-            this.OnBoosterStarted?.Invoke(booster);
-            this.OnBoosterLaunched?.Invoke(booster);
+            OnBoosterStarted?.Invoke(booster);
+            OnBoosterLaunched?.Invoke(booster);
         }
 
         public Booster SetupBooster(BoosterConfig config)
         {
-            var booster = this.factory.CreateBooster(config);
-            booster.OnEnded += this.OnEndBooster;
+            var booster = factory.CreateBooster(config);
+            booster.OnEnded += OnEndBooster;
             
-            this.currentBoosters.Add(booster);
+            currentBoosters.Add(booster);
             return booster;
         }
 
         public Booster[] GetActiveBoosters()
         {
-            return this.currentBoosters.ToArray();
+            return currentBoosters.ToArray();
         }
 
         void IGameStartElement.StartGame()
         {
-            this.StartAllBoosters();
+            StartAllBoosters();
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.StopAllBoosters();
+            StopAllBoosters();
         }
 
         private void StartAllBoosters()
         {
-            for (int i = 0, count = this.currentBoosters.Count; i < count; i++)
+            for (int i = 0, count = currentBoosters.Count; i < count; i++)
             {
-                var booster = this.currentBoosters[i];
+                var booster = currentBoosters[i];
                 if (booster.IsActive)
                 {
                     continue;
                 }
 
                 booster.Start();
-                this.OnBoosterStarted?.Invoke(booster);
+                OnBoosterStarted?.Invoke(booster);
             }
         }
 
         private void StopAllBoosters()
         {
-            for (int i = 0, count = this.currentBoosters.Count; i < count; i++)
+            for (int i = 0, count = currentBoosters.Count; i < count; i++)
             {
-                var booster = this.currentBoosters[i];
+                var booster = currentBoosters[i];
                 if (!booster.IsActive)
                 {
                     continue;
                 }
 
-                booster.OnEnded -= this.OnEndBooster;
+                booster.OnEnded -= OnEndBooster;
                 booster.Stop();
             }
         }
 
         private void OnEndBooster(Booster booster)
         {
-            booster.OnEnded -= this.OnEndBooster;
-            this.monoContext.StartCoroutine(this.EndBoosterInNextFrame(booster));
+            booster.OnEnded -= OnEndBooster;
+            monoContext.StartCoroutine(EndBoosterInNextFrame(booster));
         }
 
         private IEnumerator EndBoosterInNextFrame(Booster booster)
         {
             yield return new WaitForEndOfFrame();
-            this.currentBoosters.Remove(booster);
-            this.OnBoosterFinished?.Invoke(booster);
+            currentBoosters.Remove(booster);
+            OnBoosterFinished?.Invoke(booster);
         }
     }
 }

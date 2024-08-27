@@ -21,14 +21,14 @@ namespace Game.GameEngine.AI
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.iteratorKey, out IEnumerator<Vector3> iterator))
+            if (!Blackboard.TryGetVariable(iteratorKey, out IEnumerator<Vector3> iterator))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.Blackboard.ReplaceVariable(this.resultPositionKey, iterator.Current);
-            this.Return(true);
+            Blackboard.ReplaceVariable(resultPositionKey, iterator.Current);
+            Return(true);
         }
     }
 }

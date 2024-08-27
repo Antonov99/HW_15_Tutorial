@@ -114,16 +114,16 @@ namespace Cysharp.Threading.Tasks.Linq
         public SelectMany(IUniTaskAsyncEnumerable<TSource> source, Func<TSource, IUniTaskAsyncEnumerable<TCollection>> selector, Func<TSource, TCollection, TResult> resultSelector)
         {
             this.source = source;
-            this.selector1 = selector;
-            this.selector2 = null;
+            selector1 = selector;
+            selector2 = null;
             this.resultSelector = resultSelector;
         }
 
         public SelectMany(IUniTaskAsyncEnumerable<TSource> source, Func<TSource, int, IUniTaskAsyncEnumerable<TCollection>> selector, Func<TSource, TCollection, TResult> resultSelector)
         {
             this.source = source;
-            this.selector1 = null;
-            this.selector2 = selector;
+            selector1 = null;
+            selector2 = selector;
             this.resultSelector = resultSelector;
         }
 
@@ -348,16 +348,16 @@ namespace Cysharp.Threading.Tasks.Linq
         public SelectManyAwait(IUniTaskAsyncEnumerable<TSource> source, Func<TSource, UniTask<IUniTaskAsyncEnumerable<TCollection>>> selector, Func<TSource, TCollection, UniTask<TResult>> resultSelector)
         {
             this.source = source;
-            this.selector1 = selector;
-            this.selector2 = null;
+            selector1 = selector;
+            selector2 = null;
             this.resultSelector = resultSelector;
         }
 
         public SelectManyAwait(IUniTaskAsyncEnumerable<TSource> source, Func<TSource, int, UniTask<IUniTaskAsyncEnumerable<TCollection>>> selector, Func<TSource, TCollection, UniTask<TResult>> resultSelector)
         {
             this.source = source;
-            this.selector1 = null;
-            this.selector2 = selector;
+            selector1 = null;
+            selector2 = selector;
             this.resultSelector = resultSelector;
         }
 
@@ -624,16 +624,16 @@ namespace Cysharp.Threading.Tasks.Linq
         public SelectManyAwaitWithCancellation(IUniTaskAsyncEnumerable<TSource> source, Func<TSource, CancellationToken, UniTask<IUniTaskAsyncEnumerable<TCollection>>> selector, Func<TSource, TCollection, CancellationToken, UniTask<TResult>> resultSelector)
         {
             this.source = source;
-            this.selector1 = selector;
-            this.selector2 = null;
+            selector1 = selector;
+            selector2 = null;
             this.resultSelector = resultSelector;
         }
 
         public SelectManyAwaitWithCancellation(IUniTaskAsyncEnumerable<TSource> source, Func<TSource, int, CancellationToken, UniTask<IUniTaskAsyncEnumerable<TCollection>>> selector, Func<TSource, TCollection, CancellationToken, UniTask<TResult>> resultSelector)
         {
             this.source = source;
-            this.selector1 = null;
-            this.selector2 = selector;
+            selector1 = null;
+            selector2 = selector;
             this.resultSelector = resultSelector;
         }
 

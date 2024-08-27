@@ -14,12 +14,12 @@ namespace Game.GameEngine
         [Button]
         public void ShowPopup()
         {
-            this.popupManager.ShowPopup(this.popupName);
+            popupManager.ShowPopup(popupName);
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.popupManager = context.GetService<PopupManager>();
+            popupManager = context.GetService<PopupManager>();
         }
     }
 }

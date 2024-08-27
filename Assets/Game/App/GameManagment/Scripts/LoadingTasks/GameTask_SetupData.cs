@@ -19,10 +19,10 @@ namespace Game.App
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            for (int i = 0, count = this.mediators.Length; i < count; i++)
+            for (int i = 0, count = mediators.Length; i < count; i++)
             {
-                var mediator = this.mediators[i];
-                mediator.SetupData(this.repository);
+                var mediator = mediators[i];
+                mediator.SetupData(repository);
             }
             
             LoadingScreen.ReportProgress(0.9f);

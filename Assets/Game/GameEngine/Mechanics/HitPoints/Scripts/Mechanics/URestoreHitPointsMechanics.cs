@@ -27,47 +27,47 @@ namespace Game.GameEngine.Mechanics
 
         private void OnEnable()
         {
-            this.takeDamageEngine.OnDamageTaken += this.OnDamageTaken;
-            this.delay.OnEnded += this.OnDelayEnded;
-            this.restorePeriod.OnPeriodEvent += this.OnRestoreHitPoints;
+            takeDamageEngine.OnDamageTaken += OnDamageTaken;
+            delay.OnEnded += OnDelayEnded;
+            restorePeriod.OnPeriodEvent += OnRestoreHitPoints;
         }
 
         private void OnDisable()
         {
-            this.takeDamageEngine.OnDamageTaken -= this.OnDamageTaken;
-            this.delay.OnEnded -= this.OnDelayEnded;
-            this.restorePeriod.OnPeriodEvent -= this.OnRestoreHitPoints;
+            takeDamageEngine.OnDamageTaken -= OnDamageTaken;
+            delay.OnEnded -= OnDelayEnded;
+            restorePeriod.OnPeriodEvent -= OnRestoreHitPoints;
         }
 
         private void OnDamageTaken(TakeDamageArgs damageArgs)
         {
-            if (this.hitPointsEngine.Current <= 0)
+            if (hitPointsEngine.Current <= 0)
             {
                 return;
             }
 
             //Сброс задержки:
-            this.delay.ResetTime();
-            if (!this.delay.IsPlaying)
+            delay.ResetTime();
+            if (!delay.IsPlaying)
             {
-                this.delay.Play();
+                delay.Play();
             }
 
             //Сброс периода:
-            this.restorePeriod.Stop();
+            restorePeriod.Stop();
         }
 
         private void OnDelayEnded()
         {
-            this.restorePeriod.Play();
+            restorePeriod.Play();
         }
 
         private void OnRestoreHitPoints()
         {
-            this.hitPointsEngine.Current += this.restoreAtTime.Current;
-            if (this.hitPointsEngine.Current >= this.hitPointsEngine.Max)
+            hitPointsEngine.Current += restoreAtTime.Current;
+            if (hitPointsEngine.Current >= hitPointsEngine.Max)
             {
-                this.restorePeriod.Stop();
+                restorePeriod.Stop();
             }
         }
     }

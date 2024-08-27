@@ -73,31 +73,31 @@ namespace ES3Types
 						instance.sharedMesh = reader.Read<UnityEngine.Mesh>(ES3Type_Mesh.Instance);
 						break;
 					case "updateWhenOffscreen":
-						instance.updateWhenOffscreen = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.updateWhenOffscreen = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "skinnedMotionVectors":
-						instance.skinnedMotionVectors = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.skinnedMotionVectors = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "localBounds":
 						instance.localBounds = reader.Read<UnityEngine.Bounds>(ES3Type_Bounds.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "shadowCastingMode":
 						instance.shadowCastingMode = reader.Read<UnityEngine.Rendering.ShadowCastingMode>();
 						break;
 					case "receiveShadows":
-						instance.receiveShadows = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.receiveShadows = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "sharedMaterials":
 						instance.sharedMaterials = reader.Read<UnityEngine.Material[]>();
 						break;
 					case "lightmapIndex":
-						instance.lightmapIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.lightmapIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "realtimeLightmapIndex":
-						instance.realtimeLightmapIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.realtimeLightmapIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "lightmapScaleOffset":
 						instance.lightmapScaleOffset = reader.Read<UnityEngine.Vector4>(ES3Type_Vector4.Instance);
@@ -121,16 +121,16 @@ namespace ES3Types
 						instance.reflectionProbeUsage = reader.Read<UnityEngine.Rendering.ReflectionProbeUsage>();
 						break;
 					case "sortingLayerName":
-						instance.sortingLayerName = reader.Read<System.String>(ES3Type_string.Instance);
+						instance.sortingLayerName = reader.Read<String>(ES3Type_string.Instance);
 						break;
 					case "sortingLayerID":
-						instance.sortingLayerID = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.sortingLayerID = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "sortingOrder":
-						instance.sortingOrder = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.sortingOrder = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
                     case "blendShapeWeights":
-                        var blendShapeWeights = reader.Read<System.Single[]>(ES3Type_floatArray.Instance);
+                        var blendShapeWeights = reader.Read<Single[]>(ES3Type_floatArray.Instance);
                         if (instance.sharedMesh == null) break;
                         if (blendShapeWeights.Length != instance.sharedMesh.blendShapeCount)
                             ES3Internal.ES3Debug.LogError("The number of blend shape weights we are loading does not match the number of blend shapes in this SkinnedMeshRenderer's Mesh");

@@ -9,7 +9,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Texture() : base(typeof(UnityEngine.Texture)){ Instance = this; }
+		public ES3Type_Texture() : base(typeof(Texture)){ Instance = this; }
 
 		public override void Write(object obj, ES3Writer writer)
 		{
@@ -37,7 +37,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_TextureArray() : base(typeof(UnityEngine.Texture[]), ES3Type_Texture.Instance)
+		public ES3Type_TextureArray() : base(typeof(Texture[]), ES3Type_Texture.Instance)
 		{
 			Instance = this;
 		}

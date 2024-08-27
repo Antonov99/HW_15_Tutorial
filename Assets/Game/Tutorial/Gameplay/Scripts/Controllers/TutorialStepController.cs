@@ -10,7 +10,6 @@ namespace Game.Tutorial.Gameplay
         IGameStartElement,
         IGameFinishElement
     {
-        [FormerlySerializedAs("step")]
         [SerializeField]
         private TutorialStep step;
 
@@ -18,28 +17,28 @@ namespace Game.Tutorial.Gameplay
 
         public virtual void ConstructGame(GameContext context)
         {
-            this.tutorialManager = TutorialManager.Instance;
+            tutorialManager = TutorialManager.Instance;
         }
 
         public virtual void ReadyGame()
         {
-            this.tutorialManager.OnStepFinished += this.CheckForFinish;
-            this.tutorialManager.OnNextStep += this.CheckForStart;
+            tutorialManager.OnStepFinished += CheckForFinish;
+            tutorialManager.OnNextStep += CheckForStart;
         }
 
         public virtual void StartGame()
         {
-            var stepFinished = this.tutorialManager.IsStepPassed(this.step);
+            var stepFinished = tutorialManager.IsStepPassed(step);
             if (!stepFinished)
             {
-                this.CheckForStart(this.tutorialManager.CurrentStep);
+                CheckForStart(tutorialManager.CurrentStep);
             }
         }
 
         public virtual void FinishGame()
         {
-            this.tutorialManager.OnStepFinished -= this.CheckForFinish;
-            this.tutorialManager.OnNextStep -= this.CheckForStart;
+            tutorialManager.OnStepFinished -= CheckForFinish;
+            tutorialManager.OnNextStep -= CheckForStart;
         }
 
         protected virtual void OnStart()
@@ -52,39 +51,39 @@ namespace Game.Tutorial.Gameplay
 
         protected void NotifyAboutComplete()
         {
-            if (this.tutorialManager.CurrentStep == this.step)
+            if (tutorialManager.CurrentStep == step)
             {
-                this.tutorialManager.FinishCurrentStep();
+                tutorialManager.FinishCurrentStep();
             }
         }
 
         protected void NotifyAboutMoveNext()
         {
-            if (this.tutorialManager.CurrentStep == this.step)
+            if (tutorialManager.CurrentStep == step)
             {
-                this.tutorialManager.MoveToNextStep();
+                tutorialManager.MoveToNextStep();
             }
         }
 
         protected void NotifyAboutCompleteAndMoveNext()
         {
-            if (this.tutorialManager.CurrentStep == this.step)
+            if (tutorialManager.CurrentStep == step)
             {
-                this.tutorialManager.FinishCurrentStep();
-                this.tutorialManager.MoveToNextStep();
+                tutorialManager.FinishCurrentStep();
+                tutorialManager.MoveToNextStep();
             }
         }
 
         protected bool IsStepFinished()
         {
-            return this.tutorialManager.IsStepPassed(this.step);
+            return tutorialManager.IsStepPassed(step);
         }
 
         private void CheckForFinish(TutorialStep step)
         {
             if (this.step == step)
             {
-                this.OnStop();
+                OnStop();
             }
         }
 
@@ -92,7 +91,7 @@ namespace Game.Tutorial.Gameplay
         {
             if (this.step == step)
             {
-                this.OnStart();
+                OnStart();
             }
         }
     }

@@ -20,29 +20,29 @@ namespace Game.Meta
 
         public override string CurrentStats
         {
-            get { return this.config.hitPointsTable.GetHitPoints(this.Level).ToString(); }
+            get { return config.hitPointsTable.GetHitPoints(Level).ToString(); }
         }
 
         public override string NextImprovement
         {
-            get { return this.config.hitPointsTable.HitPointsStep.ToString(); }
+            get { return config.hitPointsTable.HitPointsStep.ToString(); }
         }
 
         protected override void LevelUp(int level)
         {
-            this.SetHitPoints(level);
+            SetHitPoints(level);
         }
 
         private void SetHitPoints(int level)
         {
-            var hitPoints = this.config.hitPointsTable.GetHitPoints(level);
-            this.heroComponent.Setup(hitPoints, hitPoints);
+            var hitPoints = config.hitPointsTable.GetHitPoints(level);
+            heroComponent.Setup(hitPoints, hitPoints);
         }
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_SetupHitPoints>();
-            this.SetHitPoints(this.Level);
+            heroComponent = heroService.GetHero().Get<IComponent_SetupHitPoints>();
+            SetHitPoints(Level);
         }
     }
 }

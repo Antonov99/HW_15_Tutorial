@@ -9,7 +9,7 @@ namespace Game.GameEngine.AI
     {
         protected override AITask_MoveByPoints<Vector3> MoveTask
         {
-            get { return this.moveTask; }
+            get { return moveTask; }
         }
 
         private readonly Task_Entity_MoveByPoints moveTask;
@@ -18,23 +18,23 @@ namespace Game.GameEngine.AI
 
         public Task_Entity_MoveByNavMesh(MonoBehaviour coroutineDispatcher)
         {
-            this.moveTask = new Task_Entity_MoveByPoints();
+            moveTask = new Task_Entity_MoveByPoints();
         }
 
         public void SetMovingEntity(IEntity movingEntity)
         {
-            this.positionComponent = movingEntity.Get<IComponent_GetPosition>();
-            this.moveTask.SetMovingEntity(movingEntity);
+            positionComponent = movingEntity.Get<IComponent_GetPosition>();
+            moveTask.SetMovingEntity(movingEntity);
         }
 
         public void SetStoppingDistance(float stoppingDistance)
         {
-            this.moveTask.SetStoppingDistance(stoppingDistance);
+            moveTask.SetStoppingDistance(stoppingDistance);
         }
 
         protected override Vector3 EvaluateStartPosition()
         {
-            return this.positionComponent.Position;
+            return positionComponent.Position;
         }
     }
 }

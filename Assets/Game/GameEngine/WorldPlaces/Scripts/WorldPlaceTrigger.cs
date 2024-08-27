@@ -6,7 +6,7 @@ namespace Game.GameEngine
     {
         public WorldPlaceType PlaceType
         {
-            get { return this.worldPlace.Type; }
+            get { return worldPlace.Type; }
         }
 
         [SerializeField]

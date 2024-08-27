@@ -7,19 +7,19 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<HarvestResourceOperation> OnHarvestStarted
         {
-            add { this.harvestOperator.OnStarted += value; }
-            remove { this.harvestOperator.OnStarted -= value; }
+            add { harvestOperator.OnStarted += value; }
+            remove { harvestOperator.OnStarted -= value; }
         }
 
         public event Action<HarvestResourceOperation> OnHarvestStopped
         {
-            add { this.harvestOperator.OnStopped += value; }
-            remove { this.harvestOperator.OnStopped -= value; }
+            add { harvestOperator.OnStopped += value; }
+            remove { harvestOperator.OnStopped -= value; }
         }
 
         public bool IsHarvesting
         {
-            get { return this.harvestOperator.IsActive; }
+            get { return harvestOperator.IsActive; }
         }
 
         private readonly IOperator<HarvestResourceOperation> harvestOperator;
@@ -31,17 +31,17 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanStartHarvest(HarvestResourceOperation operation)
         {
-            return this.harvestOperator.CanStart(operation);
+            return harvestOperator.CanStart(operation);
         }
 
         public void StartHarvest(HarvestResourceOperation operation)
         {
-            this.harvestOperator.DoStart(operation);
+            harvestOperator.DoStart(operation);
         }
 
         public void StopHarvest()
         {
-            this.harvestOperator.Stop();
+            harvestOperator.Stop();
         }
     }
 }

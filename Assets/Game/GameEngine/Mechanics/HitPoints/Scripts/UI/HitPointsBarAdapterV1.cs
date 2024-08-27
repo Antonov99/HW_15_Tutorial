@@ -19,41 +19,41 @@ namespace Game.GameEngine.Mechanics
 
         void IAwakeListener.Awake()
         {
-            this.SetupBar();
+            SetupBar();
         }
 
         void IEnableListener.OnEnable()
         {
-            this.hitPointsEngine.OnCurrentPointsChanged += this.OnHitPointsChanged;
+            hitPointsEngine.OnCurrentPointsChanged += OnHitPointsChanged;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.hitPointsEngine.OnCurrentPointsChanged -= this.OnHitPointsChanged;
+            hitPointsEngine.OnCurrentPointsChanged -= OnHitPointsChanged;
         }
 
         private void OnHitPointsChanged(int hitPoints)
         {
-            this.UpdateBar(hitPoints);
+            UpdateBar(hitPoints);
         }
 
         private void SetupBar()
         {
-            var hitPoints = this.hitPointsEngine.Current;
-            var maxHitPoints = this.hitPointsEngine.Max;
+            var hitPoints = hitPointsEngine.Current;
+            var maxHitPoints = hitPointsEngine.Max;
 
             var showBar = hitPoints > 0;
-            this.view.SetVisible(showBar);
-            this.view.SetHitPoints(hitPoints, maxHitPoints);
+            view.SetVisible(showBar);
+            view.SetHitPoints(hitPoints, maxHitPoints);
         }
 
         private void UpdateBar(int hitPoints)
         {
-            var maxHitPoints = this.hitPointsEngine.Max;
+            var maxHitPoints = hitPointsEngine.Max;
             var showBar = hitPoints > 0;
 
-            this.view.SetVisible(showBar);
-            this.view.SetHitPoints(hitPoints, maxHitPoints);
+            view.SetVisible(showBar);
+            view.SetHitPoints(hitPoints, maxHitPoints);
         }
     }
 }

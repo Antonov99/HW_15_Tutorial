@@ -4,7 +4,7 @@ using UnityEditor;
 namespace Dustyroom {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(LinearMotion))]
-    public class LinearMotionEditor : UnityEditor.Editor {
+    public class LinearMotionEditor : Editor {
         private SerializedProperty _translationMode;
         private SerializedProperty _translationVector;
         private SerializedProperty _translationSpeed;

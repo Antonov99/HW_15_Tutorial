@@ -9,7 +9,7 @@ namespace Game.Meta
     {
         public UpgradeButton UpgradeButton
         {
-            get { return this.upgradeButton; }
+            get { return upgradeButton; }
         }
 
         [SerializeField]
@@ -32,22 +32,22 @@ namespace Game.Meta
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void SetTitle(string title)
         {
-            this.titleText.text = title;
+            titleText.text = title;
         }
 
         public void SetStats(string stats)
         {
-            this.statsText.text = stats;
+            statsText.text = stats;
         }
 
         public void SetLevel(string level)
         {
-            this.levelText.text = level;
+            levelText.text = level;
         }
     }
 }

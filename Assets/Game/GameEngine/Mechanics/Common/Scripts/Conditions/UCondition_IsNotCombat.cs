@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         
         public override bool IsTrue()
         {
-            return !this.@operator.IsActive;
+            return !@operator.IsActive;
         }
     }
 }

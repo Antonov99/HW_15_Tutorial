@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_RectTransform() : base(typeof(UnityEngine.RectTransform))
+		public ES3Type_RectTransform() : base(typeof(RectTransform))
 		{
 			Instance = this;
 		}
 
 		protected override void WriteComponent(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.RectTransform)obj;
+			var instance = (RectTransform)obj;
 			
 			writer.WriteProperty("anchorMin", instance.anchorMin, ES3Type_Vector2.Instance);
 			writer.WriteProperty("anchorMax", instance.anchorMax, ES3Type_Vector2.Instance);
@@ -34,53 +34,53 @@ namespace ES3Types
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
 		{
-            if (obj.GetType() == typeof(UnityEngine.Transform))
+            if (obj.GetType() == typeof(Transform))
                 obj = ((Transform)obj).gameObject.AddComponent<RectTransform>();
 
-                var instance = (UnityEngine.RectTransform)obj;
+                var instance = (RectTransform)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
 				{
 					
 					case "anchorMin":
-						instance.anchorMin = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.anchorMin = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "anchorMax":
-						instance.anchorMax = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.anchorMax = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "anchoredPosition":
-						instance.anchoredPosition = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.anchoredPosition = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "sizeDelta":
-						instance.sizeDelta = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.sizeDelta = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "pivot":
-						instance.pivot = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.pivot = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "offsetMin":
-						instance.offsetMin = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.offsetMin = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "offsetMax":
-						instance.offsetMax = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.offsetMax = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					case "localPosition":
-						instance.localPosition = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
+						instance.localPosition = reader.Read<Vector3>(ES3Type_Vector3.Instance);
 						break;
 					case "localRotation":
-						instance.localRotation = reader.Read<UnityEngine.Quaternion>(ES3Type_Quaternion.Instance);
+						instance.localRotation = reader.Read<Quaternion>(ES3Type_Quaternion.Instance);
 						break;
 					case "localScale":
-						instance.localScale = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
+						instance.localScale = reader.Read<Vector3>(ES3Type_Vector3.Instance);
 						break;
 					case "parent":
-						instance.SetParent(reader.Read<UnityEngine.Transform>(ES3Type_Transform.Instance));
+						instance.SetParent(reader.Read<Transform>(ES3Type_Transform.Instance));
 						break;
 					case "hierarchyCapacity":
-						instance.hierarchyCapacity = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.hierarchyCapacity = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "hideFlags":
-						instance.hideFlags = reader.Read<UnityEngine.HideFlags>();
+						instance.hideFlags = reader.Read<HideFlags>();
 						break;
 					default:
 						reader.Skip();

@@ -22,12 +22,12 @@ namespace Elementary
 
         public override void Enter()
         {
-            this.onEnter.Invoke(true);
+            onEnter.Invoke(true);
         }
 
         public override void Exit()
         {
-            this.onEnter.Invoke(false);
+            onEnter.Invoke(false);
         }
     }
 }

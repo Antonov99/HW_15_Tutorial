@@ -15,7 +15,7 @@ namespace ES3Editor
 		public static void Init()
 		{
 			// Get existing open window or if none, make a new one:
-			ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+			ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if(window != null)
 			    window.Show();
 		}
@@ -23,7 +23,7 @@ namespace ES3Editor
 		public static void InitAndShowHome()
 		{
 			// Get existing open window or if none, make a new one:
-			ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+			ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -35,7 +35,7 @@ namespace ES3Editor
         public static void InitAndShowAutoSave()
 		{
 			// Get existing open window or if none, make a new one:
-			ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+			ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -46,7 +46,7 @@ namespace ES3Editor
         public static void InitAndShowReferences()
         {
             // Get existing open window or if none, make a new one:
-            ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+            ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -58,7 +58,7 @@ namespace ES3Editor
         public static void InitAndShowTypes()
         {
             // Get existing open window or if none, make a new one:
-            ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+            ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -69,7 +69,7 @@ namespace ES3Editor
         public static void InitAndShowTypes(System.Type type)
         {
             // Get existing open window or if none, make a new one:
-            ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+            ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -82,7 +82,7 @@ namespace ES3Editor
         public static void InitAndShowSettings()
         {
             // Get existing open window or if none, make a new one:
-            ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+            ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -94,7 +94,7 @@ namespace ES3Editor
         public static void InitAndShowTools()
         {
             // Get existing open window or if none, make a new one:
-            ES3Window window = (ES3Window)EditorWindow.GetWindow(typeof(ES3Window));
+            ES3Window window = (ES3Window)GetWindow(typeof(ES3Window));
             if (window != null)
             {
                 window.Show();
@@ -202,7 +202,7 @@ namespace ES3Editor
 		public static void OpenEditorWindowOnStart()
 		{
 			if(EditorPrefs.GetBool("Show ES3 Window on Start", true))
-				ES3Window.InitAndShowHome();
+				InitAndShowHome();
 			EditorPrefs.SetBool("Show ES3 Window on Start", false);
 		}
 	}

@@ -17,13 +17,13 @@ namespace Game.App
         
         public async Task StartClockAsync()
         {
-            if (this.preferences.LoadData(out RealtimeData previousSession))
+            if (preferences.LoadData(out RealtimeData previousSession))
             {
-                await this.StartByPrevious(previousSession.nowSeconds);
+                await StartByPrevious(previousSession.nowSeconds);
             }
             else
             {
-                await this.StartAsFirst();
+                await StartAsFirst();
             }
         }
 
@@ -32,7 +32,7 @@ namespace Game.App
             yield return OnlineTime.RequestNowSeconds(nowSeconds =>
             {
                 var pauseTime = Math.Max(nowSeconds - previousSeconds, 0);
-                this.realtimeClock.Play(nowSeconds, pauseTime);
+                realtimeClock.Play(nowSeconds, pauseTime);
             });
         }
 
@@ -40,7 +40,7 @@ namespace Game.App
         {
             yield return OnlineTime.RequestNowSeconds(nowSeconds =>
             {
-                this.realtimeClock.Play(nowSeconds);
+                realtimeClock.Play(nowSeconds);
             });
         }
     }

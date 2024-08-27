@@ -11,12 +11,12 @@ namespace AI.BTree.UnityEditor
 
         protected virtual void Awake()
         {
-            this.node = (UnityBehaviourNode) this.target;
+            node = (UnityBehaviourNode) target;
         }
 
         public override void OnInspectorGUI()
         {
-            InspectorHelper.DrawRunningParameter(this.node.IsRunning);
+            InspectorHelper.DrawRunningParameter(node.IsRunning);
             EditorGUILayout.Space(4.0f);
             base.OnInspectorGUI();
         }

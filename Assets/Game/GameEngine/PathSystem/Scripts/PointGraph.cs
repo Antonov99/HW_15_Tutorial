@@ -13,25 +13,25 @@ namespace Game.GameEngine.PathSystem
 
         public PointGraph()
         {
-            this.pathFinder = new PointPathFinder(this);
-            this.buffer = new List<Point>();
+            pathFinder = new PointPathFinder(this);
+            buffer = new List<Point>();
         }
 
         public bool FindPath(Vector3 startPosition, Vector3 endPosition, List<Vector3> path)
         {
-            if (!this.FindClosestPoint(startPosition, out var startPoint))
+            if (!FindClosestPoint(startPosition, out var startPoint))
             {
                 Debug.LogWarning("Start point is not found!");
                 return false;
             }
 
-            if (!this.FindClosestPoint(endPosition, out var endPoint))
+            if (!FindClosestPoint(endPosition, out var endPoint))
             {
                 Debug.LogWarning("End point is not found!");
                 return false;
             }
 
-            if (!this.FindPath(startPoint, endPoint, this.buffer))
+            if (!FindPath(startPoint, endPoint, buffer))
             {
                 Debug.LogWarning($"Path between points {startPoint.name}, {endPoint.name} is not found!");
                 return false;
@@ -40,9 +40,9 @@ namespace Game.GameEngine.PathSystem
             path.Clear();
             path.Add(startPosition);
 
-            for (int i = 0, count = this.buffer.Count; i < count; i++)
+            for (int i = 0, count = buffer.Count; i < count; i++)
             {
-                var point = this.buffer[i];
+                var point = buffer[i];
                 path.Add(point.WorldPosition);
             }
 
@@ -52,7 +52,7 @@ namespace Game.GameEngine.PathSystem
 
         public bool FindPath(Point startPoint, Point endPoint, List<Point> path)
         {
-            if (!this.pathFinder.FindPath(startPoint, endPoint, path))
+            if (!pathFinder.FindPath(startPoint, endPoint, path))
             {
                 Debug.LogWarning($"Path between points {startPoint.name}, {endPoint.name} is not found!");
                 return false;
@@ -66,7 +66,7 @@ namespace Game.GameEngine.PathSystem
             result = null;
             var minDistance = -1.0f;
 
-            var pathPoints = this.GetAllPoints();
+            var pathPoints = GetAllPoints();
             foreach (var point in pathPoints)
             {
                 var distanceToPoint = point.GetDistanceTo(position);
@@ -95,7 +95,7 @@ namespace Game.GameEngine.PathSystem
 
             protected override IEnumerable<Point> GetNeighbours(Point point)
             {
-                return this.graph.GetNeighbours(point);
+                return graph.GetNeighbours(point);
             }
 
             protected override float GetDistance(Point point1, Point point2)
@@ -119,21 +119,21 @@ namespace Game.GameEngine.PathSystem
 
         protected virtual void OnDrawGizmos()
         {
-            if (this.drawGizmos)
+            if (drawGizmos)
             {
-                this.DrawPointsGraph();
+                DrawPointsGraph();
             }
         }
 
         private void DrawPointsGraph()
         {
-            var previousColor = UnityEngine.Gizmos.color;
-            Handles.color = this.gizmosColor;
+            var previousColor = Gizmos.color;
+            Handles.color = gizmosColor;
 
-            var points = this.GetAllPoints();
+            var points = GetAllPoints();
             foreach (var point in points)
             {
-                var neighbours = this.GetNeighbours(point);
+                var neighbours = GetNeighbours(point);
                 DrawNeighbors(point, neighbours);
             }
 

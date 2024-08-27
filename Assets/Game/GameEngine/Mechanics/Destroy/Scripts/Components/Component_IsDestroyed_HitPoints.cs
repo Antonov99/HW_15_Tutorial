@@ -4,7 +4,7 @@ namespace Game.GameEngine.Mechanics
     {
         public bool IsDestroyed
         {
-            get { return this.hitPointsEngine.Current <= 0; }
+            get { return hitPointsEngine.Current <= 0; }
         }
 
         private readonly IHitPoints hitPointsEngine;

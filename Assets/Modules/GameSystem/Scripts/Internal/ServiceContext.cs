@@ -9,14 +9,14 @@ namespace GameSystem
 
         internal ServiceContext()
         {
-            this.services = new List<object>();
+            services = new List<object>();
         }
 
         internal T GetService<T>()
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                if (this.services[i] is T result)
+                if (services[i] is T result)
                 {
                     return result;
                 }
@@ -27,9 +27,9 @@ namespace GameSystem
 
         internal object GetService(Type type)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var currentService = this.services[i];
+                var currentService = services[i];
                 var currentType = currentService.GetType(); 
                 
                 if (type.IsAssignableFrom(currentType))
@@ -43,9 +43,9 @@ namespace GameSystem
 
         internal bool TryGetService(Type type, out object service)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var currentService = this.services[i];
+                var currentService = services[i];
                 var currentType = currentService.GetType(); 
                 
                 if (type.IsAssignableFrom(currentType))
@@ -61,9 +61,9 @@ namespace GameSystem
         
         internal bool TryGetService<T>(out T service)
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                if (this.services[i] is T result)
+                if (services[i] is T result)
                 {
                     service = result;
                     return true;
@@ -76,15 +76,15 @@ namespace GameSystem
 
         internal List<object> GetAllServices()
         {
-            return this.services;
+            return services;
         }
         
         internal object[] GetServices(Type type)
         {
             var result = new List<object>();
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 var currentType = service.GetType(); 
                 
                 if (type.IsAssignableFrom(currentType))
@@ -99,9 +99,9 @@ namespace GameSystem
         internal T[] GetServices<T>()
         {
             var result = new List<T>();
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            for (int i = 0, count = services.Count; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 if (service is T tService)
                 {
                     result.Add(tService);
@@ -115,7 +115,7 @@ namespace GameSystem
         {
             if (service != null)
             {
-                this.AddRecursively(service);
+                AddRecursively(service);
             }
         }
 
@@ -123,7 +123,7 @@ namespace GameSystem
         {
             if (service != null)
             {
-                this.RemoveRecursively(service);
+                RemoveRecursively(service);
             }
         }
 
@@ -134,12 +134,12 @@ namespace GameSystem
                 var services = group.GetServices();
                 foreach (var innerService in services)
                 {
-                    this.AddRecursively(innerService);
+                    AddRecursively(innerService);
                 }
             }
             else
             {
-                this.services.Add(service);
+                services.Add(service);
             }
         }
 
@@ -150,12 +150,12 @@ namespace GameSystem
                 var services = group.GetServices();
                 foreach (var innerService in services)
                 {
-                    this.RemoveRecursively(innerService);
+                    RemoveRecursively(innerService);
                 }
             }
             else
             {
-                this.services.Remove(service);
+                services.Remove(service);
             }
         }
     }

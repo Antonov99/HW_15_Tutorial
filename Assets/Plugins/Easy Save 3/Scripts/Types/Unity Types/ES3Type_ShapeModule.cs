@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_ShapeModule() : base(typeof(UnityEngine.ParticleSystem.ShapeModule))
+		public ES3Type_ShapeModule() : base(typeof(ParticleSystem.ShapeModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.ShapeModule)obj;
+			var instance = (ParticleSystem.ShapeModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("shapeType", instance.shapeType);
@@ -45,14 +45,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.ShapeModule();
+			var instance = new ParticleSystem.ShapeModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.ShapeModule)obj;
+			var instance = (ParticleSystem.ShapeModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -60,28 +60,28 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "shapeType":
-						instance.shapeType = reader.Read<UnityEngine.ParticleSystemShapeType>();
+						instance.shapeType = reader.Read<ParticleSystemShapeType>();
 						break;
 					case "randomDirectionAmount":
-						instance.randomDirectionAmount = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.randomDirectionAmount = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "sphericalDirectionAmount":
-						instance.sphericalDirectionAmount = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.sphericalDirectionAmount = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "alignToDirection":
-						instance.alignToDirection = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.alignToDirection = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "radius":
-						instance.radius = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.radius = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "angle":
-						instance.angle = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.angle = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "length":
-						instance.length = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.length = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 						#if UNITY_5
 					case "box":
@@ -92,35 +92,35 @@ namespace ES3Types
 						break;
 						#else
 					case "scale":
-						instance.scale = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
+						instance.scale = reader.Read<Vector3>(ES3Type_Vector3.Instance);
 						break;
 					#endif
 					case "meshShapeType":
-						instance.meshShapeType = reader.Read<UnityEngine.ParticleSystemMeshShapeType>();
+						instance.meshShapeType = reader.Read<ParticleSystemMeshShapeType>();
 						break;
 					case "mesh":
-						instance.mesh = reader.Read<UnityEngine.Mesh>();
+						instance.mesh = reader.Read<Mesh>();
 						break;
 					case "meshRenderer":
-						instance.meshRenderer = reader.Read<UnityEngine.MeshRenderer>();
+						instance.meshRenderer = reader.Read<MeshRenderer>();
 						break;
 					case "skinnedMeshRenderer":
-						instance.skinnedMeshRenderer = reader.Read<UnityEngine.SkinnedMeshRenderer>();
+						instance.skinnedMeshRenderer = reader.Read<SkinnedMeshRenderer>();
 						break;
 					case "useMeshMaterialIndex":
-						instance.useMeshMaterialIndex = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useMeshMaterialIndex = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "meshMaterialIndex":
-						instance.meshMaterialIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.meshMaterialIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "useMeshColors":
-						instance.useMeshColors = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useMeshColors = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "normalOffset":
-						instance.normalOffset = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.normalOffset = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "arc":
-						instance.arc = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.arc = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					default:
 						reader.Skip();

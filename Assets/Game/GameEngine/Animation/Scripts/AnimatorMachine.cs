@@ -23,50 +23,50 @@ namespace Game.GameEngine.Animation
 
         public event Action OnEventReceived
         {
-            add { this.eventDispatcher.OnEventReceived += value; }
-            remove { this.eventDispatcher.OnEventReceived -= value; }
+            add { eventDispatcher.OnEventReceived += value; }
+            remove { eventDispatcher.OnEventReceived -= value; }
         }
 
         public event Action<bool> OnBoolReceived
         {
-            add { this.eventDispatcher.OnBoolReceived += value; }
-            remove { this.eventDispatcher.OnBoolReceived -= value; }
+            add { eventDispatcher.OnBoolReceived += value; }
+            remove { eventDispatcher.OnBoolReceived -= value; }
         }
 
         public event Action<int> OnIntReceived
         {
-            add { this.eventDispatcher.OnIntReceived += value; }
-            remove { this.eventDispatcher.OnIntReceived -= value; }
+            add { eventDispatcher.OnIntReceived += value; }
+            remove { eventDispatcher.OnIntReceived -= value; }
         }
 
         public event Action<float> OnFloatReceived
         {
-            add { this.eventDispatcher.OnFloatReceived += value; }
-            remove { this.eventDispatcher.OnFloatReceived -= value; }
+            add { eventDispatcher.OnFloatReceived += value; }
+            remove { eventDispatcher.OnFloatReceived -= value; }
         }
 
         public event Action<string> OnStringReceived
         {
-            add { this.eventDispatcher.OnStringReceived += value; }
-            remove { this.eventDispatcher.OnStringReceived -= value; }
+            add { eventDispatcher.OnStringReceived += value; }
+            remove { eventDispatcher.OnStringReceived -= value; }
         }
 
         public event Action<Object> OnObjectReceived
         {
-            add { this.eventDispatcher.OnObjectReceived += value; }
-            remove { this.eventDispatcher.OnObjectReceived -= value; }
+            add { eventDispatcher.OnObjectReceived += value; }
+            remove { eventDispatcher.OnObjectReceived -= value; }
         }
 
         public event Action<AnimationClip> OnAnimationStarted
         {
-            add { this.eventDispatcher.OnAnimationStarted += value; }
-            remove { this.eventDispatcher.OnAnimationStarted -= value; }
+            add { eventDispatcher.OnAnimationStarted += value; }
+            remove { eventDispatcher.OnAnimationStarted -= value; }
         }
 
         public event Action<AnimationClip> OnAnimationFinished
         {
-            add { this.eventDispatcher.OnAnimationEnded += value; }
-            remove { this.eventDispatcher.OnAnimationEnded -= value; }
+            add { eventDispatcher.OnAnimationEnded += value; }
+            remove { eventDispatcher.OnAnimationEnded -= value; }
         }
 
         [PropertySpace]
@@ -75,21 +75,21 @@ namespace Game.GameEngine.Animation
         [ShowInInspector]
         public bool IsRootMotion
         {
-            get { return this.animator != null && this.animator.applyRootMotion; }
+            get { return animator != null && animator.applyRootMotion; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public float BaseSpeed
         {
-            get { return this.baseSpeed; }
+            get { return baseSpeed; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public int CurrentState
         {
-            get { return this.stateId; }
+            get { return stateId; }
         }
 
         private int stateId;
@@ -117,12 +117,12 @@ namespace Game.GameEngine.Animation
 
         public bool AddState(int id, IState state)
         {
-            if (this.FindState(id, out _))
+            if (FindState(id, out _))
             {
                 return false;
             }
 
-            this.states.Add(new StateEntry
+            states.Add(new StateEntry
             {
                 id = id,
                 state = state
@@ -133,12 +133,12 @@ namespace Game.GameEngine.Animation
 
         public bool RemoveState(int id)
         {
-            for (int i = 0, count = this.states.Count; i < count; i++)
+            for (int i = 0, count = states.Count; i < count; i++)
             {
-                var holder = this.states[i];
+                var holder = states[i];
                 if (holder.id.Equals(id))
                 {
-                    this.states.Remove(holder);
+                    states.Remove(holder);
                     return true;
                 }
             }
@@ -149,23 +149,23 @@ namespace Game.GameEngine.Animation
         public void PlayAnimation(string animationName, string layerName, float normalizedTime = 0)
         {
             var id = Animator.StringToHash(animationName);
-            this.PlayAnimation(id, layerName, normalizedTime);
+            PlayAnimation(id, layerName, normalizedTime);
         }
 
         public void PlayAnimation(int hash, string layerName, float normalizedTime = 0)
         {
-            var index = this.animator.GetLayerIndex(layerName);
-            this.PlayAnimation(hash, index, normalizedTime);
+            var index = animator.GetLayerIndex(layerName);
+            PlayAnimation(hash, index, normalizedTime);
         }
 
         public void SetLayerWeight(int layer, float weight)
         {
-            this.animator.SetLayerWeight(layer, weight);
+            animator.SetLayerWeight(layer, weight);
         }
 
         public void PlayAnimation(int hash, int layer, float normalizedTime = 0)
         {
-            this.animator.Play(hash, layer, normalizedTime);
+            animator.Play(hash, layer, normalizedTime);
         }
 
         public void SwitchState(int stateId)
@@ -176,104 +176,104 @@ namespace Game.GameEngine.Animation
             }
 
             this.stateId = stateId;
-            this.animator.SetInteger(STATE_PARAMETER, this.stateId);
+            animator.SetInteger(STATE_PARAMETER, this.stateId);
         }
 
         public void AddSpeedMultiplier(IAnimatorMultiplier multiplier)
         {
             this.multiplier.Add(multiplier);
-            this.UpdateAnimatorSpeed();
+            UpdateAnimatorSpeed();
         }
 
         public void RemoveSpeedMultiplier(IAnimatorMultiplier multiplier)
         {
             this.multiplier.Remove(multiplier);
-            this.UpdateAnimatorSpeed();
+            UpdateAnimatorSpeed();
         }
 
         public void SetBaseSpeed(float speed)
         {
-            if (Mathf.Approximately(speed, this.baseSpeed))
+            if (Mathf.Approximately(speed, baseSpeed))
             {
                 return;
             }
 
-            this.baseSpeed = speed;
-            this.UpdateAnimatorSpeed();
+            baseSpeed = speed;
+            UpdateAnimatorSpeed();
         }
 
         public void ApplyRootMotion()
         {
-            this.animator.applyRootMotion = true;
+            animator.applyRootMotion = true;
         }
 
         public void ResetRootMotion(bool resetPosition = true, bool resetRotation = true)
         {
-            this.animator.applyRootMotion = false;
+            animator.applyRootMotion = false;
             if (resetPosition)
             {
-                this.animator.transform.localPosition = Vector3.zero;
+                animator.transform.localPosition = Vector3.zero;
             }
 
             if (resetRotation)
             {
-                this.animator.transform.localRotation = Quaternion.identity;
+                animator.transform.localRotation = Quaternion.identity;
             }
         }
 
         public virtual void Awake()
         {
-            this.stateId = this.animator.GetInteger(STATE_PARAMETER);
-            this.baseSpeed = this.animator.speed;
+            stateId = animator.GetInteger(STATE_PARAMETER);
+            baseSpeed = animator.speed;
         }
 
         public virtual void OnEnable()
         {
-            this.eventDispatcher.OnStateEntered += this.OnEnterState;
-            this.eventDispatcher.OnStateExited += this.OnExitState;
+            eventDispatcher.OnStateEntered += OnEnterState;
+            eventDispatcher.OnStateExited += OnExitState;
         }
 
         public virtual void Update(float deltaTime)
         {
-            this.UpdateTransitions();
+            UpdateTransitions();
         }
 
         public virtual void OnDisable()
         {
-            this.eventDispatcher.OnStateEntered -= this.OnEnterState;
-            this.eventDispatcher.OnStateExited -= this.OnExitState;
+            eventDispatcher.OnStateEntered -= OnEnterState;
+            eventDispatcher.OnStateExited -= OnExitState;
         }
 
         private void OnEnterState(AnimatorStateInfo state, int stateId, int layerindex)
         {
-            if (this.FindState(stateId, out var fsmState))
+            if (FindState(stateId, out var fsmState))
             {
                 fsmState.Enter();
             }
 
-            this.OnStateEntered?.Invoke(state, stateId, layerindex);
+            OnStateEntered?.Invoke(state, stateId, layerindex);
         }
 
         private void OnExitState(AnimatorStateInfo state, int stateId, int layerindex)
         {
-            if (this.FindState(stateId, out var fsmState))
+            if (FindState(stateId, out var fsmState))
             {
                 fsmState.Exit();
             }
 
-            this.OnStateExited?.Invoke(state, stateId, layerindex);
+            OnStateExited?.Invoke(state, stateId, layerindex);
         }
 
         private void UpdateAnimatorSpeed()
         {
-            this.animator.speed = this.baseSpeed * this.multiplier.GetValue();
+            animator.speed = baseSpeed * multiplier.GetValue();
         }
 
         private bool FindState(int id, out IState state)
         {
-            for (int i = 0, count = this.states.Count; i < count; i++)
+            for (int i = 0, count = states.Count; i < count; i++)
             {
-                var holder = this.states[i];
+                var holder = states[i];
                 if (holder.id.Equals(id))
                 {
                     state = holder.state;
@@ -288,12 +288,12 @@ namespace Game.GameEngine.Animation
         
         private void UpdateTransitions()
         {
-            for (int i = 0, count = this.orderedTransitions.Count; i < count; i++)
+            for (int i = 0, count = orderedTransitions.Count; i < count; i++)
             {
-                var transition = this.orderedTransitions[i];
+                var transition = orderedTransitions[i];
                 if (transition.condition.IsTrue())
                 {
-                    this.SwitchState(transition.id);
+                    SwitchState(transition.id);
                     return;
                 }
             }

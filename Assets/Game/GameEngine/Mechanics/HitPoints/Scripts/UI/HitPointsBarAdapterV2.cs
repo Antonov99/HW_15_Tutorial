@@ -26,62 +26,62 @@ namespace Game.GameEngine.Mechanics
 
         void IAwakeListener.Awake()
         {
-            this.SetupBar();
+            SetupBar();
         }
 
         void IEnableListener.OnEnable()
         {
-            this.hitPoints.OnSetuped += this.SetupBar;
-            this.hitPoints.OnCurrentPointsChanged += this.UpdateBar;
+            hitPoints.OnSetuped += SetupBar;
+            hitPoints.OnCurrentPointsChanged += UpdateBar;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.hitPoints.OnSetuped -= this.SetupBar;
-            this.hitPoints.OnCurrentPointsChanged -= this.UpdateBar;
+            hitPoints.OnSetuped -= SetupBar;
+            hitPoints.OnCurrentPointsChanged -= UpdateBar;
         }
 
         private void SetupBar()
         {
-            this.ResetCoroutines();
+            ResetCoroutines();
 
             var hitPoints = this.hitPoints.Current;
             var maxHitPoints = this.hitPoints.Max;
 
             var showBar = hitPoints > 0 && hitPoints < maxHitPoints;
-            this.view.SetVisible(showBar);
-            this.view.SetHitPoints(hitPoints, maxHitPoints);
+            view.SetVisible(showBar);
+            view.SetHitPoints(hitPoints, maxHitPoints);
         }
 
         private void UpdateBar(int hitPoints)
         {
-            this.ResetCoroutines();
+            ResetCoroutines();
 
             var maxHitPoints = this.hitPoints.Max;
 
-            this.view.SetVisible(true);
-            this.view.SetHitPoints(hitPoints, maxHitPoints);
+            view.SetVisible(true);
+            view.SetHitPoints(hitPoints, maxHitPoints);
 
             if (hitPoints <= 0 || hitPoints == maxHitPoints)
             {
-                this.hideCoroutine = this.context.StartCoroutine(this.HideWithDelay());
+                hideCoroutine = context.StartCoroutine(HideWithDelay());
             }
         }
 
         private void ResetCoroutines()
         {
-            if (this.hideCoroutine != null)
+            if (hideCoroutine != null)
             {
-                this.context.StopCoroutine(this.hideCoroutine);
-                this.hideCoroutine = null;
+                context.StopCoroutine(hideCoroutine);
+                hideCoroutine = null;
             }
         }
 
         private IEnumerator HideWithDelay()
         {
             yield return new WaitForSeconds(1.0f);
-            this.view.SetVisible(false);
-            this.hideCoroutine = null;
+            view.SetVisible(false);
+            hideCoroutine = null;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Game.Meta
         public bool SelectMissions(out List<MissionData> missions)
         {
             missions = new List<MissionData>();
-            return this.database.SelectQuery("SELECT * FROM missions", missions, reader => new MissionData
+            return database.SelectQuery("SELECT * FROM missions", missions, reader => new MissionData
             {
                 id = reader.GetString(0),
                 serializedState = reader.GetString(1)
@@ -29,7 +29,7 @@ namespace Game.Meta
 
         public void DeleteMissions()
         {
-            this.database.DeleteQuery("DELETE FROM missions");
+            database.DeleteQuery("DELETE FROM missions");
         }
 
         public void InsertMissions(MissionData[] missions)
@@ -39,7 +39,7 @@ namespace Game.Meta
                 data.serializedState
             ));
             var command = string.Format("INSERT INTO missions (id, state) VALUES {0}", serializedMissions);
-            this.database.InsertQuery(command);
+            database.InsertQuery(command);
         }
     }
 }

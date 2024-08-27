@@ -14,12 +14,12 @@ namespace Game.UI
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void SetPrice(string price)
         {
-            this.priceText.text = price;
+            priceText.text = price;
         }
     }
 }

@@ -55,12 +55,12 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void ConstructEnable()
             {
-                this.enableMechanics.Construct(this.isEnable, isEnable =>
+                enableMechanics.Construct(this.isEnable, isEnable =>
                 {
                     if (isEnable)
-                        this.sensor.Play();
+                        sensor.Play();
                     else
-                        this.sensor.Stop();
+                        sensor.Stop();
                 });
             }
 
@@ -68,11 +68,11 @@ namespace Game.Gameplay.Enemies
             private void ConstructSensor(ScriptableEnemyWarriorAI config)
             {
                 var opponentDetector = new EnemyOpponentDetector(
-                    this.blackboard,
+                    blackboard,
                     ScriptableEnemyWarriorAI.TARGET_KEY,
                     config.detectTargetConditions
                 );
-                this.sensor.AddListener(opponentDetector);
+                sensor.AddListener(opponentDetector);
             }
         }
 
@@ -85,8 +85,8 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void Construct(Core core)
             {
-                this.ai.Add(new Component_Enable(core.isEnable));
-                this.ai.Add(new Component_Blackboard(core.blackboard));
+                ai.Add(new Component_Enable(core.isEnable));
+                ai.Add(new Component_Blackboard(core.blackboard));
             }
         }
 
@@ -109,24 +109,24 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void ConstructTree()
             {
-                this.behaviourTree.root = new BehaviourNodeSelector(
-                    this.attackBranch,
-                    this.patrolBranch
+                behaviourTree.root = new BehaviourNodeSelector(
+                    attackBranch,
+                    patrolBranch
                 );
             }
 
             [Construct]
             private void ConstructUpdateMechanics(Core core)
             {
-                this.updateMechanics.Construct(_ =>
+                updateMechanics.Construct(_ =>
                 {
                     if (core.isEnable.Current)
                     {
-                        this.behaviourTree.Run(null);
+                        behaviourTree.Run(null);
                     }
                     else
                     {
-                        this.behaviourTree.Abort();
+                        behaviourTree.Abort();
                     }
                 });
             }
@@ -134,9 +134,9 @@ namespace Game.Gameplay.Enemies
             [Construct]
             private void ConstructAbort(Core core)
             {
-                this.treeAborter.tree = this.behaviourTree;
-                this.treeAborter.blackboard = core.blackboard;
-                this.treeAborter.blackboardKeys = new List<string>
+                treeAborter.tree = behaviourTree;
+                treeAborter.blackboard = core.blackboard;
+                treeAborter.blackboardKeys = new List<string>
                 {
                     ScriptableEnemyWarriorAI.TARGET_KEY
                 };
@@ -159,19 +159,19 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf()
                 {
-                    this.children = new IBehaviourNode[]
+                    children = new IBehaviourNode[]
                     {
-                        this.conditionNode,
-                        this.followNode,
-                        this.waitForSeconds,
-                        new BehaviourNodeDecorator(this.combatNode, success: true)
+                        conditionNode,
+                        followNode,
+                        waitForSeconds,
+                        new BehaviourNodeDecorator(combatNode, success: true)
                     };
                 }
 
                 [Construct]
                 private void ConstructConditionNode(Core core)
                 {
-                    this.conditionNode.condition = new BTCondition_HasBlackboardVariable(
+                    conditionNode.condition = new BTCondition_HasBlackboardVariable(
                         core.blackboard, ScriptableEnemyWarriorAI.TARGET_KEY
                     );
                 }
@@ -179,27 +179,27 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructFollowNode(ScriptableEnemyWarriorAI config, MonoBehaviour monoContext, Core core)
                 {
-                    this.followNode.ConstructBlackboard(core.blackboard);
-                    this.followNode.ConstructBlackboardKeys(
+                    followNode.ConstructBlackboard(core.blackboard);
+                    followNode.ConstructBlackboardKeys(
                         ScriptableEnemyWarriorAI.UNIT_KEY,
                         ScriptableEnemyWarriorAI.TARGET_KEY,
                         ScriptableEnemyWarriorAI.SURFACE_KEY
                     );
-                    this.followNode.ConstructIntermediateDistance(config.pointStoppingDistance);
-                    this.followNode.ConstructStoppingDistance(config.meleeStoppingDistance);
+                    followNode.ConstructIntermediateDistance(config.pointStoppingDistance);
+                    followNode.ConstructStoppingDistance(config.meleeStoppingDistance);
                 }
 
                 [Construct]
                 private void ConstructWaitNode(MonoBehaviour monoContext)
                 {
-                    this.waitForSeconds.waitSeconds = 0.1f;
+                    waitForSeconds.waitSeconds = 0.1f;
                 }
 
                 [Construct]
                 private void ConstructCombatNode(Core core)
                 {
-                    this.combatNode.ConstructBlackboard(core.blackboard);
-                    this.combatNode.ConstructBlackboardKeys(
+                    combatNode.ConstructBlackboard(core.blackboard);
+                    combatNode.ConstructBlackboardKeys(
                         ScriptableEnemyWarriorAI.UNIT_KEY,
                         ScriptableEnemyWarriorAI.TARGET_KEY
                     );
@@ -223,20 +223,20 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructSelf()
                 {
-                    this.children = new IBehaviourNode[]
+                    children = new IBehaviourNode[]
                     {
-                        this.assignPositionNode,
-                        this.moveNextPointNode,
-                        this.moveToPositionNode,
-                        this.waitNode
+                        assignPositionNode,
+                        moveNextPointNode,
+                        moveToPositionNode,
+                        waitNode
                     };
                 }
 
                 [Construct]
                 private void ConstructAssignPositionNode(Core core)
                 {
-                    this.assignPositionNode.ConstructBlackboard(core.blackboard);
-                    this.assignPositionNode.ConstructBlackboardKeys(
+                    assignPositionNode.ConstructBlackboard(core.blackboard);
+                    assignPositionNode.ConstructBlackboardKeys(
                         ScriptableEnemyWarriorAI.WAYPOINTS_KEY,
                         ScriptableEnemyWarriorAI.TARGET_POSITION_KEY
                     );
@@ -245,25 +245,25 @@ namespace Game.Gameplay.Enemies
                 [Construct]
                 private void ConstructMoveNextNode(Core core)
                 {
-                    this.moveNextPointNode.ConstructBlackboard(core.blackboard);
-                    this.moveNextPointNode.ConstructBlackboardKeys(ScriptableEnemyWarriorAI.WAYPOINTS_KEY);
+                    moveNextPointNode.ConstructBlackboard(core.blackboard);
+                    moveNextPointNode.ConstructBlackboardKeys(ScriptableEnemyWarriorAI.WAYPOINTS_KEY);
                 }
 
                 [Construct]
                 private void ConstructMoveToPositionNode(Core core, ScriptableEnemyWarriorAI config)
                 {
-                    this.moveToPositionNode.ConstructBlackboard(core.blackboard);
-                    this.moveToPositionNode.ConstructBlackboardKeys(
+                    moveToPositionNode.ConstructBlackboard(core.blackboard);
+                    moveToPositionNode.ConstructBlackboardKeys(
                         ScriptableEnemyWarriorAI.UNIT_KEY,
                         ScriptableEnemyWarriorAI.TARGET_POSITION_KEY
                     );
-                    this.moveToPositionNode.ConstructStoppingDistance(config.pointStoppingDistance);
+                    moveToPositionNode.ConstructStoppingDistance(config.pointStoppingDistance);
                 }
 
                 [Construct]
                 private void ConstructWaitNode(ScriptableEnemyWarriorAI config)
                 {
-                    this.waitNode.waitSeconds = config.patrolWaitTime;
+                    waitNode.waitSeconds = config.patrolWaitTime;
                 }
             }
         }
@@ -292,26 +292,26 @@ namespace Game.Gameplay.Enemies
                 var sensor = ai.core.sensor;
 
                 //Set Unit:
-                blackboard.AddVariable(ScriptableEnemyWarriorAI.UNIT_KEY, this.unit);
+                blackboard.AddVariable(ScriptableEnemyWarriorAI.UNIT_KEY, unit);
 
                 //Set Waypoints:
-                var waypoints = this.waypointsPath.GetPositionPoints().ToArray();
-                var iterator = IteratorFactory.CreateIterator(this.waypointMode, waypoints);
+                var waypoints = waypointsPath.GetPositionPoints().ToArray();
+                var iterator = IteratorFactory.CreateIterator(waypointMode, waypoints);
                 blackboard.AddVariable(ScriptableEnemyWarriorAI.WAYPOINTS_KEY, iterator);
 
                 //Set surface:
-                var polygon = GameObject.Find(this.surfacePolygonName).GetComponent<MonoPolygon>();
+                var polygon = GameObject.Find(surfacePolygonName).GetComponent<MonoPolygon>();
                 blackboard.AddVariable(ScriptableEnemyWarriorAI.SURFACE_KEY, polygon);
 
                 //Set center point:
-                var centerPoint = this.unit.Get<IComponent_GetPivot>().Pivot;
+                var centerPoint = unit.Get<IComponent_GetPivot>().Pivot;
                 sensor.SetCenterPoint(centerPoint);
             }
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.external.ConstructGame(this, context);
+            external.ConstructGame(this, context);
         }
     }
 }

@@ -13,10 +13,10 @@ namespace Game.GameEngine.Development
 
         public void InstantiatePrefabs()
         {
-            for (int i = 0, count = this.prefabs.Length; i < count; i++)
+            for (int i = 0, count = prefabs.Length; i < count; i++)
             {
-                var prefab = this.prefabs[i];
-                Instantiate(prefab, this.container);
+                var prefab = prefabs[i];
+                Instantiate(prefab, container);
             }
         }
     }

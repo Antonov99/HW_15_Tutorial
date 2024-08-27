@@ -19,24 +19,24 @@ namespace Game.Meta
 
         void IGameReadyElement.ReadyGame()
         {
-            this.buyManager.OnBuyStarted += this.OnStartBuy;
-            this.buyManager.OnBuyCompleted += this.OnFinishBuy;
+            buyManager.OnBuyStarted += OnStartBuy;
+            buyManager.OnBuyCompleted += OnFinishBuy;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.buyManager.OnBuyStarted -= this.OnStartBuy;
-            this.buyManager.OnBuyCompleted -= this.OnFinishBuy;
+            buyManager.OnBuyStarted -= OnStartBuy;
+            buyManager.OnBuyCompleted -= OnFinishBuy;
         }
 
         private void OnStartBuy(Product product)
         {
-            this.previousMoney = this.moneyStorage.Money;
+            previousMoney = moneyStorage.Money;
         }
 
         private void OnFinishBuy(Product product)
         {
-            ProductAnalytics.LogProductBought(product, this.previousMoney, this.moneyStorage.Money);
+            ProductAnalytics.LogProductBought(product, previousMoney, moneyStorage.Money);
         }
     }
 }

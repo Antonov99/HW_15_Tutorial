@@ -28,53 +28,53 @@ namespace Game.Meta
         protected override void OnShow(IDialoguePresentationModel presentationModel)
         {
             this.presentationModel = presentationModel;
-            this.presentationModel.OnStateChanged += this.OnStateChanged;
-            this.presentationModel.OnFinished += this.OnFinished;
+            this.presentationModel.OnStateChanged += OnStateChanged;
+            this.presentationModel.OnFinished += OnFinished;
 
-            this.icon.sprite = this.presentationModel.Icon;
+            icon.sprite = this.presentationModel.Icon;
 
-            this.UpdateMessage();
-            this.UpdateOptions();
+            UpdateMessage();
+            UpdateOptions();
         }
 
         protected override void OnHide()
         {
-            this.ResetOptions();
+            ResetOptions();
         }
 
         private void OnFinished()
         {
-            this.onFinished.Invoke();
+            onFinished.Invoke();
         }
 
         private void OnStateChanged()
         {
-            this.UpdateMessage();
-            this.UpdateOptions();
+            UpdateMessage();
+            UpdateOptions();
         }
 
         private void UpdateMessage()
         {
-            this.messageText.text = this.presentationModel.CurrentMessage;
+            messageText.text = presentationModel.CurrentMessage;
         }
 
         private void UpdateOptions()
         {
-            var options = this.presentationModel.CurrentOptions;
+            var options = presentationModel.CurrentOptions;
             var count = options.Length;
 
             for (var i = 0; i < count; i++)
             {
                 var option = options[i];
-                var view = this.optionViews[i];
+                var view = optionViews[i];
                 view.SetVisible(true);
                 view.SetText(option.Text);
                 view.SetClickAction(option.OnSelected);
             }
 
-            for (int i = count, length = this.optionViews.Length; i < length; i++)
+            for (int i = count, length = optionViews.Length; i < length; i++)
             {
-                var view = this.optionViews[i];
+                var view = optionViews[i];
                 view.SetVisible(false);
                 view.ClearClickAction();
             }
@@ -82,9 +82,9 @@ namespace Game.Meta
         
         private void ResetOptions()
         {
-            for (int i = 0, count = this.optionViews.Length; i < count; i++)
+            for (int i = 0, count = optionViews.Length; i < count; i++)
             {
-                var view = this.optionViews[i];
+                var view = optionViews[i];
                 view.ClearClickAction();
             }
         }

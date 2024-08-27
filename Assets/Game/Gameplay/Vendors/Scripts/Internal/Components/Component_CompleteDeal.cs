@@ -13,7 +13,7 @@ namespace Game.Gameplay.Vendors
 
         public void NotifyAboutCompleted()
         {
-            this.emitter.Call();
+            emitter.Call();
         }
     }
 }

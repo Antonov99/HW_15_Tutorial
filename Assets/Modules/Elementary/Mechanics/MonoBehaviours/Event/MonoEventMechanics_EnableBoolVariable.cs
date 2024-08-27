@@ -13,7 +13,7 @@ namespace Elementary
         
         protected override void OnEvent()
         {
-            this.toggle.SetValue(this.setEnable);
+            toggle.SetValue(setEnable);
         }
     }
 }

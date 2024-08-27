@@ -21,10 +21,10 @@ namespace ES3Internal
 		public ES3Member(ES3Reflection.ES3ReflectedMember reflectedMember)
 		{
 			this.reflectedMember = reflectedMember;
-			this.name = reflectedMember.Name;
-			this.type = reflectedMember.MemberType;
-			this.isProperty = reflectedMember.isProperty;
-			this.useReflection = true;
+			name = reflectedMember.Name;
+			type = reflectedMember.MemberType;
+			isProperty = reflectedMember.isProperty;
+			useReflection = true;
 		}
 	}
 }

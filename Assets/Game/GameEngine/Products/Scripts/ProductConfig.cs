@@ -12,12 +12,12 @@ namespace Game.GameEngine.Products
     {
         public string Id
         {
-            get { return this.origin.Id; }
+            get { return origin.Id; }
         }
 
         public Product Prototype
         {
-            get { return this.origin; }
+            get { return origin; }
         }
 
         [OdinSerialize]

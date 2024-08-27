@@ -10,7 +10,7 @@ namespace Game.Meta
     {
         public int RequiredKills
         {
-            get { return this.requiredKills; }
+            get { return requiredKills; }
         }
 
         [Header("Quest")]

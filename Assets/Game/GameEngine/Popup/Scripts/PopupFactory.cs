@@ -17,8 +17,8 @@ namespace Game.GameEngine
 
         public MonoWindow CreateWindow(PopupName key)
         {
-            var prefab = this.catalog.GetPrefab(key);
-            var popup = GameObject.Instantiate(prefab, this.container);
+            var prefab = catalog.GetPrefab(key);
+            var popup = Object.Instantiate(prefab, container);
             return popup;
         }
     }

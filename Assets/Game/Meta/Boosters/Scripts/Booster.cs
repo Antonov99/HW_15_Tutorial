@@ -19,29 +19,29 @@ namespace Game.Meta
         [ShowInInspector]
         public string Id
         {
-            get { return this.config.id; }
+            get { return config.id; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public bool IsActive
         {
-            get { return this.timer.IsPlaying; }
+            get { return timer.IsPlaying; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public float RemainingTime
         {
-            get { return this.timer.RemainingTime; }
-            set { this.timer.RemainingTime = value; }
+            get { return timer.RemainingTime; }
+            set { timer.RemainingTime = value; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public float Duration
         {
-            get { return this.timer.Duration; }
+            get { return timer.Duration; }
         }
 
         [ReadOnly]
@@ -49,14 +49,14 @@ namespace Game.Meta
         [ProgressBar(0, 1)]
         public float Progress
         {
-            get { return this.timer.Progress; }
+            get { return timer.Progress; }
         }
 
         [ReadOnly]
         [ShowInInspector]
         public BoosterMetadata Metadata
         {
-            get { return this.config.metadata; }
+            get { return config.metadata; }
         }
 
         private readonly BoosterConfig config;
@@ -66,38 +66,38 @@ namespace Game.Meta
         public Booster(BoosterConfig config)
         {
             this.config = config;
-            this.timer = new Countdown(config.duration);
+            timer = new Countdown(config.duration);
         }
 
         public void Start()
         {
-            if (this.timer.IsPlaying)
+            if (timer.IsPlaying)
             {
                 throw new Exception("Timer is already started!");
             }
 
-            this.timer.OnTimeChanged += this.OnChangeTime;
-            this.timer.OnEnded += this.OnEnd;
+            timer.OnTimeChanged += OnChangeTime;
+            timer.OnEnded += OnEnd;
 
-            this.OnStart();
-            this.OnStarted?.Invoke(this);
+            OnStart();
+            OnStarted?.Invoke(this);
 
-            this.timer.Play();
+            timer.Play();
         }
 
         public void Stop()
         {
-            if (!this.timer.IsPlaying)
+            if (!timer.IsPlaying)
             {
                 return;
             }
 
-            this.timer.OnEnded -= this.OnEnd;
-            this.timer.OnTimeChanged -= this.OnChangeTime;
-            this.timer.Stop();
+            timer.OnEnded -= OnEnd;
+            timer.OnTimeChanged -= OnChangeTime;
+            timer.Stop();
 
-            this.OnStop();
-            this.OnStopped?.Invoke(this);
+            OnStop();
+            OnStopped?.Invoke(this);
         }
 
         protected abstract void OnStart();
@@ -106,16 +106,16 @@ namespace Game.Meta
 
         private void OnEnd()
         {
-            this.timer.OnEnded -= this.OnEnd;
-            this.timer.OnTimeChanged -= this.OnChangeTime;
+            timer.OnEnded -= OnEnd;
+            timer.OnTimeChanged -= OnChangeTime;
 
-            this.OnStop();
-            this.OnEnded?.Invoke(this);
+            OnStop();
+            OnEnded?.Invoke(this);
         }
 
         private void OnChangeTime()
         {
-            this.OnTimeChanged?.Invoke(this);
+            OnTimeChanged?.Invoke(this);
         }
     }
 }

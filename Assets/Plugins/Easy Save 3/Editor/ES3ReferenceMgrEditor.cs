@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ES3Internal;
 
 [CustomEditor(typeof(ES3ReferenceMgr))]
-[System.Serializable]
+[Serializable]
 public class ES3ReferenceMgrEditor : Editor
 {
     private bool isDraggingOver = false;
@@ -131,7 +132,7 @@ public class ES3ReferenceMgrEditor : Editor
     [MenuItem("Assets/Easy Save 3/Add Reference(s) to Manager", false, 33)]
     public static void AddReferenceToManager()
     {
-        var mgr = ES3ReferenceMgr.Current;
+        var mgr = ES3ReferenceMgrBase.Current;
         if (mgr == null)
         {
             EditorUtility.DisplayDialog("Could not add reference to manager", "This object could not be added to the reference manager because no reference manager exists in this scene. To create one, go to Assets > Easy Save 3 > Add Manager to Scene", "Ok");
@@ -163,7 +164,7 @@ public class ES3ReferenceMgrEditor : Editor
     [MenuItem("Assets/Easy Save 3/Add Reference(s) to Manager", true, 33)]
     private static bool CanAddReferenceToManager()
     {
-        return Selection.objects != null && Selection.objects.Length > 0 && ES3ReferenceMgr.Current != null;
+        return Selection.objects != null && Selection.objects.Length > 0 && ES3ReferenceMgrBase.Current != null;
     }
 
     [MenuItem("GameObject/Easy Save 3/Add Manager to Scene", false, 33)]
@@ -181,6 +182,6 @@ public class ES3ReferenceMgrEditor : Editor
     [MenuItem("Tools/Easy Save 3/Add Manager to Scene", true, 150)]
     private static bool CanEnableForScene()
     {
-        return ES3ReferenceMgr.Current == null;
+        return ES3ReferenceMgrBase.Current == null;
     }
 }

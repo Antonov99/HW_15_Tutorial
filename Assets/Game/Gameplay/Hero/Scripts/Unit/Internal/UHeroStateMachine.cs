@@ -30,32 +30,32 @@ namespace Game.Gameplay.Hero
 
         public override void Enter()
         {
-            if (this.moveEngine != null)
+            if (moveEngine != null)
             {
-                this.moveEngine.OnStartMove += this.OnMoveStarted;
-                this.moveEngine.OnStopMove += this.OnMoveEnded;
+                moveEngine.OnStartMove += OnMoveStarted;
+                moveEngine.OnStopMove += OnMoveEnded;
             }
 
-            if (this.combatOperator != null)
+            if (combatOperator != null)
             {
-                this.combatOperator.OnStarted += this.OnCombatStarted;
-                this.combatOperator.OnStopped += this.OnCombatEnded;
+                combatOperator.OnStarted += OnCombatStarted;
+                combatOperator.OnStopped += OnCombatEnded;
             }
 
-            if (this.harvestEngine != null)
+            if (harvestEngine != null)
             {
-                this.harvestEngine.OnStarted += this.OnHarvestStarted;
-                this.harvestEngine.OnStopped += this.OnHarvestEnded;
+                harvestEngine.OnStarted += OnHarvestStarted;
+                harvestEngine.OnStopped += OnHarvestEnded;
             }
 
-            if (this.destroyReceiver != null)
+            if (destroyReceiver != null)
             {
-                this.destroyReceiver.OnDestroy += this.OnDied;
+                destroyReceiver.OnDestroy += OnDied;
             }
 
-            if (this.respawnReceiver != null)
+            if (respawnReceiver != null)
             {
-                this.respawnReceiver.OnEvent += this.OnRespawned;
+                respawnReceiver.OnEvent += OnRespawned;
             }
 
             base.Enter();
@@ -63,32 +63,32 @@ namespace Game.Gameplay.Hero
 
         public override void Exit()
         {
-            if (this.moveEngine != null)
+            if (moveEngine != null)
             {
-                this.moveEngine.OnStartMove -= this.OnMoveStarted;
-                this.moveEngine.OnStopMove -= this.OnMoveEnded;
+                moveEngine.OnStartMove -= OnMoveStarted;
+                moveEngine.OnStopMove -= OnMoveEnded;
             }
 
-            if (this.combatOperator != null)
+            if (combatOperator != null)
             {
-                this.combatOperator.OnStarted -= this.OnCombatStarted;
-                this.combatOperator.OnStopped -= this.OnCombatEnded;
+                combatOperator.OnStarted -= OnCombatStarted;
+                combatOperator.OnStopped -= OnCombatEnded;
             }
 
-            if (this.harvestEngine != null)
+            if (harvestEngine != null)
             {
-                this.harvestEngine.OnStarted -= this.OnHarvestStarted;
-                this.harvestEngine.OnStopped -= this.OnHarvestEnded;
+                harvestEngine.OnStarted -= OnHarvestStarted;
+                harvestEngine.OnStopped -= OnHarvestEnded;
             }
 
-            if (this.destroyReceiver != null)
+            if (destroyReceiver != null)
             {
-                this.destroyReceiver.OnDestroy -= this.OnDied;
+                destroyReceiver.OnDestroy -= OnDied;
             }
 
-            if (this.respawnReceiver != null)
+            if (respawnReceiver != null)
             {
-                this.respawnReceiver.OnEvent -= this.OnRespawned;
+                respawnReceiver.OnEvent -= OnRespawned;
             }
 
             base.Exit();
@@ -98,53 +98,53 @@ namespace Game.Gameplay.Hero
 
         private void OnDied(DestroyArgs destroyArgs)
         {
-            this.SwitchState(HeroStateId.DEATH);
+            SwitchState(HeroStateId.DEATH);
         }
 
         private void OnMoveStarted()
         {
-            this.SwitchState(HeroStateId.MOVE);
+            SwitchState(HeroStateId.MOVE);
         }
 
         private void OnMoveEnded()
         {
-            if (this.CurrentState == HeroStateId.MOVE)
+            if (CurrentState == HeroStateId.MOVE)
             {
-                this.SwitchState(HeroStateId.IDLE);
+                SwitchState(HeroStateId.IDLE);
             }
         }
 
         private void OnHarvestStarted(HarvestResourceOperation operation)
         {
-            this.SwitchState(HeroStateId.HARVEST_RESOURCE);
+            SwitchState(HeroStateId.HARVEST_RESOURCE);
         }
 
         private void OnHarvestEnded(HarvestResourceOperation operation)
         {
-            if (this.CurrentState == HeroStateId.HARVEST_RESOURCE)
+            if (CurrentState == HeroStateId.HARVEST_RESOURCE)
             {
-                this.SwitchState(HeroStateId.IDLE);
+                SwitchState(HeroStateId.IDLE);
             }
         }
 
         private void OnCombatStarted(CombatOperation operation)
         {
-            this.SwitchState(HeroStateId.MELEE_COMBAT);
+            SwitchState(HeroStateId.MELEE_COMBAT);
         }
 
         private void OnCombatEnded(CombatOperation operation)
         {
-            if (this.CurrentState == HeroStateId.MELEE_COMBAT)
+            if (CurrentState == HeroStateId.MELEE_COMBAT)
             {
-                this.SwitchState(HeroStateId.IDLE);
+                SwitchState(HeroStateId.IDLE);
             }
         }
 
         private void OnRespawned()
         {
-            if (this.CurrentState == HeroStateId.DEATH)
+            if (CurrentState == HeroStateId.DEATH)
             {
-                this.SwitchState(HeroStateId.IDLE);
+                SwitchState(HeroStateId.IDLE);
             }
         }
 

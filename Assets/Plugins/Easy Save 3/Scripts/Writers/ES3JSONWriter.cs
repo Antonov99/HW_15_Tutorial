@@ -32,12 +32,12 @@ namespace ES3Internal
 		internal override void WritePrimitive(long value)		{ baseWriter.Write(value); }
 		internal override void WritePrimitive(ulong value)	{ baseWriter.Write(value); }
 		internal override void WritePrimitive(uint value)		{ baseWriter.Write(value); }
-		internal override void WritePrimitive(byte value)		{ baseWriter.Write(System.Convert.ToInt32(value)); }
-		internal override void WritePrimitive(sbyte value)	{ baseWriter.Write(System.Convert.ToInt32(value)); }
-		internal override void WritePrimitive(short value)	{ baseWriter.Write(System.Convert.ToInt32(value)); }
-		internal override void WritePrimitive(ushort value)	{ baseWriter.Write(System.Convert.ToInt32(value)); }
+		internal override void WritePrimitive(byte value)		{ baseWriter.Write(Convert.ToInt32(value)); }
+		internal override void WritePrimitive(sbyte value)	{ baseWriter.Write(Convert.ToInt32(value)); }
+		internal override void WritePrimitive(short value)	{ baseWriter.Write(Convert.ToInt32(value)); }
+		internal override void WritePrimitive(ushort value)	{ baseWriter.Write(Convert.ToInt32(value)); }
 		internal override void WritePrimitive(char value)		{ WritePrimitive( value.ToString() ); }
-		internal override void WritePrimitive(byte[] value)		{ WritePrimitive( System.Convert.ToBase64String(value) ); }
+		internal override void WritePrimitive(byte[] value)		{ WritePrimitive( Convert.ToBase64String(value) ); }
 
 
 		internal override void WritePrimitive(string value)

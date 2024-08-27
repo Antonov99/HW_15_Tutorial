@@ -110,20 +110,20 @@ namespace Cysharp.Threading.Tasks
 
         public UniTask<AsyncUnit> AsAsyncUnitUniTask()
         {
-            if (this.source == null) return CompletedTasks.AsyncUnit;
+            if (source == null) return CompletedTasks.AsyncUnit;
 
-            var status = this.source.GetStatus(this.token);
+            var status = source.GetStatus(token);
             if (status.IsCompletedSuccessfully())
             {
-                this.source.GetResult(this.token);
+                source.GetResult(token);
                 return CompletedTasks.AsyncUnit;
             }
-            else if(this.source is IUniTaskSource<AsyncUnit> asyncUnitSource)
+            else if(source is IUniTaskSource<AsyncUnit> asyncUnitSource)
             {
-                return new UniTask<AsyncUnit>(asyncUnitSource, this.token);
+                return new UniTask<AsyncUnit>(asyncUnitSource, token);
             }
 
-            return new UniTask<AsyncUnit>(new AsyncUnitSource(this.source), this.token);
+            return new UniTask<AsyncUnit>(new AsyncUnitSource(source), token);
         }
 
         sealed class AsyncUnitSource : IUniTaskSource<AsyncUnit>
@@ -374,8 +374,8 @@ namespace Cysharp.Threading.Tasks
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public UniTask(T result)
         {
-            this.source = default;
-            this.token = default;
+            source = default;
+            token = default;
             this.result = result;
         }
 
@@ -385,7 +385,7 @@ namespace Cysharp.Threading.Tasks
         {
             this.source = source;
             this.token = token;
-            this.result = default;
+            result = default;
         }
 
         public UniTaskStatus Status
@@ -422,17 +422,17 @@ namespace Cysharp.Threading.Tasks
 
         public UniTask AsUniTask()
         {
-            if (this.source == null) return UniTask.CompletedTask;
+            if (source == null) return UniTask.CompletedTask;
 
-            var status = this.source.GetStatus(this.token);
+            var status = source.GetStatus(token);
             if (status.IsCompletedSuccessfully())
             {
-                this.source.GetResult(this.token);
+                source.GetResult(token);
                 return UniTask.CompletedTask;
             }
 
             // Converting UniTask<T> -> UniTask is zero overhead.
-            return new UniTask(this.source, this.token);
+            return new UniTask(source, token);
         }
 
         public static implicit operator UniTask(UniTask<T> self)
@@ -473,8 +473,8 @@ namespace Cysharp.Threading.Tasks
 
         public override string ToString()
         {
-            return (this.source == null) ? result?.ToString()
-                 : "(" + this.source.UnsafeGetStatus() + ")";
+            return (source == null) ? result?.ToString()
+                 : "(" + source.UnsafeGetStatus() + ")";
         }
 
         sealed class IsCanceledSource : IUniTaskSource<(bool, T)>

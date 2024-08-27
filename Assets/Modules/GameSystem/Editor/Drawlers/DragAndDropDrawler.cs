@@ -39,7 +39,7 @@ namespace GameSystem.UnityEditor
         {
             this.color = color;
             this.text = text;
-            this.OnDragAndDrop += callback;
+            OnDragAndDrop += callback;
         }
 
         public void Draw()
@@ -52,8 +52,8 @@ namespace GameSystem.UnityEditor
             };
 
             var prevColor = GUI.color;
-            GUI.color = this.color;
-            GUI.Box(dropArea, this.text, guiStyle);
+            GUI.color = color;
+            GUI.Box(dropArea, text, guiStyle);
             GUI.color = prevColor;
 
             if (currentEvent.type != EventType.DragUpdated && currentEvent.type != EventType.DragPerform)
@@ -75,7 +75,7 @@ namespace GameSystem.UnityEditor
             DragAndDrop.AcceptDrag();
             foreach (Object draggedObject in DragAndDrop.objectReferences)
             {
-                this.OnDragAndDrop?.Invoke(draggedObject);
+                OnDragAndDrop?.Invoke(draggedObject);
             }
         }
     }

@@ -7,19 +7,19 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<CombatOperation> OnCombatStarted
         {
-            add { this.@operator.OnStarted += value; }
-            remove { this.@operator.OnStarted -= value; }
+            add { @operator.OnStarted += value; }
+            remove { @operator.OnStarted -= value; }
         }
 
         public event Action<CombatOperation> OnCombatStopped
         {
-            add { this.@operator.OnStopped += value; }
-            remove { this.@operator.OnStopped -= value; }
+            add { @operator.OnStopped += value; }
+            remove { @operator.OnStopped -= value; }
         }
 
         public bool IsCombat
         {
-            get { return this.@operator.IsActive; }
+            get { return @operator.IsActive; }
         }
 
         private readonly IOperator<CombatOperation> @operator;
@@ -31,17 +31,17 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanStartCombat(CombatOperation operation)
         {
-            return this.@operator.CanStart(operation);
+            return @operator.CanStart(operation);
         }
 
         public void StartCombat(CombatOperation operation)
         {
-            this.@operator.DoStart(operation);
+            @operator.DoStart(operation);
         }
 
         public void StopCombat()
         {
-            this.@operator.Stop();
+            @operator.Stop();
         }
     }
 }

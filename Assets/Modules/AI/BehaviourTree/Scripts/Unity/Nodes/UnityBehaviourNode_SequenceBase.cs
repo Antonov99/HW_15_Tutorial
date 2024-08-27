@@ -10,43 +10,43 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            var children = this.Children;
+            var children = Children;
             if (children is not {Length: > 0})
             {
-                this.Return(true);
+                Return(true);
                 return;
             }
 
-            this.pointer = 0;
-            this.currentNode = children[this.pointer];
-            this.currentNode.Run(callback: this);
+            pointer = 0;
+            currentNode = children[pointer];
+            currentNode.Run(callback: this);
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
             if (!success)
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            var children = this.Children;
-            if (this.pointer + 1 >= children.Length)
+            var children = Children;
+            if (pointer + 1 >= children.Length)
             {
-                this.Return(true);
+                Return(true);
                 return;
             }
 
-            this.pointer++;
-            this.currentNode = children[this.pointer];
-            this.currentNode.Run(callback: this);
+            pointer++;
+            currentNode = children[pointer];
+            currentNode.Run(callback: this);
         }
 
         protected override void OnAbort()
         {
-            if (this.currentNode != null && this.currentNode.IsRunning)
+            if (currentNode != null && currentNode.IsRunning)
             {
-                this.currentNode.Abort();
+                currentNode.Abort();
             }
         }
     }

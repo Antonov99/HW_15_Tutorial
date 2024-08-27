@@ -21,9 +21,9 @@ namespace Game.GameEngine.Mechanics
 
         protected override void FixedUpdate(float deltaTime)
         {
-            var targetPosiiton = this.GetTargetPosition();
-            var distanceReached = this.transform.IsDistanceReached(targetPosiiton, this.minDistance.Current);
-            this.ProcessDistance(distanceReached);
+            var targetPosiiton = GetTargetPosition();
+            var distanceReached = transform.IsDistanceReached(targetPosiiton, minDistance.Current);
+            ProcessDistance(distanceReached);
         }
 
         protected abstract void ProcessDistance(bool distanceReached);

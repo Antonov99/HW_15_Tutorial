@@ -9,12 +9,12 @@ namespace CustomParticles
 
         public void SetIcon(Sprite icon)
         {
-            this.spriteRenderer.sprite = icon;
+            spriteRenderer.sprite = icon;
         }
 
         private void Reset()
         {
-            this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
 }

@@ -16,14 +16,14 @@ namespace Game.Meta
 
         public virtual void ReadyGame()
         {
-            this.inventory.OnItemAdded += this.OnItemAdded;
-            this.inventory.OnItemRemoved += this.OnItemRemoved;
+            inventory.OnItemAdded += OnItemAdded;
+            inventory.OnItemRemoved += OnItemRemoved;
         }
 
         public virtual void FinishGame()
         {
-            this.inventory.OnItemAdded -= this.OnItemAdded;
-            this.inventory.OnItemRemoved -= this.OnItemRemoved;
+            inventory.OnItemAdded -= OnItemAdded;
+            inventory.OnItemRemoved -= OnItemRemoved;
         }
 
         protected abstract void OnItemAdded(InventoryItem item);

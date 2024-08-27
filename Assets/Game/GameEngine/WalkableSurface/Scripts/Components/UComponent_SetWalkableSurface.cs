@@ -9,7 +9,7 @@ namespace Game.GameEngine
     
         public void SetSurface(IWalkableSurface surface)
         {
-            this.surfaceHolder.SetSurface(surface);
+            surfaceHolder.SetSurface(surface);
         }
     }
 }

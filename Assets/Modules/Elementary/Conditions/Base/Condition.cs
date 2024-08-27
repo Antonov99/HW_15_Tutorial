@@ -11,7 +11,7 @@ namespace Elementary
 
         public bool IsTrue()
         {
-            return this.isTrue;
+            return isTrue;
         }
     }
 }

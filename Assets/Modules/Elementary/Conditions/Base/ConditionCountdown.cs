@@ -13,33 +13,33 @@ namespace Elementary
 
         public ConditionCountdown(MonoBehaviour coroutineDispatcher, float seconds, bool startInstantly)
         {
-            this.remainingSeconds = seconds;
+            remainingSeconds = seconds;
             this.coroutineDispatcher = coroutineDispatcher;
             
             if (startInstantly)
             {
-                this.StartCountdown();
+                StartCountdown();
             }
         }
 
         public bool IsTrue()
         {
-            return this.remainingSeconds <= 0.0f;
+            return remainingSeconds <= 0.0f;
         }
 
         public void StartCountdown()
         {
-            if (this.coroutine == null)
+            if (coroutine == null)
             {
-                this.coroutine = this.coroutineDispatcher.StartCoroutine(this.CountdownRoutine());
+                coroutine = coroutineDispatcher.StartCoroutine(CountdownRoutine());
             }
         }
 
         private IEnumerator CountdownRoutine()
         {
-            while (this.remainingSeconds > 0.0f)
+            while (remainingSeconds > 0.0f)
             {
-                this.remainingSeconds -= Time.deltaTime;
+                remainingSeconds -= Time.deltaTime;
                 yield return null;
             }
         }

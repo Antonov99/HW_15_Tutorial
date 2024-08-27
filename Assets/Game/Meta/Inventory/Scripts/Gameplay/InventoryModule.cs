@@ -28,45 +28,45 @@ namespace Game.Meta
 
         public override void ConstructGame(GameContext context)
         {
-            this.service.Setup(this.inventory);
-            this.itemConsumer.SetInventory(this.inventory);
-            this.itemCrafter.SetInventory(this.inventory);
+            service.Setup(inventory);
+            itemConsumer.SetInventory(inventory);
+            itemCrafter.SetInventory(inventory);
 
-            this.InstallEffectObserver(context);
-            this.InstallConsumeHealingKit(context);
-            this.InstallProductBuyKit(context);
+            InstallEffectObserver(context);
+            InstallConsumeHealingKit(context);
+            InstallProductBuyKit(context);
         }
 
         private void InstallEffectObserver(GameContext context)
         {
             var heroService = context.GetService<HeroService>();
-            this.effectsObserver.Construct(heroService);
-            this.effectsObserver.SetInventory(this.inventory);
+            effectsObserver.Construct(heroService);
+            effectsObserver.SetInventory(inventory);
         }
 
         private void InstallConsumeHealingKit(GameContext context)
         {
             var heroService = context.GetService<HeroService>();
-            this.itemConsumer.AddHandler(new HealingInventoryItemConsumeHandler(heroService));
+            itemConsumer.AddHandler(new HealingInventoryItemConsumeHandler(heroService));
         }
 
         private void InstallProductBuyKit(GameContext context)
         {
             var buySystem = context.GetService<ProductBuyer>();
-            buySystem.AddCompletor(new InventoryItemBuyCompletor(this.inventory));
+            buySystem.AddCompletor(new InventoryItemBuyCompletor(inventory));
         }
         
         [Title("Debug")]
         [Button]
         private void AddItems(InventoryItemConfig itemInfo, int count)
         {
-            this.inventory.AddItemsByPrototype(itemInfo.Prototype, count);
+            inventory.AddItemsByPrototype(itemInfo.Prototype, count);
         }
 
         [Button]
         private void RemoveItem(InventoryItemConfig itemInfo, int count)
         {
-            this.inventory.RemoveItems(itemInfo.ItemName, count);
+            inventory.RemoveItems(itemInfo.ItemName, count);
         }
     }
 }

@@ -30,55 +30,55 @@ namespace Game.GameEngine.AI
 
         protected override void Run()
         {
-            if (!this.blackboard.TryGetVariable(this.attackerKey, out IEntity unit))
+            if (!blackboard.TryGetVariable(attackerKey, out IEntity unit))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!blackboard.TryGetVariable(targetKey, out IEntity target))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.unitComponent = unit.Get<IComponent_MeleeCombat>();
-            this.TryStartCombat(target);
+            unitComponent = unit.Get<IComponent_MeleeCombat>();
+            TryStartCombat(target);
         }
 
         private void TryStartCombat(IEntity target)
         {
             var operation = new CombatOperation(target);
-            if (this.unitComponent.CanStartCombat(operation))
+            if (unitComponent.CanStartCombat(operation))
             {
-                this.unitComponent.OnCombatStopped += this.OnCombatFinished;
-                this.unitComponent.StartCombat(operation);
+                unitComponent.OnCombatStopped += OnCombatFinished;
+                unitComponent.StartCombat(operation);
             }
             else
             {
-                this.Return(false);
+                Return(false);
             }
         }
 
         private void OnCombatFinished(CombatOperation operation)
         {
-            if (this.unitComponent != null)
+            if (unitComponent != null)
             {
-                this.unitComponent.OnCombatStopped -= this.OnCombatFinished;
-                this.unitComponent = null;
+                unitComponent.OnCombatStopped -= OnCombatFinished;
+                unitComponent = null;
             }
 
             var success = operation.targetDestroyed;
-            this.Return(success);
+            Return(success);
         }
 
         protected override void OnAbort()
         {
-            if (this.unitComponent != null)
+            if (unitComponent != null)
             {
-                this.unitComponent.OnCombatStopped -= this.OnCombatFinished;
-                this.unitComponent.StopCombat();
-                this.unitComponent = null;
+                unitComponent.OnCombatStopped -= OnCombatFinished;
+                unitComponent.StopCombat();
+                unitComponent = null;
             }
         }
     }

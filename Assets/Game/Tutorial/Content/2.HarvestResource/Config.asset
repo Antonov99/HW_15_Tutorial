@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f73a8de52be40e6a659d478d6259aa0, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  targetResourceType: 1
+  targetResourceType: 0
   title: Tutorial|MINE_STONE
-  icon: {fileID: 21300000, guid: d29138e8659754a718ff048d6aa8572c, type: 3}
+  icon: {fileID: 21300000, guid: e6168e92e6cff442a8613e6a1b59e14c, type: 3}

@@ -13,37 +13,37 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            this.actionNode.Run(callback: this);
+            actionNode.Run(callback: this);
             
-            for (int i = 0, count = this.inspectorNodes.Length; i < count; i++)
+            for (int i = 0, count = inspectorNodes.Length; i < count; i++)
             {
-                var inspector = this.inspectorNodes[i];
+                var inspector = inspectorNodes[i];
                 inspector.Run(callback: this);
             }
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
-            if (ReferenceEquals(node, this.actionNode))
+            if (ReferenceEquals(node, actionNode))
             {
-                this.Return(success);
+                Return(success);
             }
             else //Any inspector node
             {
-                this.Return(false);
+                Return(false);
             }
         }
 
         protected override void OnAbort()
         {
-            if (this.actionNode.IsRunning)
+            if (actionNode.IsRunning)
             {
-                this.actionNode.Abort();
+                actionNode.Abort();
             }
             
-            for (int i = 0, count = this.inspectorNodes.Length; i < count; i++)
+            for (int i = 0, count = inspectorNodes.Length; i < count; i++)
             {
-                var inspector = this.inspectorNodes[i];
+                var inspector = inspectorNodes[i];
                 if (inspector.IsRunning)
                 {
                     inspector.Abort();

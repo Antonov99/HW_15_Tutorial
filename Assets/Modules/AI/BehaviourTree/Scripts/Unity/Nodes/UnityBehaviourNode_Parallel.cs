@@ -8,7 +8,7 @@ namespace AI.BTree
     {
         protected override UnityBehaviourNode[] Children
         {
-            get { return this.children; }
+            get { return children; }
         }
 
         private UnityBehaviourNode[] children;
@@ -16,7 +16,7 @@ namespace AI.BTree
         private void Awake()
         {
             var children = new List<UnityBehaviourNode>();
-            foreach (Transform child in this.transform)
+            foreach (Transform child in transform)
             {
                 if (child.gameObject.activeSelf && child.TryGetComponent(out UnityBehaviourNode node))
                 {

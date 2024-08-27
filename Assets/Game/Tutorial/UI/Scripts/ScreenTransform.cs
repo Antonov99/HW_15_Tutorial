@@ -6,7 +6,7 @@ namespace Game.Tutorial.UI
     {
         public Transform Value
         {
-            get { return this.rootTransform; }
+            get { return rootTransform; }
         }
 
         [SerializeField]

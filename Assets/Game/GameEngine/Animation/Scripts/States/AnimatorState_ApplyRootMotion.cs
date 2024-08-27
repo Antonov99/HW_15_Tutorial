@@ -15,7 +15,7 @@ namespace Game.GameEngine.Animation
 
         public override void Enter()
         {
-            this.system.ApplyRootMotion();
+            system.ApplyRootMotion();
         }
     }
 }

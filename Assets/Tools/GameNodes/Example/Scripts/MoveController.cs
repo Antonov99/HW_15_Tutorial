@@ -13,26 +13,26 @@ namespace GameNodes
         [GameInit]
         public void Init(IHeroService heroService, IMoveInput input)
         {
-            this.heroComponent = heroService.GetHero().Get<IComponent_MoveInDirection>();
+            heroComponent = heroService.GetHero().Get<IComponent_MoveInDirection>();
             this.input = input;
         }
 
         [GameStart]
         public void Enable()
         {
-            this.input.OnMoved += this.OnDirectionMoved;
+            input.OnMoved += OnDirectionMoved;
         }
 
         [GameFinish]
         public void Disable()
         {
-            this.input.OnMoved -= this.OnDirectionMoved;
+            input.OnMoved -= OnDirectionMoved;
         }
 
         private void OnDirectionMoved(Vector2 screenDirection)
         {
             var worldDirection = new Vector3(screenDirection.x, 0.0f, screenDirection.y);
-            this.heroComponent.Move(worldDirection);
+            heroComponent.Move(worldDirection);
         }
     }
 }

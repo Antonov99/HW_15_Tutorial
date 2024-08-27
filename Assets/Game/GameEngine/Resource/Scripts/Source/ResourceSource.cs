@@ -15,7 +15,7 @@ namespace Game.GameEngine.GameResources
 
         public int Count
         {
-            get { return this.GetSum(); }
+            get { return GetSum(); }
         }
 
         [SerializeField]
@@ -25,8 +25,8 @@ namespace Game.GameEngine.GameResources
 
         public int this[ResourceType type]
         {
-            get { return this.Get(type); }
-            set { this.Set(type, value); }
+            get { return Get(type); }
+            set { Set(type, value); }
         }
 
         public void Setup(ResourceData[] resources)
@@ -39,15 +39,15 @@ namespace Game.GameEngine.GameResources
                 this.resources.Add(resource);
             }
 
-            this.OnSetuped?.Invoke();
+            OnSetuped?.Invoke();
         }
 
         public void GetAllNonAlloc(Dictionary<ResourceType, int> result)
         {
             result.Clear();
-            for (int i = 0, count = this.resources.Count; i < count; i++)
+            for (int i = 0, count = resources.Count; i < count; i++)
             {
-                var data = this.resources[i];
+                var data = resources[i];
                 var amount = data.amount;
                 if (amount > 0)
                 {
@@ -59,9 +59,9 @@ namespace Game.GameEngine.GameResources
         public void GetAllNonAlloc(List<ResourceData> result)
         {
             result.Clear();
-            for (int i = 0, count = this.resources.Count; i < count; i++)
+            for (int i = 0, count = resources.Count; i < count; i++)
             {
-                var data = this.resources[i];
+                var data = resources[i];
                 if (data.amount > 0)
                 {
                     result.Add(data);
@@ -71,23 +71,23 @@ namespace Game.GameEngine.GameResources
 
         public ResourceData[] GetAll()
         {
-            this.buffer.Clear();
+            buffer.Clear();
             
-            for (int i = 0, count = this.resources.Count; i < count; i++)
+            for (int i = 0, count = resources.Count; i < count; i++)
             {
-                var data = this.resources[i];
+                var data = resources[i];
                 if (data.amount > 0)
                 {
-                    this.buffer.Add(data);
+                    buffer.Add(data);
                 }
             }
 
-            return this.buffer.ToArray();
+            return buffer.ToArray();
         }
 
         public bool Exists(ResourceType type, int requiredCount)
         {
-            var currentAmount = this.Get(type);
+            var currentAmount = Get(type);
             return currentAmount >= requiredCount;
         }
 
@@ -98,9 +98,9 @@ namespace Game.GameEngine.GameResources
                 return;
             }
 
-            var previousCount = this.Get(type);
+            var previousCount = Get(type);
             var newCount = previousCount + range;
-            this.Set(type, newCount);
+            Set(type, newCount);
         }
 
         public void Minus(ResourceType type, int range)
@@ -110,23 +110,23 @@ namespace Game.GameEngine.GameResources
                 return;
             }
 
-            var previousCount = this.Get(type);
+            var previousCount = Get(type);
             var newCount = previousCount - range;
             newCount = Math.Max(newCount, 0);
-            this.Set(type, newCount);
+            Set(type, newCount);
         }
 
         public void Clear()
         {
-            this.resources.Clear();
-            this.OnCleared?.Invoke();
+            resources.Clear();
+            OnCleared?.Invoke();
         }
 
         private int Get(ResourceType type)
         {
-            for (int i = 0, count = this.resources.Count; i < count; i++)
+            for (int i = 0, count = resources.Count; i < count; i++)
             {
-                var resource = this.resources[i];
+                var resource = resources[i];
                 if (resource.type == type)
                 {
                     return resource.amount;
@@ -145,29 +145,29 @@ namespace Game.GameEngine.GameResources
 
             var result = new ResourceData(type, newAmount);
 
-            for (int i = 0, count = this.resources.Count; i < count; i++)
+            for (int i = 0, count = resources.Count; i < count; i++)
             {
-                var resource = this.resources[i];
+                var resource = resources[i];
                 if (resource.type != type)
                 {
                     continue;
                 }
 
-                this.resources[i] = result;
-                this.OnValueChanged?.Invoke(type, newAmount);
+                resources[i] = result;
+                OnValueChanged?.Invoke(type, newAmount);
                 return;
             }
 
-            this.resources.Add(result);
-            this.OnValueChanged?.Invoke(type, newAmount);
+            resources.Add(result);
+            OnValueChanged?.Invoke(type, newAmount);
         }
 
         public int GetSum()
         {
             var result = 0;
-            for (int i = 0, count = this.resources.Count; i < count; i++)
+            for (int i = 0, count = resources.Count; i < count; i++)
             {
-                var resource = this.resources[i];
+                var resource = resources[i];
                 result += resource.amount;
             }
 

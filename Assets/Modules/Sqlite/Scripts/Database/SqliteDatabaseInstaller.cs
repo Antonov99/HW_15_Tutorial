@@ -17,10 +17,10 @@ namespace SqliteModule
 
         public void Install()
         {
-            var sourcePath = this.adapter.SourceFilePath;
-            var destinationPath = this.adapter.DestinationFilePath;
+            var sourcePath = adapter.SourceFilePath;
+            var destinationPath = adapter.DestinationFilePath;
             
-            if (this.adapter.IsInstalled)
+            if (adapter.IsInstalled)
             {
                 if (!File.Exists(destinationPath))
                 {
@@ -35,7 +35,7 @@ namespace SqliteModule
                 }
 
                 Install(sourcePath, destinationPath);
-                this.adapter.IsInstalled = true;
+                adapter.IsInstalled = true;
             }
         }
 

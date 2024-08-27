@@ -30,44 +30,44 @@ namespace Game.Meta
         {
             this.presenter = presenter;
 
-            this.titleText.text = presenter.Title;
-            this.decriptionText.text = presenter.Description;
-            this.iconImage.sprite = presenter.Icon;
+            titleText.text = presenter.Title;
+            decriptionText.text = presenter.Description;
+            iconImage.sprite = presenter.Icon;
 
-            this.SetupStackContainer(presenter);
-            this.SetupConsumeButton(presenter);
-            this.consumeButton.onClick.AddListener(this.OnConsumeButtonClicked);
+            SetupStackContainer(presenter);
+            SetupConsumeButton(presenter);
+            consumeButton.onClick.AddListener(OnConsumeButtonClicked);
         }
 
         protected override void OnHide()
         {
-            this.consumeButton.onClick.RemoveListener(this.OnConsumeButtonClicked);
+            consumeButton.onClick.RemoveListener(OnConsumeButtonClicked);
         }
 
         private void OnConsumeButtonClicked()
         {
-            this.presenter.OnConsumeClicked();
+            presenter.OnConsumeClicked();
         }
 
         private void SetupStackContainer(IInventoryItemPresentationModel presenter)
         {
             var isStackableItem = presenter.IsStackableItem();
-            this.stackView.SetVisible(isStackableItem);
+            stackView.SetVisible(isStackableItem);
             
             if (isStackableItem)
             {
                 presenter.GetStackInfo(out var current, out var size);
-                this.stackView.SetAmount(current, size);
+                stackView.SetAmount(current, size);
             }
         }
 
         private void SetupConsumeButton(IInventoryItemPresentationModel presenter)
         {
             var isConsumableItem = presenter.IsConsumableItem();
-            this.consumeButton.gameObject.SetActive(isConsumableItem);
+            consumeButton.gameObject.SetActive(isConsumableItem);
             if (isConsumableItem)
             {
-                this.consumeButton.interactable = presenter.CanConsumeItem();
+                consumeButton.interactable = presenter.CanConsumeItem();
             }
         }
     }

@@ -15,15 +15,15 @@ namespace AI.Blackboards.UnityEditor
         private void Awake()
         {
             var config = BlackboardKeysConfig.EditorInstance;
-            this.serializedObject = new SerializedObject(config);
-            this.names = this.serializedObject.FindProperty(nameof(this.names));
+            serializedObject = new SerializedObject(config);
+            names = serializedObject.FindProperty(nameof(names));
 
-            this.DrawTitle();
+            DrawTitle();
         }
 
         private void DrawTitle()
         {
-            this.titleContent = new GUIContent("Blackboard Keys");
+            titleContent = new GUIContent("Blackboard Keys");
         }
 
         private void OnGUI()
@@ -31,24 +31,24 @@ namespace AI.Blackboards.UnityEditor
             EditorGUILayout.Space(8);
 
             EditorGUILayout.BeginVertical();
-            this.scrollPosition = EditorGUILayout.BeginScrollView(
-                this.scrollPosition,
+            scrollPosition = EditorGUILayout.BeginScrollView(
+                scrollPosition,
                 GUILayout.ExpandWidth(true),
                 GUILayout.ExpandHeight(true)
             );
 
-            if (this.names != null)
+            if (names != null)
             {
-                EditorGUILayout.PropertyField(this.names, includeChildren: true);
+                EditorGUILayout.PropertyField(names, includeChildren: true);
             }
 
 
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
 
-            if (this.serializedObject != null)
+            if (serializedObject != null)
             {
-                this.serializedObject.ApplyModifiedProperties();
+                serializedObject.ApplyModifiedProperties();
             }
         }
     }

@@ -14,42 +14,42 @@ namespace Game.GameEngine.AI
 
         public T GetVariable<T>(string key)
         {
-            return this.blackboard.GetVariable<T>(key);
+            return blackboard.GetVariable<T>(key);
         }
 
         public IEnumerable<KeyValuePair<string, object>> GetVariables()
         {
-            return this.blackboard.GetVariables();
+            return blackboard.GetVariables();
         }
 
         public bool TryGetVariable<T>(string key, out T value)
         {
-            return this.blackboard.TryGetVariable(key, out value);
+            return blackboard.TryGetVariable(key, out value);
         }
 
         public bool HasVariable(string key)
         {
-            return this.blackboard.HasVariable(key);
+            return blackboard.HasVariable(key);
         }
 
         public void AddVariable(string key, object value)
         {
-            this.blackboard.AddVariable(key, value);
+            blackboard.AddVariable(key, value);
         }
 
         public void ChangeVariable(string key, object value)
         {
-            this.blackboard.ChangeVariable(key, value);
+            blackboard.ChangeVariable(key, value);
         }
 
         public void RemoveVariable(string key)
         {
-            this.blackboard.RemoveVariable(key);
+            blackboard.RemoveVariable(key);
         }
 
         public void Clear()
         {
-            this.blackboard.Clear();
+            blackboard.Clear();
         }
     }
 }

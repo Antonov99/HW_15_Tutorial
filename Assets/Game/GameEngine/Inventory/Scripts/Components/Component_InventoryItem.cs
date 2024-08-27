@@ -8,7 +8,7 @@ namespace Game.GameEngine.InventorySystem
     {
         public InventoryItem Item
         {
-            get { return this.config.Prototype; }
+            get { return config.Prototype; }
         }
 
         [SerializeField]

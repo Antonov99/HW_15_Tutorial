@@ -8,7 +8,7 @@ namespace Game.GameEngine.Mechanics
     {
         public IEffect Effect
         {
-            get { return this.effect; }
+            get { return effect; }
         }
         
         [SerializeField]

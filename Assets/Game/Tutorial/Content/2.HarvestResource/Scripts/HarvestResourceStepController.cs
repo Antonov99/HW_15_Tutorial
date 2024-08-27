@@ -28,12 +28,12 @@ namespace Game.Tutorial
 
         public override void ConstructGame(GameContext context)
         {
-            this.pointerManager = context.GetService<PointerManager>();
-            this.screenTransform = context.GetService<ScreenTransform>();
+            pointerManager = context.GetService<PointerManager>();
+            screenTransform = context.GetService<ScreenTransform>();
 
             var heroService = context.GetService<IHeroService>();
-            this.inspector.Construct(heroService, this.config);
-            this.panelShower.Construct(this.config);
+            inspector.Construct(heroService, config);
+            panelShower.Construct(config);
 
             base.ConstructGame(context);
         }
@@ -41,16 +41,16 @@ namespace Game.Tutorial
         protected override void OnStart()
         {
             TutorialAnalytics.LogEventAndCache("tutorial_step_2__harvest_resource_started");
-            this.inspector.Inspect(callback: this.NotifyAboutCompleteAndMoveNext);
-            this.pointerManager.ShowPointer(this.pointerTransform.position, this.pointerTransform.rotation);
-            this.panelShower.Show(this.screenTransform.Value);
+            inspector.Inspect(callback: NotifyAboutCompleteAndMoveNext);
+            pointerManager.ShowPointer(pointerTransform.position, pointerTransform.rotation);
+            panelShower.Show(screenTransform.Value);
         }
 
         protected override void OnStop()
         {
             TutorialAnalytics.LogEventAndCache("tutorial_step_2__harvest_resource_completed");
-            this.panelShower.Hide();
-            this.pointerManager.HidePointer();
+            panelShower.Hide();
+            pointerManager.HidePointer();
         }
     }
 }

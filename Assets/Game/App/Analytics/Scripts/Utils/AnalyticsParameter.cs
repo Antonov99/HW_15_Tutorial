@@ -35,14 +35,14 @@ namespace Game.App
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            if (string.IsNullOrEmpty(this.name))
+            if (string.IsNullOrEmpty(name))
             {
-                this.name = AnalyticsConst.UNDEFINED;
+                name = AnalyticsConst.UNDEFINED;
             }
 
-            if (string.IsNullOrEmpty(this.value))
+            if (string.IsNullOrEmpty(value))
             {
-                this.value = AnalyticsConst.UNDEFINED;
+                value = AnalyticsConst.UNDEFINED;
             }
         }
 

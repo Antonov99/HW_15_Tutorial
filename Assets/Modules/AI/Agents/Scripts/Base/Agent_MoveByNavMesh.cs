@@ -8,13 +8,13 @@ namespace AI.Agents
     {
         public event Action OnPositionReached
         {
-            add { this.MoveAgent.OnPathFinished += value; }
-            remove { this.MoveAgent.OnPathFinished -= value; }
+            add { MoveAgent.OnPathFinished += value; }
+            remove { MoveAgent.OnPathFinished -= value; }
         }
 
         public bool IsPathFinished
         {
-            get { return this.MoveAgent.IsPathFinished; }
+            get { return MoveAgent.IsPathFinished; }
         }
 
         protected abstract Agent_MoveByPoints<Vector3> MoveAgent { get; }
@@ -30,15 +30,15 @@ namespace AI.Agents
 
         public void SetTargetPosition(Vector3 targetPosition)
         {
-            var currentPosition = this.EvaluateCurrentPosition();
+            var currentPosition = EvaluateCurrentPosition();
             if (NavMesh.CalculatePath(
                     currentPosition,
                     targetPosition,
-                    this.navMeshAreas,
-                    this.currentPath
+                    navMeshAreas,
+                    currentPath
                 ))
             {
-                this.MoveAgent.SetPath(this.currentPath.corners);
+                MoveAgent.SetPath(currentPath.corners);
             }
             else
             {
@@ -48,12 +48,12 @@ namespace AI.Agents
 
         protected override void OnStart()
         {
-            this.MoveAgent.Play();
+            MoveAgent.Play();
         }
 
         protected override void OnStop()
         {
-            this.MoveAgent.Stop();
+            MoveAgent.Stop();
         }
 
         protected abstract Vector3 EvaluateCurrentPosition();

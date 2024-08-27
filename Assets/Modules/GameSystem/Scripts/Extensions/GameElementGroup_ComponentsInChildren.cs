@@ -13,9 +13,9 @@ namespace GameSystem.Extensions
         public IEnumerable<IGameElement> GetElements()
         {
             var results = new List<IGameElement>(capacity: 0);
-            if (this.gameObject.activeSelf)
+            if (gameObject.activeSelf)
             {
-                this.GetComponentsInChildren<IGameElement>(this.includeInactive, results);
+                GetComponentsInChildren<IGameElement>(includeInactive, results);
                 results.Remove(this);
             }
 

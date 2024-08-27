@@ -16,12 +16,12 @@ namespace Game.Meta
         
         void IGameReadyElement.ReadyGame()
         {
-            this.manager.OnBoosterLaunched += this.OnBoosterLaunched;
+            manager.OnBoosterLaunched += OnBoosterLaunched;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.manager.OnBoosterLaunched -= this.OnBoosterLaunched;
+            manager.OnBoosterLaunched -= OnBoosterLaunched;
         }
 
         private void OnBoosterLaunched(Booster booster)

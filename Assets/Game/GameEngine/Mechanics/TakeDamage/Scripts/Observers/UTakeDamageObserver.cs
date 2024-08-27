@@ -12,14 +12,14 @@ namespace Game.GameEngine.Mechanics
 
         private void OnEnable()
         {
-            this.takeDamageComponent = this.unit.Get<IComponent_OnDamageTaken>(); 
-            this.takeDamageComponent.OnDamageTaken += this.OnDamageTaken;
+            takeDamageComponent = unit.Get<IComponent_OnDamageTaken>(); 
+            takeDamageComponent.OnDamageTaken += OnDamageTaken;
         }
 
         private void OnDisable()
         {
-            this.takeDamageComponent.OnDamageTaken -= this.OnDamageTaken;
-            this.takeDamageComponent = null;
+            takeDamageComponent.OnDamageTaken -= OnDamageTaken;
+            takeDamageComponent = null;
         }
 
         protected abstract void OnDamageTaken(TakeDamageArgs obj);

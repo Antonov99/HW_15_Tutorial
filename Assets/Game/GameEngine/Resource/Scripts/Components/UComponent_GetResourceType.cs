@@ -7,7 +7,7 @@ namespace Game.GameEngine.GameResources
     {
         public ResourceType Type
         {
-            get { return this.type; }
+            get { return type; }
         }
 
         [SerializeField]

@@ -58,11 +58,11 @@ namespace Game.Gameplay.Player
 
         public void PlayIncomeFromWorld(Vector3 startWorldPosition, int income)
         {
-            var endUIPosition = this.panel.GetIconPosition();
+            var endUIPosition = panel.GetIconPosition();
             
-            var prevValue = this.panel.Money;
+            var prevValue = panel.Money;
             var newValue = prevValue + income;
-            var particleIterator = new IntValueIterator(prevValue, newValue, this.maxParticleCount);
+            var particleIterator = new IntValueIterator(prevValue, newValue, maxParticleCount);
             var particleCount = particleIterator.ParticleCount;
 
             var currentJumpAngle = 0.0f;
@@ -71,13 +71,13 @@ namespace Game.Gameplay.Player
             for (var i = 0; i < particleCount; i++)
             {
                 var jumpAngle = currentJumpAngle + Random.Range(-15.0f, 15.0f);
-                var routine = this.PlayParticle(
+                var routine = PlayParticle(
                     startWorldPosition,
                     endUIPosition,
                     jumpAngle,
                     particleIterator
                 );
-                this.StartCoroutine(routine);
+                StartCoroutine(routine);
 
                 currentJumpAngle += deltaJumpAngle;
             }
@@ -90,96 +90,96 @@ namespace Game.Gameplay.Player
             IntValueIterator particleIterator
         )
         {
-            var iconParticle = this.iconParticlePool.Get(this.worldViewport);
-            iconParticle.SetIcon(this.moneyIcon);
-            this.iconParticles.Add(iconParticle);
+            var iconParticle = iconParticlePool.Get(worldViewport);
+            iconParticle.SetIcon(moneyIcon);
+            iconParticles.Add(iconParticle);
 
-            var pointParticle = this.pointParticlePool.Get(this.worldViewport);
-            this.pointParticles.Add(pointParticle);
+            var pointParticle = pointParticlePool.Get(worldViewport);
+            pointParticles.Add(pointParticle);
 
-            this.startWorldPositions.Add(startWorldPosition);
+            startWorldPositions.Add(startWorldPosition);
             var startUIPosition = CameraUtils.FromWorldToUIPosition(
-                this.worldCamera,
-                this.uiCamera,
+                worldCamera,
+                uiCamera,
                 startWorldPosition
             );
-            this.startUIPositions.Add(startUIPosition);
+            startUIPositions.Add(startUIPosition);
             pointParticle.position = startUIPosition;
 
-            yield return UIAnimations.AnimateJumpRoutine(pointParticle, this.jumps, angle);
+            yield return UIAnimations.AnimateJumpRoutine(pointParticle, jumps, angle);
             yield return new WaitForSeconds(Random.Range(0.35f, 0.45f));
 
-            this.startWorldPositions.Remove(startWorldPosition);
-            this.startUIPositions.Remove(startUIPosition);
-            this.pointParticles.Remove(pointParticle);
-            this.iconParticles.Remove(iconParticle);
-            this.pointParticlePool.Release(pointParticle);
+            startWorldPositions.Remove(startWorldPosition);
+            startUIPositions.Remove(startUIPosition);
+            pointParticles.Remove(pointParticle);
+            iconParticles.Remove(iconParticle);
+            pointParticlePool.Release(pointParticle);
 
-            yield return UIAnimations.AnimateFlyRoutine(iconParticle.transform, this.settings, endUIPosiiton);
-            this.iconParticlePool.Release(iconParticle);
+            yield return UIAnimations.AnimateFlyRoutine(iconParticle.transform, settings, endUIPosiiton);
+            iconParticlePool.Release(iconParticle);
 
             if (particleIterator.NextValue(out var moneyRange))
             {
-                this.panel.IncrementMoney(moneyRange);
+                panel.IncrementMoney(moneyRange);
             }
         }
         
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.pointParticles = new List<RectTransform>();
-            this.pointParticlesCache = new List<RectTransform>();
-            this.iconParticles = new List<ImageParticle>();
-            this.iconParticlesCache = new List<ImageParticle>();
-            this.startWorldPositions = new List<Vector3>();
-            this.startWorldPositionsCache = new List<Vector3>();
-            this.startUIPositions = new List<Vector3>();
-            this.startUIPositionsCache = new List<Vector3>();
+            pointParticles = new List<RectTransform>();
+            pointParticlesCache = new List<RectTransform>();
+            iconParticles = new List<ImageParticle>();
+            iconParticlesCache = new List<ImageParticle>();
+            startWorldPositions = new List<Vector3>();
+            startWorldPositionsCache = new List<Vector3>();
+            startUIPositions = new List<Vector3>();
+            startUIPositionsCache = new List<Vector3>();
             
             var guiParticleSystem = context.GetService<GUIParticlePoolService>();
-            this.iconParticlePool = guiParticleSystem.ImagePool;
-            this.pointParticlePool = guiParticleSystem.PointPool;
+            iconParticlePool = guiParticleSystem.ImagePool;
+            pointParticlePool = guiParticleSystem.PointPool;
             
-            this.uiCamera = context.GetService<GUICameraService>().Camera;
-            this.worldCamera = WorldCamera.Instance;
+            uiCamera = context.GetService<GUICameraService>().Camera;
+            worldCamera = WorldCamera.Instance;
 
-            this.worldViewport = context.GetService<GUIParticleViewportService>().WorldViewport;
+            worldViewport = context.GetService<GUIParticleViewportService>().WorldViewport;
         }
 
         void IGameLateUpdateElement.OnLateUpdate(float deltaTime)
         {
-            this.UpdateIconParticles();
+            UpdateIconParticles();
         }
 
         private void UpdateIconParticles()
         {
-            this.pointParticlesCache.Clear();
-            this.pointParticlesCache.AddRange(this.pointParticles);
+            pointParticlesCache.Clear();
+            pointParticlesCache.AddRange(pointParticles);
 
-            this.iconParticlesCache.Clear();
-            this.iconParticlesCache.AddRange(this.iconParticles);
+            iconParticlesCache.Clear();
+            iconParticlesCache.AddRange(iconParticles);
 
-            this.startWorldPositionsCache.Clear();
-            this.startWorldPositionsCache.AddRange(this.startWorldPositions);
+            startWorldPositionsCache.Clear();
+            startWorldPositionsCache.AddRange(startWorldPositions);
 
-            this.startUIPositionsCache.Clear();
-            this.startUIPositionsCache.AddRange(this.startUIPositions);
+            startUIPositionsCache.Clear();
+            startUIPositionsCache.AddRange(startUIPositions);
 
-            for (int i = 0, count = this.pointParticlesCache.Count; i < count; i++)
+            for (int i = 0, count = pointParticlesCache.Count; i < count; i++)
             {
-                var point = this.pointParticlesCache[i];
-                var icon = this.iconParticlesCache[i];
+                var point = pointParticlesCache[i];
+                var icon = iconParticlesCache[i];
                 var iconTransform = icon.transform;
                 iconTransform.localScale = point.localScale;
 
-                var startUIPosition = this.startUIPositionsCache[i];
-                var startWorldPosition = this.startWorldPositionsCache[i];
-                iconTransform.position = point.position + this.EvaluateOffset(startWorldPosition, startUIPosition);
+                var startUIPosition = startUIPositionsCache[i];
+                var startWorldPosition = startWorldPositionsCache[i];
+                iconTransform.position = point.position + EvaluateOffset(startWorldPosition, startUIPosition);
             }
         }
 
         private Vector3 EvaluateOffset(Vector3 startWorldPosition, Vector3 startUIPosition)
         {
-            var uiPosition = CameraUtils.FromWorldToUIPosition(this.worldCamera, this.uiCamera, startWorldPosition);
+            var uiPosition = CameraUtils.FromWorldToUIPosition(worldCamera, uiCamera, startWorldPosition);
             return uiPosition - startUIPosition;
         }
     }

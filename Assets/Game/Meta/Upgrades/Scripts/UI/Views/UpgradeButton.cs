@@ -44,17 +44,17 @@ namespace Game.Meta
 
         public void AddListener(UnityAction action)
         {
-            this.button.onClick.AddListener(action);
+            button.onClick.AddListener(action);
         }
 
         public void RemoveListener(UnityAction action)
         {
-            this.button.onClick.RemoveListener(action);
+            button.onClick.RemoveListener(action);
         }
 
         public void SetPrice(string price)
         {
-            this.priceText.text = price;
+            priceText.text = price;
         }
 
         public void SetState(State state)
@@ -63,30 +63,30 @@ namespace Game.Meta
 
             if (state == State.AVAILABLE)
             {
-                this.button.interactable = true;
-                this.buttonBackground.sprite = this.availableButtonSprite;
+                button.interactable = true;
+                buttonBackground.sprite = availableButtonSprite;
 
-                this.priceContainer.SetActive(true);
-                this.titleTextGO.SetActive(true);
-                this.maxTextGO.SetActive(false);
+                priceContainer.SetActive(true);
+                titleTextGO.SetActive(true);
+                maxTextGO.SetActive(false);
             }
             else if (state == State.LOCKED)
             {
-                this.button.interactable = false;
-                this.buttonBackground.sprite = this.lockedButtonSprite;
+                button.interactable = false;
+                buttonBackground.sprite = lockedButtonSprite;
 
-                this.priceContainer.SetActive(true);
-                this.titleTextGO.SetActive(true);
-                this.maxTextGO.SetActive(false);
+                priceContainer.SetActive(true);
+                titleTextGO.SetActive(true);
+                maxTextGO.SetActive(false);
             }
             else if (state == State.MAX)
             {
-                this.button.interactable = false;
-                this.buttonBackground.sprite = this.maxButtonSprite;
+                button.interactable = false;
+                buttonBackground.sprite = maxButtonSprite;
 
-                this.priceContainer.SetActive(false);
-                this.titleTextGO.SetActive(false);
-                this.maxTextGO.SetActive(true);
+                priceContainer.SetActive(false);
+                titleTextGO.SetActive(false);
+                maxTextGO.SetActive(true);
             }
             else
             {
@@ -106,7 +106,7 @@ namespace Game.Meta
         {
             try
             {
-                this.SetState(this.state);
+                SetState(state);
             }
             catch (Exception)
             {

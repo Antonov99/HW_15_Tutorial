@@ -33,32 +33,32 @@ namespace Game.GameEngine.Animation
 
         public override void Enter()
         {
-            this.system.AddSpeedMultiplier(this);
+            system.AddSpeedMultiplier(this);
         }
 
         public override void Exit()
         {
-            this.system.RemoveSpeedMultiplier(this);
+            system.RemoveSpeedMultiplier(this);
         }
 
         float IAnimatorMultiplier.GetValue()
         {
-            if (this.mode == Mode.MONO_BEHAVIOUR)
+            if (mode == Mode.MONO_BEHAVIOUR)
             {
-                return this.monoFloat.Current;
+                return monoFloat.Current;
             }
 
-            if (this.mode == Mode.SCRIPTABLE_OBJECT)
+            if (mode == Mode.SCRIPTABLE_OBJECT)
             {
-                return this.scriptableFloat.Current;
+                return scriptableFloat.Current;
             }
 
-            if (this.mode == Mode.CUSTOM)
+            if (mode == Mode.CUSTOM)
             {
-                return this.customFloat;
+                return customFloat;
             }
 
-            throw new Exception($"Mode {this.mode} is undefined!");
+            throw new Exception($"Mode {mode} is undefined!");
         }
 
         private enum Mode

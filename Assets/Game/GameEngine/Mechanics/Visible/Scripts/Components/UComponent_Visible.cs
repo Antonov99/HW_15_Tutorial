@@ -10,7 +10,7 @@ namespace Game.GameEngine.Mechanics
     {
         public bool IsVisible
         {
-            get { return this.isVisible.Current; }
+            get { return isVisible.Current; }
         }
 
         [SerializeField]

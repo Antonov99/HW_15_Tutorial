@@ -29,45 +29,45 @@ namespace Game.GameEngine.AI
 
         private void Awake()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         private void Update()
         {
-            if (this.abortRequired)
+            if (abortRequired)
             {
-                this.Tree.Abort();
-                this.abortRequired = false;
+                Tree.Abort();
+                abortRequired = false;
             }
         }
 
         void IGameStartElement.StartGame()
         {
-            this.Blackboard.OnVariableAdded += this.OnVariableAdded;
-            this.Blackboard.OnVariableRemoved += this.OnVariableRemoved;
-            this.enabled = true;
+            Blackboard.OnVariableAdded += OnVariableAdded;
+            Blackboard.OnVariableRemoved += OnVariableRemoved;
+            enabled = true;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.Blackboard.OnVariableAdded -= this.OnVariableAdded;
-            this.Blackboard.OnVariableRemoved -= this.OnVariableRemoved;
-            this.enabled = false;
+            Blackboard.OnVariableAdded -= OnVariableAdded;
+            Blackboard.OnVariableRemoved -= OnVariableRemoved;
+            enabled = false;
         }
 
         private void OnVariableAdded(string key, object value)
         {
-            if (this.addBlackboardKeys.Contains(key))
+            if (addBlackboardKeys.Contains(key))
             {
-                this.abortRequired = true;
+                abortRequired = true;
             }
         }
 
         private void OnVariableRemoved(string key, object value)
         {
-            if (this.removeBlackboardKeys.Contains(key))
+            if (removeBlackboardKeys.Contains(key))
             {
-                this.abortRequired = true;
+                abortRequired = true;
             }
         }
     }

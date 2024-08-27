@@ -53,10 +53,10 @@ namespace Game.Gameplay.Vendors
             [Construct]
             private void Construct(ScriptableVendor config, Core core)
             {
-                this.entity.Add(new Component_Info(config));
-                this.entity.Add(new Component_ObjectType(config.objectType));
-                this.entity.Add(new Component_CompleteDeal(core.dealEmitter));
-                this.entity.Add(new Component_GetParticlePosition(this.particlePoint));
+                entity.Add(new Component_Info(config));
+                entity.Add(new Component_ObjectType(config.objectType));
+                entity.Add(new Component_CompleteDeal(core.dealEmitter));
+                entity.Add(new Component_GetParticlePosition(particlePoint));
             }
         }
 
@@ -72,7 +72,7 @@ namespace Game.Gameplay.Vendors
             [Construct]
             private void Construct(Core core)
             {
-                core.dealEmitter.AddListener(() => this.animator.Play(this.dealAnimation, -1, 0));
+                core.dealEmitter.AddListener(() => animator.Play(dealAnimation, -1, 0));
             }
         }
 
@@ -93,14 +93,14 @@ namespace Game.Gameplay.Vendors
                 var resourceType = config.resourceType;
                 var pricePerResource = config.pricePerOne;
                 var resourceIcon = resourceCatalog.FindResource(resourceType).icon;
-                this.infoView.SetPrice(pricePerResource.ToString());
-                this.infoView.SetIcon(resourceIcon);
+                infoView.SetPrice(pricePerResource.ToString());
+                infoView.SetIcon(resourceIcon);
             }
 
             [Construct]
             private void ConstructParry()
             {
-                this.parryMechanics.moveTransform = this.moveTransform;
+                parryMechanics.moveTransform = moveTransform;
             }
         }
     }

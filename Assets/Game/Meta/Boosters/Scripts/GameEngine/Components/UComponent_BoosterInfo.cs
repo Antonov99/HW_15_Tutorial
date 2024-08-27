@@ -6,7 +6,7 @@ namespace Game.Meta
     {
         public BoosterConfig BoosterInfo
         {
-            get { return this.config; }
+            get { return config; }
         }
 
         [SerializeField]

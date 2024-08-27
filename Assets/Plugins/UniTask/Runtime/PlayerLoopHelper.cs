@@ -300,8 +300,8 @@ namespace Cysharp.Threading.Tasks
 #if UNITY_EDITOR && UNITY_2019_3_OR_NEWER
             // When domain reload is disabled, re-initialization is required when entering play mode; 
             // otherwise, pending tasks will leak between play mode sessions.
-            var domainReloadDisabled = UnityEditor.EditorSettings.enterPlayModeOptionsEnabled &&
-                UnityEditor.EditorSettings.enterPlayModeOptions.HasFlag(UnityEditor.EnterPlayModeOptions.DisableDomainReload);
+            var domainReloadDisabled = EditorSettings.enterPlayModeOptionsEnabled &&
+                EditorSettings.enterPlayModeOptions.HasFlag(EnterPlayModeOptions.DisableDomainReload);
             if (!domainReloadDisabled && runners != null) return;
 #else
             if (runners != null) return; // already initialized
@@ -516,7 +516,7 @@ namespace Cysharp.Threading.Tasks
 
         public static void DumpCurrentPlayerLoop()
         {
-            var playerLoop = UnityEngine.LowLevel.PlayerLoop.GetCurrentPlayerLoop();
+            var playerLoop = PlayerLoop.GetCurrentPlayerLoop();
 
             var sb = new System.Text.StringBuilder();
             sb.AppendLine($"PlayerLoop List");
@@ -539,17 +539,17 @@ namespace Cysharp.Threading.Tasks
 
                     if (subSystem.subSystemList != null)
                     {
-                        UnityEngine.Debug.LogWarning("More Subsystem:" + subSystem.subSystemList.Length);
+                        Debug.LogWarning("More Subsystem:" + subSystem.subSystemList.Length);
                     }
                 }
             }
 
-            UnityEngine.Debug.Log(sb.ToString());
+            Debug.Log(sb.ToString());
         }
 
         public static bool IsInjectedUniTaskPlayerLoop()
         {
-            var playerLoop = UnityEngine.LowLevel.PlayerLoop.GetCurrentPlayerLoop();
+            var playerLoop = PlayerLoop.GetCurrentPlayerLoop();
 
             foreach (var header in playerLoop.subSystemList)
             {

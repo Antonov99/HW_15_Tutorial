@@ -17,7 +17,7 @@ namespace Game.Meta
         {
             if (product.TryGetComponent(out IComponent_ResourcePrice component))
             {
-                return this.IsResourcesEnough(component);
+                return IsResourcesEnough(component);
             }
 
             return true;
@@ -29,7 +29,7 @@ namespace Game.Meta
             for (int i = 0, count = requiredResources.Length; i < count; i++)
             {
                 var resourceData = requiredResources[i];
-                var amountInStorage = this.resourceStorage.GetResource(resourceData.type);
+                var amountInStorage = resourceStorage.GetResource(resourceData.type);
                 if (amountInStorage < resourceData.amount)
                 {
                     return false;

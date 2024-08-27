@@ -8,7 +8,7 @@ namespace Game.GameEngine.Mechanics
     {
         public bool CanCollect
         {
-            get { return this.boolVariable.Current; }
+            get { return boolVariable.Current; }
         }
 
         [SerializeField]

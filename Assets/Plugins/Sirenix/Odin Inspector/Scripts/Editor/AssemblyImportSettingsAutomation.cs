@@ -11,7 +11,7 @@ namespace Sirenix.OdinInspector.Editor
     using System.IO;
     using System.Collections.Generic;
     using Sirenix.Serialization.Utilities.Editor;
-    using Sirenix.Utilities;
+    using Utilities;
     using UnityEditor;
     using UnityEditor.Build;
 

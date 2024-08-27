@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ES3Internal
 {
-	[System.Serializable]
+	[Serializable]
 	public abstract class ES3SerializableDictionary<TKey,TVal> : Dictionary<TKey,TVal>, ISerializationCallbackReceiver
 	{
 		[SerializeField]
@@ -41,9 +41,9 @@ namespace ES3Internal
                 return;
 
 			if(_Keys.Count != _Values.Count)
-				throw new System.Exception(string.Format("Key count is different to value count after deserialising dictionary."));
+				throw new Exception(string.Format("Key count is different to value count after deserialising dictionary."));
 
-            this.Clear();
+            Clear();
 
             for (int i = 0; i < _Keys.Count; i++)
 			{
@@ -51,7 +51,7 @@ namespace ES3Internal
                 {
                     try
                     {
-                        this.Add(_Keys[i], _Values[i]);
+                        Add(_Keys[i], _Values[i]);
                     }
                     catch { }
                 }

@@ -17,7 +17,7 @@ namespace Game.App
 
         async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            var success = await this.client.Authenticate();
+            var success = await client.Authenticate();
             Debug.Log($"AUTH SUCCESS {success}");
 
             LoadingScreen.ReportProgress(0.2f);

@@ -8,7 +8,7 @@ namespace Game.GameEngine.Mechanics
     {
         public int HealingPoints
         {
-            get { return this.healingPoints; }
+            get { return healingPoints; }
         }
 
         [SerializeField]

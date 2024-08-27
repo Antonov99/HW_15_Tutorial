@@ -12,8 +12,8 @@ namespace Elementary
         
         public bool Current
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
         
         [OnValueChanged("SetValue")]
@@ -24,26 +24,26 @@ namespace Elementary
 
         public void AddListener(IAction<bool> listener)
         {
-            this.onValueChanged += listener;
+            onValueChanged += listener;
         }
 
         public void RemoveListener(IAction<bool> listener)
         {
-            this.onValueChanged -= listener;
+            onValueChanged -= listener;
         }
 
         public IAction<bool> AddListener(Action<bool> listener)
         {
             var actionDelegate = new ActionDelegate<bool>(listener);
-            this.onValueChanged += actionDelegate;
+            onValueChanged += actionDelegate;
             return actionDelegate;
         }
 
         private void SetValue(bool value)
         {
             this.value = value;
-            this.onValueChanged?.Do(value);
-            this.OnValueChanged?.Invoke(value);
+            onValueChanged?.Do(value);
+            OnValueChanged?.Invoke(value);
         }
     }
 }

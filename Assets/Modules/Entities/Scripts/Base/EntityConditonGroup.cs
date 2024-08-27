@@ -20,19 +20,19 @@ namespace Entities
 
         public bool IsTrue(IEntity entity)
         {
-            return this.mode switch
+            return mode switch
             {
-                Mode.AND => this.All(entity),
-                Mode.OR => this.Any(entity),
-                _ => throw new Exception($"Mode is undefined {this.mode}")
+                Mode.AND => All(entity),
+                Mode.OR => Any(entity),
+                _ => throw new Exception($"Mode is undefined {mode}")
             };
         }
 
         private bool All(IEntity entity)
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue(entity))
                 {
                     return false;
@@ -44,9 +44,9 @@ namespace Entities
 
         private bool Any(IEntity entity)
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (condition.IsTrue(entity))
                 {
                     return true;

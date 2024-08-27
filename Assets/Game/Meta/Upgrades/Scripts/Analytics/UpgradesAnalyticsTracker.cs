@@ -19,12 +19,12 @@ namespace Game.Meta
 
         void IGameReadyElement.ReadyGame()
         {
-            this.upgradesManager.OnLevelUp += this.OnLevelUpUpgrade;
+            upgradesManager.OnLevelUp += OnLevelUpUpgrade;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.upgradesManager.OnLevelUp -= this.OnLevelUpUpgrade;
+            upgradesManager.OnLevelUp -= OnLevelUpUpgrade;
         }
 
         private void OnLevelUpUpgrade(Upgrade upgrade)

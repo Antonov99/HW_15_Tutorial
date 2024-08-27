@@ -3,6 +3,7 @@ using System.Collections;
 using Asyncoroutine;
 using Game.Tutorial.UI;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Tutorial.Gameplay
 {
@@ -20,18 +21,18 @@ namespace Game.Tutorial.Gameplay
         
         public async void Show(Transform parent)
         {
-            await new WaitForSeconds(this.showDelay);
+            await new WaitForSeconds(showDelay);
 
-            this.view = GameObject.Instantiate(this.viewPrefab, parent);
-            this.OnShow();
+            view = Object.Instantiate(viewPrefab, parent);
+            OnShow();
         }
 
         public void Hide()
         {
-            if (this.view != null)
+            if (view != null)
             {
-                this.OnHide();
-                GameObject.Destroy(this.view.gameObject);
+                OnHide();
+                Object.Destroy(view.gameObject);
             }
         }
 

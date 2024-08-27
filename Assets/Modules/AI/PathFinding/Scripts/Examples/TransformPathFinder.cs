@@ -15,7 +15,7 @@ namespace PathFinding.Examples
         
         protected override IEnumerable<Transform> GetNeighbours(Transform point)
         {
-            if (this.pointsTable.TryGetValue(point, out var points))
+            if (pointsTable.TryGetValue(point, out var points))
             {
                 return points;
             }
@@ -31,7 +31,7 @@ namespace PathFinding.Examples
         protected override float GetHeuristic(Transform point1, Transform point2)
         {
             //Manhattan distance:
-            return this.GetDistance(point1, point2);
+            return GetDistance(point1, point2);
         }
     }
 }

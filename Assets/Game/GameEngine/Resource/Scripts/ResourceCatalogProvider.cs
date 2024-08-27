@@ -6,7 +6,7 @@ namespace Game.GameEngine.GameResources
     {
         public ResourceInfoCatalog Catalog
         {
-            get { return this.catalog; }
+            get { return catalog; }
         }
 
         [SerializeField]

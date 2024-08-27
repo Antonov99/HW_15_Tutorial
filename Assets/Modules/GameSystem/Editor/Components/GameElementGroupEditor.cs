@@ -16,42 +16,42 @@ namespace GameSystem.UnityEditor
 
         private void OnEnable()
         {
-            this.elementGroup = (GameElementGroup) this.target;
-            this.gameElements = this.serializedObject.FindProperty(nameof(this.gameElements));
-            this.dragAndDropDrawler = DragAndDropDrawler.CreateForElements(this.OnDragAndDrop);
+            elementGroup = (GameElementGroup) target;
+            gameElements = serializedObject.FindProperty(nameof(gameElements));
+            dragAndDropDrawler = DragAndDropDrawler.CreateForElements(OnDragAndDrop);
         }
 
         private void OnDisable()
         {
-            this.dragAndDropDrawler.OnDragAndDrop -= this.OnDragAndDrop;
+            dragAndDropDrawler.OnDragAndDrop -= OnDragAndDrop;
         }
 
         public override void OnInspectorGUI()
         {
-            this.serializedObject.Update();
-            this.DrawGameElements();
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.Update();
+            DrawGameElements();
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void DrawGameElements()
         {
-            EditorGUILayout.PropertyField(this.gameElements, includeChildren: true);
+            EditorGUILayout.PropertyField(gameElements, includeChildren: true);
             EditorGUILayout.Space(8);
-            this.dragAndDropDrawler.Draw();
+            dragAndDropDrawler.Draw();
         }
 
         private void OnDragAndDrop(Object draggedObject)
         {
             if (draggedObject is GameObject gameObject)
             {
-                this.AddByGameObject(gameObject);
-                EditorUtility.SetDirty(this.elementGroup);
+                AddByGameObject(gameObject);
+                EditorUtility.SetDirty(elementGroup);
             }
 
             if (draggedObject is IGameElement gameElement)
             {
-                this.AddByGameElement(gameElement);
-                EditorUtility.SetDirty(this.elementGroup);
+                AddByGameElement(gameElement);
+                EditorUtility.SetDirty(elementGroup);
             }
         }
 
@@ -60,15 +60,15 @@ namespace GameSystem.UnityEditor
             var gameElements = gameObject.GetComponents<IGameElement>();
             foreach (var element in gameElements)
             {
-                this.AddByGameElement(element);
+                AddByGameElement(element);
             }
         }
 
         private void AddByGameElement(IGameElement element)
         {
-            if (!ReferenceEquals(element, this.elementGroup))
+            if (!ReferenceEquals(element, elementGroup))
             {
-                this.elementGroup.Editor_AddElement(element);
+                elementGroup.Editor_AddElement(element);
             }
         }
     }

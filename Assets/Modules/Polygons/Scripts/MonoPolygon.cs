@@ -8,21 +8,21 @@ namespace Polygons
 
         private void Awake()
         {
-            this.Init();
+            Init();
         }
 
         public bool IsPointInside(Vector3 position)
         {
-            var point2D = this.ConvertToPoint(position);
-            return this.polygon.IsPointInside(point2D);
+            var point2D = ConvertToPoint(position);
+            return polygon.IsPointInside(point2D);
         }
 
         public bool ClampPosition(Vector3 position, out float distance, out Vector3 clampedPosition)
         {
-            var point2D = this.ConvertToPoint(position);
-            if (this.polygon.ClampPosition(point2D, out distance, out var clampedPoint2D))
+            var point2D = ConvertToPoint(position);
+            if (polygon.ClampPosition(point2D, out distance, out var clampedPoint2D))
             {
-                clampedPosition = this.ConventToPosition(clampedPoint2D);
+                clampedPosition = ConventToPosition(clampedPoint2D);
                 return true;
             }
 
@@ -32,11 +32,11 @@ namespace Polygons
 
         public Vector3[] GetAllPoints()
         {
-            var count = this.polygon.Length;
+            var count = polygon.Length;
             var result = new Vector3[count];
             for (var i = 0; i < count; i++)
             {
-                var point2D = this.polygon.GetPoint(i);
+                var point2D = polygon.GetPoint(i);
                 result[i] = new Vector3(point2D.x, 0.0f, point2D.y);
             }
             
@@ -45,17 +45,17 @@ namespace Polygons
 
         private void Init()
         {
-            var count = this.transform.childCount;
+            var count = transform.childCount;
             var points = new Vector2[count];
 
             for (var i = 0; i < count; i++)
             {
-                var child = this.transform.GetChild(i);
+                var child = transform.GetChild(i);
                 var worldPosition = child.position;
-                points[i] = this.ConvertToPoint(worldPosition);
+                points[i] = ConvertToPoint(worldPosition);
             }
 
-            this.polygon = new Polygon(points);
+            polygon = new Polygon(points);
         }
 
         private Vector2 ConvertToPoint(Vector3 position)
@@ -77,16 +77,16 @@ namespace Polygons
 
         private void OnDrawGizmos()
         {
-            if (this.gameObject.activeInHierarchy && this.drawGizmos)
+            if (gameObject.activeInHierarchy && drawGizmos)
             {
-                this.Init();
-                this.drawer.DrawPolygon(this.polygon);
+                Init();
+                drawer.DrawPolygon(polygon);
             }
         }
 
         private void OnValidate()
         {
-            this.Init();
+            Init();
         }
 #endif
     }

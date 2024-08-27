@@ -81,16 +81,16 @@ public struct BigNumber : ISerializationCallbackReceiver
 
     public BigNumber(float baseValue, Order order)
     {
-        this.value = baseValue;
+        value = baseValue;
         this.order = order;
-        this.bigInteger = BigNumberHelper.EvaluateBigInteger(baseValue, order);
+        bigInteger = BigNumberHelper.EvaluateBigInteger(baseValue, order);
     }
 
     public BigNumber(BigNumber bigNumber)
     {
-        this.bigInteger = bigNumber.bigInteger;
-        this.order = bigNumber.GetOrder();
-        this.value = bigNumber.GetBaseValue();
+        bigInteger = bigNumber.bigInteger;
+        order = bigNumber.GetOrder();
+        value = bigNumber.GetBaseValue();
     }
 
     public BigNumber(BigInteger bigInteger)
@@ -102,37 +102,37 @@ public struct BigNumber : ISerializationCallbackReceiver
             this.bigInteger = maxValue.bigInteger;
         }
 
-        this.order = BigNumberHelper.EvaluateOrder(this.bigInteger);
-        this.value = BigNumberHelper.EvaluateBaseValue(this.bigInteger);
+        order = BigNumberHelper.EvaluateOrder(this.bigInteger);
+        value = BigNumberHelper.EvaluateBaseValue(this.bigInteger);
     }
 
     public BigNumber(int value)
     {
-        this.bigInteger = value;
-        this.order = BigNumberHelper.EvaluateOrder(this.bigInteger);
-        this.value = BigNumberHelper.EvaluateBaseValue(this.bigInteger);
+        bigInteger = value;
+        order = BigNumberHelper.EvaluateOrder(bigInteger);
+        this.value = BigNumberHelper.EvaluateBaseValue(bigInteger);
     }
 
     public BigNumber(string serializedValue)
     {
-        this.bigInteger = BigInteger.Parse(serializedValue);
-        this.order = BigNumberHelper.EvaluateOrder(this.bigInteger);
-        this.value = BigNumberHelper.EvaluateBaseValue(this.bigInteger);
+        bigInteger = BigInteger.Parse(serializedValue);
+        order = BigNumberHelper.EvaluateOrder(bigInteger);
+        value = BigNumberHelper.EvaluateBaseValue(bigInteger);
     }
 
     public int ToInt()
     {
-        return (int) this.bigInteger;
+        return (int) bigInteger;
     }
 
     public float GetBaseValue()
     {
-        return BigNumberHelper.EvaluateBaseValue(this.bigInteger);
+        return BigNumberHelper.EvaluateBaseValue(bigInteger);
     }
 
     public Order GetOrder()
     {
-        return BigNumberHelper.EvaluateOrder(this.bigInteger);
+        return BigNumberHelper.EvaluateOrder(bigInteger);
     }
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
@@ -141,7 +141,7 @@ public struct BigNumber : ISerializationCallbackReceiver
 
     void ISerializationCallbackReceiver.OnAfterDeserialize()
     {
-        this.bigInteger = BigNumberHelper.EvaluateBigInteger(this.value, this.order);
+        bigInteger = BigNumberHelper.EvaluateBigInteger(value, order);
     }
 
     public static BigNumber MaxNumber()
@@ -392,7 +392,7 @@ public struct BigNumber : ISerializationCallbackReceiver
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
+        if (obj.GetType() != GetType()) return false;
         return Equals((BigNumber) obj);
     }
 
@@ -412,22 +412,22 @@ public struct BigNumber : ISerializationCallbackReceiver
 
     public override string ToString()
     {
-        return this.ToString(FORMAT_XXX_XC);
+        return ToString(FORMAT_XXX_XC);
     }
 
     public string ToString(string format)
     {
-        return this.Formate(format);
+        return Formate(format);
     }
 
     private string Formate(string format)
     {
         format = format.ToUpperInvariant();
 
-        if (String.IsNullOrEmpty(format) || (this.bigInteger < 1000 && format != FORMAT_SERIALIZED))
+        if (String.IsNullOrEmpty(format) || (bigInteger < 1000 && format != FORMAT_SERIALIZED))
             format = FORMAT_XXX_C;
 
-        var fullNumberToString = this.bigInteger.ToString();
+        var fullNumberToString = bigInteger.ToString();
         var numberLength = fullNumberToString.Length;
         var orderInt = (numberLength - 1) / 3;
         var m_order = (Order) orderInt;
@@ -444,22 +444,22 @@ public struct BigNumber : ISerializationCallbackReceiver
         {
             case FORMAT_XXX_XX_C:
                 finalStringWithoutOrder =
-                    this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, true);
+                    GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, true);
                 break;
 
             case FORMAT_XXX_XXC:
                 finalStringWithoutOrder =
-                    this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, false);
+                    GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, false);
                 break;
 
             case FORMAT_XXX_X_C:
                 finalStringWithoutOrder =
-                    this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, true);
+                    GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, true);
                 break;
 
             case FORMAT_XXX_XC:
                 finalStringWithoutOrder =
-                    this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, false);
+                    GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, false);
                 break;
 
             case FORMAT_XXX_C:
@@ -471,13 +471,13 @@ public struct BigNumber : ISerializationCallbackReceiver
                 break;
 
             case FORMAT_SERIALIZED:
-                return this.bigInteger.ToString();
+                return bigInteger.ToString();
 
             case FORMAT_DYNAMIC_3_C:
                 finalStringWithoutOrder = olderNumbersLength switch
                 {
-                    1 => this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, true),
-                    2 => this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, true),
+                    1 => GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, true),
+                    2 => GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, true),
                     3 => $"{olderNumberString} ",
                     _ => finalStringWithoutOrder
                 };
@@ -489,11 +489,11 @@ public struct BigNumber : ISerializationCallbackReceiver
                 {
                     case 1:
                         finalStringWithoutOrder =
-                            this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, false);
+                            GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, false);
                         break;
                     case 2:
                         finalStringWithoutOrder =
-                            this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, false);
+                            GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, false);
                         break;
                     case 3:
                         finalStringWithoutOrder = $"{olderNumberString}";
@@ -506,12 +506,12 @@ public struct BigNumber : ISerializationCallbackReceiver
                 if (olderNumbersLength < 3)
                 {
                     finalStringWithoutOrder =
-                        this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, true);
+                        GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, true);
                 }
                 else
                 {
                     finalStringWithoutOrder =
-                        this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, true);
+                        GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, true);
                 }
 
                 break;
@@ -520,12 +520,12 @@ public struct BigNumber : ISerializationCallbackReceiver
                 if (olderNumbersLength < 3)
                 {
                     finalStringWithoutOrder =
-                        this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, false);
+                        GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 2, false);
                 }
                 else
                 {
                     finalStringWithoutOrder =
-                        this.GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, false);
+                        GetFinalStringWithoutOrder(fullNumberToString, olderNumberString, 1, false);
                 }
 
                 break;

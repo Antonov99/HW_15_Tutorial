@@ -19,14 +19,14 @@ namespace Game.Meta
 
         protected override void OnStart()
         {
-            var heroComponent = this.heroService.GetHero().Get<IComponent_Effector>();
-            heroComponent.Apply(this.config.effect);
+            var heroComponent = heroService.GetHero().Get<IComponent_Effector>();
+            heroComponent.Apply(config.effect);
         }
 
         protected override void OnStop()
         {
-            var heroComponent = this.heroService.GetHero().Get<IComponent_Effector>();
-            heroComponent.Discard(this.config.effect);
+            var heroComponent = heroService.GetHero().Get<IComponent_Effector>();
+            heroComponent.Discard(config.effect);
         }
     }
 }

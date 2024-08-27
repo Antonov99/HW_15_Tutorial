@@ -18,39 +18,39 @@ namespace AI.BTree.UnityEditor
 
         private void Awake()
         {
-            this.behaviourTree = (UnityBehaviourTree) this.target;
-            this.root = this.serializedObject.FindProperty(nameof(this.root));
-            this.updateMode = this.serializedObject.FindProperty(nameof(this.updateMode));
-            this.autoRun = this.serializedObject.FindProperty(nameof(this.autoRun));
-            this.loop = this.serializedObject.FindProperty(nameof(this.loop));
+            behaviourTree = (UnityBehaviourTree) target;
+            root = serializedObject.FindProperty(nameof(root));
+            updateMode = serializedObject.FindProperty(nameof(updateMode));
+            autoRun = serializedObject.FindProperty(nameof(autoRun));
+            loop = serializedObject.FindProperty(nameof(loop));
         }
 
         public override void OnInspectorGUI()
         {
-            if (this.behaviourTree.Editor_GetRoot() == null)
+            if (behaviourTree.Editor_GetRoot() == null)
             {
                 EditorGUILayout.HelpBox("Root is not installed", MessageType.Error, false);
             }
             else
             {
-                InspectorHelper.DrawRunningParameter(this.behaviourTree.IsRunning);
+                InspectorHelper.DrawRunningParameter(behaviourTree.IsRunning);
             }
 
             EditorGUILayout.Space(2.0f);
 
-            EditorGUILayout.PropertyField(this.autoRun);
-            EditorGUILayout.PropertyField(this.loop);
+            EditorGUILayout.PropertyField(autoRun);
+            EditorGUILayout.PropertyField(loop);
             
-            if (this.loop.boolValue)
+            if (loop.boolValue)
             {
-                EditorGUILayout.PropertyField(this.updateMode);
+                EditorGUILayout.PropertyField(updateMode);
             }
 
 
             EditorGUILayout.Space(2.0f);
-            EditorGUILayout.PropertyField(this.root, true);
+            EditorGUILayout.PropertyField(root, true);
 
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

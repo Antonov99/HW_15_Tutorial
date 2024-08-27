@@ -11,8 +11,8 @@ namespace Game.GameEngine
     {
         public event Action<TakeDamageArgs> OnDamageTaken
         {
-            add { this.engine.OnDamageTaken += value; }
-            remove { this.engine.OnDamageTaken -= value; }
+            add { engine.OnDamageTaken += value; }
+            remove { engine.OnDamageTaken -= value; }
         }
 
         [SerializeField]
@@ -20,7 +20,7 @@ namespace Game.GameEngine
         
         public void TakeDamage(TakeDamageArgs damageArgs)
         {
-            this.engine.TakeDamage(damageArgs);
+            engine.TakeDamage(damageArgs);
         }
     }
 }

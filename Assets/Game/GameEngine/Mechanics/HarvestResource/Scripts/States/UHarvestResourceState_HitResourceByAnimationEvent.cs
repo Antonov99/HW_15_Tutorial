@@ -27,19 +27,19 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.animationSystem.OnStringReceived += this.OnAnimationEvent;
+            animationSystem.OnStringReceived += OnAnimationEvent;
         }
 
         public override void Exit()
         {
-            this.animationSystem.OnStringReceived -= this.OnAnimationEvent;
+            animationSystem.OnStringReceived -= OnAnimationEvent;
         }
 
         private void OnAnimationEvent(string message)
         {
-            if (this.animationEvents.Contains(message) && this.harvestEngine.IsActive)
+            if (animationEvents.Contains(message) && harvestEngine.IsActive)
             {
-                this.hitAction.Do(this.harvestEngine.Current);
+                hitAction.Do(harvestEngine.Current);
             }
         }
     }

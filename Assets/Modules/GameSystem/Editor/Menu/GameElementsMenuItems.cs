@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameSystem.UnityEditor
 {
@@ -13,7 +14,7 @@ namespace GameSystem.UnityEditor
             var root = new GameObject("GameContext").AddComponent<GameContext>();
             Selection.activeGameObject = root.gameObject;
 
-            var activeScene = EditorSceneManager.GetActiveScene();
+            var activeScene = SceneManager.GetActiveScene();
             EditorSceneManager.MarkSceneDirty(activeScene);
         }
 
@@ -23,7 +24,7 @@ namespace GameSystem.UnityEditor
             var root = new GameObject("GameElementGroup").AddComponent<GameElementGroup>();
             Selection.activeGameObject = root.gameObject;
 
-            var activeScene = EditorSceneManager.GetActiveScene();
+            var activeScene = SceneManager.GetActiveScene();
             EditorSceneManager.MarkSceneDirty(activeScene);
         }
 
@@ -33,7 +34,7 @@ namespace GameSystem.UnityEditor
             var root = new GameObject("GameServiceGroup").AddComponent<GameServiceGroup>();
             Selection.activeGameObject = root.gameObject;
 
-            var activeScene = EditorSceneManager.GetActiveScene();
+            var activeScene = SceneManager.GetActiveScene();
             EditorSceneManager.MarkSceneDirty(activeScene);
         }
     }

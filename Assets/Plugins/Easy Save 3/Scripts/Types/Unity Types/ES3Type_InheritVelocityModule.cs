@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_InheritVelocityModule() : base(typeof(UnityEngine.ParticleSystem.InheritVelocityModule))
+		public ES3Type_InheritVelocityModule() : base(typeof(ParticleSystem.InheritVelocityModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.InheritVelocityModule)obj;
+			var instance = (ParticleSystem.InheritVelocityModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("mode", instance.mode);
@@ -26,14 +26,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.InheritVelocityModule();
+			var instance = new ParticleSystem.InheritVelocityModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.InheritVelocityModule)obj;
+			var instance = (ParticleSystem.InheritVelocityModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -41,16 +41,16 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "mode":
-						instance.mode = reader.Read<UnityEngine.ParticleSystemInheritVelocityMode>();
+						instance.mode = reader.Read<ParticleSystemInheritVelocityMode>();
 						break;
 					case "curve":
-						instance.curve = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.curve = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "curveMultiplier":
-						instance.curveMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.curveMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					default:
 						reader.Skip();

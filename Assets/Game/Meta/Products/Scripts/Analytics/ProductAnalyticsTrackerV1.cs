@@ -16,20 +16,20 @@ namespace Game.Meta
 
         void IGameReadyElement.ReadyGame()
         {
-            this.buyManager.OnBuyCompleted += this.OnBuyProduct;
+            buyManager.OnBuyCompleted += OnBuyProduct;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.buyManager.OnBuyCompleted -= this.OnBuyProduct;
+            buyManager.OnBuyCompleted -= OnBuyProduct;
         }
 
         private void OnBuyProduct(Product product)
         {
             ProductAnalytics.LogProductBought(
                 product,
-                previousMoney: this.moneySupplier.PreviousMoney,
-                currentMoney: this.moneySupplier.CurrentMoney
+                previousMoney: moneySupplier.PreviousMoney,
+                currentMoney: moneySupplier.CurrentMoney
             );
         }
     }

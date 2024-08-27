@@ -12,7 +12,7 @@ namespace Game.GameEngine.Mechanics
         [ShowInInspector]
         public bool IsAlive
         {
-            get { return this.CheckIsAlive(); }
+            get { return CheckIsAlive(); }
         }
 
         [SerializeField]
@@ -24,17 +24,17 @@ namespace Game.GameEngine.Mechanics
 
         private bool CheckIsAlive()
         {
-            if (this.isAlive == null)
+            if (isAlive == null)
             {
                 return default;
             }
             
-            if (this.invert)
+            if (invert)
             {
-                return !this.isAlive.Current;
+                return !isAlive.Current;
             }
 
-            return this.isAlive.Current;
+            return isAlive.Current;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Game.GameEngine
         public override void Construct(GameContext gameContext)
         {
             var entitiesService = gameContext.GetService<EntitiesService>();
-            if (entitiesService.FindEntity(this.heroCondition, out IEntity hero))
+            if (entitiesService.FindEntity(heroCondition, out IEntity hero))
             {
                 var heroService = gameContext.GetService<HeroService>();
                 heroService.SetupHero(hero);

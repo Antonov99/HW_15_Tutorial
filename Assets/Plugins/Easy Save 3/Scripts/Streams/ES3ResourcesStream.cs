@@ -6,7 +6,7 @@ namespace ES3Internal
 	internal class ES3ResourcesStream : MemoryStream
 	{
 		// Check that data exists by checking stream is not empty.
-		public bool Exists{ get{ return this.Length > 0; } }
+		public bool Exists{ get{ return Length > 0; } }
 
 		// Used when creating 
 		public ES3ResourcesStream(string path) : base(GetData(path))

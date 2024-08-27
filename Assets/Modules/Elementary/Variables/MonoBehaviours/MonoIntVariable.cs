@@ -13,8 +13,8 @@ namespace Elementary
 
         public int Current
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
 
         private readonly List<IAction<int>> listeners = new();
@@ -28,61 +28,61 @@ namespace Elementary
 
         public void SetValue(int value)
         {
-            for (int i = 0, count = this.listeners.Count; i < count; i++)
+            for (int i = 0, count = listeners.Count; i < count; i++)
             {
-                var listener = this.listeners[i];
+                var listener = listeners[i];
                 listener.Do(value);
             }
 
             this.value = value;
-            this.onValueChanged?.Invoke(value);
-            this.OnValueChanged?.Invoke(value);
+            onValueChanged?.Invoke(value);
+            OnValueChanged?.Invoke(value);
         }
         
         public void Plus(int range)
         {
-            var newValue = this.value + range;
-            this.SetValue(newValue);
+            var newValue = value + range;
+            SetValue(newValue);
         }
 
         public void Minus(int range)
         {
-            var newValue = this.value - range;
-            this.SetValue(newValue);
+            var newValue = value - range;
+            SetValue(newValue);
         }
 
         public void Multiply(int multiplier)
         {
-            var newValue = this.value * multiplier;
-            this.SetValue(newValue);
+            var newValue = value * multiplier;
+            SetValue(newValue);
         }
 
         public void Divide(int divider)
         {
-            var newValue = this.value / divider;
-            this.SetValue(newValue);
+            var newValue = value / divider;
+            SetValue(newValue);
         }
 
         public void Increment()
         {
-            var newValue = this.value + 1;
-            this.SetValue(newValue);
+            var newValue = value + 1;
+            SetValue(newValue);
         }
 
         public void Decrement()
         {
-            var newValue = this.value - 1;
-            this.SetValue(newValue);
+            var newValue = value - 1;
+            SetValue(newValue);
         }
 
         public void AddListener(IAction<int> listener)
         {
-            this.listeners.Add(listener);
+            listeners.Add(listener);
         }
 
         public void RemoveListener(IAction<int> listener)
         {
-            this.listeners.Remove(listener);
+            listeners.Remove(listener);
         }
     }
 }

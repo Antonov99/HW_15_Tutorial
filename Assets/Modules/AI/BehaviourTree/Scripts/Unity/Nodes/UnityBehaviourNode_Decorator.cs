@@ -13,19 +13,19 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            this.node.Run(callback: this);
+            node.Run(callback: this);
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
-            this.Return(this.success);
+            Return(this.success);
         }
 
         protected override void OnAbort()
         {
-            if (this.node.IsRunning)
+            if (node.IsRunning)
             {
-                this.node.Abort();
+                node.Abort();
             }
         }
     }

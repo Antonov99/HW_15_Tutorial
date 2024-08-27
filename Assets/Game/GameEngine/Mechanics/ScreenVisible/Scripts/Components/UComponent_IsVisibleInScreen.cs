@@ -8,7 +8,7 @@ namespace Game.GameEngine.Mechanics
     {
         public bool IsVisible
         {
-            get { return this.visibleScript.IsVisible; }
+            get { return visibleScript.IsVisible; }
         }
 
         [SerializeField]

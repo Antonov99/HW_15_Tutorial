@@ -11,7 +11,7 @@ namespace Windows.Examples
 
         protected override MonoWindow GetPrefab(MyPopupId key)
         {
-            foreach (var info in this.popups)
+            foreach (var info in popups)
             {
                 if (info.id == key)
                 {

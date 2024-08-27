@@ -14,24 +14,24 @@ namespace Game.GameEngine
         
         private void Awake()
         {
-            this.SetActive(this.timer.IsPlaying);
+            SetActive(timer.IsPlaying);
         }
 
         protected override void OnTimerStarted()
         {
-            this.SetActive(this.setActive);
+            SetActive(setActive);
         }
 
         protected override void OnTimerFinished()
         {
-            this.SetActive(!this.setActive);
+            SetActive(!setActive);
         }
 
         private void SetActive(bool isActive)
         {
-            for (int i = 0, count = this.objects.Length; i < count; i++)
+            for (int i = 0, count = objects.Length; i < count; i++)
             {
-                var obj = this.objects[i];
+                var obj = objects[i];
                 obj.SetActive(isActive);
             }
         }

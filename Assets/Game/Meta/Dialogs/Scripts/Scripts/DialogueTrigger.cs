@@ -8,7 +8,7 @@ namespace Game.Meta
     {
         public DialogueConfig Dialogue
         {
-            get { return this.dialogue; }
+            get { return dialogue; }
         }
 
         [SerializeField]

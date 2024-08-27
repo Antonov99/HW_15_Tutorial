@@ -16,7 +16,7 @@ namespace Game.App
 
         public async void Do(Action<LoadingResult> callback)
         {
-            if (await this.database.ConnectAsync())
+            if (await database.ConnectAsync())
             {
                 callback?.Invoke(LoadingResult.Success());
             }

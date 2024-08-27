@@ -24,32 +24,32 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.targetComponent = this.combatOperator
+            targetComponent = combatOperator
                 .Current
                 .targetEntity
                 .Get<IComponent_OnDestroyed<DestroyArgs>>();
-            this.targetComponent.OnDestroyed += this.OnTargetDestroyed;
+            targetComponent.OnDestroyed += OnTargetDestroyed;
         }
 
         public override void Exit()
         {
-            this.targetComponent.OnDestroyed -= this.OnTargetDestroyed;
+            targetComponent.OnDestroyed -= OnTargetDestroyed;
         }
 
         private void OnTargetDestroyed(DestroyArgs destroyArgs)
         {
-            if (this.IsDestroyedByAttacker(destroyArgs))
+            if (IsDestroyedByAttacker(destroyArgs))
             {
-                this.combatOperator.Current.targetDestroyed = true;
+                combatOperator.Current.targetDestroyed = true;
             }
 
-            this.combatOperator.Stop();
+            combatOperator.Stop();
         }
 
         private bool IsDestroyedByAttacker(DestroyArgs destroyArgs)
         {
             return destroyArgs.reason == DestroyReason.ATTACKER &&
-                   ReferenceEquals(destroyArgs.source, this.attacker);
+                   ReferenceEquals(destroyArgs.source, attacker);
         }
     }
 }

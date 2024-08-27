@@ -21,17 +21,17 @@ namespace Game.GameEngine.AI
     
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.entityKey, out IEntity entity))
+            if (!Blackboard.TryGetVariable(entityKey, out IEntity entity))
             {
                 Debug.LogWarning("Entity is not found!");
-                this.Return(false);
+                Return(false);
                 return;
             }
             
             var targetTransform = entity.Get<IComponent_GetPosition>();
             var targetPosition = targetTransform.Position;
-            this.Blackboard.ReplaceVariable(this.resultPositionKey, targetPosition);
-            this.Return(true);
+            Blackboard.ReplaceVariable(resultPositionKey, targetPosition);
+            Return(true);
         }
     }
 }

@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Gradient() : base(typeof(UnityEngine.Gradient))
+		public ES3Type_Gradient() : base(typeof(Gradient))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Gradient)obj;
+			var instance = (Gradient)obj;
 			writer.WriteProperty("colorKeys", instance.colorKeys, ES3Type_GradientColorKeyArray.Instance);
 			writer.WriteProperty("alphaKeys", instance.alphaKeys, ES3Type_GradientAlphaKeyArray.Instance);
 			writer.WriteProperty("mode", instance.mode);
@@ -24,17 +24,17 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.Gradient();
+			var instance = new Gradient();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.Gradient)obj;
+			var instance = (Gradient)obj;
 			instance.SetKeys(
-				reader.ReadProperty<UnityEngine.GradientColorKey[]>(ES3Type_GradientColorKeyArray.Instance),
-				reader.ReadProperty<UnityEngine.GradientAlphaKey[]>(ES3Type_GradientAlphaKeyArray.Instance)
+				reader.ReadProperty<GradientColorKey[]>(ES3Type_GradientColorKeyArray.Instance),
+				reader.ReadProperty<GradientAlphaKey[]>(ES3Type_GradientAlphaKeyArray.Instance)
 			);
 
 			string propertyName;
@@ -43,7 +43,7 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					case "mode":
-						instance.mode = reader.Read<UnityEngine.GradientMode>();
+						instance.mode = reader.Read<GradientMode>();
 						break;
 					default:
 						reader.Skip();

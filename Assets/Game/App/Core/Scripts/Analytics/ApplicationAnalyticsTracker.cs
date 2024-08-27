@@ -12,18 +12,18 @@ namespace Game.Analytics
 
         void IAppStartListener.Start()
         {
-            this.applicationManager.OnPaused += this.OnAppPaused;
-            this.applicationManager.OnResumed += this.OnAppResumed;
-            this.applicationManager.OnQuit += this.OnAppQuit;
+            applicationManager.OnPaused += OnAppPaused;
+            applicationManager.OnResumed += OnAppResumed;
+            applicationManager.OnQuit += OnAppQuit;
             
             ApplicationAnalytics.LogApplicationStarted();
         }
 
         void IAppQuitListener.OnQuit()
         {
-            this.applicationManager.OnPaused -= this.OnAppPaused;
-            this.applicationManager.OnResumed -= this.OnAppResumed;
-            this.applicationManager.OnQuit -= this.OnAppQuit;
+            applicationManager.OnPaused -= OnAppPaused;
+            applicationManager.OnResumed -= OnAppResumed;
+            applicationManager.OnQuit -= OnAppQuit;
         }
 
         private void OnAppPaused()

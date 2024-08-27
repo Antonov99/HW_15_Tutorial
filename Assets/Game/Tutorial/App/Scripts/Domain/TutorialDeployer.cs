@@ -17,8 +17,8 @@ namespace Game.Tutorial.App
 
         void IAppInitListener.Init()
         {
-            this.assetSupplier = ServiceLocator.GetService<TutorialAssetSupplier>();
-            this.gameFacade = ServiceLocator.GetService<GameFacade>();
+            assetSupplier = ServiceLocator.GetService<TutorialAssetSupplier>();
+            gameFacade = ServiceLocator.GetService<GameFacade>();
         }
 
         public async Task DeployTutorial()
@@ -30,23 +30,23 @@ namespace Game.Tutorial.App
             }
 
             //Load tutorial engine:
-            var enginePrefab = await this.assetSupplier.LoadTutorialEngine();
-            var engine = GameObject.Instantiate(enginePrefab);
+            var enginePrefab = await assetSupplier.LoadTutorialEngine();
+            var engine = Object.Instantiate(enginePrefab);
             engine.name = ENGINE_NAME;
             
             //Load tutorial gui:
-            var guiPrefab = await this.assetSupplier.LoadTutorialInterface();
-            var canvasService = this.gameFacade.GetService<GUICanvasService>();
-            var gui = GameObject.Instantiate(guiPrefab, canvasService.RootTransform);
+            var guiPrefab = await assetSupplier.LoadTutorialInterface();
+            var canvasService = gameFacade.GetService<GUICanvasService>();
+            var gui = Object.Instantiate(guiPrefab, canvasService.RootTransform);
             gui.name = guiPrefab.name;
             
             //Register services:
-            this.gameFacade.RegisterService(engine.GetComponent<IGameServiceGroup>());
-            this.gameFacade.RegisterService(gui.GetComponent<IGameServiceGroup>());
+            gameFacade.RegisterService(engine.GetComponent<IGameServiceGroup>());
+            gameFacade.RegisterService(gui.GetComponent<IGameServiceGroup>());
 
             //Register elements:
-            this.gameFacade.RegisterElement(engine.GetComponent<IGameElementGroup>());
-            this.gameFacade.RegisterElement(gui.GetComponent<IGameElementGroup>());
+            gameFacade.RegisterElement(engine.GetComponent<IGameElementGroup>());
+            gameFacade.RegisterElement(gui.GetComponent<IGameElementGroup>());
         }
     }
 }

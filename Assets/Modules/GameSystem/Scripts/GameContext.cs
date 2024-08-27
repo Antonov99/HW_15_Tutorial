@@ -54,180 +54,180 @@ namespace GameSystem
 
         public GameContext()
         {
-            this.CurrentState = State.OFF;
-            this.elementContext = new ElementContext(this);
-            this.serviceContext = new ServiceContext();
+            CurrentState = State.OFF;
+            elementContext = new ElementContext(this);
+            serviceContext = new ServiceContext();
         }
 
         private void Awake()
         {
-            if (this.autoRun)
+            if (autoRun)
             {
-                this.StartCoroutine(this.AutoRun());
+                StartCoroutine(AutoRun());
             }
             else
             {
-                this.enabled = false;
+                enabled = false;
             }
         }
 
         private void FixedUpdate()
         {
-            this.elementContext.FixedUpdate(Time.fixedDeltaTime);
+            elementContext.FixedUpdate(Time.fixedDeltaTime);
         }
 
         private void Update()
         {
-            this.elementContext.Update(Time.deltaTime);
+            elementContext.Update(Time.deltaTime);
         }
 
         private void LateUpdate()
         {
-            this.elementContext.LateUpdate(Time.deltaTime);
+            elementContext.LateUpdate(Time.deltaTime);
         }
 
         [ContextMenu("Construct Game")]
         public void ConstructGame()
         {
-            if (this.CurrentState != State.OFF)
+            if (CurrentState != State.OFF)
             {
-                LogWarning($"Can't construct the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't construct the game from the {CurrentState} state, " +
                            $"only from {nameof(State.OFF)}");
                 return;
             }
             
-            this.RegisterElements();
-            this.RegisterServices();
+            RegisterElements();
+            RegisterServices();
             
-            this.CurrentState = State.CONSTRUCT;
-            this.elementContext.ConstructGame();
+            CurrentState = State.CONSTRUCT;
+            elementContext.ConstructGame();
 
-            foreach (var task in this.constructTasks)
+            foreach (var task in constructTasks)
             {
                 task.Construct(this);
             }
 
-            this.OnGameConstructed?.Invoke();
+            OnGameConstructed?.Invoke();
         }
 
         [ContextMenu("Init Game")]
         public void InitGame()
         {
-            if (this.CurrentState != State.CONSTRUCT)
+            if (CurrentState != State.CONSTRUCT)
             {
-                LogWarning($"Can't initialize the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't initialize the game from the {CurrentState} state, " +
                            $"only from {nameof(State.CONSTRUCT)}");
                 return;
             }
 
-            this.CurrentState = State.INIT;
-            this.elementContext.InitGame();
-            this.OnGameInitialized?.Invoke();
+            CurrentState = State.INIT;
+            elementContext.InitGame();
+            OnGameInitialized?.Invoke();
         }
 
         [ContextMenu("Ready Game")]
         public void ReadyGame()
         {
-            if (this.CurrentState != State.INIT)
+            if (CurrentState != State.INIT)
             {
-                LogWarning($"Can't set ready the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't set ready the game from the {CurrentState} state, " +
                            $"only from {nameof(State.INIT)}");
                 return;
             }
 
-            this.CurrentState = State.READY;
-            this.elementContext.ReadyGame();
-            this.OnGameReady?.Invoke();
+            CurrentState = State.READY;
+            elementContext.ReadyGame();
+            OnGameReady?.Invoke();
         }
 
         [ContextMenu("Start Game")]
         public void StartGame()
         {
-            if (this.CurrentState != State.READY)
+            if (CurrentState != State.READY)
             {
-                LogWarning($"Can't start the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't start the game from the {CurrentState} state, " +
                            $"only from {nameof(State.READY)}");
                 return;
             }
 
-            this.CurrentState = State.PLAY;
-            this.elementContext.StartGame();
-            this.OnGameStarted?.Invoke();
+            CurrentState = State.PLAY;
+            elementContext.StartGame();
+            OnGameStarted?.Invoke();
             
-            this.enabled = true;
+            enabled = true;
         }
 
         [ContextMenu("Pause Game")]
         public void PauseGame()
         {
-            if (this.CurrentState != State.PLAY)
+            if (CurrentState != State.PLAY)
             {
-                LogWarning($"Can't pause the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't pause the game from the {CurrentState} state, " +
                            $"only from {nameof(State.PLAY)}");
                 return;
             }
 
-            this.CurrentState = State.PAUSE;
-            this.elementContext.PauseGame();
-            this.OnGamePaused?.Invoke();
+            CurrentState = State.PAUSE;
+            elementContext.PauseGame();
+            OnGamePaused?.Invoke();
             
-            this.enabled = false;
+            enabled = false;
         }
 
         [ContextMenu("Resume Game")]
         public void ResumeGame()
         {
-            if (this.CurrentState != State.PAUSE)
+            if (CurrentState != State.PAUSE)
             {
-                LogWarning($"Can't resume the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't resume the game from the {CurrentState} state, " +
                            $"only from {nameof(State.PAUSE)}");
                 return;
             }
 
-            this.CurrentState = State.PLAY;
-            this.elementContext.ResumeGame();
-            this.OnGameResumed?.Invoke();
+            CurrentState = State.PLAY;
+            elementContext.ResumeGame();
+            OnGameResumed?.Invoke();
             
-            this.enabled = true;
+            enabled = true;
         }
 
         [ContextMenu("Finish Game")]
         public void FinishGame()
         {
-            if (this.CurrentState is not (State.PLAY or State.PAUSE))
+            if (CurrentState is not (State.PLAY or State.PAUSE))
             {
-                LogWarning($"Can't finish the game from the {this.CurrentState} state, " +
+                LogWarning($"Can't finish the game from the {CurrentState} state, " +
                            $"only from {nameof(State.PLAY)} or {nameof(State.PAUSE)}");
                 return;
             }
 
-            this.CurrentState = State.FINISH;
-            this.elementContext.FinishGame();
-            this.OnGameFinished?.Invoke();
+            CurrentState = State.FINISH;
+            elementContext.FinishGame();
+            OnGameFinished?.Invoke();
 
-            this.enabled = false;
+            enabled = false;
         }
 
         private void RegisterElements()
         {
-            for (int i = 0, count = this.gameElements.Count; i < count; i++)
+            for (int i = 0, count = gameElements.Count; i < count; i++)
             {
-                var monoElement = this.gameElements[i];
+                var monoElement = gameElements[i];
                 if (monoElement is IGameElement gameElement)
                 {
-                    this.RegisterElement(gameElement);
+                    RegisterElement(gameElement);
                 }
             }
         }
 
         private void RegisterServices()
         {
-            for (int i = 0, count = this.gameServices.Count; i < count; i++)
+            for (int i = 0, count = gameServices.Count; i < count; i++)
             {
-                var monoService = this.gameServices[i];
+                var monoService = gameServices[i];
                 if (monoService != null)
                 {
-                    this.RegisterService(monoService);
+                    RegisterService(monoService);
                 }
             }
         }
@@ -235,93 +235,93 @@ namespace GameSystem
         private IEnumerator AutoRun()
         {
             yield return new WaitForEndOfFrame();
-            this.ConstructGame();
-            this.InitGame();
-            this.ReadyGame();
-            this.StartGame();
+            ConstructGame();
+            InitGame();
+            ReadyGame();
+            StartGame();
         }
 
 #if UNITY_EDITOR
         public void Editor_AddElement(MonoBehaviour gameElement)
         {
-            this.gameElements.Add(gameElement);
+            gameElements.Add(gameElement);
         }
 
         public void Editor_AddService(MonoBehaviour gameService)
         {
-            this.gameServices.Add(gameService);
+            gameServices.Add(gameService);
         }
 
         public void Editor_AddConstructTask(ConstructTask task)
         {
-            this.constructTasks.Add(task);
+            constructTasks.Add(task);
         }
 
         private void OnValidate()
         {
-            EditorValidator.ValidateServices(ref this.gameServices);
-            EditorValidator.ValidateElements(ref this.gameElements);
+            EditorValidator.ValidateServices(ref gameServices);
+            EditorValidator.ValidateElements(ref gameElements);
         }
 #endif
 
         public void RegisterElement(IGameElement element)
         {
-            this.elementContext.AddElement(element);
+            elementContext.AddElement(element);
         }
 
         public void UnregisterElement(IGameElement element)
         {
-            this.elementContext.RemoveElement(element);
+            elementContext.RemoveElement(element);
         }
 
         public object[] GetAllElements()
         {
-            return this.elementContext.GetAllElements();
+            return elementContext.GetAllElements();
         }
 
         public void RegisterService(object service)
         {
-            this.serviceContext.AddService(service);
+            serviceContext.AddService(service);
         }
 
         public void UnregisterService(object service)
         {
-            this.serviceContext.RemoveService(service);
+            serviceContext.RemoveService(service);
         }
 
         public T GetService<T>()
         {
-            return this.serviceContext.GetService<T>();
+            return serviceContext.GetService<T>();
         }
 
         public object[] GetServices(Type type)
         {
-            return this.serviceContext.GetServices(type);
+            return serviceContext.GetServices(type);
         }
 
         public object[] GetAllServices()
         {
-            return this.serviceContext.GetAllServices().ToArray();
+            return serviceContext.GetAllServices().ToArray();
         }
 
         public object GetService(Type type)
         {
-            return this.serviceContext.GetService(type);
+            return serviceContext.GetService(type);
         }
 
         public bool TryGetService<T>(out T service)
         {
-            return this.serviceContext.TryGetService(out service);
+            return serviceContext.TryGetService(out service);
         }
 
         public bool TryGetService(Type type, out object service)
         {
-            return this.serviceContext.TryGetService(type, out service);
+            return serviceContext.TryGetService(type, out service);
         }
 
         public T[] GetServices<T>()
         {
-            return this.serviceContext.GetServices<T>();
+            return serviceContext.GetServices<T>();
         }
         
         public abstract class ConstructTask : ScriptableObject

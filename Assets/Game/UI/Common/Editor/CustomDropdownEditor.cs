@@ -11,7 +11,7 @@ namespace Game.App.QualitySettings.Editor
         protected override void OnEnable()
         {
             base.OnEnable();
-            this.blocker = serializedObject.FindProperty("blocker");
+            blocker = serializedObject.FindProperty("blocker");
         }
 
         public override void OnInspectorGUI()

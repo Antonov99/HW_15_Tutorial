@@ -12,7 +12,7 @@ namespace ES3Types
 
 		public override void Write(object obj, ES3Writer writer, ES3.ReferenceMode unityObjectType)
 		{
-			var array = (System.Array)obj;
+			var array = (Array)obj;
 
 			if(elementType == null)
 				throw new ArgumentNullException("ES3Type argument cannot be null.");

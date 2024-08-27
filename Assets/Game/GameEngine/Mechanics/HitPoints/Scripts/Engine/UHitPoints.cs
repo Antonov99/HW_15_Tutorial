@@ -19,14 +19,14 @@ namespace Game.GameEngine.Mechanics
 
         public int Current
         {
-            get { return this.currentHitPoints; }
-            set { this.SetCurrentPoints(value); }
+            get { return currentHitPoints; }
+            set { SetCurrentPoints(value); }
         }
 
         public int Max
         {
-            get { return this.maxHitPoints; }
-            set { this.SetMaxPoints(value); }
+            get { return maxHitPoints; }
+            set { SetMaxPoints(value); }
         }
 
         [SerializeField]
@@ -40,27 +40,27 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void Setup(int current, int max)
         {
-            this.maxHitPoints = max;
-            this.currentHitPoints = Mathf.Clamp(current, 0, this.maxHitPoints);
-            this.OnSetuped?.Invoke();
+            maxHitPoints = max;
+            currentHitPoints = Mathf.Clamp(current, 0, maxHitPoints);
+            OnSetuped?.Invoke();
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         private void SetCurrentPoints(int value)
         {
-            value = Mathf.Clamp(value, 0, this.maxHitPoints);
-            this.currentHitPoints = value;
-            this.OnCurrentPointsChanged?.Invoke(this.currentHitPoints);
+            value = Mathf.Clamp(value, 0, maxHitPoints);
+            currentHitPoints = value;
+            OnCurrentPointsChanged?.Invoke(currentHitPoints);
 
             if (value <= 0)
             {
-                this.OnCurrentPointsOver?.Invoke();
+                OnCurrentPointsOver?.Invoke();
             }
 
-            if (value >= this.maxHitPoints)
+            if (value >= maxHitPoints)
             {
-                this.OnCurrentPointsFull?.Invoke();
+                OnCurrentPointsFull?.Invoke();
             }
         }
 
@@ -69,20 +69,20 @@ namespace Game.GameEngine.Mechanics
         private void SetMaxPoints(int value)
         {
             value = Math.Max(1, value);
-            if (this.currentHitPoints > value)
+            if (currentHitPoints > value)
             {
-                this.currentHitPoints = value;
+                currentHitPoints = value;
             }
 
-            this.maxHitPoints = value;
-            this.OnMaxPointsChanged?.Invoke(value);
+            maxHitPoints = value;
+            OnMaxPointsChanged?.Invoke(value);
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            this.maxHitPoints = Math.Max(1, this.maxHitPoints);
-            this.currentHitPoints = Mathf.Clamp(this.currentHitPoints, 1, this.maxHitPoints);
+            maxHitPoints = Math.Max(1, maxHitPoints);
+            currentHitPoints = Mathf.Clamp(currentHitPoints, 1, maxHitPoints);
         }
 #endif
     }

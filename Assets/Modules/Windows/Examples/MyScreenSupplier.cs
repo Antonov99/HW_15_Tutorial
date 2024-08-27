@@ -9,7 +9,7 @@ namespace Windows.Examples
         
         protected override MonoWindow InstantiateFrame(MyScreenId key)
         {
-            return this.factory.CreateWindow(key);
+            return factory.CreateWindow(key);
         }
     }
 }

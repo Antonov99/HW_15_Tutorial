@@ -8,12 +8,12 @@ namespace Game.Meta
     {
         public MissionProgressBar ProgressBar
         {
-            get { return this.progressBar; }
+            get { return progressBar; }
         }
 
         public MissionRewardButton RewardButton
         {
-            get { return this.button; }
+            get { return button; }
         }
 
         [SerializeField]
@@ -33,17 +33,17 @@ namespace Game.Meta
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void SetTitle(string title)
         {
-            this.titleText.text = title;
+            titleText.text = title;
         }
 
         public void SetDifficulty(string difficulty)
         {
-            this.difficultyText.text = difficulty.ToUpper();
+            difficultyText.text = difficulty.ToUpper();
         }
     }
 }

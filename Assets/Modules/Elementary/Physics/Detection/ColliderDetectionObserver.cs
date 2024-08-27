@@ -9,18 +9,18 @@ namespace Elementary
 
         protected virtual void OnEnable()
         {
-            this.sensor.OnCollidersUpdated += this.OnCollidersUpdated;
+            sensor.OnCollidersUpdated += OnCollidersUpdated;
         }
 
         protected virtual void OnDisable()
         {
-            this.sensor.OnCollidersUpdated -= this.OnCollidersUpdated;
+            sensor.OnCollidersUpdated -= OnCollidersUpdated;
         }
 
         protected void OnCollidersUpdated()
         {
-            this.sensor.GetCollidersUnsafe(out var buffer, out var size);
-            this.OnCollidersUpdated(buffer, size);
+            sensor.GetCollidersUnsafe(out var buffer, out var size);
+            OnCollidersUpdated(buffer, size);
         }
 
         protected abstract void OnCollidersUpdated(Collider[] buffer, int size);

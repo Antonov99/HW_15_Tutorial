@@ -27,10 +27,10 @@ namespace ES3Types
 				{
 					
 					case "bounciness":
-						instance.bounciness = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.bounciness = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "friction":
-						instance.friction = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.friction = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					default:
 						reader.Skip();

@@ -10,7 +10,7 @@ namespace Cysharp.Threading.Tasks.Linq
         {
             Error.ThrowArgumentNullException(source, nameof(source));
 
-            return Cysharp.Threading.Tasks.Linq.ToHashSet.ToHashSetAsync(source, EqualityComparer<TSource>.Default, cancellationToken);
+            return ToHashSet.ToHashSetAsync(source, EqualityComparer<TSource>.Default, cancellationToken);
         }
 
         public static UniTask<HashSet<TSource>> ToHashSetAsync<TSource>(this IUniTaskAsyncEnumerable<TSource> source, IEqualityComparer<TSource> comparer, CancellationToken cancellationToken = default)
@@ -18,7 +18,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(comparer, nameof(comparer));
 
-            return Cysharp.Threading.Tasks.Linq.ToHashSet.ToHashSetAsync(source, comparer, cancellationToken);
+            return ToHashSet.ToHashSetAsync(source, comparer, cancellationToken);
         }
     }
 

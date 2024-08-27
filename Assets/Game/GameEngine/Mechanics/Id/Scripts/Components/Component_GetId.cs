@@ -6,7 +6,7 @@ namespace Game.GameEngine.Mechanics
     {
         public string Id
         {
-            get { return this.id.Current; }
+            get { return id.Current; }
         }
 
         private readonly IValue<string> id;

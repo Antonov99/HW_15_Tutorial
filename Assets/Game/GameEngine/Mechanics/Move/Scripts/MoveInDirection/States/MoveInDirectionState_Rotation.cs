@@ -31,22 +31,22 @@ namespace Game.GameEngine.Mechanics
 
         protected override void Update(float deltaTime)
         {
-            if (this.moveMotor.IsMoving)
+            if (moveMotor.IsMoving)
             {
-                this.RotateInDirection(deltaTime);
+                RotateInDirection(deltaTime);
             }
         }
 
         private void RotateInDirection(float deltaTime)
         {
-            var direction = this.moveMotor.Direction;
-            if (this.mode == Mode.INSTANTLY)
+            var direction = moveMotor.Direction;
+            if (mode == Mode.INSTANTLY)
             {
-                this.transform.LookInDirection(direction);
+                transform.LookInDirection(direction);
             }
-            else if (this.mode == Mode.SMOOTH)
+            else if (mode == Mode.SMOOTH)
             {
-                this.transform.RotateTowardsInDirection(direction, this.rotationSpeed, deltaTime);
+                transform.RotateTowardsInDirection(direction, rotationSpeed, deltaTime);
             }
         }
 

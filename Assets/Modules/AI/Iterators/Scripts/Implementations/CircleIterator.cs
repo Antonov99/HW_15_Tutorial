@@ -8,7 +8,7 @@ namespace AI.Iterators
 
         public override bool MoveNext()
         {
-            this.pointer = (this.pointer + 1) % this.movePoints.Length;
+            pointer = (pointer + 1) % movePoints.Length;
             return true;
         }
 

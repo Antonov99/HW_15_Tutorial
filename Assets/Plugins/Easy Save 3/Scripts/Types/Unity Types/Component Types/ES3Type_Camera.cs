@@ -61,27 +61,27 @@ namespace ES3Types
 				{
 					
 					case "fieldOfView":
-						instance.fieldOfView = reader.Read<System.Single>();
+						instance.fieldOfView = reader.Read<Single>();
 						break;
 					case "nearClipPlane":
-						instance.nearClipPlane = reader.Read<System.Single>();
+						instance.nearClipPlane = reader.Read<Single>();
 						break;
 					case "farClipPlane":
-						instance.farClipPlane = reader.Read<System.Single>();
+						instance.farClipPlane = reader.Read<Single>();
 						break;
 					case "renderingPath":
 						instance.renderingPath = reader.Read<UnityEngine.RenderingPath>();
 						break;
 					#if UNITY_5_6_OR_NEWER 
 					case "allowHDR":
-						instance.allowHDR = reader.Read<System.Boolean>();
+						instance.allowHDR = reader.Read<Boolean>();
 						break;
 					#endif
 					case "orthographicSize":
-						instance.orthographicSize = reader.Read<System.Single>();
+						instance.orthographicSize = reader.Read<Single>();
 						break;
 					case "orthographic":
-						instance.orthographic = reader.Read<System.Boolean>();
+						instance.orthographic = reader.Read<Boolean>();
 						break;
 					case "opaqueSortMode":
 						instance.opaqueSortMode = reader.Read<UnityEngine.Rendering.OpaqueSortMode>();
@@ -90,16 +90,16 @@ namespace ES3Types
 						instance.transparencySortMode = reader.Read<UnityEngine.TransparencySortMode>();
 						break;
 					case "depth":
-						instance.depth = reader.Read<System.Single>();
+						instance.depth = reader.Read<Single>();
 						break;
 					case "aspect":
-						instance.aspect = reader.Read<System.Single>();
+						instance.aspect = reader.Read<Single>();
 						break;
 					case "cullingMask":
-						instance.cullingMask = reader.Read<System.Int32>();
+						instance.cullingMask = reader.Read<Int32>();
 						break;
 					case "eventMask":
-						instance.eventMask = reader.Read<System.Int32>();
+						instance.eventMask = reader.Read<Int32>();
 						break;
 					case "backgroundColor":
 						instance.backgroundColor = reader.Read<UnityEngine.Color>();
@@ -117,16 +117,16 @@ namespace ES3Types
 						instance.nonJitteredProjectionMatrix = reader.Read<UnityEngine.Matrix4x4>();
 						break;
 					case "useJitteredProjectionMatrixForTransparentRendering":
-						instance.useJitteredProjectionMatrixForTransparentRendering = reader.Read<System.Boolean>();
+						instance.useJitteredProjectionMatrixForTransparentRendering = reader.Read<Boolean>();
 						break;
 					case "clearFlags":
 						instance.clearFlags = reader.Read<UnityEngine.CameraClearFlags>();
 						break;
 					case "stereoSeparation":
-						instance.stereoSeparation = reader.Read<System.Single>();
+						instance.stereoSeparation = reader.Read<Single>();
 						break;
 					case "stereoConvergence":
-						instance.stereoConvergence = reader.Read<System.Single>();
+						instance.stereoConvergence = reader.Read<Single>();
 						break;
 					case "cameraType":
 						instance.cameraType = reader.Read<UnityEngine.CameraType>();
@@ -135,22 +135,22 @@ namespace ES3Types
 						instance.stereoTargetEye = reader.Read<UnityEngine.StereoTargetEyeMask>();
 						break;
 					case "targetDisplay":
-						instance.targetDisplay = reader.Read<System.Int32>();
+						instance.targetDisplay = reader.Read<Int32>();
 						break;
 					case "useOcclusionCulling":
-						instance.useOcclusionCulling = reader.Read<System.Boolean>();
+						instance.useOcclusionCulling = reader.Read<Boolean>();
 						break;
 					case "layerCullSpherical":
-						instance.layerCullSpherical = reader.Read<System.Boolean>();
+						instance.layerCullSpherical = reader.Read<Boolean>();
 						break;
 					case "depthTextureMode":
 						instance.depthTextureMode = reader.Read<UnityEngine.DepthTextureMode>();
 						break;
 					case "clearStencilAfterLightingPass":
-						instance.clearStencilAfterLightingPass = reader.Read<System.Boolean>();
+						instance.clearStencilAfterLightingPass = reader.Read<Boolean>();
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>();
+						instance.enabled = reader.Read<Boolean>();
 						break;
 					case "hideFlags":
 						instance.hideFlags = reader.Read<UnityEngine.HideFlags>();

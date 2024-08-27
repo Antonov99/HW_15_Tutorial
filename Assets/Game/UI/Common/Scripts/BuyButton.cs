@@ -34,28 +34,28 @@ namespace Game.UI
 
         public void AddListener(UnityAction action)
         {
-            this.button.onClick.AddListener(action);
+            button.onClick.AddListener(action);
         }
 
         public void RemoveListener(UnityAction action)
         {
-            this.button.onClick.RemoveListener(action);
+            button.onClick.RemoveListener(action);
         }
 
         public void SetPrice(string price)
         {
-            this.priceText.text = price;
+            priceText.text = price;
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.priceIcon.sprite = icon;
+            priceIcon.sprite = icon;
         }
 
         public void SetAvailable(bool isAvailable)
         {
             var state = isAvailable ? State.AVAILABLE : State.LOCKED;
-            this.SetState(state);
+            SetState(state);
         }
 
         public void SetState(State state)
@@ -64,13 +64,13 @@ namespace Game.UI
 
             if (state == State.AVAILABLE)
             {
-                this.button.interactable = true;
-                this.buttonBackground.sprite = this.availableButtonSprite;
+                button.interactable = true;
+                buttonBackground.sprite = availableButtonSprite;
             }
             else if (state == State.LOCKED)
             {
-                this.button.interactable = false;
-                this.buttonBackground.sprite = this.lockedButtonSprite;
+                button.interactable = false;
+                buttonBackground.sprite = lockedButtonSprite;
             }
             else
             {
@@ -89,7 +89,7 @@ namespace Game.UI
         {
             try
             {
-                this.SetState(this.state);
+                SetState(state);
             }
             catch (Exception)
             {

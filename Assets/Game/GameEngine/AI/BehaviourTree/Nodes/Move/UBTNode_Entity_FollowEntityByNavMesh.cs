@@ -32,46 +32,46 @@ namespace Game.GameEngine.AI
 
         private void Awake()
         {
-            this.followAgent = new Agent_Entity_FollowEntityByNavMesh();
-            this.followAgent.SetNavMeshAreas(NavMesh.AllAreas);
-            this.followAgent.SetStoppingDistance(this.stoppingDistance.Current);
-            this.followAgent.SetMinPointDistance(this.minPointDistance.Current);
-            this.followAgent.SetCalculatePathPeriod(new WaitForFixedUpdate());
-            this.followAgent.SetCheckTargetReachedPeriod(null);
+            followAgent = new Agent_Entity_FollowEntityByNavMesh();
+            followAgent.SetNavMeshAreas(NavMesh.AllAreas);
+            followAgent.SetStoppingDistance(stoppingDistance.Current);
+            followAgent.SetMinPointDistance(minPointDistance.Current);
+            followAgent.SetCalculatePathPeriod(new WaitForFixedUpdate());
+            followAgent.SetCheckTargetReachedPeriod(null);
         }
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!Blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.Blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!Blackboard.TryGetVariable(targetKey, out IEntity target))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.followAgent.OnTargetReached += this.OnTargetReached;
-            this.followAgent.SetTargetEntity(target);
-            this.followAgent.SetFollowingEntity(unit);
-            this.followAgent.Play();
+            followAgent.OnTargetReached += OnTargetReached;
+            followAgent.SetTargetEntity(target);
+            followAgent.SetFollowingEntity(unit);
+            followAgent.Play();
         }
 
         private void OnTargetReached(bool isReached)
         {
             if (isReached)
             {
-                this.Return(true);
+                Return(true);
             }
         }
 
         protected override void OnDispose()
         {
-            this.followAgent.Stop();
-            this.followAgent.OnTargetReached -= this.OnTargetReached;
+            followAgent.Stop();
+            followAgent.OnTargetReached -= OnTargetReached;
         }
     }
 }

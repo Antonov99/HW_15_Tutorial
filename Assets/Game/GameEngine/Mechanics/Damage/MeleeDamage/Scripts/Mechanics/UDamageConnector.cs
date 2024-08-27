@@ -20,41 +20,41 @@ namespace Game.GameEngine.Mechanics
 
         private void Awake()
         {
-            this.UpdateDamage();
+            UpdateDamage();
         }
 
         private void OnEnable()
         {
-            this.baseValue.OnValueChanged += this.OnValueChanged;
-            this.multiplier.OnValueChanged += this.OnMultiplierChanged;
+            baseValue.OnValueChanged += OnValueChanged;
+            multiplier.OnValueChanged += OnMultiplierChanged;
         }
 
         private void OnDisable()
         {
-            this.baseValue.OnValueChanged -= this.OnValueChanged;
-            this.multiplier.OnValueChanged -= this.OnMultiplierChanged;
+            baseValue.OnValueChanged -= OnValueChanged;
+            multiplier.OnValueChanged -= OnMultiplierChanged;
         }
 
         private void OnMultiplierChanged(float _)
         {
-            this.UpdateDamage();
+            UpdateDamage();
         }
 
         private void OnValueChanged(int _)
         {
-            var newValue = this.EvaluateFullValue();
-            this.fullValue.SetValue(newValue);
+            var newValue = EvaluateFullValue();
+            fullValue.SetValue(newValue);
         }
 
         private void UpdateDamage()
         {
-            var newDamage = this.EvaluateFullValue();
-            this.fullValue.SetValue(newDamage);
+            var newDamage = EvaluateFullValue();
+            fullValue.SetValue(newDamage);
         }
 
         private int EvaluateFullValue()
         {
-            var damage = this.baseValue.Current * this.multiplier.Current;
+            var damage = baseValue.Current * multiplier.Current;
             return Mathf.RoundToInt(damage);
         }
     }

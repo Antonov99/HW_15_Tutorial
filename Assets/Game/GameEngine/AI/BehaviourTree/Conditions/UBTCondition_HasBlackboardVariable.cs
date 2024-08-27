@@ -15,7 +15,7 @@ namespace Game.GameEngine.AI
         
         public override bool IsTrue()
         {
-            var hasValue = this.Blackboard.HasVariable(this.variableKey);
+            var hasValue = Blackboard.HasVariable(variableKey);
             return hasValue;
         }
     }

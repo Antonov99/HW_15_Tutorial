@@ -10,7 +10,7 @@ namespace Game.GameEngine.GameResources
         
         public override bool IsTrue()
         {
-            return !this.source.IsLimit;
+            return !source.IsLimit;
         }
     }
 }

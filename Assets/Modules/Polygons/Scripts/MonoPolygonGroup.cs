@@ -12,19 +12,19 @@ namespace Polygons
 
         public void AddPolygon(MonoPolygon zone)
         {
-            this.polygons.Add(zone);
+            polygons.Add(zone);
         }
 
         public void RemovePolygon(MonoPolygon zone)
         {
-            this.polygons.Remove(zone);
+            polygons.Remove(zone);
         }
 
         public bool IsPointInside(Vector3 position)
         {
-            for (int i = 0, count = this.polygons.Count; i < count; i++)
+            for (int i = 0, count = polygons.Count; i < count; i++)
             {
-                var polygon = this.polygons[i];
+                var polygon = polygons[i];
                 if (polygon.IsPointInside(position))
                 {
                     return true;
@@ -41,9 +41,9 @@ namespace Polygons
 
             var pointFound = false;
 
-            for (int i = 0, count = this.polygons.Count; i < count; i++)
+            for (int i = 0, count = polygons.Count; i < count; i++)
             {
-                var polygon = this.polygons[i];
+                var polygon = polygons[i];
                 if (!polygon.ClampPosition(position, out distance, out var clampedPosition))
                 {
                     continue;
@@ -64,9 +64,9 @@ namespace Polygons
         public Vector3[] GetAllPoints()
         {
             var result = new List<Vector3>();
-            for (int i = 0, count = this.polygons.Count; i < count; i++)
+            for (int i = 0, count = polygons.Count; i < count; i++)
             {
-                var polygon = this.polygons[i];
+                var polygon = polygons[i];
                 result.AddRange(polygon.GetAllPoints());
             }
 

@@ -12,7 +12,7 @@ namespace AI.Commands
 
         public bool IsRunning
         {
-            get { return this.commandQueue.Count > 0 || this.executor is {IsRunning: true}; }
+            get { return commandQueue.Count > 0 || executor is {IsRunning: true}; }
         }
 
         private IAICommandExecutor<T> executor;
@@ -31,43 +31,43 @@ namespace AI.Commands
 
         public void Start()
         {
-            this.executor.OnFinished += this.OnCommandFinished;
+            executor.OnFinished += OnCommandFinished;
         }
 
         public void Stop()
         {
-            this.executor.OnFinished -= this.OnCommandFinished;
+            executor.OnFinished -= OnCommandFinished;
         }
         
         public void Enqueue(T key, object args)
         {
-            if (this.executor.IsRunning)
+            if (executor.IsRunning)
             {
-                this.commandQueue.Enqueue(new (key, args));
+                commandQueue.Enqueue(new (key, args));
             }
             else
             {
-                this.executor.Execute(key, args);
+                executor.Execute(key, args);
             }
         }
 
         public void Interrupt()
         {
-            this.executor.Interrupt();
-            this.commandQueue.Clear();
+            executor.Interrupt();
+            commandQueue.Clear();
         }
 
         public IEnumerable<(T, object)> GetQueue()
         {
-            return this.commandQueue;
+            return commandQueue;
         }
         
         private void OnCommandFinished(T prevKey, object prevArgs)
         {
-            if (this.commandQueue.Count > 0)
+            if (commandQueue.Count > 0)
             {
-                var (key, args) = this.commandQueue.Dequeue();
-                this.executor.Execute(key, args);
+                var (key, args) = commandQueue.Dequeue();
+                executor.Execute(key, args);
             }
         }
     }

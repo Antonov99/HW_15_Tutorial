@@ -29,16 +29,16 @@ namespace Game.GameEngine.Mechanics
 
         protected override void FixedUpdate(float deltaTime)
         {
-            if (this.motor.IsMoving)
+            if (motor.IsMoving)
             {
-                this.MoveInDirection(deltaTime);
+                MoveInDirection(deltaTime);
             }
         }
 
         private void MoveInDirection(float deltaTime)
         {
-            var velocity = this.motor.Direction * (this.speed.Current * deltaTime);
-            this.transform.MovePosition(velocity);
+            var velocity = motor.Direction * (speed.Current * deltaTime);
+            transform.MovePosition(velocity);
         }
     }
 }

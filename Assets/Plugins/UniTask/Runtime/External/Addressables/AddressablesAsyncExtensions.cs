@@ -55,7 +55,7 @@ namespace Cysharp.Threading.Tasks
             public AsyncOperationHandleAwaiter(AsyncOperationHandle handle)
             {
                 this.handle = handle;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public bool IsCompleted => handle.IsDone;

@@ -18,7 +18,7 @@ namespace Game.App
 
         public override IEnumerable<object> ProvideServices()
         {
-            var gameServer = new GameServer(this.url, this.port);
+            var gameServer = new GameServer(url, port);
             var gameClient = new GameClient(gameServer); 
             
             yield return gameServer;

@@ -134,7 +134,7 @@ namespace Cysharp.Threading.Tasks
                 // setup result
                 this.result = result;
 
-                if (continuation != null || Interlocked.CompareExchange(ref this.continuation, UniTaskCompletionSourceCoreShared.s_sentinel, null) != null)
+                if (continuation != null || Interlocked.CompareExchange(ref continuation, UniTaskCompletionSourceCoreShared.s_sentinel, null) != null)
                 {
                     continuation(continuationState);
                     return true;
@@ -152,7 +152,7 @@ namespace Cysharp.Threading.Tasks
             if (Interlocked.Increment(ref completedCount) == 1)
             {
                 // setup result
-                this.hasUnhandledError = true;
+                hasUnhandledError = true;
                 if (error is OperationCanceledException)
                 {
                     this.error = error;
@@ -162,7 +162,7 @@ namespace Cysharp.Threading.Tasks
                     this.error = new ExceptionHolder(ExceptionDispatchInfo.Capture(error));
                 }
 
-                if (continuation != null || Interlocked.CompareExchange(ref this.continuation, UniTaskCompletionSourceCoreShared.s_sentinel, null) != null)
+                if (continuation != null || Interlocked.CompareExchange(ref continuation, UniTaskCompletionSourceCoreShared.s_sentinel, null) != null)
                 {
                     continuation(continuationState);
                     return true;
@@ -178,10 +178,10 @@ namespace Cysharp.Threading.Tasks
             if (Interlocked.Increment(ref completedCount) == 1)
             {
                 // setup result
-                this.hasUnhandledError = true;
-                this.error = new OperationCanceledException(cancellationToken);
+                hasUnhandledError = true;
+                error = new OperationCanceledException(cancellationToken);
 
-                if (continuation != null || Interlocked.CompareExchange(ref this.continuation, UniTaskCompletionSourceCoreShared.s_sentinel, null) != null)
+                if (continuation != null || Interlocked.CompareExchange(ref continuation, UniTaskCompletionSourceCoreShared.s_sentinel, null) != null)
                 {
                     continuation(continuationState);
                     return true;

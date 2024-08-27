@@ -11,9 +11,9 @@ namespace Game.GameEngine.Mechanics
         
         public override bool IsTrue(CombatOperation operation)
         {
-            for (int i = 0, count = this.conditions.Length; i < count; i++)
+            for (int i = 0, count = conditions.Length; i < count; i++)
             {
-                var condition = this.conditions[i];
+                var condition = conditions[i];
                 if (!condition.IsTrue())
                 {
                     return false;

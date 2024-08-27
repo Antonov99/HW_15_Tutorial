@@ -38,13 +38,13 @@ namespace Game.Gameplay.Hero
 
         protected sealed override void OnHeroEntered(T target)
         {
-            if (this.target != null || !this.CanEnter(target))
+            if (this.target != null || !CanEnter(target))
             {
                 return;
             }
 
             this.target = target;
-            this.updateRoutine = this.monoContext.StartCoroutine(this.UpdateVisitState(target));
+            updateRoutine = monoContext.StartCoroutine(UpdateVisitState(target));
         }
 
         protected sealed override void OnHeroExited(T target)
@@ -54,16 +54,16 @@ namespace Game.Gameplay.Hero
                 return;
             }
 
-            if (this.updateRoutine != null)
+            if (updateRoutine != null)
             {
-                this.monoContext.StopCoroutine(this.updateRoutine);
-                this.updateRoutine = null;
+                monoContext.StopCoroutine(updateRoutine);
+                updateRoutine = null;
             }
 
-            if (this.IsVisiting)
+            if (IsVisiting)
             {
-                this.IsVisiting = false;
-                this.OnHeroQuit(this.target);
+                IsVisiting = false;
+                OnHeroQuit(this.target);
             }
 
             this.target = null;
@@ -77,26 +77,26 @@ namespace Game.Gameplay.Hero
         {
             WaitForSeconds period = null;
             
-            if (this.checkConditionPeriod > 0.0f)
+            if (checkConditionPeriod > 0.0f)
             {
-                period = new WaitForSeconds(this.checkConditionPeriod);
+                period = new WaitForSeconds(checkConditionPeriod);
             }
 
-            var visitCondition = this.ProvideConditions(target);
+            var visitCondition = ProvideConditions(target);
 
             while (true)
             {
                 var visitStarted = visitCondition.IsTrue();
-                if (visitStarted && !this.IsVisiting)
+                if (visitStarted && !IsVisiting)
                 {
-                    this.IsVisiting = true;
-                    this.OnHeroVisit(this.target);
+                    IsVisiting = true;
+                    OnHeroVisit(this.target);
                 }
-                else if (!visitStarted && this.IsVisiting)
+                else if (!visitStarted && IsVisiting)
                 {
-                    this.IsVisiting = false;
-                    this.OnHeroQuit(this.target);
-                    visitCondition = this.ProvideConditions(target);
+                    IsVisiting = false;
+                    OnHeroQuit(this.target);
+                    visitCondition = ProvideConditions(target);
                 }
 
                 yield return period;

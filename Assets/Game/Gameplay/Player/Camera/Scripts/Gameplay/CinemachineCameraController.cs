@@ -21,14 +21,14 @@ namespace Game.Gameplay.Player
 
         void IGameStartElement.StartGame()
         {
-            var hero = this.heroService.GetHero();
-            this.virtualCamera.Follow = hero.Get<IComponent_GetPivot>().Pivot;
-            this.virtualCamera.enabled = true;
+            var hero = heroService.GetHero();
+            virtualCamera.Follow = hero.Get<IComponent_GetPivot>().Pivot;
+            virtualCamera.enabled = true;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.virtualCamera.enabled = false;
+            virtualCamera.enabled = false;
         }
     }
 }

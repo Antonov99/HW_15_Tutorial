@@ -22,19 +22,19 @@ namespace Game.Meta
         public override void ConstructGame(GameContext context)
         {
             base.ConstructGame(context);
-            this.ConstructControllers(context);
+            ConstructControllers(context);
         }
 
         private void ConstructControllers(GameContext context)
         {
             var consumeManager = context.GetService<InventoryItemConsumer>();
-            consumeManager.AddHandler(new BoosterInventoryItemConsumeHandler(this.manager));
+            consumeManager.AddHandler(new BoosterInventoryItemConsumeHandler(manager));
 
             var productManager = context.GetService<ProductBuyer>();
-            productManager.AddCompletor(new BoosterBuyCompletor(this.manager));
+            productManager.AddCompletor(new BoosterBuyCompletor(manager));
 
             var timeShiftEmitter = context.GetService<TimeShiftEmitter>();
-            timeShiftEmitter.AddHandler(new BoostersTimeSynchronizer(this.manager));
+            timeShiftEmitter.AddHandler(new BoostersTimeSynchronizer(manager));
         }
     }
 }

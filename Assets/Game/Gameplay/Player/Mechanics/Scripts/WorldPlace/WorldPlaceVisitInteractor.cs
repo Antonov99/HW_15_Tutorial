@@ -18,25 +18,25 @@ namespace Game.Gameplay.Player
         
         public void StartVisit(WorldPlaceType type)
         {
-            if (this.IsVisiting)
+            if (IsVisiting)
             {
                 throw new Exception("Other visit place is already started!");
             }
 
-            this.IsVisiting = true;
-            this.CurrentPlace = type;
-            this.OnVisitStarted?.Invoke(type);
+            IsVisiting = true;
+            CurrentPlace = type;
+            OnVisitStarted?.Invoke(type);
         }
 
         public void EndVisit()
         {
-            if (!this.IsVisiting)
+            if (!IsVisiting)
             {
                 return;
             }
 
-            this.IsVisiting = false;
-            this.OnVisitEnded?.Invoke(this.CurrentPlace);
+            IsVisiting = false;
+            OnVisitEnded?.Invoke(CurrentPlace);
         }
     }
 }

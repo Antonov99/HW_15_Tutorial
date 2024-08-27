@@ -20,8 +20,8 @@ namespace Game.GameEngine.AI
         
         public BTNode_Entity_FollowEntityByPolygon()
         {
-            this.followAgent.SetCalculatePathPeriod(new WaitForFixedUpdate());
-            this.followAgent.SetCheckTargetReachedPeriod(null);
+            followAgent.SetCalculatePathPeriod(new WaitForFixedUpdate());
+            followAgent.SetCheckTargetReachedPeriod(null);
         }
 
         public void ConstructBlackboard(IBlackboard blackboard)
@@ -38,53 +38,53 @@ namespace Game.GameEngine.AI
 
         public void ConstructStoppingDistance(float distance)
         {
-            this.followAgent.SetStoppingDistance(distance);
+            followAgent.SetStoppingDistance(distance);
         }
 
         public void ConstructIntermediateDistance(float distance)
         {
-            this.followAgent.SetIntermediateDistance(distance);
+            followAgent.SetIntermediateDistance(distance);
         }
 
         protected override void Run()
         {
-            if (!this.blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!blackboard.TryGetVariable(targetKey, out IEntity target))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.surfaceKey, out MonoPolygon polygon))
+            if (!blackboard.TryGetVariable(surfaceKey, out MonoPolygon polygon))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.followAgent.OnTargetReached += this.OnTargetReached;
-            this.followAgent.SetSurface(polygon);
-            this.followAgent.SetTargetEntity(target);
-            this.followAgent.SetFollowingEntity(unit);
-            this.followAgent.Play();
+            followAgent.OnTargetReached += OnTargetReached;
+            followAgent.SetSurface(polygon);
+            followAgent.SetTargetEntity(target);
+            followAgent.SetFollowingEntity(unit);
+            followAgent.Play();
         }
 
         private void OnTargetReached(bool isReached)
         {
             if (isReached)
             {
-                this.Return(true);
+                Return(true);
             }
         }
 
         protected override void OnDispose()
         {
-            this.followAgent.Stop();
-            this.followAgent.OnTargetReached -= this.OnTargetReached;
+            followAgent.Stop();
+            followAgent.OnTargetReached -= OnTargetReached;
         }
     }
 }

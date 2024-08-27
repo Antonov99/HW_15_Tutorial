@@ -37,17 +37,17 @@ namespace Game.Meta
 
         public void AddListener(UnityAction action)
         {
-            this.button.onClick.AddListener(action);
+            button.onClick.AddListener(action);
         }
 
         public void RemoveListener(UnityAction action)
         {
-            this.button.onClick.RemoveListener(action);
+            button.onClick.RemoveListener(action);
         }
 
         public void SetReward(string reward)
         {
-            this.rewardText.text = reward;
+            rewardText.text = reward;
         }
 
         public void SetState(State state)
@@ -56,17 +56,17 @@ namespace Game.Meta
 
             if (state == State.COMPLETE)
             {
-                this.button.interactable = true;
-                this.buttonBackground.sprite = this.availableBackground;
-                this.getText.SetActive(true);
-                this.processingText.SetActive(false);
+                button.interactable = true;
+                buttonBackground.sprite = availableBackground;
+                getText.SetActive(true);
+                processingText.SetActive(false);
             }
             else if (state == State.PROCESSING)
             {
-                this.button.interactable = false;
-                this.buttonBackground.sprite = this.unavailableBackground;
-                this.getText.SetActive(false);
-                this.processingText.SetActive(true);
+                button.interactable = false;
+                buttonBackground.sprite = unavailableBackground;
+                getText.SetActive(false);
+                processingText.SetActive(true);
             }
             else
             {
@@ -85,7 +85,7 @@ namespace Game.Meta
         {
             try
             {
-                this.SetState(this.state);
+                SetState(state);
             }
             catch (Exception)
             {

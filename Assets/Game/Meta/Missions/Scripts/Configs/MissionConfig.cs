@@ -6,22 +6,22 @@ namespace Game.Meta
     {
         public string Id
         {
-            get { return this.id; }
+            get { return id; }
         }
 
         public MissionDifficulty Difficulty
         {
-            get { return this.difficulty; }
+            get { return difficulty; }
         }
 
         public int MoneyReward
         {
-            get { return this.moneyReward; }
+            get { return moneyReward; }
         }
 
         public MissionMetadata Metadata
         {
-            get { return this.metadata; }
+            get { return metadata; }
         }
 
         [SerializeField]

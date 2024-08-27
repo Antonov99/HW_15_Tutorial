@@ -41,41 +41,41 @@ namespace GameNodes
         [GameStart]
         public void Enable()
         {
-            this.enabled = true;
+            enabled = true;
         }
 
         [GameFinish]
         public void Disable()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         void IGameUpdater.Update(float deltaTime)
         {
-            if (this.enabled)
+            if (enabled)
             {
-                this.HandleInput();
+                HandleInput();
             }
         }
 
         private void HandleInput()
         {
-            if (this.inputSystem.GetKey(this.upCode))
+            if (inputSystem.GetKey(upCode))
             {
-                this.OnMoved?.Invoke(Vector2.up);
+                OnMoved?.Invoke(Vector2.up);
             }
-            else if (this.inputSystem.GetKey(this.downCode))
+            else if (inputSystem.GetKey(downCode))
             {
-                this.OnMoved?.Invoke(Vector2.down);
+                OnMoved?.Invoke(Vector2.down);
             }
 
-            if (this.inputSystem.GetKey(this.leftCode))
+            if (inputSystem.GetKey(leftCode))
             {
-                this.OnMoved?.Invoke(Vector2.left);
+                OnMoved?.Invoke(Vector2.left);
             }
-            else if (this.inputSystem.GetKey(this.rightCode))
+            else if (inputSystem.GetKey(rightCode))
             {
-                this.OnMoved?.Invoke(Vector2.right);
+                OnMoved?.Invoke(Vector2.right);
             }
         }
     }

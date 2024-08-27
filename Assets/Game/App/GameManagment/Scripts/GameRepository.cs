@@ -28,17 +28,17 @@ namespace Game.App
 
         public bool TryGetData(string key, out string data)
         {
-            return this.gameState.TryGetValue(key, out data);
+            return gameState.TryGetValue(key, out data);
         }
 
         public string GetData(string data)
         {
-            return this.gameState[data];
+            return gameState[data];
         }
 
         public void SetData(string key, string data)
         {
-            this.gameState[key] = data;
+            gameState[key] = data;
         }
 
         public async Task LoadSynchronizedState()
@@ -57,7 +57,7 @@ namespace Game.App
             Dictionary<string, string> remoteState = new();
             long remoteSaveTime = -1;
             
-            var (success, remoteJson) = await this.client.GetPlayerData();
+            var (success, remoteJson) = await client.GetPlayerData();
             if (success)
             {
                 Debug.Log($"DOWNLOADED DATA {remoteJson}");
@@ -69,22 +69,22 @@ namespace Game.App
             if (remoteSaveTime > localSaveTime)
             {
                 Debug.Log($"SELECT REMOTE DATA {remoteSaveTime}");
-                this.gameState = remoteState;
+                gameState = remoteState;
             }
             else
             {
                 Debug.Log($"SELECT LOCAL DATA {localSaveTime}");
-                this.gameState = localState;
+                gameState = localState;
             }
         }
 
         public async Task<bool> LoadRemoteState()
         {
-            var (success, remoteJson) = await this.client.GetPlayerData();
+            var (success, remoteJson) = await client.GetPlayerData();
             if (success)
             {
                 Debug.Log($"DOWNLOADED DATA {remoteJson}");
-                this.gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
+                gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
                 PlayerPrefs.DeleteKey(GAME_PREFS);
             }
 
@@ -96,30 +96,30 @@ namespace Game.App
             if (PlayerPrefs.HasKey(GAME_PREFS))
             {
                 var localJson = PlayerPrefs.GetString(GAME_PREFS);
-                this.gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
+                gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
             }
         }
 
         public async void SaveAllStates()
         {
-            if (this.isSaving)
+            if (isSaving)
             {
                 return;
             }
             
-            this.isSaving = true;
+            isSaving = true;
             
             //Update save time:
             var time = DateTime.Now.ToUniversalTime() - originTime;
             var saveTime = time.TotalSeconds.ToString("F0");
-            this.gameState[SAVE_TIME_KEY] = saveTime;
+            gameState[SAVE_TIME_KEY] = saveTime;
             
             //Save game state:
-            var json = JsonConvert.SerializeObject(this.gameState);
+            var json = JsonConvert.SerializeObject(gameState);
             PlayerPrefs.SetString(GAME_PREFS, json);
-            await this.client.SetPlayerData(json);
+            await client.SetPlayerData(json);
             
-            this.isSaving = false;
+            isSaving = false;
         }
     }
 }

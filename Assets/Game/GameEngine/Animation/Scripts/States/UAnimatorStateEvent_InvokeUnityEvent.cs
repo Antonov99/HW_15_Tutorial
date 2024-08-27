@@ -24,19 +24,19 @@ namespace Game.GameEngine.Animation
 
         public override void Enter()
         {
-            this.animationSystem.OnStringReceived += this.OnAnimationEvent;
+            animationSystem.OnStringReceived += OnAnimationEvent;
         }
 
         public override void Exit()
         {
-            this.animationSystem.OnStringReceived -= this.OnAnimationEvent;
+            animationSystem.OnStringReceived -= OnAnimationEvent;
         }
 
         private void OnAnimationEvent(string message)
         {
-            if (this.animationEvents.Contains(message))
+            if (animationEvents.Contains(message))
             {
-                this.unityEvent.Invoke();
+                unityEvent.Invoke();
             }
         }
     }

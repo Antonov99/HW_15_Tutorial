@@ -43,10 +43,10 @@ namespace ES3Editor
                 var es3Prefab = Undo.AddComponent<ES3Prefab>(go);
                 es3Prefab.GeneratePrefabReferences();
 
-                if (ES3ReferenceMgr.Current != null)
+                if (ES3ReferenceMgrBase.Current != null)
                 {
-                    ES3ReferenceMgr.Current.AddPrefab(es3Prefab);
-                    EditorUtility.SetDirty(ES3ReferenceMgr.Current);
+                    ES3ReferenceMgrBase.Current.AddPrefab(es3Prefab);
+                    EditorUtility.SetDirty(ES3ReferenceMgrBase.Current);
                 }
             }
 		}

@@ -14,20 +14,20 @@ namespace Game.GameEngine.UnityEditor
         
         public DialogueGraph()
         {
-            this.InitStyles();
-            this.InitManipulators();
-            this.InitGridBackground();
+            InitStyles();
+            InitManipulators();
+            InitGridBackground();
         }
 
         private void InitStyles()
         {
-            this.styleSheets.Add((StyleSheet) EditorGUIUtility.Load(FOLDER_PATH + "Styles/DialogueGraph.uss"));
-            this.styleSheets.Add((StyleSheet) EditorGUIUtility.Load(FOLDER_PATH + "Styles/DialogueNode.uss"));
+            styleSheets.Add((StyleSheet) EditorGUIUtility.Load(FOLDER_PATH + "Styles/DialogueGraph.uss"));
+            styleSheets.Add((StyleSheet) EditorGUIUtility.Load(FOLDER_PATH + "Styles/DialogueNode.uss"));
         }
 
         private void InitManipulators()
         {
-            this.AddManipulator(new ContextualMenuManipulator(this.OnMenuEvent));
+            this.AddManipulator(new ContextualMenuManipulator(OnMenuEvent));
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(new ContentDragger());
@@ -73,10 +73,10 @@ namespace Game.GameEngine.UnityEditor
         {
             var screenPosition = actionEvent.eventInfo.localMousePosition;
             var node = DialogueNode.Instantiate(screenPosition);
-            node.Id = this.generatedId++;
-            this.AddElement(node);
+            node.Id = generatedId++;
+            AddElement(node);
             
-            var list = this.nodes.ToList();
+            var list = nodes.ToList();
             if (list.Count == 1)
             {
                 node.SetAsEntry();
@@ -91,7 +91,7 @@ namespace Game.GameEngine.UnityEditor
         {
             targetNode.SetAsEntry();
 
-            foreach (var node in this.nodes)
+            foreach (var node in nodes)
             {
                 if (node != targetNode && node is DialogueNode dialogueNode)
                 {
@@ -102,7 +102,7 @@ namespace Game.GameEngine.UnityEditor
 
         public DialogueNode GetEntryNode()
         {
-            foreach (var node in this.nodes)
+            foreach (var node in nodes)
             {
                 var dialogueNode = (DialogueNode) node;
                 if (dialogueNode.IsEntry)
@@ -116,14 +116,14 @@ namespace Game.GameEngine.UnityEditor
         
         public void Reset()
         {
-            foreach (var edge in this.edges)
+            foreach (var edge in edges)
             {
-                this.RemoveElement(edge);
+                RemoveElement(edge);
             }
 
-            foreach (var node in this.nodes)
+            foreach (var node in nodes)
             {
-                this.RemoveElement(node);
+                RemoveElement(node);
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.targetComponent = this.combatOperator
+            targetComponent = combatOperator
                 .Current
                 .targetEntity
                 .Get<IComponent_GetPosition>();
@@ -39,22 +39,22 @@ namespace Game.GameEngine.Mechanics
 
         protected override void Update(float deltaTime)
         {
-            if (this.combatOperator.IsActive)
+            if (combatOperator.IsActive)
             {
-                this.RotateInDirection(deltaTime);
+                RotateInDirection(deltaTime);
             }
         }
 
         private void RotateInDirection(float deltaTime)
         {
-            var targetPosition = this.targetComponent.Position;
-            if (this.mode == Mode.INSTANTLY)
+            var targetPosition = targetComponent.Position;
+            if (mode == Mode.INSTANTLY)
             {
-                this.transform.LookAtPosition(targetPosition);
+                transform.LookAtPosition(targetPosition);
             }
-            else if (this.mode == Mode.SMOOTH)
+            else if (mode == Mode.SMOOTH)
             {
-                this.transform.RotateTowardsAtPosition(targetPosition, this.rotationSpeed, deltaTime);
+                transform.RotateTowardsAtPosition(targetPosition, rotationSpeed, deltaTime);
             }
         }
 

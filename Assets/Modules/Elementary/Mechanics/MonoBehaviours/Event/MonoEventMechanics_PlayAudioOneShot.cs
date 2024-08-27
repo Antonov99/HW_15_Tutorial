@@ -13,7 +13,7 @@ namespace Elementary
 
         protected override void OnEvent()
         {
-            this.audioSource.PlayOneShot(this.audioClip);
+            audioSource.PlayOneShot(audioClip);
         }
     }
 }

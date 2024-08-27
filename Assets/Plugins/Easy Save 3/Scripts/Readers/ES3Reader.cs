@@ -7,7 +7,7 @@ using System.ComponentModel;
 using ES3Types;
 using ES3Internal;
 
-public abstract class ES3Reader : System.IDisposable
+public abstract class ES3Reader : IDisposable
 {
 	/// <summary>The settings used to create this reader.</summary>
 	public ES3Settings settings;
@@ -33,7 +33,7 @@ public abstract class ES3Reader : System.IDisposable
 	internal abstract byte[]	Read_byteArray();
     internal abstract long      Read_ref();
 
-    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract string ReadPropertyName();
 
 	protected abstract Type ReadKeyPrefix(bool ignore = false);
@@ -114,7 +114,7 @@ public abstract class ES3Reader : System.IDisposable
 	 * 	When this method successfully exits, it will be on the closing brace for the object.
 	 */
 	/// <summary>Skips the current object in the stream.</summary>
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public virtual void Skip()
 	{
 		ReadElement(true);
@@ -134,20 +134,20 @@ public abstract class ES3Reader : System.IDisposable
 	}
 
 	/// <summary>Reads a property (i.e. a property name and value) from the reader, ignoring the property name and only returning the value.</summary>
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public T ReadProperty<T>()
 	{
 		return ReadProperty<T>(ES3TypeMgr.GetOrCreateES3Type(typeof(T)));
 	}
 
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public T ReadProperty<T>(ES3Type type)
 	{
 		ReadPropertyName();
 		return Read<T>(type);
 	}
 
-    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public long ReadRefProperty()
     {
         ReadPropertyName();
@@ -263,7 +263,7 @@ public abstract class ES3Reader : System.IDisposable
 	 * 	Will also read the terminating '}'.
 	 * 	If we have reached the end of stream, it will return null.
 	 */
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public virtual T Read<T>(ES3Type type)
 	{
 		if(type == null || type.isUnsupported)
@@ -278,7 +278,7 @@ public abstract class ES3Reader : System.IDisposable
 			return ReadObject<T>(type);
 	}
 
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public virtual void ReadInto<T>(object obj, ES3Type type)
 	{
 		if(type == null || type.isUnsupported)
@@ -294,7 +294,7 @@ public abstract class ES3Reader : System.IDisposable
 
 
     #endregion
-    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     internal Type ReadTypeFromHeader<T>()
 	{
 		// Check whether we need to determine the type by reading the header.

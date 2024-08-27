@@ -9,7 +9,7 @@ namespace Elementary
 
         public Value(T value)
         {
-            this.Current = value;
+            Current = value;
         }
     }
 }

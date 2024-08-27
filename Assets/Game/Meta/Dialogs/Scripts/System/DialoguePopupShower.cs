@@ -14,7 +14,7 @@ namespace Game.Meta
         {
             var dialogue = new Dialogue(config);
             var presenter = new DialoguePresentationModel(dialogue);
-            this.popupManager.ShowPopup(PopupName.DIALOGUE, presenter);
+            popupManager.ShowPopup(PopupName.DIALOGUE, presenter);
         }
     }
 }

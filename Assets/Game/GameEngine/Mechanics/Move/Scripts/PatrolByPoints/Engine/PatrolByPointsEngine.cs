@@ -30,14 +30,14 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public bool CanStartPatrol(PatrolByPointsOperation operation)
         {
-            if (this.IsPatrol)
+            if (IsPatrol)
             {
                 return false;
             }
 
-            for (int i = 0, count = this.preconditions.Count; i < count; i++)
+            for (int i = 0, count = preconditions.Count; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(operation))
                 {
                     return false;
@@ -50,75 +50,75 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void StartPatrol(PatrolByPointsOperation operation)
         {
-            if (!this.CanStartPatrol(operation))
+            if (!CanStartPatrol(operation))
             {
                 return;
             }
 
-            for (int i = 0, count = this.startActions.Count; i < count; i++)
+            for (int i = 0, count = startActions.Count; i < count; i++)
             {
-                var action = this.startActions[i];
+                var action = startActions[i];
                 action.Do(operation);
             }
 
-            this.CurrentOperation = operation;
-            this.IsPatrol = true;
-            this.OnPatrolStarted?.Invoke(operation);
+            CurrentOperation = operation;
+            IsPatrol = true;
+            OnPatrolStarted?.Invoke(operation);
         }
 
         [Button]
         public void StopPatrol()
         {
-            if (!this.IsPatrol)
+            if (!IsPatrol)
             {
                 return;
             }
 
-            var operation = this.CurrentOperation;
-            for (int i = 0, count = this.stopActions.Count; i < count; i++)
+            var operation = CurrentOperation;
+            for (int i = 0, count = stopActions.Count; i < count; i++)
             {
-                var action = this.stopActions[i];
+                var action = stopActions[i];
                 action.Do(operation);
             }
 
-            this.IsPatrol = false;
-            this.CurrentOperation = default;
-            this.OnPatrolStopped?.Invoke(operation);
+            IsPatrol = false;
+            CurrentOperation = default;
+            OnPatrolStopped?.Invoke(operation);
         }
 
         public void AddPreconditions(params ICondition<PatrolByPointsOperation>[] conditions)
         {
-            this.preconditions.AddRange(conditions);
+            preconditions.AddRange(conditions);
         }
 
         public void AddPreconditions(IEnumerable<ICondition<PatrolByPointsOperation>> conditions)
         {
-            this.preconditions.AddRange(conditions);
+            preconditions.AddRange(conditions);
         }
 
         public void AddPreconditon(ICondition<PatrolByPointsOperation> condition)
         {
-            this.preconditions.Add(condition);
+            preconditions.Add(condition);
         }
 
         public void AddStartActions(IEnumerable<IAction<PatrolByPointsOperation>> actions)
         {
-            this.startActions.AddRange(actions);
+            startActions.AddRange(actions);
         }
 
         public void AddStartAction(IAction<PatrolByPointsOperation> action)
         {
-            this.startActions.Add(action);
+            startActions.Add(action);
         }
 
         public void AddStopActions(IEnumerable<IAction<PatrolByPointsOperation>> actions)
         {
-            this.stopActions.AddRange(actions);
+            stopActions.AddRange(actions);
         }
 
         public void AddStopAction(IAction<PatrolByPointsOperation> action)
         {
-            this.stopActions.Add(action);
+            stopActions.Add(action);
         }
     }
 }

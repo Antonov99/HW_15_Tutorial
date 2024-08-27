@@ -23,14 +23,14 @@ namespace Game.Gameplay.Hero
         [Construct]
         private void ConstructBoolMechanics(HeroModel_Core core)
         {
-            this.boolMechanics.Construct(core.main.isEnable, isEnable =>
+            boolMechanics.Construct(core.main.isEnable, isEnable =>
             {
-                this.collider.enabled = isEnable;
+                collider.enabled = isEnable;
 
                 if (isEnable)
-                    this.collisionSensor.Play();
+                    collisionSensor.Play();
                 else
-                    this.collisionSensor.Stop();
+                    collisionSensor.Stop();
             });
         }
     }

@@ -14,12 +14,12 @@ namespace Game.GameEngine.Mechanics
 
         void IGameStartElement.StartGame()
         {
-            this.toggle.SetValue(true);
+            toggle.SetValue(true);
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.toggle.SetValue(false);
+            toggle.SetValue(false);
         }
     }
 }

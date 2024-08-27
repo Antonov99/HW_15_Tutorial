@@ -38,7 +38,7 @@ namespace KevinIglesias {
     
         public void Start()
         {
-            characterRoot = this.transform;
+            characterRoot = transform;
             
             zeroPosition = propToSpin.localPosition;
             zeroRotation = propToSpin.localRotation;

@@ -12,29 +12,29 @@ namespace Game.GameEngine.UnityEditor
     {
         public int Id
         {
-            get { return this.id; }
-            set { this.id = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         public string Content
         {
-            get { return this.contentTextField.value; }
-            set { this.contentTextField.value = value; }
+            get { return contentTextField.value; }
+            set { contentTextField.value = value; }
         }
 
         public Port InputPort
         {
-            get { return this.inputPort; }
+            get { return inputPort; }
         }
 
         public List<Choice> Choices
         {
-            get { return this.choices; }
+            get { return choices; }
         }
 
         public bool IsEntry
         {
-            get { return this.isEntry; }
+            get { return isEntry; }
         }
 
         private int id;
@@ -61,27 +61,27 @@ namespace Game.GameEngine.UnityEditor
 
         private void InitTitle()
         {
-            this.inputPort = InstantiatePort(
+            inputPort = InstantiatePort(
                 Orientation.Horizontal,
                 Direction.Input,
                 Port.Capacity.Multi,
                 typeof(bool)
             );
 
-            this.inputPort.portColor = Color.white;
-            this.inputPort.portName = "";
-            this.titleContainer.Insert(0, this.inputPort);
+            inputPort.portColor = Color.white;
+            inputPort.portName = "";
+            titleContainer.Insert(0, inputPort);
         }
 
         private void InitBody()
         {
-            this.contentTextField = new TextField
+            contentTextField = new TextField
             {
                 value = "Message",
                 multiline = true
             };
             
-            this.inputContainer.Insert(0, this.contentTextField);
+            inputContainer.Insert(0, contentTextField);
         }
 
         private void InitButton_AddChoice()
@@ -89,10 +89,10 @@ namespace Game.GameEngine.UnityEditor
             var button = new Button
             {
                 text = "Add Choice",
-                clickable = new Clickable(() => this.AddChoice("Answer"))
+                clickable = new Clickable(() => AddChoice("Answer"))
             };
 
-            this.extensionContainer.Add(button);
+            extensionContainer.Add(button);
         }
 
         public void AddChoice(string content, bool refresh = true)
@@ -110,7 +110,7 @@ namespace Game.GameEngine.UnityEditor
             var deleteButton = new Button
             {
                 text = "-",
-                clickable = new Clickable(() => this.RemoveOutputPort(port))
+                clickable = new Clickable(() => RemoveOutputPort(port))
             };
 
             var choiceText = new TextField
@@ -123,43 +123,43 @@ namespace Game.GameEngine.UnityEditor
             port.Add(deleteButton);
             port.Add(choiceText);
 
-            this.outputContainer.Add(port);
+            outputContainer.Add(port);
 
             var result = new Choice
             {
                 port = port,
                 textField = choiceText
             };
-            this.choices.Add(result);
+            choices.Add(result);
 
 
             if (refresh)
             {
-                this.RefreshExpandedState();
+                RefreshExpandedState();
             }
         }
 
         public void RemoveOutputPort(Port outputPort, bool refresh = true)
         {
-            this.outputContainer.Remove(outputPort);
+            outputContainer.Remove(outputPort);
 
-            var choice = this.choices.FirstOrDefault(it => it.port == outputPort);
+            var choice = choices.FirstOrDefault(it => it.port == outputPort);
             if (choice.port != null)
             {
-                this.choices.Remove(choice);
+                choices.Remove(choice);
             }
 
             if (refresh)
             {
-                this.RefreshExpandedState();
+                RefreshExpandedState();
             }
         }
 
         public int IndexOfChoice(Port output)
         {
-            for (var i = 0; i < this.choices.Count; i++)
+            for (var i = 0; i < choices.Count; i++)
             {
-                var choice = this.choices[i];
+                var choice = choices[i];
                 if (choice.port == output)
                 {
                     return i;
@@ -172,26 +172,26 @@ namespace Game.GameEngine.UnityEditor
 
         private void InitStyleSheets()
         {
-            this.extensionContainer.AddToClassList("dialogue_node_extension-container");
-            this.mainContainer.AddToClassList("dialogue_node_main-container");
-            this.contentTextField.AddToClassList("dialogue_node_message");
+            extensionContainer.AddToClassList("dialogue_node_extension-container");
+            mainContainer.AddToClassList("dialogue_node_main-container");
+            contentTextField.AddToClassList("dialogue_node_message");
 
-            this.style.borderTopLeftRadius = 8;
-            this.style.borderTopRightRadius = 8;
-            this.style.borderBottomLeftRadius = 8;
-            this.style.borderBottomRightRadius = 8;
+            style.borderTopLeftRadius = 8;
+            style.borderTopRightRadius = 8;
+            style.borderBottomLeftRadius = 8;
+            style.borderBottomRightRadius = 8;
         }
 
         public void SetAsEntry()
         {
-            this.style.backgroundColor = new Color(0.92f, 0.76f, 0f);
-            this.isEntry = true;
+            style.backgroundColor = new Color(0.92f, 0.76f, 0f);
+            isEntry = true;
         }
 
         public void SetAsNotEntry()
         {
-            this.style.backgroundColor = new Color(0.53f, 0.53f, 0.56f);
-            this.isEntry = false;
+            style.backgroundColor = new Color(0.53f, 0.53f, 0.56f);
+            isEntry = false;
         }
 
         public struct Choice

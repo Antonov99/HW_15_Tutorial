@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         [ShowInInspector]
         public bool IsAlive
         {
-            get { return this.CheckIsAlive(); }
+            get { return CheckIsAlive(); }
         }
 
         [Space]
@@ -20,12 +20,12 @@ namespace Game.GameEngine.Mechanics
 
         private bool CheckIsAlive()
         {
-            if (this.hitPointsEngine == null)
+            if (hitPointsEngine == null)
             {
                 return default;
             }
 
-            return this.hitPointsEngine.Current > 0;
+            return hitPointsEngine.Current > 0;
         }
     }
 }

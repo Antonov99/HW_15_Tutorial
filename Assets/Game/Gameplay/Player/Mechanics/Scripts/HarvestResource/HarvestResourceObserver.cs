@@ -38,24 +38,24 @@ namespace Game.Gameplay.Player
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_HarvestResource>();
+            heroComponent = heroService.GetHero().Get<IComponent_HarvestResource>();
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.heroComponent.OnHarvestStopped += this.OnHarvestStopped;
+            heroComponent.OnHarvestStopped += OnHarvestStopped;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.heroComponent.OnHarvestStopped -= this.OnHarvestStopped;
+            heroComponent.OnHarvestStopped -= OnHarvestStopped;
         }
 
         private void OnHarvestStopped(HarvestResourceOperation operation)
         {
             if (operation.isCompleted)
             {
-                this.AddResources(operation);
+                AddResources(operation);
             }
         }
 
@@ -63,12 +63,12 @@ namespace Game.Gameplay.Player
         {
             var resourceType = operation.resourceType;
             var resourceAmount = operation.resourceCount;
-            this.resourceStorage.AddResource(resourceType, resourceAmount);
+            resourceStorage.AddResource(resourceType, resourceAmount);
 
             var resourcePosition = operation.targetResource.Get<IComponent_GetPosition>().Position;
-            this.resourceAnimator.PlayIncomeFromWorld(resourcePosition, resourceType, resourceAmount);
+            resourceAnimator.PlayIncomeFromWorld(resourcePosition, resourceType, resourceAmount);
 
-            SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, collectSFX);
             //
             // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
             // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);

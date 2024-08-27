@@ -7,17 +7,17 @@ namespace Game.Meta
     {
         public string Title
         {
-            get { return this.item.Metadata.title; }
+            get { return item.Metadata.title; }
         }
 
         public string Description
         {
-            get { return this.item.Metadata.decription; }
+            get { return item.Metadata.decription; }
         }
 
         public Sprite Icon
         {
-            get { return this.item.Metadata.icon; }
+            get { return item.Metadata.icon; }
         }
 
         private readonly InventoryItem item;
@@ -32,31 +32,31 @@ namespace Game.Meta
         
         public bool IsStackableItem()
         {
-            return this.item.FlagsExists(InventoryItemFlags.STACKABLE);
+            return item.FlagsExists(InventoryItemFlags.STACKABLE);
         }
 
         public void GetStackInfo(out int current, out int size)
         {
-            var component = this.item.GetComponent<IComponent_Stackable>();
+            var component = item.GetComponent<IComponent_Stackable>();
             current = component.Value;
             size = component.Size;
         }
 
         public bool IsConsumableItem()
         {
-            return this.item.FlagsExists(InventoryItemFlags.CONSUMABLE);
+            return item.FlagsExists(InventoryItemFlags.CONSUMABLE);
         }
 
         public bool CanConsumeItem()
         {
-            return this.consumeManager.CanConsumeItem(this.item);
+            return consumeManager.CanConsumeItem(item);
         }
 
         public void OnConsumeClicked()
         {
-            if (this.consumeManager.CanConsumeItem(this.item))
+            if (consumeManager.CanConsumeItem(item))
             {
-                this.consumeManager.ConsumeItem(this.item);
+                consumeManager.ConsumeItem(item);
             }
         }
     }

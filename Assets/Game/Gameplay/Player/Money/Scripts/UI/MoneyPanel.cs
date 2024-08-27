@@ -22,40 +22,40 @@ namespace Game.Gameplay.Player
 
         public void SetupMoney(int money)
         {
-            this.Money = money;
-            this.UpdateMoneyText();
+            Money = money;
+            UpdateMoneyText();
         }
 
         public void IncrementMoney(int range)
         {
-            var newAmount = this.Money + range;
+            var newAmount = Money + range;
 
-            this.Money = newAmount;
-            this.UpdateMoneyText();
-            this.AnimateIncome();
+            Money = newAmount;
+            UpdateMoneyText();
+            AnimateIncome();
         }
 
         public void DecrementMoney(int range)
         {
-            var newAmount = this.Money - range;
-            this.Money = newAmount;
-            this.UpdateMoneyText();
+            var newAmount = Money - range;
+            Money = newAmount;
+            UpdateMoneyText();
         }
 
         private void UpdateMoneyText()
         {
-            var money = Math.Max(this.Money, 0);
-            this.moneyText.text = money.ToString();
+            var money = Math.Max(Money, 0);
+            moneyText.text = money.ToString();
         }
 
         public Vector3 GetIconPosition()
         {
-            return this.iconTransform.TransformPoint(this.iconTransform.rect.center);
+            return iconTransform.TransformPoint(iconTransform.rect.center);
         }
 
         private void AnimateIncome()
         {
-            var rootTransform = this.iconTransform;
+            var rootTransform = iconTransform;
             DOTween.Sequence()
                 .Append(rootTransform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), 0.1f))
                 .Append(rootTransform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.2f));

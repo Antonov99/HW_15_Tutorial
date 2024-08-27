@@ -10,18 +10,18 @@ namespace Game.Meta
     {
         public event UnityAction OnClicked
         {
-            add { this.button.onClick.AddListener(value); }
-            remove { this.button.onClick.RemoveListener(value); }
+            add { button.onClick.AddListener(value); }
+            remove { button.onClick.RemoveListener(value); }
         }
 
         public PricePanel PriceItem1
         {
-            get { return this.priceItem1; }
+            get { return priceItem1; }
         }
 
         public PricePanel PriceItem2
         {
-            get { return this.priceItem2; }
+            get { return priceItem2; }
         }
         
         [SerializeField]
@@ -52,16 +52,16 @@ namespace Game.Meta
 
         public void SetPriceSize1()
         {
-            this.priceItem1.gameObject.SetActive(true);
-            this.priceItem2.gameObject.SetActive(false);
-            this.mainTransform.sizeDelta = new Vector2(this.mainTransform.sizeDelta.x, 140);
+            priceItem1.gameObject.SetActive(true);
+            priceItem2.gameObject.SetActive(false);
+            mainTransform.sizeDelta = new Vector2(mainTransform.sizeDelta.x, 140);
         }
 
         public void SetPriceSize2()
         {
-            this.priceItem1.gameObject.SetActive(true);
-            this.priceItem2.gameObject.SetActive(true);
-            this.mainTransform.sizeDelta = new Vector2(this.mainTransform.sizeDelta.x, 200);
+            priceItem1.gameObject.SetActive(true);
+            priceItem2.gameObject.SetActive(true);
+            mainTransform.sizeDelta = new Vector2(mainTransform.sizeDelta.x, 200);
         }
 
         public void SetState(State state)
@@ -70,13 +70,13 @@ namespace Game.Meta
 
             if (state == State.AVAILABLE)
             {
-                this.button.interactable = true;
-                this.buttonBackground.sprite = this.availableButtonSprite;
+                button.interactable = true;
+                buttonBackground.sprite = availableButtonSprite;
             }
             else if (state == State.LOCKED)
             {
-                this.button.interactable = false;
-                this.buttonBackground.sprite = this.lockedButtonSprite;
+                button.interactable = false;
+                buttonBackground.sprite = lockedButtonSprite;
             }
             else
             {
@@ -95,7 +95,7 @@ namespace Game.Meta
         {
             try
             {
-                this.SetState(this.state);
+                SetState(state);
             }
             catch (Exception)
             {

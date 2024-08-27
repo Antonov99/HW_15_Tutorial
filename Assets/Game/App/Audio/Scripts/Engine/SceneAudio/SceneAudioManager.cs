@@ -110,9 +110,9 @@ namespace Game.SceneAudio
 
         private SceneAudioChannel FindChannel(SceneAudioType channelType)
         {
-            for (int i = 0, count = this.channels.Length; i < count; i++)
+            for (int i = 0, count = channels.Length; i < count; i++)
             {
-                var holder = this.channels[i];
+                var holder = channels[i];
                 if (holder.channelType == channelType)
                 {
                     return holder.channel;

@@ -25,30 +25,30 @@ namespace Game.GameEngine.AI
 
         void IEnableListener.OnEnable()
         {
-            this.blackboard.OnVariableAdded += this.OnVariableChanged;
-            this.blackboard.OnVariableRemoved += this.OnVariableChanged;
+            blackboard.OnVariableAdded += OnVariableChanged;
+            blackboard.OnVariableRemoved += OnVariableChanged;
         }
 
         void IUpdateListener.Update(float deltaTime)
         {
-            if (this.abortRequired)
+            if (abortRequired)
             {
-                this.tree.Abort();
-                this.abortRequired = false;
+                tree.Abort();
+                abortRequired = false;
             }
         }
 
         void IDisableListener.OnDisable()
         {
-            this.blackboard.OnVariableAdded -= this.OnVariableChanged;
-            this.blackboard.OnVariableRemoved -= this.OnVariableChanged;
+            blackboard.OnVariableAdded -= OnVariableChanged;
+            blackboard.OnVariableRemoved -= OnVariableChanged;
         }
         
         private void OnVariableChanged(string key, object value)
         {
-            if (this.blackboardKeys.Contains(key))
+            if (blackboardKeys.Contains(key))
             {
-                this.abortRequired = true;
+                abortRequired = true;
             }
         }
     }

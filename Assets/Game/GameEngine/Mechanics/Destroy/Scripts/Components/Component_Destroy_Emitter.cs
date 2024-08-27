@@ -9,8 +9,8 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action OnDestroyed
         {
-            add { this.emitter.OnEvent += value; }
-            remove { this.emitter.OnEvent -= value; }
+            add { emitter.OnEvent += value; }
+            remove { emitter.OnEvent -= value; }
         }
 
         private readonly IEmitter emitter;
@@ -22,7 +22,7 @@ namespace Game.GameEngine.Mechanics
 
         public void Destroy()
         {
-            this.emitter.Call();
+            emitter.Call();
         }
     }
     
@@ -32,8 +32,8 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action<T> OnDestroyed
         {
-            add { this.emitter.OnEvent += value; }
-            remove { this.emitter.OnEvent -= value; }
+            add { emitter.OnEvent += value; }
+            remove { emitter.OnEvent -= value; }
         }
 
         private readonly IEmitter<T> emitter;
@@ -45,7 +45,7 @@ namespace Game.GameEngine.Mechanics
 
         public void Destroy(T args)
         {
-            this.emitter.Call(args);
+            emitter.Call(args);
         }
     }
 }

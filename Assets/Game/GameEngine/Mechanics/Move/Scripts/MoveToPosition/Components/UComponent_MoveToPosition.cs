@@ -12,12 +12,12 @@ namespace Game.GameEngine.Mechanics
     
         public void Move(Vector3 position)
         {
-            this.engine.StartMove(position);
+            engine.StartMove(position);
         }
 
         public bool CanMove(Vector3 position)
         {
-            return this.engine.CanStartMove(position);
+            return engine.CanStartMove(position);
         }
     }
 }

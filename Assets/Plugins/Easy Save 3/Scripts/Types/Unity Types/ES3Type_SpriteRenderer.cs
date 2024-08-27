@@ -53,28 +53,28 @@ namespace ES3Types
 						instance.color = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
 						break;
 					case "flipX":
-						instance.flipX = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.flipX = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "flipY":
-						instance.flipY = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.flipY = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "shadowCastingMode":
 						instance.shadowCastingMode = reader.Read<UnityEngine.Rendering.ShadowCastingMode>();
 						break;
 					case "receiveShadows":
-						instance.receiveShadows = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.receiveShadows = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "sharedMaterials":
 						instance.sharedMaterials = reader.Read<UnityEngine.Material[]>();
 						break;
 					case "lightmapIndex":
-						instance.lightmapIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.lightmapIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "realtimeLightmapIndex":
-						instance.realtimeLightmapIndex = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.realtimeLightmapIndex = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "lightmapScaleOffset":
 						instance.lightmapScaleOffset = reader.Read<UnityEngine.Vector4>(ES3Type_Vector4.Instance);
@@ -98,13 +98,13 @@ namespace ES3Types
 						instance.reflectionProbeUsage = reader.Read<UnityEngine.Rendering.ReflectionProbeUsage>();
 						break;
 					case "sortingLayerName":
-						instance.sortingLayerName = reader.Read<System.String>(ES3Type_string.Instance);
+						instance.sortingLayerName = reader.Read<String>(ES3Type_string.Instance);
 						break;
 					case "sortingLayerID":
-						instance.sortingLayerID = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.sortingLayerID = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "sortingOrder":
-						instance.sortingOrder = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.sortingOrder = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();

@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         public override void Do(CombatOperation operation)
         {
             var targetPosition = operation.targetEntity.Get<IComponent_GetPosition>().Position;
-            this.lookAtScript.LookAtPosition(targetPosition);
+            lookAtScript.LookAtPosition(targetPosition);
         }
     }
 }

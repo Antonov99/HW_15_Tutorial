@@ -11,12 +11,12 @@ namespace Game.GameEngine.Mechanics
     {
         public Vector3 Position
         {
-            get { return this.root.position; }
+            get { return root.position; }
         }
 
         public Quaternion Rotation
         {
-            get { return this.root.rotation; }
+            get { return root.rotation; }
         }
 
         [SerializeField]
@@ -24,12 +24,12 @@ namespace Game.GameEngine.Mechanics
 
         public void SetPosition(Vector3 position)
         {
-            this.root.position = position;
+            root.position = position;
         }
 
         public void SetRotation(Quaternion rotation)
         {
-            this.root.rotation = rotation;
+            root.rotation = rotation;
         }
     }
 }

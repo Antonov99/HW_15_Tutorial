@@ -16,17 +16,17 @@ namespace Game.Gameplay.Hero
 
         public void OnEntitiesUpdated(List<IEntity> entities)
         {
-            this.detectedEntites.Clear();
+            detectedEntites.Clear();
             for (int i = 0, count = entities.Count; i < count; i++)
             {
                 var entity = entities[i];
-                if (this.MatchesEntity(entity))
+                if (MatchesEntity(entity))
                 {
-                    this.detectedEntites.Add(entity);
+                    detectedEntites.Add(entity);
                 }
             }
             
-            this.OnEntitesChanged(this.detectedEntites);
+            OnEntitesChanged(detectedEntites);
         }
     }
 }

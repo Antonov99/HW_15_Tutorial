@@ -16,18 +16,18 @@ namespace Game.GameEngine.Mechanics
 
         public T GetParameter<T>(EffectId name)
         {
-            return this.effect.GetParameter<T>(name);
+            return effect.GetParameter<T>(name);
         }
 
         public bool TryGetParameter<T>(EffectId name, out T value)
         {
-            return this.effect.TryGetParameter(name, out value);
+            return effect.TryGetParameter(name, out value);
         }
 
         protected override void OnAfterDeserialize()
         {
             base.OnAfterDeserialize();
-            this.effect = new Effect(this.parameters);
+            effect = new Effect(parameters);
         }
     }
 }

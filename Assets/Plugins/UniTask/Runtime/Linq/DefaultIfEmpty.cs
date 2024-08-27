@@ -62,7 +62,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.defaultValue = defaultValue;
                 this.cancellationToken = cancellationToken;
 
-                this.iteratingState = IteratingState.Empty;
+                iteratingState = IteratingState.Empty;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 

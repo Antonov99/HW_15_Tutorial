@@ -7,12 +7,12 @@ namespace Game.GameEngine.GUI
     {
         public ParticlePool<RectTransform> PointPool
         {
-            get { return this.pointParticlePool; }
+            get { return pointParticlePool; }
         }
 
         public ParticlePool<ImageParticle> ImagePool
         {
-            get { return this.imageParticlePool; }
+            get { return imageParticlePool; }
         }
 
         [SerializeField]

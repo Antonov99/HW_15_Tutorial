@@ -54,66 +54,66 @@ namespace ES3Types
 				{
 					
 					case "sprite":
-						instance.sprite = reader.Read<UnityEngine.Sprite>(ES3Type_Sprite.Instance);
+						instance.sprite = reader.Read<Sprite>(ES3Type_Sprite.Instance);
 						break;
 					case "overrideSprite":
-						instance.overrideSprite = reader.Read<UnityEngine.Sprite>(ES3Type_Sprite.Instance);
+						instance.overrideSprite = reader.Read<Sprite>(ES3Type_Sprite.Instance);
 						break;
 					case "type":
 						instance.type = reader.Read<UnityEngine.UI.Image.Type>();
 						break;
 					case "preserveAspect":
-						instance.preserveAspect = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.preserveAspect = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "fillCenter":
-						instance.fillCenter = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.fillCenter = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "fillMethod":
 						instance.fillMethod = reader.Read<UnityEngine.UI.Image.FillMethod>();
 						break;
 					case "fillAmount":
-						instance.fillAmount = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.fillAmount = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "fillClockwise":
-						instance.fillClockwise = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.fillClockwise = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "fillOrigin":
-						instance.fillOrigin = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.fillOrigin = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "alphaHitTestMinimumThreshold":
-						instance.alphaHitTestMinimumThreshold = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.alphaHitTestMinimumThreshold = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 #if UNITY_2019_1_OR_NEWER
                     case "useSpriteMesh":
-						instance.useSpriteMesh = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useSpriteMesh = reader.Read<Boolean>(ES3Type_bool.Instance);
                         break;
 #endif
                     case "material":
-						instance.material = reader.Read<UnityEngine.Material>(ES3Type_Material.Instance);
+						instance.material = reader.Read<Material>(ES3Type_Material.Instance);
 						break;
 					case "onCullStateChanged":
 						instance.onCullStateChanged = reader.Read<UnityEngine.UI.MaskableGraphic.CullStateChangedEvent>();
 						break;
 					case "maskable":
-						instance.maskable = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.maskable = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "color":
-						instance.color = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
+						instance.color = reader.Read<Color>(ES3Type_Color.Instance);
 						break;
 					case "raycastTarget":
-						instance.raycastTarget = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.raycastTarget = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "useLegacyMeshGeneration":
-					reader.SetPrivateProperty("useLegacyMeshGeneration", reader.Read<System.Boolean>(), instance);
+					reader.SetPrivateProperty("useLegacyMeshGeneration", reader.Read<Boolean>(), instance);
 					break;
 					case "useGUILayout":
-						instance.useGUILayout = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useGUILayout = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "hideFlags":
-						instance.hideFlags = reader.Read<UnityEngine.HideFlags>(ES3Type_enum.Instance);
+						instance.hideFlags = reader.Read<HideFlags>(ES3Type_enum.Instance);
 						break;
 					default:
 						reader.Skip();

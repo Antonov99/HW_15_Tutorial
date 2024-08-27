@@ -9,7 +9,7 @@ namespace Game.GameEngine.AI
     {
         protected override Agent_MoveToTarget<Vector3> MoveAgent
         {
-            get { return this.moveAgent; }
+            get { return moveAgent; }
         }
 
         private readonly Agent_Entity_MoveToPosition moveAgent = new();
@@ -20,28 +20,28 @@ namespace Game.GameEngine.AI
 
         public void SetFollowingEntity(IEntity follower)
         {
-            this.followerComponent = follower.Get<IComponent_GetPosition>();
-            this.moveAgent.SetMovingEntity(follower);
+            followerComponent = follower.Get<IComponent_GetPosition>();
+            moveAgent.SetMovingEntity(follower);
         }
 
         public void SetTargetEntity(IEntity target)
         {
-            this.targetComponent = target.Get<IComponent_GetPosition>();
+            targetComponent = target.Get<IComponent_GetPosition>();
         }
 
         public void SetMinPointDistance(float stoppingDistance)
         {
-            this.moveAgent.SetStoppingDistance(stoppingDistance);
+            moveAgent.SetStoppingDistance(stoppingDistance);
         }
 
         protected override Vector3 EvaluateCurrentPosition()
         {
-            return this.followerComponent.Position;
+            return followerComponent.Position;
         }
 
         protected override Vector3 EvaluateTargetPosition()
         {
-            return this.targetComponent.Position;
+            return targetComponent.Position;
         }
     }
 }

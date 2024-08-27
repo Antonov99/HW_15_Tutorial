@@ -8,7 +8,7 @@ namespace AI.Agents
 
         public bool IsTargetReached
         {
-            get { return this.isTargetReached; }
+            get { return isTargetReached; }
         }
 
         private T target;
@@ -23,27 +23,27 @@ namespace AI.Agents
         protected override void OnStart()
         {
             base.OnStart();
-            this.isTargetReached = false;
+            isTargetReached = false;
         }
 
         protected override void Update()
         {
-            var isTargetReached = this.CheckTargetReached(this.target);
+            var isTargetReached = CheckTargetReached(target);
 
             if (isTargetReached && !this.isTargetReached)
             {
                 this.isTargetReached = true;
-                this.OnTargetReached?.Invoke(true);
+                OnTargetReached?.Invoke(true);
             }
             else if (!isTargetReached && this.isTargetReached)
             {
                 this.isTargetReached = false;
-                this.OnTargetReached?.Invoke(false);
+                OnTargetReached?.Invoke(false);
             }
 
             if (!isTargetReached)
             {
-                this.MoveToTarget(this.target);
+                MoveToTarget(target);
             }
         }
 

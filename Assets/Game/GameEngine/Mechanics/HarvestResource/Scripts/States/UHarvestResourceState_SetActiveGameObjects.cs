@@ -23,36 +23,36 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            var resourceType = this.engine
+            var resourceType = engine
                 .Current
                 .targetResource
                 .Get<IComponent_GetResourceType>()
                 .Type;
 
-            this.currentGameObjects = this.GetGameObjects(resourceType);
-            this.EnableGameObjects(this.currentGameObjects, true);
+            currentGameObjects = GetGameObjects(resourceType);
+            EnableGameObjects(currentGameObjects, true);
         }
 
         public override void Exit()
         {
-            this.EnableGameObjects(this.currentGameObjects, false);
+            EnableGameObjects(currentGameObjects, false);
         }
 
         private void Awake()
         {
-            if (this.disableOnAwake)
+            if (disableOnAwake)
             {
-                this.DisableAllGameObjects();
+                DisableAllGameObjects();
             }
         }
 
         private void DisableAllGameObjects()
         {
-            for (int i = 0, count = this.objectGroups.Length; i < count; i++)
+            for (int i = 0, count = objectGroups.Length; i < count; i++)
             {
-                var group = this.objectGroups[i];
+                var group = objectGroups[i];
                 var gameObjects = group.objects;
-                this.EnableGameObjects(gameObjects, false);
+                EnableGameObjects(gameObjects, false);
             }
         }
 
@@ -67,9 +67,9 @@ namespace Game.GameEngine.Mechanics
 
         private GameObject[] GetGameObjects(ResourceType resourceType)
         {
-            for (int i = 0, count = this.objectGroups.Length; i < count; i++)
+            for (int i = 0, count = objectGroups.Length; i < count; i++)
             {
-                var objectGroup = this.objectGroups[i];
+                var objectGroup = objectGroups[i];
                 if (objectGroup.resourceType == resourceType)
                 {
                     return objectGroup.objects;

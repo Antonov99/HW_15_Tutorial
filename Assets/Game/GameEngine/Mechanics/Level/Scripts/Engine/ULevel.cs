@@ -19,12 +19,12 @@ namespace Game.GameEngine.Mechanics
 
         public int CurrentLevel
         {
-            get { return this.currentLevel; }
+            get { return currentLevel; }
         }
 
         public int MaxLevel
         {
-            get { return this.maxLevel; }
+            get { return maxLevel; }
         }
 
         [SerializeField]
@@ -38,49 +38,49 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void LevelUp()
         {
-            if (this.currentLevel + 1 >= this.maxLevel)
+            if (currentLevel + 1 >= maxLevel)
             {
                 Debug.LogWarning("Can't level up! Max level reached");
             }
 
-            this.currentLevel++;
-            this.OnLevelUp?.Invoke(this.currentLevel);
+            currentLevel++;
+            OnLevelUp?.Invoke(currentLevel);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void ResetLevel()
         {
-            this.currentLevel = 0;
-            this.OnLevelReset?.Invoke(this.currentLevel);
+            currentLevel = 0;
+            OnLevelReset?.Invoke(currentLevel);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void SetupLevel(int level)
         {
-            this.currentLevel = Mathf.Clamp(level, 0, this.maxLevel);
-            this.OnLevelSetuped?.Invoke(level);
+            currentLevel = Mathf.Clamp(level, 0, maxLevel);
+            OnLevelSetuped?.Invoke(level);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void SetupMaxLevel(int level)
         {
-            if (this.currentLevel > level)
+            if (currentLevel > level)
             {
-                this.currentLevel = level;
+                currentLevel = level;
             }
 
-            this.maxLevel = level;
-            this.OnMaxLevelSetuped?.Invoke(level);
+            maxLevel = level;
+            OnMaxLevelSetuped?.Invoke(level);
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            this.maxLevel = Math.Max(1, this.maxLevel);
-            this.currentLevel = Mathf.Clamp(this.currentLevel, 1, this.maxLevel);
+            maxLevel = Math.Max(1, maxLevel);
+            currentLevel = Mathf.Clamp(currentLevel, 1, maxLevel);
         }
 #endif
     }

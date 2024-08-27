@@ -17,28 +17,28 @@ namespace AI.Tasks
 
         public void SetPath(IEnumerable<T> points)
         {
-            this.currentPath.Clear();
-            this.currentPath.AddRange(points);
+            currentPath.Clear();
+            currentPath.AddRange(points);
         }
 
         protected override IEnumerator DoAsync()
         {
-            for (var i = 0; i < this.currentPath.Count; i++)
+            for (var i = 0; i < currentPath.Count; i++)
             {
-                var nextPoint = this.currentPath[i];
-                yield return this.MoveToNextPoint(nextPoint);
+                var nextPoint = currentPath[i];
+                yield return MoveToNextPoint(nextPoint);
             }
 
-            yield return this.framePeriod;
-            this.Return(true);
+            yield return framePeriod;
+            Return(true);
         }
 
         private IEnumerator MoveToNextPoint(T target)
         {
-            while (!this.CheckPointReached(target))
+            while (!CheckPointReached(target))
             {
-                this.MoveToPoint(target);
-                yield return this.framePeriod;
+                MoveToPoint(target);
+                yield return framePeriod;
             }
         }
 

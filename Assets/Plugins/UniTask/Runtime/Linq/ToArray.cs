@@ -11,7 +11,7 @@ namespace Cysharp.Threading.Tasks.Linq
         {
             Error.ThrowArgumentNullException(source, nameof(source));
 
-            return Cysharp.Threading.Tasks.Linq.ToArray.ToArrayAsync(source, cancellationToken);
+            return ToArray.ToArrayAsync(source, cancellationToken);
         }
     }
 

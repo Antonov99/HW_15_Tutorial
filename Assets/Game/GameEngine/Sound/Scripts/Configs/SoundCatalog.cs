@@ -14,9 +14,9 @@ namespace Game.GameEngine
 
         public AudioClip FindSound(string id)
         {
-            for (int i = 0, count = this.sounds.Length; i < count; i++)
+            for (int i = 0, count = sounds.Length; i < count; i++)
             {
-                var sound = this.sounds[i];
+                var sound = sounds[i];
                 if (sound.id == id)
                 {
                     return sound.clip;
@@ -28,9 +28,9 @@ namespace Game.GameEngine
 
         public bool FindSound(string id, out AudioClip result)
         {
-            for (int i = 0, count = this.sounds.Length; i < count; i++)
+            for (int i = 0, count = sounds.Length; i < count; i++)
             {
-                var sound = this.sounds[i];
+                var sound = sounds[i];
                 if (sound.id == id)
                 {
                     result = sound.clip;

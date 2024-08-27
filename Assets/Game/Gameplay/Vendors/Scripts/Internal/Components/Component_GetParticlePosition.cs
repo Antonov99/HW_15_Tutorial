@@ -6,7 +6,7 @@ namespace Game.Gameplay.Vendors
     {
         public Vector3 Position
         {
-            get { return this.emissionPoint.position; }
+            get { return emissionPoint.position; }
         }
 
         private readonly Transform emissionPoint;

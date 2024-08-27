@@ -21,8 +21,8 @@ namespace SqliteModule
         {
             var result = new Result();
 
-            var currentVersion = this.adapter.CurrentVersion;
-            var targetVersion = this.adapter.TargetVersion;
+            var currentVersion = adapter.CurrentVersion;
+            var targetVersion = adapter.TargetVersion;
             
             if (currentVersion >= targetVersion)
             {
@@ -30,9 +30,9 @@ namespace SqliteModule
                 return result;
             }
 
-            if (this.database.IsConnected)
+            if (database.IsConnected)
             {
-                await this.UpdateDatabase(currentVersion, targetVersion, result);
+                await UpdateDatabase(currentVersion, targetVersion, result);
             }
 
             return result;
@@ -45,7 +45,7 @@ namespace SqliteModule
                 await UpdateToVersion(version, result);
                 if (result.isSuccessful)
                 {
-                    this.adapter.CurrentVersion = version;
+                    adapter.CurrentVersion = version;
                 }
                 else
                 {
@@ -66,7 +66,7 @@ namespace SqliteModule
             for (int i = 0, count = handlers.Count; i < count; i++)
             {
                 var handler = handlers[i];
-                await handler.UpdateAsync(this.database, result);
+                await handler.UpdateAsync(database, result);
 
                 if (!result.isSuccessful)
                 {

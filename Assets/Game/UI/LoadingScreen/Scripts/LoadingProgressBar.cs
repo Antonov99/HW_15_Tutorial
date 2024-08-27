@@ -14,8 +14,8 @@ namespace Game.UI
 
         public void SetProgress(float progress)
         {
-            this.fill.fillAmount = progress;
-            this.text.text = $"{(progress * 100):F0}%";
+            fill.fillAmount = progress;
+            text.text = $"{(progress * 100):F0}%";
         }
     }
 }

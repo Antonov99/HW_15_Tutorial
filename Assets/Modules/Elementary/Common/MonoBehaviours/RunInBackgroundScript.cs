@@ -9,7 +9,7 @@ namespace Elementary
 
         private void Awake()
         {
-            Application.runInBackground = this.runInBackground;
+            Application.runInBackground = runInBackground;
         }
     }
 }

@@ -40,13 +40,13 @@ namespace ES3Types
 						instance.size = reader.Read<UnityEngine.Vector3>();
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>();
+						instance.enabled = reader.Read<Boolean>();
 						break;
 					case "isTrigger":
-						instance.isTrigger = reader.Read<System.Boolean>();
+						instance.isTrigger = reader.Read<Boolean>();
 						break;
 					case "contactOffset":
-						instance.contactOffset = reader.Read<System.Single>();
+						instance.contactOffset = reader.Read<Single>();
 						break;
 					case "material":
 						instance.sharedMaterial = reader.Read<UnityEngine.PhysicMaterial>();

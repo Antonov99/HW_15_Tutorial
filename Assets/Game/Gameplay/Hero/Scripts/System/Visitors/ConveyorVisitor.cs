@@ -18,12 +18,12 @@ namespace Game.Gameplay.Hero
             var zoneType = target.Zone;
             if (zoneType == ConveyorTrigger.ZoneType.LOAD)
             {
-                this.EnterLoadZone(target);
+                EnterLoadZone(target);
             }
 
             if (zoneType == ConveyorTrigger.ZoneType.UNLOAD)
             {
-                this.EnterUnloadZone(target);
+                EnterUnloadZone(target);
             }
         }
 
@@ -32,18 +32,18 @@ namespace Game.Gameplay.Hero
             var zoneType = target.Zone;
             if (zoneType == ConveyorTrigger.ZoneType.LOAD)
             {
-                this.visitInteractor.InputZone.Exit();
+                visitInteractor.InputZone.Exit();
             }
 
             if (zoneType == ConveyorTrigger.ZoneType.UNLOAD)
             {
-                this.visitInteractor.OutputZone.Exit();
+                visitInteractor.OutputZone.Exit();
             }
         }
 
         private void EnterLoadZone(ConveyorTrigger trigger)
         {
-            var inputZone = this.visitInteractor.InputZone;
+            var inputZone = visitInteractor.InputZone;
             if (inputZone.IsEntered)
             {
                 inputZone.Exit();
@@ -54,7 +54,7 @@ namespace Game.Gameplay.Hero
 
         private void EnterUnloadZone(ConveyorTrigger trigger)
         {
-            var outputZone = this.visitInteractor.OutputZone;
+            var outputZone = visitInteractor.OutputZone;
             if (outputZone.IsEntered)
             {
                 outputZone.Exit();

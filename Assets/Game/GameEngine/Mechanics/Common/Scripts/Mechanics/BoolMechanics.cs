@@ -21,17 +21,17 @@ namespace Game.GameEngine.Mechanics
 
         void IAwakeListener.Awake()
         {
-            this.action(this.variable.Current);
+            action(variable.Current);
         }
 
         void IEnableListener.OnEnable()
         {
-            this.variable.OnValueChanged += this.action;
+            variable.OnValueChanged += action;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.variable.OnValueChanged -= this.action;
+            variable.OnValueChanged -= action;
         }
     }
 }

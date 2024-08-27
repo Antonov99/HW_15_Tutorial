@@ -12,7 +12,7 @@ namespace Game.Tutorial
     {
         [Header("Quest")]
         [SerializeField]
-        public ResourceType targetResourceType = ResourceType.STONE;
+        public ResourceType targetResourceType = ResourceType.WOOD;
     
         [Header("Meta")]
         [TranslationKey]

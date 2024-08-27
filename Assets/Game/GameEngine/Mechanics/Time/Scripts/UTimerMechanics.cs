@@ -10,18 +10,18 @@ namespace Game.GameEngine
 
         protected virtual void OnEnable()
         {
-            this.timer.OnStarted += this.OnTimerStarted;
-            this.timer.OnTimeChanged += this.OnTimeChanged;
-            this.timer.OnFinished += this.OnTimerFinished;
-            this.timer.OnCanceled += this.OnTimerCanceled;
+            timer.OnStarted += OnTimerStarted;
+            timer.OnTimeChanged += OnTimeChanged;
+            timer.OnFinished += OnTimerFinished;
+            timer.OnCanceled += OnTimerCanceled;
         }
 
         protected virtual void OnDisable()
         {
-            this.timer.OnStarted -= this.OnTimerStarted;
-            this.timer.OnTimeChanged -= this.OnTimeChanged;
-            this.timer.OnFinished -= this.OnTimerFinished;
-            this.timer.OnCanceled -= this.OnTimerCanceled;
+            timer.OnStarted -= OnTimerStarted;
+            timer.OnTimeChanged -= OnTimeChanged;
+            timer.OnFinished -= OnTimerFinished;
+            timer.OnCanceled -= OnTimerCanceled;
         }
 
         protected virtual void OnTimerStarted()

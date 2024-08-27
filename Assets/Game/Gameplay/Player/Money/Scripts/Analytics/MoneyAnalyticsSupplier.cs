@@ -25,24 +25,24 @@ namespace Game.Gameplay.Player
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.PreviousMoney = this.storage.Money;
-            this.CurrentMoney = this.storage.Money;
+            PreviousMoney = storage.Money;
+            CurrentMoney = storage.Money;
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.storage.OnMoneyChanged += this.OnMoneyChanged;
+            storage.OnMoneyChanged += OnMoneyChanged;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.storage.OnMoneyChanged -= this.OnMoneyChanged;
+            storage.OnMoneyChanged -= OnMoneyChanged;
         }
 
         private void OnMoneyChanged(int newValue)
         {
-            this.PreviousMoney = this.CurrentMoney;
-            this.CurrentMoney = newValue;
+            PreviousMoney = CurrentMoney;
+            CurrentMoney = newValue;
         }
     }
 }

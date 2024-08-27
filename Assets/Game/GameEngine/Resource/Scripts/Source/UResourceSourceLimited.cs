@@ -12,16 +12,16 @@ namespace Game.GameEngine.GameResources
 
         public event Action<ResourceType, int> OnValueChanged
         {
-            add { this.source.OnValueChanged += value; }
-            remove { this.source.OnValueChanged -= value; }
+            add { source.OnValueChanged += value; }
+            remove { source.OnValueChanged -= value; }
         }
 
         public event Action OnSetuped;
 
         public event Action OnCleared
         {
-            add { this.source.OnCleared += value; }
-            remove { this.source.OnCleared -= value; }
+            add { source.OnCleared += value; }
+            remove { source.OnCleared -= value; }
         }
 
         [PropertySpace]
@@ -30,7 +30,7 @@ namespace Game.GameEngine.GameResources
         [ShowInInspector]
         public int AvailableCount
         {
-            get { return this.limit - this.Count; }
+            get { return limit - Count; }
         }
 
         [PropertyOrder(-9)]
@@ -38,12 +38,12 @@ namespace Game.GameEngine.GameResources
         [ShowInInspector]
         public int Count
         {
-            get { return this.source.Count; }
+            get { return source.Count; }
         }
 
         public int Limit
         {
-            get { return this.limit; }
+            get { return limit; }
         }
 
         [PropertyOrder(-8)]
@@ -51,7 +51,7 @@ namespace Game.GameEngine.GameResources
         [ShowInInspector]
         public bool IsLimit
         {
-            get { return this.Count >= this.limit; }
+            get { return Count >= limit; }
         }
 
         [Title("Fields")]
@@ -63,22 +63,22 @@ namespace Game.GameEngine.GameResources
 
         public int this[ResourceType type]
         {
-            get { return this.source[type]; }
+            get { return source[type]; }
         }
 
         public ResourceData[] GetAll()
         {
-            return this.source.GetAll();
+            return source.GetAll();
         }
 
         public void GetAllNonAlloc(Dictionary<ResourceType, int> result)
         {
-            this.source.GetAllNonAlloc(result);
+            source.GetAllNonAlloc(result);
         }
 
         public void GetAllNonAlloc(List<ResourceData> result)
         {
-            this.source.GetAllNonAlloc(result);
+            source.GetAllNonAlloc(result);
         }
 
         [Title("Methods")]
@@ -86,24 +86,24 @@ namespace Game.GameEngine.GameResources
         [Button]
         public void Setup(ResourceData[] resources, int limit)
         {
-            this.source.Setup(resources);
+            source.Setup(resources);
             this.limit = limit;
-            this.OnSetuped?.Invoke();
+            OnSetuped?.Invoke();
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Setup(ResourceData[] resources)
         {
-            this.source.Setup(resources);
-            this.OnSetuped?.Invoke();
+            source.Setup(resources);
+            OnSetuped?.Invoke();
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public bool Exists(ResourceType type, int requiredCount)
         {
-            return this.source.Exists(type, requiredCount);
+            return source.Exists(type, requiredCount);
         }
 
         [GUIColor(0, 1, 0)]
@@ -115,26 +115,26 @@ namespace Game.GameEngine.GameResources
                 return;
             }
 
-            var resourceCount = this.Count;
-            if (resourceCount >= this.limit)
+            var resourceCount = Count;
+            if (resourceCount >= limit)
             {
                 return;
             }
 
             var newCount = resourceCount + range;
-            if (newCount > this.limit)
+            if (newCount > limit)
             {
-                range = this.limit - resourceCount;
+                range = limit - resourceCount;
             }
 
-            this.source.Plus(type, range);
+            source.Plus(type, range);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Minus(ResourceType type, int range)
         {
-            this.source.Minus(type, range);
+            source.Minus(type, range);
         }
 
         [GUIColor(0, 1, 0)]
@@ -142,19 +142,19 @@ namespace Game.GameEngine.GameResources
         public void SetLimit(int limit)
         {
             this.limit = limit;
-            this.OnLimitChanged?.Invoke(limit);
+            OnLimitChanged?.Invoke(limit);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void Clear()
         {
-            this.source.Clear();
+            source.Clear();
         }
 
         public int GetSum()
         {
-            return this.source.GetSum();
+            return source.GetSum();
         }
     }
 }

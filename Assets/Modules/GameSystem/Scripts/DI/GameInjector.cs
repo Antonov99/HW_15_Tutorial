@@ -23,9 +23,9 @@ namespace GameSystem
 
         public static object Instantiate(GameContext context, Type type)
         {
-            var constructors = type.GetConstructors(System.Reflection.BindingFlags.Instance |
-                                                    System.Reflection.BindingFlags.Public | 
-                                                    System.Reflection.BindingFlags.DeclaredOnly);
+            var constructors = type.GetConstructors(BindingFlags.Instance |
+                                                    BindingFlags.Public | 
+                                                    BindingFlags.DeclaredOnly);
 
             for (var i = 0; i < constructors.Length; i++)
             {
@@ -75,10 +75,10 @@ namespace GameSystem
 
         public static void InjectByFields(GameContext context, object target, Type targetType)
         {
-            var fields = targetType.GetFields(System.Reflection.BindingFlags.Instance |
-                                              System.Reflection.BindingFlags.Public |
-                                              System.Reflection.BindingFlags.NonPublic |
-                                              System.Reflection.BindingFlags.DeclaredOnly);
+            var fields = targetType.GetFields(BindingFlags.Instance |
+                                              BindingFlags.Public |
+                                              BindingFlags.NonPublic |
+                                              BindingFlags.DeclaredOnly);
 
             for (int i = 0, count = fields.Length; i < count; i++)
             {
@@ -99,10 +99,10 @@ namespace GameSystem
 
         public static void InjectByMethods(GameContext context, object target, Type targetType)
         {
-            var methods = targetType.GetMethods(System.Reflection.BindingFlags.Instance |
-                                                System.Reflection.BindingFlags.Public |
-                                                System.Reflection.BindingFlags.NonPublic |
-                                                System.Reflection.BindingFlags.DeclaredOnly);
+            var methods = targetType.GetMethods(BindingFlags.Instance |
+                                                BindingFlags.Public |
+                                                BindingFlags.NonPublic |
+                                                BindingFlags.DeclaredOnly);
 
             for (int i = 0, count = methods.Length; i < count; i++)
             {

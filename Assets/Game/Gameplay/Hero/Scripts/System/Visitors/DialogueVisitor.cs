@@ -30,14 +30,14 @@ namespace Game.Gameplay.Hero
         protected override ICondition ProvideConditions(DialogueTrigger target)
         {
             return new ConditionComposite(
-                new ConditionCountdown(this.monoContext, seconds: this.visitDelay, startInstantly: true),
-                new Condition_Entity_IsNotMoving(this.HeroService.GetHero())
+                new ConditionCountdown(monoContext, seconds: visitDelay, startInstantly: true),
+                new Condition_Entity_IsNotMoving(HeroService.GetHero())
             );
         }
 
         protected override void OnHeroVisit(DialogueTrigger trigger)
         {
-            this.dialogueShower.ShowDialog(trigger.Dialogue);
+            dialogueShower.ShowDialog(trigger.Dialogue);
         }
 
         protected override void OnHeroQuit(DialogueTrigger target)

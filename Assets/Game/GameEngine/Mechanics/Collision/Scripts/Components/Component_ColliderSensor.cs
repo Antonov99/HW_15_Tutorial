@@ -8,8 +8,8 @@ namespace Game.GameEngine.Mechanics
     {
         public event Action OnCollisionsUpdated
         {
-            add { this.sensor.OnCollidersUpdated += value; }
-            remove { this.sensor.OnCollidersUpdated -= value; }
+            add { sensor.OnCollidersUpdated += value; }
+            remove { sensor.OnCollidersUpdated -= value; }
         }
 
         private readonly ColliderDetection sensor;
@@ -21,12 +21,12 @@ namespace Game.GameEngine.Mechanics
 
         public void GetCollidersNonAlloc(Collider[] buffer, out int size)
         {
-            this.sensor.GetCollidersNonAlloc(buffer, out size);
+            sensor.GetCollidersNonAlloc(buffer, out size);
         }
 
         public void GetCollidersUnsafe(out Collider[] buffer, out int size)
         {
-            this.sensor.GetCollidersUnsafe(out buffer, out size);
+            sensor.GetCollidersUnsafe(out buffer, out size);
         }
     }
 }

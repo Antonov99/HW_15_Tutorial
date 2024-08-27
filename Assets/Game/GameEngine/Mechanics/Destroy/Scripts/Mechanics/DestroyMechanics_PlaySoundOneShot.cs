@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
 
         protected override void Destroy(DestroyArgs destroyArgs)
         {
-            this.audioSource.PlayOneShot(this.sound);
+            audioSource.PlayOneShot(sound);
         }
     }
 }

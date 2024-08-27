@@ -11,8 +11,8 @@ namespace AI.BTree
 
         protected override IEnumerator RunRoutine()
         {
-            yield return new WaitForSeconds(this.waitSeconds);
-            this.Return(true);
+            yield return new WaitForSeconds(waitSeconds);
+            Return(true);
         }
     }
 }

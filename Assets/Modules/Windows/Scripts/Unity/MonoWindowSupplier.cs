@@ -9,19 +9,19 @@ namespace Windows
 
         public MonoWindowSupplier()
         {
-            this.cashedFrames = new Dictionary<K, V>();
+            cashedFrames = new Dictionary<K, V>();
         }
 
         public V LoadWindow(K key)
         {
-            if (this.cashedFrames.TryGetValue(key, out var frame))
+            if (cashedFrames.TryGetValue(key, out var frame))
             {
                 frame.gameObject.SetActive(true);
             }
             else
             {
-                frame = this.InstantiateFrame(key);
-                this.cashedFrames.Add(key, frame);
+                frame = InstantiateFrame(key);
+                cashedFrames.Add(key, frame);
             }
 
             frame.transform.SetAsLastSibling();

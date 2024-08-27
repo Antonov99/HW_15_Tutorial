@@ -38,55 +38,55 @@ namespace Game.Gameplay.Hero
         protected override void OnEnable()
         {
             base.OnEnable();
-            this.stateMachine.OnStateSwitched += this.OnStateChanged;
+            stateMachine.OnStateSwitched += OnStateChanged;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            this.stateMachine.OnStateSwitched -= this.OnStateChanged;
+            stateMachine.OnStateSwitched -= OnStateChanged;
         }
 
         private void OnStateChanged(HeroStateId state)
         {
             if (state == HeroStateId.IDLE)
             {
-                this.ChangeState(this.idleStateId.Current);
+                ChangeState(idleStateId.Current);
             }
             else if (state == HeroStateId.MOVE)
             {
-                this.ChangeState(this.moveStateId.Current);
+                ChangeState(moveStateId.Current);
             }
             else if (state == HeroStateId.HARVEST_RESOURCE)
             {
-                this.ChangeState(this.SelectHarvestAnimation());
+                ChangeState(SelectHarvestAnimation());
             }
             else if (state == HeroStateId.MELEE_COMBAT)
             {
-                this.ChangeState(this.attackStateId.Current);
+                ChangeState(attackStateId.Current);
             }
             else if (state == HeroStateId.DEATH)
             {
-                this.ChangeState(this.dieStateId.Current);
+                ChangeState(dieStateId.Current);
             }
         }
 
         private int SelectHarvestAnimation()
         {
-            var operation = this.harvestEngine.Current;
+            var operation = harvestEngine.Current;
             var resourceType = operation.resourceType;
             if (resourceType == ResourceType.WOOD)
             {
-                return this.chopStateId.Current;
+                return chopStateId.Current;
             }
 
             if (resourceType == ResourceType.STONE)
             {
-                return this.mineStateId.Current;
+                return mineStateId.Current;
             }
 
             //By default:
-            return this.chopStateId.Current;
+            return chopStateId.Current;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Game.UI
     {
         public void MoveContentStartPosition(Vector2 vector)
         {
-            this.m_ContentStartPosition += vector;
+            m_ContentStartPosition += vector;
         }
     }
 }

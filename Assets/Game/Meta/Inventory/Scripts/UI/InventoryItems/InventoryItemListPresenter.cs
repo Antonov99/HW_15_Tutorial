@@ -25,67 +25,67 @@ namespace Game.Meta
 
         protected override void OnShow(object args)
         {
-            var playerInventory = this.inventoryService.GetInventory();
-            playerInventory.OnItemAdded += this.AddItem;
-            playerInventory.OnItemRemoved += this.RemoveItem;
+            var playerInventory = inventoryService.GetInventory();
+            playerInventory.OnItemAdded += AddItem;
+            playerInventory.OnItemRemoved += RemoveItem;
 
             var inventoryItems = playerInventory.GetAllItems();
             for (int i = 0, count = inventoryItems.Length; i < count; i++)
             {
                 var inventoryItem = inventoryItems[i];
-                this.AddItem(inventoryItem);
+                AddItem(inventoryItem);
             }
         }
 
         protected override void OnHide()
         {
-            var playerInventory = this.inventoryService.GetInventory();
-            playerInventory.OnItemAdded -= this.AddItem;
-            playerInventory.OnItemRemoved -= this.RemoveItem;
+            var playerInventory = inventoryService.GetInventory();
+            playerInventory.OnItemAdded -= AddItem;
+            playerInventory.OnItemRemoved -= RemoveItem;
 
             var inventoryItems = playerInventory.GetAllItems();
             for (int i = 0, count = inventoryItems.Length; i < count; i++)
             {
                 var inventoryItem = inventoryItems[i];
-                this.RemoveItem(inventoryItem);
+                RemoveItem(inventoryItem);
             }
         }
 
         private void AddItem(InventoryItem item)
         {
-            if (this.items.ContainsKey(item))
+            if (items.ContainsKey(item))
             {
                 return;
             }
 
-            var view = Instantiate(this.prefab, this.container);
+            var view = Instantiate(prefab, container);
             var presenter = new InventoryItemViewPresenter(view, item);
-            presenter.Construct(this.popupManager, this.consumeManager);
+            presenter.Construct(popupManager, consumeManager);
 
             var viewHolder = new ViewHolder(view, presenter);
-            this.items.Add(item, viewHolder);
+            items.Add(item, viewHolder);
 
             presenter.Start();
         }
 
         private void RemoveItem(InventoryItem item)
         {
-            if (!this.items.ContainsKey(item))
+            if (!items.ContainsKey(item))
             {
                 return;
             }
 
-            var viewHolder = this.items[item];
+            var viewHolder = items[item];
             viewHolder.presenter.Stop();
             Destroy(viewHolder.view.gameObject);
-            this.items.Remove(item);
+            items.Remove(item);
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.inventoryService = context.GetService<InventoryService>();
-            this.popupManager = context.GetService<PopupManager>();
-            this.consumeManager = context.GetService<InventoryItemConsumer>();
+            inventoryService = context.GetService<InventoryService>();
+            popupManager = context.GetService<PopupManager>();
+            consumeManager = context.GetService<InventoryItemConsumer>();
         }
 
         private sealed class ViewHolder

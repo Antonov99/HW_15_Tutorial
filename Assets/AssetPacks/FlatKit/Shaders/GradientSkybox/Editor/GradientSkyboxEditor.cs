@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class GradientSkyboxEditor : UnityEditor.MaterialEditor {
+public class GradientSkyboxEditor : MaterialEditor {
 
     public override void OnInspectorGUI() {
         serializedObject.Update();

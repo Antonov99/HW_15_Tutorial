@@ -21,42 +21,42 @@ namespace Game.Tutorial.UI
 
         public void Show(MonoWindow prefab, object args = null, Action callback = null)
         {
-            if (this.currentPopup != null)
+            if (currentPopup != null)
             {
                 return;
             }
 
             this.callback = callback;
-            this.currentPopup = Instantiate(prefab, this.rootTransform);
+            currentPopup = Instantiate(prefab, rootTransform);
 
-            if (this.currentPopup.TryGetComponent(out IGameElement element))
+            if (currentPopup.TryGetComponent(out IGameElement element))
             {
-                this.gameContext.RegisterElement(element);
+                gameContext.RegisterElement(element);
             }
 
-            this.inputManager.SwitchState(InputStateId.LOCK);
-            this.currentPopup.Show(args, callback: this);
+            inputManager.SwitchState(InputStateId.LOCK);
+            currentPopup.Show(args, callback: this);
         }
 
         void IWindow.Callback.OnClose(IWindow popup)
         {
-            this.currentPopup.Hide();
-            this.inputManager.SwitchState(InputStateId.BASE);
+            currentPopup.Hide();
+            inputManager.SwitchState(InputStateId.BASE);
 
-            if (this.currentPopup.TryGetComponent(out IGameElement element))
+            if (currentPopup.TryGetComponent(out IGameElement element))
             {
-                this.gameContext.UnregisterElement(element);
+                gameContext.UnregisterElement(element);
             }
             
-            Destroy(this.currentPopup.gameObject);
-            this.currentPopup = null;
-            this.callback?.Invoke();
+            Destroy(currentPopup.gameObject);
+            currentPopup = null;
+            callback?.Invoke();
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.gameContext = context;
-            this.inputManager = context.GetService<InputStateManager>();
+            gameContext = context;
+            inputManager = context.GetService<InputStateManager>();
         }
     }
 }

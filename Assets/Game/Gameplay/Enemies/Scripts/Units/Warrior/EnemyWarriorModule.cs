@@ -27,8 +27,8 @@ namespace Game.Gameplay.Enemies
 
         public override void ConstructGame(GameContext context)
         {
-            this.enableController.Construct(this.unit, this.ai);
-            this.respawnController.Construct(this.unit, this.ai, this.respawnTime, this.transform);
+            enableController.Construct(unit, ai);
+            respawnController.Construct(unit, ai, respawnTime, transform);
         }
     }
 }

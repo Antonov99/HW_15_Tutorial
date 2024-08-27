@@ -27,7 +27,7 @@ namespace Cysharp.Threading.Tasks.Linq
         public Publish(IUniTaskAsyncEnumerable<TSource> source)
         {
             this.source = source;
-            this.cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource = new CancellationTokenSource();
         }
 
         public IDisposable Connect()
@@ -85,7 +85,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
             public void Dispose()
             {
-                this.cancellationTokenSource.Cancel();
+                cancellationTokenSource.Cancel();
             }
         }
 
@@ -107,7 +107,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                 if (cancellationToken.CanBeCanceled)
                 {
-                    this.cancellationTokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(CancelDelegate, this);
+                    cancellationTokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(CancelDelegate, this);
                 }
 
                 parent.trigger.Add(this);

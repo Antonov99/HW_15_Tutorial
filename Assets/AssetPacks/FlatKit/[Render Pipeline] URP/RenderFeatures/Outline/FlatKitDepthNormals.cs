@@ -21,7 +21,7 @@ public class FlatKitDepthNormals : ScriptableRendererFeature {
         }
 
         public void Setup(RenderTextureDescriptor baseDescriptor, RenderTargetHandle depthAttachmentHandle) {
-            this._depthAttachmentHandle = depthAttachmentHandle;
+            _depthAttachmentHandle = depthAttachmentHandle;
             baseDescriptor.colorFormat = RenderTextureFormat.ARGB32;
             baseDescriptor.depthBufferBits = _depthBufferBits;
             _descriptor = baseDescriptor;

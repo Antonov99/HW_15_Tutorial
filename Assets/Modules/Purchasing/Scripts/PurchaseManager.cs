@@ -25,25 +25,25 @@ namespace Purchasing
 
         public PurchaseManager()
         {
-            this.failListeners = new List<IFailListener>();
-            this.completeListeners = new List<ICompleteListener>();
+            failListeners = new List<IFailListener>();
+            completeListeners = new List<ICompleteListener>();
         }
 
         #region Initialize
 
         public void Initialize(Action<InitResult> callback = null)
         {
-            if (this.isLoading)
+            if (isLoading)
             {
                 throw new Exception("Unity purchasing is already loading!");
             }
 
-            if (this.IsInitialized)
+            if (IsInitialized)
             {
                 throw new Exception("Unity Purchasing is already initialized");
             }
 
-            this.initCallback = callback;
+            initCallback = callback;
 
             var module = StandardPurchasingModule.Instance();
             var builder = ConfigurationBuilder.Instance(module);
@@ -54,30 +54,30 @@ namespace Purchasing
 
         void IStoreListener.OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
-            this.storeController = controller;
-            this.isLoading = false;
-            this.IsInitialized = true;
+            storeController = controller;
+            isLoading = false;
+            IsInitialized = true;
 
             var initResult = new InitResult
             {
                 isSuccess = true
             };
-            this.initCallback?.Invoke(initResult);
-            this.initCallback = null;
+            initCallback?.Invoke(initResult);
+            initCallback = null;
         }
 
         void IStoreListener.OnInitializeFailed(InitializationFailureReason error)
         {
-            this.isLoading = false;
-            this.IsInitialized = false;
+            isLoading = false;
+            IsInitialized = false;
 
             var initResult = new InitResult
             {
                 isSuccess = false,
                 error = error
             };
-            this.initCallback?.Invoke(initResult);
-            this.initCallback = null;
+            initCallback?.Invoke(initResult);
+            initCallback = null;
         }
 
         #endregion
@@ -86,33 +86,33 @@ namespace Purchasing
 
         public void Purchase(Product product, Action<PurchaseResult> callback = null)
         {
-            this.Purchase(product.definition.id, callback);
+            Purchase(product.definition.id, callback);
         }
 
         public void Purchase(string productId, Action<PurchaseResult> callback = null)
         {
-            if (!this.IsInitialized)
+            if (!IsInitialized)
             {
                 throw new Exception("Purchasing service is not initialized!");
             }
 
-            if (this.isPurchasing)
+            if (isPurchasing)
             {
                 throw new Exception("Other product is purchasing!");
             }
 
-            this.purchaseCallback = callback;
-            this.isPurchasing = true;
-            this.storeController.InitiatePurchase(productId);
+            purchaseCallback = callback;
+            isPurchasing = true;
+            storeController.InitiatePurchase(productId);
         }
 
         void IStoreListener.OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
-            this.isPurchasing = false;
+            isPurchasing = false;
 
-            for (int i = 0, count = this.failListeners.Count; i < count; i++)
+            for (int i = 0, count = failListeners.Count; i < count; i++)
             {
-                var observer = this.failListeners[i];
+                var observer = failListeners[i];
                 observer.OnFailed(product, failureReason);
             }
 
@@ -122,17 +122,17 @@ namespace Purchasing
                 error = failureReason
             };
 
-            this.purchaseCallback?.Invoke(result);
-            this.purchaseCallback = null;
+            purchaseCallback?.Invoke(result);
+            purchaseCallback = null;
         }
 
         PurchaseProcessingResult IStoreListener.ProcessPurchase(PurchaseEventArgs args)
         {
-            this.isPurchasing = false;
+            isPurchasing = false;
 
-            for (int i = 0, count = this.completeListeners.Count; i < count; i++)
+            for (int i = 0, count = completeListeners.Count; i < count; i++)
             {
-                var observer = this.completeListeners[i];
+                var observer = completeListeners[i];
                 observer.OnComplete(args);
             }
 
@@ -141,8 +141,8 @@ namespace Purchasing
                 isSuccess = true
             };
 
-            this.purchaseCallback?.Invoke(result);
-            this.purchaseCallback = null;
+            purchaseCallback?.Invoke(result);
+            purchaseCallback = null;
             return PurchaseProcessingResult.Complete;
         }
 
@@ -150,10 +150,10 @@ namespace Purchasing
 
         public bool TryGetProduct(string id, out Product product)
         {
-            var isInitialized = this.IsInitialized;
+            var isInitialized = IsInitialized;
             if (isInitialized)
             {
-                product = this.storeController.products.WithID(id);
+                product = storeController.products.WithID(id);
             }
             else
             {
@@ -165,10 +165,10 @@ namespace Purchasing
 
         public bool TryGetAllProducts(out Product[] products)
         {
-            var isInitialized = this.IsInitialized;
+            var isInitialized = IsInitialized;
             if (isInitialized)
             {
-                products = this.storeController.products.all;
+                products = storeController.products.all;
             }
             else
             {
@@ -180,32 +180,32 @@ namespace Purchasing
 
         public void AddCompleteListeners(IEnumerable<ICompleteListener> listeners)
         {
-            this.completeListeners.AddRange(listeners);
+            completeListeners.AddRange(listeners);
         }
 
         public void AddCompleteListener(ICompleteListener listener)
         {
-            this.completeListeners.Add(listener);
+            completeListeners.Add(listener);
         }
 
         public void AddFailListeners(IEnumerable<IFailListener> listeners)
         {
-            this.failListeners.AddRange(listeners);
+            failListeners.AddRange(listeners);
         }
 
         public void AddFailListener(IFailListener listener)
         {
-            this.failListeners.Add(listener);
+            failListeners.Add(listener);
         }
 
         public void RemoveCompleteListener(ICompleteListener listener)
         {
-            this.completeListeners.Remove(listener);
+            completeListeners.Remove(listener);
         }
 
         public void RemoveFailListener(IFailListener listener)
         {
-            this.failListeners.Remove(listener);
+            failListeners.Remove(listener);
         }
     }
 }

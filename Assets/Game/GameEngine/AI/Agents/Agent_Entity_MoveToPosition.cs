@@ -15,36 +15,36 @@ namespace Game.GameEngine.AI
 
         public Agent_Entity_MoveToPosition()
         {
-            this.SetFramePeriod(new WaitForFixedUpdate());
+            SetFramePeriod(new WaitForFixedUpdate());
         }
 
         public void SetMovingEntity(IEntity movingEntity)
         {
-            this.moveComponent = movingEntity.Get<IComponent_MoveInDirection>();
-            this.positionComponent = movingEntity.Get<IComponent_GetPosition>();
+            moveComponent = movingEntity.Get<IComponent_MoveInDirection>();
+            positionComponent = movingEntity.Get<IComponent_GetPosition>();
         }
 
         public void SetStoppingDistance(float stoppingDistance)
         {
-            this.sqrStoppingDistance = Mathf.Pow(stoppingDistance, 2);
+            sqrStoppingDistance = Mathf.Pow(stoppingDistance, 2);
         }
 
         protected override bool CheckTargetReached(Vector3 target)
         {
-            var moveVector = this.EvaluateMoveVector(target);
-            var targetReached = moveVector.sqrMagnitude <= this.sqrStoppingDistance;
+            var moveVector = EvaluateMoveVector(target);
+            var targetReached = moveVector.sqrMagnitude <= sqrStoppingDistance;
             return targetReached;
         }
 
         protected override void MoveToTarget(Vector3 target)
         {
-            var moveVector = this.EvaluateMoveVector(target);
-            this.moveComponent.Move(moveVector.normalized);
+            var moveVector = EvaluateMoveVector(target);
+            moveComponent.Move(moveVector.normalized);
         }
 
         private Vector3 EvaluateMoveVector(Vector3 targetPosition)
         {
-            var currentPosition = this.positionComponent.Position;
+            var currentPosition = positionComponent.Position;
             var moveVector = targetPosition - currentPosition;
             moveVector.y = 0;
             return moveVector;

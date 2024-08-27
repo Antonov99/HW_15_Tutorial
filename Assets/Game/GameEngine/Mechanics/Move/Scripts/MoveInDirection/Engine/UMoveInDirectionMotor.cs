@@ -15,18 +15,18 @@ namespace Game.GameEngine.Mechanics
 
         public bool IsMoving
         {
-            get { return this.moveRequired && this.direction != ZERO_DIRECTION; }
+            get { return moveRequired && direction != ZERO_DIRECTION; }
         }
 
         public bool IsEnabled
         {
-            get { return this.enabled; }
-            set { this.enabled = value; }
+            get { return enabled; }
+            set { enabled = value; }
         }
 
         public Vector3 Direction
         {
-            get { return this.direction; }
+            get { return direction; }
         }
 
         [PropertyOrder(-10)]
@@ -60,25 +60,25 @@ namespace Game.GameEngine.Mechanics
 
         private void FixedUpdate()
         {
-            if (this.updateMode == UpdateMode.FIXED_UPDATE)
+            if (updateMode == UpdateMode.FIXED_UPDATE)
             {
-                this.UpdateMove();
+                UpdateMove();
             }
         }
 
         private void Update()
         {
-            if (this.updateMode == UpdateMode.UPDATE)
+            if (updateMode == UpdateMode.UPDATE)
             {
-                this.UpdateMove();
+                UpdateMove();
             }
         }
 
         public bool CanMove(Vector3 direction)
         {
-            for (int i = 0, count = this.preconditions.Length; i < count; i++)
+            for (int i = 0, count = preconditions.Length; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(direction))
                 {
                     return false;
@@ -90,69 +90,69 @@ namespace Game.GameEngine.Mechanics
 
         public void RequestMove(Vector3 direction)
         {
-            if (!this.CanMove(direction))
+            if (!CanMove(direction))
             {
                 return;
             }
 
             this.direction = direction;
-            this.finishMove = false;
+            finishMove = false;
 
-            if (!this.moveRequired)
+            if (!moveRequired)
             {
-                this.moveRequired = true;
-                this.StartMove();
+                moveRequired = true;
+                StartMove();
             }
         }
 
         public void Interrupt()
         {
-            if (!this.moveRequired)
+            if (!moveRequired)
             {
                 return;
             }
 
-            this.finishMove = false;
-            this.moveRequired = false;
-            this.StopMove();
+            finishMove = false;
+            moveRequired = false;
+            StopMove();
         }
 
         private void StartMove()
         {
-            for (int i = 0, count = this.startActions.Length; i < count; i++)
+            for (int i = 0, count = startActions.Length; i < count; i++)
             {
-                var action = this.startActions[i];
-                action.Do(this.direction);
+                var action = startActions[i];
+                action.Do(direction);
             }
 
-            this.OnStartMove?.Invoke();
+            OnStartMove?.Invoke();
         }
 
         private void UpdateMove()
         {
-            if (!this.moveRequired)
+            if (!moveRequired)
             {
                 return;
             }
 
-            if (this.finishMove)
+            if (finishMove)
             {
-                this.moveRequired = false;
-                this.StopMove();
+                moveRequired = false;
+                StopMove();
             }
 
-            this.finishMove = true;
+            finishMove = true;
         }
 
         private void StopMove()
         {
-            for (int i = 0, count = this.stopActions.Length; i < count; i++)
+            for (int i = 0, count = stopActions.Length; i < count; i++)
             {
-                var action = this.stopActions[i];
-                action.Do(this.direction);
+                var action = stopActions[i];
+                action.Do(direction);
             }
 
-            this.OnStopMove?.Invoke();
+            OnStopMove?.Invoke();
         }
 
         private enum UpdateMode

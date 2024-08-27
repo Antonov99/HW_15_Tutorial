@@ -12,9 +12,9 @@ namespace Cysharp.Threading.Tasks.Linq
             var end = (long)start + count - 1L;
             if (end > int.MaxValue) throw Error.ArgumentOutOfRange(nameof(count));
 
-            if (count == 0) UniTaskAsyncEnumerable.Empty<int>();
+            if (count == 0) Empty<int>();
 
-            return new Cysharp.Threading.Tasks.Linq.Range(start, count);
+            return new Range(start, count);
         }
     }
 
@@ -26,7 +26,7 @@ namespace Cysharp.Threading.Tasks.Linq
         public Range(int start, int count)
         {
             this.start = start;
-            this.end = start + count;
+            end = start + count;
         }
 
         public IUniTaskAsyncEnumerator<int> GetAsyncEnumerator(CancellationToken cancellationToken = default)
@@ -47,7 +47,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.end = end;
                 this.cancellationToken = cancellationToken;
 
-                this.current = start - 1;
+                current = start - 1;
             }
 
             public int Current => current;

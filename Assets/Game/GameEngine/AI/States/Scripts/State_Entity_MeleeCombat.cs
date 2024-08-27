@@ -11,12 +11,12 @@ namespace Game.GameEngine.AI
     {
         public string UnitKey
         {
-            set { this.unitKey = value; }
+            set { unitKey = value; }
         }
 
         public string TargetKey
         {
-            set { this.targetKey = value; }
+            set { targetKey = value; }
         }
 
         private IBlackboard blackboard;
@@ -38,24 +38,24 @@ namespace Game.GameEngine.AI
 
         public override void Enter()
         {
-            if (!this.blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.targetKey, out IEntity target))
+            if (!blackboard.TryGetVariable(targetKey, out IEntity target))
             {
                 return;
             }
 
-            this.meleeAgent.SetAttacker(unit);
-            this.meleeAgent.SetTarget(target);
-            this.meleeAgent.Play();
+            meleeAgent.SetAttacker(unit);
+            meleeAgent.SetTarget(target);
+            meleeAgent.Play();
         }
 
         public override void Exit()
         {
-            this.meleeAgent.Stop();
+            meleeAgent.Stop();
         }
     }
 }

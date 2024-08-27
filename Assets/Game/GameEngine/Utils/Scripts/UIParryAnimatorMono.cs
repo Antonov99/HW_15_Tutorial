@@ -12,12 +12,12 @@ namespace Game.GameEngine
         
         private void OnEnable()
         {
-            this.parryTween = UIAnimations.AnimateParry(this.moveTransform);
+            parryTween = UIAnimations.AnimateParry(moveTransform);
         }
 
         private void OnDisable()
         {
-            this.parryTween.Kill();
+            parryTween.Kill();
         }
     }
 }

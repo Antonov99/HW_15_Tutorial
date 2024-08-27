@@ -29,13 +29,13 @@ namespace ES3Types
 				{
 					
 					case "inext":
-					reader.SetPrivateField("inext", reader.Read<System.Int32>(), instance);
+					reader.SetPrivateField("inext", reader.Read<Int32>(), instance);
 					break;
 					case "inextp":
-					reader.SetPrivateField("inextp", reader.Read<System.Int32>(), instance);
+					reader.SetPrivateField("inextp", reader.Read<Int32>(), instance);
 					break;
 					case "SeedArray":
-					reader.SetPrivateField("SeedArray", reader.Read<System.Int32[]>(), instance);
+					reader.SetPrivateField("SeedArray", reader.Read<Int32[]>(), instance);
 					break;
 					default:
 						reader.Skip();

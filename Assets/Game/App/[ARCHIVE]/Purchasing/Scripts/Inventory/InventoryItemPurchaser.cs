@@ -21,16 +21,16 @@ namespace Game.App
             var iapComponent = prototype.GetComponent<IComponent_IAPProduct>();
             var productId = iapComponent.ProductId;
 
-            this.purchaseManager.Purchase(productId, result =>
+            purchaseManager.Purchase(productId, result =>
             {
                 if (result.isSuccess)
                 {
-                    this.AddItemInInventory(prototype);
-                    this.OnItemPurchased?.Invoke(prototype);
+                    AddItemInInventory(prototype);
+                    OnItemPurchased?.Invoke(prototype);
                 }
                 else
                 {
-                    this.OnItemPurchaseFailed?.Invoke(prototype);
+                    OnItemPurchaseFailed?.Invoke(prototype);
                 }
             });
         }

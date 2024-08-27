@@ -16,7 +16,7 @@ namespace Game.GameEngine
         {
             if (entity.TryGet(out IComponent_GetObjectType component))
             {
-                return component.ObjectType == this.objectType;
+                return component.ObjectType == objectType;
             }
 
             Debug.LogWarning("Component «Get Object Type» is not found!");

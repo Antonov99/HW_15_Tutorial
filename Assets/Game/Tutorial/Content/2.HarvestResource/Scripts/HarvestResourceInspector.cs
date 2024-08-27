@@ -21,10 +21,10 @@ namespace Game.Tutorial
         public void Inspect(Action callback)
         {
             this.callback = callback;
-            this.heroService
+            heroService
                 .GetHero()
                 .Get<IComponent_HarvestResource>()
-                .OnHarvestStopped += this.OnHarvestFinished;
+                .OnHarvestStopped += OnHarvestFinished;
         }
 
         private void OnHarvestFinished(HarvestResourceOperation operation)
@@ -34,19 +34,19 @@ namespace Game.Tutorial
                 return;
             }
             
-            if (operation.resourceType == this.config.targetResourceType)
+            if (operation.resourceType == config.targetResourceType)
             {
-                this.CompleteQuest();
+                CompleteQuest();
             }
         }
 
         private void CompleteQuest()
         {
-            this.heroService
+            heroService
                 .GetHero()
                 .Get<IComponent_HarvestResource>()
-                .OnHarvestStopped -= this.OnHarvestFinished;
-            this.callback?.Invoke();
+                .OnHarvestStopped -= OnHarvestFinished;
+            callback?.Invoke();
         }
     }
 }

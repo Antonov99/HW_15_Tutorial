@@ -26,26 +26,26 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            if (!this.root.IsRunning)
+            if (!root.IsRunning)
             {
-                this.OnStarted?.Invoke();
-                this.root.Run(callback: this);
+                OnStarted?.Invoke();
+                root.Run(callback: this);
             }
         }
 
         protected override void OnAbort()
         {
-            if (this.root.IsRunning)
+            if (root.IsRunning)
             {
-                this.root.Abort();
-                this.OnAborted?.Invoke();
+                root.Abort();
+                OnAborted?.Invoke();
             }
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
-            this.Return(success);
-            this.OnFinished?.Invoke(success);
+            Return(success);
+            OnFinished?.Invoke(success);
         }
     }
 }

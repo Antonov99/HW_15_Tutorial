@@ -8,19 +8,19 @@ namespace Elementary
 
         public void Update()
         {
-            this.UpdateTransitions();
+            UpdateTransitions();
         }
 
         private void UpdateTransitions()
         {
-            for (int i = 0, count = this.orderedTransitions.Count; i < count; i++)
+            for (int i = 0, count = orderedTransitions.Count; i < count; i++)
             {
-                var transition = this.orderedTransitions[i];
+                var transition = orderedTransitions[i];
                 if (transition.condition.IsTrue())
                 {
-                    if (!transition.stateId.Equals(this.CurrentState))
+                    if (!transition.stateId.Equals(CurrentState))
                     {
-                        this.SwitchState(transition.stateId);                        
+                        SwitchState(transition.stateId);                        
                     }
                     return;
                 }

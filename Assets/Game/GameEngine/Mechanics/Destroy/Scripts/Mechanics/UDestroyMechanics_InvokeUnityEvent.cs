@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
 
         protected override void OnDestroyEvent(DestroyArgs destroyArgs)
         {
-            this.unityEvent.Invoke(destroyArgs);
+            unityEvent.Invoke(destroyArgs);
         }
     }
 }

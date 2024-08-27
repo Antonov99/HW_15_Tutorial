@@ -8,9 +8,9 @@ namespace AI.Iterators
 
         public override bool MoveNext()
         {
-            if (this.pointer + 1 < this.movePoints.Length)
+            if (pointer + 1 < movePoints.Length)
             {
-                this.pointer++;
+                pointer++;
                 return true;
             }
 
@@ -19,7 +19,7 @@ namespace AI.Iterators
 
         public override void Reset()
         {
-            this.pointer = 0;
+            pointer = 0;
         }
 
         public override void Dispose()

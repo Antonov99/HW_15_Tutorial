@@ -10,28 +10,28 @@ namespace AI.Iterators
 
         public override bool MoveNext()
         {
-            if (this.Forward)
+            if (Forward)
             {
-                if (this.pointer + 1 < this.movePoints.Length)
+                if (pointer + 1 < movePoints.Length)
                 {
-                    this.pointer++;
+                    pointer++;
                 }
                 else
                 {
-                    this.Forward = false;
-                    this.pointer--;
+                    Forward = false;
+                    pointer--;
                 }
             }
             else
             {
-                if (this.pointer - 1 >= 0)
+                if (pointer - 1 >= 0)
                 {
-                    this.pointer--;
+                    pointer--;
                 }
                 else
                 {
-                    this.Forward = true;
-                    this.pointer++;
+                    Forward = true;
+                    pointer++;
                 }
             }
 
@@ -40,8 +40,8 @@ namespace AI.Iterators
 
         public override void Reset()
         {
-            this.pointer = 0;
-            this.Forward = true;
+            pointer = 0;
+            Forward = true;
         }
 
         public override void Dispose()

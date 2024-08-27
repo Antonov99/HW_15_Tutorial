@@ -32,113 +32,113 @@ namespace Declarative
         {
             if (element is IMonoInjective injectiveComponent)
             {
-                injectiveComponent.Context = this.root;
+                injectiveComponent.Context = root;
             }
             
             if (element is IAwakeListener awakeComponent)
             {
-                this.awakeComponents.Add(awakeComponent);
+                awakeComponents.Add(awakeComponent);
             }
 
             if (element is IEnableListener enableComponent)
             {
-                this.enableComponents.Add(enableComponent);
+                enableComponents.Add(enableComponent);
             }
 
             if (element is IStartListener startComponent)
             {
-                this.startComponents.Add(startComponent);
+                startComponents.Add(startComponent);
             }
 
             if (element is IFixedUpdateListener fixedUpdateComponent)
             {
-                this.fixedUpdateComponents.Add(fixedUpdateComponent);
+                fixedUpdateComponents.Add(fixedUpdateComponent);
             }
 
             if (element is IUpdateListener updateComponent)
             {
-                this.updateComponents.Add(updateComponent);
+                updateComponents.Add(updateComponent);
             }
 
             if (element is ILateUpdateListener lateUpdateComponent)
             {
-                this.lateUpdateComponents.Add(lateUpdateComponent);
+                lateUpdateComponents.Add(lateUpdateComponent);
             }
 
             if (element is IDisableListener disableComponent)
             {
-                this.disableComponents.Add(disableComponent);
+                disableComponents.Add(disableComponent);
             }
         }
 
         public void Awake()
         {
-            for (int i = 0, count = this.awakeComponents.Count; i < count; i++)
+            for (int i = 0, count = awakeComponents.Count; i < count; i++)
             {
-                var listener = this.awakeComponents[i];
+                var listener = awakeComponents[i];
                 listener.Awake();
             }
         }
 
         public void OnEnable()
         {
-            for (int i = 0, count = this.enableComponents.Count; i < count; i++)
+            for (int i = 0, count = enableComponents.Count; i < count; i++)
             {
-                var listener = this.enableComponents[i];
+                var listener = enableComponents[i];
                 listener.OnEnable();
             }
         }
 
         public void Start()
         {
-            for (int i = 0, count = this.startComponents.Count; i < count; i++)
+            for (int i = 0, count = startComponents.Count; i < count; i++)
             {
-                var listener = this.startComponents[i];
+                var listener = startComponents[i];
                 listener.Start();
             }
         }
 
         public void FixedUpdate(float deltaTime)
         {
-            for (int i = 0, count = this.fixedUpdateComponents.Count; i < count; i++)
+            for (int i = 0, count = fixedUpdateComponents.Count; i < count; i++)
             {
-                var listener = this.fixedUpdateComponents[i];
+                var listener = fixedUpdateComponents[i];
                 listener.FixedUpdate(deltaTime);
             }
         }
 
         public void Update(float deltaTime)
         {
-            for (int i = 0, count = this.updateComponents.Count; i < count; i++)
+            for (int i = 0, count = updateComponents.Count; i < count; i++)
             {
-                var listener = this.updateComponents[i];
+                var listener = updateComponents[i];
                 listener.Update(deltaTime);
             }
         }
 
         public void LateUpdate(float deltaTime)
         {
-            for (int i = 0, count = this.lateUpdateComponents.Count; i < count; i++)
+            for (int i = 0, count = lateUpdateComponents.Count; i < count; i++)
             {
-                var listener = this.lateUpdateComponents[i];
+                var listener = lateUpdateComponents[i];
                 listener.LateUpdate(deltaTime);
             }
         }
 
         public void OnDisable()
         {
-            for (int i = 0, count = this.disableComponents.Count; i < count; i++)
+            for (int i = 0, count = disableComponents.Count; i < count; i++)
             {
-                var listener = this.disableComponents[i];
+                var listener = disableComponents[i];
                 listener.OnDisable();
             }
         }
 
         public void OnDestroy()
         {
-            for (int i = 0, count = this.destroyComponents.Count; i < count; i++)
+            for (int i = 0, count = destroyComponents.Count; i < count; i++)
             {
-                var listener = this.destroyComponents[i];
+                var listener = destroyComponents[i];
                 listener.OnDestroy();
             }
         }

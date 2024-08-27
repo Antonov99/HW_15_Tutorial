@@ -14,45 +14,45 @@ namespace Game.Gameplay.Conveyors
 
         public void SetupItems(int currentAmount)
         {
-            currentAmount = Mathf.Clamp(currentAmount, 0, this.items.Count);
+            currentAmount = Mathf.Clamp(currentAmount, 0, items.Count);
             this.currentAmount = currentAmount;
 
             for (var i = 0; i < currentAmount; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 item.SetActive(true);
             }
 
-            var count = this.items.Count;
+            var count = items.Count;
             for (var i = currentAmount; i < count; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 item.SetActive(false);
             }
         }
 
         public void IncrementItems(int range)
         {
-            var previousAmount = this.currentAmount;
-            var newAmount = Mathf.Min(this.currentAmount + range, this.items.Count);
-            this.currentAmount = newAmount;
+            var previousAmount = currentAmount;
+            var newAmount = Mathf.Min(currentAmount + range, items.Count);
+            currentAmount = newAmount;
 
             for (var i = previousAmount; i < newAmount; i++)
             {
-                var item = this.items[i];
+                var item = items[i];
                 item.SetActive(true);
             }
         }
 
         public void DecrementItems(int range)
         {
-            var previousAmount = this.currentAmount;
-            var newAmount = Mathf.Max(this.currentAmount - range, 0);
-            this.currentAmount = newAmount;
+            var previousAmount = currentAmount;
+            var newAmount = Mathf.Max(currentAmount - range, 0);
+            currentAmount = newAmount;
 
             for (var i = previousAmount - 1; i >= newAmount; i--)
             {
-                var item = this.items[i];
+                var item = items[i];
                 item.SetActive(false);
             }
         }
@@ -61,10 +61,10 @@ namespace Game.Gameplay.Conveyors
         [Button("Setup Items")]
         private void Editor_SetupItems()
         {
-            this.items = new List<GameObject>();
-            foreach (Transform child in this.transform)
+            items = new List<GameObject>();
+            foreach (Transform child in transform)
             {
-                this.items.Add(child.gameObject);
+                items.Add(child.gameObject);
             }
         }
 #endif

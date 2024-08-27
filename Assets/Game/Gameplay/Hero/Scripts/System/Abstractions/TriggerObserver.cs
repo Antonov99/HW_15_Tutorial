@@ -16,24 +16,24 @@ namespace Game.Gameplay.Hero
         [GameInject]
         public void Construct(HeroService heroService)
         {
-            this.HeroService = heroService;
+            HeroService = heroService;
         }
         
         public virtual void InitGame()
         {
-            this.heroComponent = this.HeroService.GetHero().Get<IComponent_TriggerSensor>();
+            heroComponent = HeroService.GetHero().Get<IComponent_TriggerSensor>();
         }
 
         public virtual void ReadyGame()
         {
-            this.heroComponent.OnEntered += this.OnHeroEntered;
-            this.heroComponent.OnExited += this.OnHeroExited;
+            heroComponent.OnEntered += OnHeroEntered;
+            heroComponent.OnExited += OnHeroExited;
         }
 
         public virtual void FinishGame()
         {
-            this.heroComponent.OnEntered -= this.OnHeroEntered;
-            this.heroComponent.OnExited -= this.OnHeroExited;
+            heroComponent.OnEntered -= OnHeroEntered;
+            heroComponent.OnExited -= OnHeroExited;
         }
 
         protected virtual void OnHeroEntered(Collider other)
@@ -51,7 +51,7 @@ namespace Game.Gameplay.Hero
         {
             if (other.TryGetComponent(out T target))
             {
-                this.OnHeroEntered(target);
+                OnHeroEntered(target);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Game.Gameplay.Hero
         {
             if (other.TryGetComponent(out T target))
             {
-                this.OnHeroExited(target);
+                OnHeroExited(target);
             }
         }
 

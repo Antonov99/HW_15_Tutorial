@@ -35,13 +35,13 @@ namespace Services
         {
             object[] result;
 #if UNITY_EDITOR
-            if (this.editorMode)
+            if (editorMode)
             {
-                result = LoadServicesInEditor(this.editorScripts);
+                result = LoadServicesInEditor(editorScripts);
             }
             else
             {
-                result = LoadServicesInEditor(this.releaseScripts);
+                result = LoadServicesInEditor(releaseScripts);
             }
 
 #else
@@ -61,7 +61,7 @@ namespace Services
                 var script = scripts[i];
                 if (script == null)
                 {
-                    Debug.LogWarning($"Missing script in service pack {this.name}");
+                    Debug.LogWarning($"Missing script in service pack {name}");
                     continue;
                 }
                 
@@ -101,11 +101,11 @@ namespace Services
 #if UNITY_EDITOR
         public void PrepareServicesForBuild()
         {
-            var length = this.releaseScripts.Length;
+            var length = releaseScripts.Length;
             var classNames = new List<string>(length);
             for (var i = 0; i < length; i++)
             {
-                var script = this.releaseScripts[i];
+                var script = releaseScripts[i];
                 if (script != null)
                 {
                     var className = script.GetClass().FullName;
@@ -113,7 +113,7 @@ namespace Services
                 }
             }
 
-            this.releaseClassNames = classNames.ToArray();
+            releaseClassNames = classNames.ToArray();
             EditorUtility.SetDirty(this);
         }
 #endif

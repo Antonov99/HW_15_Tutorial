@@ -18,12 +18,12 @@ namespace Game.GameEngine
 
         public async Task LoadAssets()
         {
-            var count = this.popups.Length;
+            var count = popups.Length;
             var tasks = new Task<GameObject>[count];
             
             for (var i = 0; i < count; i++)
             {
-                var info = this.popups[i];
+                var info = popups[i];
                 var handle = info.addressable.LoadAssetAsync<GameObject>();
                 tasks[i] = handle.Task;
             }
@@ -31,7 +31,7 @@ namespace Game.GameEngine
             var prefabs = await Task.WhenAll(tasks);
             for (var i = 0; i < count; i++)
             {
-                var info = this.popups[i];
+                var info = popups[i];
                 var prefab = prefabs[i];
                 info.prefab = prefab.GetComponent<MonoWindow>();
             }
@@ -39,9 +39,9 @@ namespace Game.GameEngine
 
         public MonoWindow GetPrefab(PopupName name)
         {
-            for (int i = 0, count = this.popups.Length; i < count; i++)
+            for (int i = 0, count = popups.Length; i < count; i++)
             {
-                var info = this.popups[i];
+                var info = popups[i];
                 if (info.name == name)
                 {
                     return info.prefab;

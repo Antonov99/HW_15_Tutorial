@@ -17,7 +17,7 @@ namespace Game.Meta
         {
             if (product.TryGetComponent(out IComponent_MoneyPrice component))
             {
-                this.moneyStorage.SpendMoney(component.Price);
+                moneyStorage.SpendMoney(component.Price);
             }
         }
     }

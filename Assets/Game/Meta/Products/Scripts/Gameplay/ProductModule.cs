@@ -18,18 +18,18 @@ namespace Game.Meta
         public override void ConstructGame(GameContext context)
         {
             base.ConstructGame(context);
-            this.ConstructProductBuyer(context);
+            ConstructProductBuyer(context);
         }
 
         private void ConstructProductBuyer(GameContext context)
         {
             var moneyBank = context.GetService<MoneyStorage>();
-            this.productBuyer.AddCondition(new ProductBuyCondition_CanSpendMoney(moneyBank));
-            this.productBuyer.AddProcessor(new ProductBuyProcessor_SpendMoney(moneyBank));
+            productBuyer.AddCondition(new ProductBuyCondition_CanSpendMoney(moneyBank));
+            productBuyer.AddProcessor(new ProductBuyProcessor_SpendMoney(moneyBank));
             
             var resourceStorage = context.GetService<ResourceStorage>();
-            this.productBuyer.AddCondition(new ProductBuyCondition_CanSpendResources(resourceStorage));
-            this.productBuyer.AddProcessor(new ProductBuyProcessor_SpendResources(resourceStorage));
+            productBuyer.AddCondition(new ProductBuyCondition_CanSpendResources(resourceStorage));
+            productBuyer.AddProcessor(new ProductBuyProcessor_SpendResources(resourceStorage));
         }
     }
 }

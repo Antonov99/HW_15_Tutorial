@@ -10,7 +10,7 @@ namespace Game.Gameplay.Player
     {
         public int InitialMoney
         {
-            get { return this.initialMoney; }
+            get { return initialMoney; }
         }
 
         [SerializeField]

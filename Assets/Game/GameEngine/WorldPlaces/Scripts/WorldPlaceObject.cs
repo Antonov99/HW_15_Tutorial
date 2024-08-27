@@ -6,12 +6,12 @@ namespace Game.GameEngine
     {
         public WorldPlaceType Type
         {
-            get { return this.type; }
+            get { return type; }
         }
 
         public Vector3 VisitPosition
         {
-            get { return this.visitPoint.position; }
+            get { return visitPoint.position; }
         }
 
         [SerializeField]

@@ -30,33 +30,33 @@ namespace Game.Gameplay.Hero
 
         public void TryStartCombat(IEntity target)
         {
-            if (this.heroComponent.IsCombat)
+            if (heroComponent.IsCombat)
             {
                 return;
             }
 
-            if (this.delayCoroutine == null)
+            if (delayCoroutine == null)
             {
-                this.delayCoroutine = this.monoContext.StartCoroutine(this.CombatRoutine(target));
+                delayCoroutine = monoContext.StartCoroutine(CombatRoutine(target));
             }
         }
 
         private IEnumerator CombatRoutine(IEntity target)
         {
-            yield return new WaitForSeconds(this.delay);
+            yield return new WaitForSeconds(delay);
 
             var operation = new CombatOperation(target);
-            if (this.heroComponent.CanStartCombat(operation))
+            if (heroComponent.CanStartCombat(operation))
             {
-                this.heroComponent.StartCombat(operation);
+                heroComponent.StartCombat(operation);
             }
 
-            this.delayCoroutine = null;
+            delayCoroutine = null;
         }
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_MeleeCombat>();
+            heroComponent = heroService.GetHero().Get<IComponent_MeleeCombat>();
         }
     }
 }

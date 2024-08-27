@@ -28,41 +28,41 @@ namespace Game.GameEngine.AI
 
         private void Awake()
         {
-            this.moveAgent = new Agent_Entity_MoveByPoints();
-            this.moveAgent.SetStoppingDistance(this.stoppingDistance.Current);
+            moveAgent = new Agent_Entity_MoveByPoints();
+            moveAgent.SetStoppingDistance(stoppingDistance.Current);
         }
 
         protected override void Run()
         {
-            if (!this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!Blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
                 Debug.LogWarning("Unit is not found!");
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.Blackboard.TryGetVariable(this.movePathKey, out Vector3[] movePositions))
+            if (!Blackboard.TryGetVariable(movePathKey, out Vector3[] movePositions))
             {
                 Debug.LogWarning("Move path is not found!");
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.moveAgent.OnPathFinished += this.OnMoveFinished;
-            this.moveAgent.SetMovingEntity(unit);
-            this.moveAgent.SetPath(movePositions);
-            this.moveAgent.Play();
+            moveAgent.OnPathFinished += OnMoveFinished;
+            moveAgent.SetMovingEntity(unit);
+            moveAgent.SetPath(movePositions);
+            moveAgent.Play();
         }
 
         private void OnMoveFinished()
         {
-            this.Return(true);
+            Return(true);
         }
 
         protected override void OnDispose()
         {
-            this.moveAgent.OnPathFinished -= this.OnMoveFinished;
-            this.moveAgent.Stop();
+            moveAgent.OnPathFinished -= OnMoveFinished;
+            moveAgent.Stop();
         }
     }
 }

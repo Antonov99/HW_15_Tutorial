@@ -12,7 +12,7 @@ namespace Game.GameEngine.Mechanics
         
         public ResourceData[] GetPrice()
         {
-            return this.price;
+            return price;
         }
     }
 }

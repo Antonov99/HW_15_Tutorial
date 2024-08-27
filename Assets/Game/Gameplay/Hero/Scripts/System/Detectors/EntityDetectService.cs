@@ -25,7 +25,7 @@ namespace Game.Gameplay.Hero
 
         public List<IEntity> GetDetectedEntitesUnsafe()
         {
-            return this.detectedEntities;
+            return detectedEntities;
         }
 
         [GameInject]
@@ -36,47 +36,47 @@ namespace Game.Gameplay.Hero
 
         public void AddListener(EntityDetectListener listener)
         {
-            this.observers.Add(listener);
+            observers.Add(listener);
         }
 
         public void RemoveListener(EntityDetectListener listener)
         {
-            this.observers.Remove(listener);
+            observers.Remove(listener);
         }
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_ColliderSensor>();
+            heroComponent = heroService.GetHero().Get<IComponent_ColliderSensor>();
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.heroComponent.OnCollisionsUpdated += this.UpdateEntities;
+            heroComponent.OnCollisionsUpdated += UpdateEntities;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.heroComponent.OnCollisionsUpdated -= this.UpdateEntities;
+            heroComponent.OnCollisionsUpdated -= UpdateEntities;
         }
 
         private void UpdateEntities()
         {
-            this.detectedEntities.Clear();
-            this.heroComponent.GetCollidersUnsafe(out var buffer, out var size);
+            detectedEntities.Clear();
+            heroComponent.GetCollidersUnsafe(out var buffer, out var size);
 
             for (var i = 0; i < size; i++)
             {
                 var collider = buffer[i];
                 if (collider.TryGetComponent(out IEntity entity))
                 {
-                    this.detectedEntities.Add(entity);
+                    detectedEntities.Add(entity);
                 }
             }
 
-            for (int i = 0, count = this.observers.Count; i < count; i++)
+            for (int i = 0, count = observers.Count; i < count; i++)
             {
-                var listener = this.observers[i];
-                listener.OnEntitiesUpdated(this.detectedEntities);
+                var listener = observers[i];
+                listener.OnEntitiesUpdated(detectedEntities);
             }
         }
     }

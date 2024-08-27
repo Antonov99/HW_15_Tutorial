@@ -18,12 +18,12 @@ namespace Game.GameEngine.Mechanics
 
         public bool IsMoving
         {
-            get { return this.moveRequired && this.direction != ZERO_DIRECTION; }
+            get { return moveRequired && direction != ZERO_DIRECTION; }
         }
 
         public Vector3 Direction
         {
-            get { return this.direction; }
+            get { return direction; }
         }
 
         [ShowInInspector, ReadOnly, PropertyOrder(-11)]
@@ -49,9 +49,9 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanMove(Vector3 direction)
         {
-            for (int i = 0, count = this.preconditions.Count; i < count; i++)
+            for (int i = 0, count = preconditions.Count; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(direction))
                 {
                     return false;
@@ -63,129 +63,129 @@ namespace Game.GameEngine.Mechanics
 
         public void RequestMove(Vector3 direction)
         {
-            if (!this.CanMove(direction))
+            if (!CanMove(direction))
             {
                 return;
             }
 
             this.direction = direction;
-            this.finishMove = false;
+            finishMove = false;
 
-            if (!this.moveRequired)
+            if (!moveRequired)
             {
-                this.moveRequired = true;
-                this.StartMove();
+                moveRequired = true;
+                StartMove();
             }
         }
 
         public void Update()
         {
-            if (!this.moveRequired)
+            if (!moveRequired)
             {
                 return;
             }
 
-            if (this.finishMove)
+            if (finishMove)
             {
-                this.moveRequired = false;
-                this.StopMove();
+                moveRequired = false;
+                StopMove();
             }
 
-            this.finishMove = true;
+            finishMove = true;
         }
 
         public void Interrupt()
         {
-            if (!this.moveRequired)
+            if (!moveRequired)
             {
                 return;
             }
 
-            this.finishMove = false;
-            this.moveRequired = false;
-            this.StopMove();
+            finishMove = false;
+            moveRequired = false;
+            StopMove();
         }
         
         public void AddPrecondition(Func<Vector3, bool> condition)
         {
-            this.preconditions.Add(new ConditionDelegate<Vector3>(condition));
+            preconditions.Add(new ConditionDelegate<Vector3>(condition));
         }
 
         public void AddPrecondition(ICondition<Vector3> condition)
         {
-            this.preconditions.Add(condition);
+            preconditions.Add(condition);
         }
 
         public void AddPreconditions(params ICondition<Vector3>[] conditions)
         {
-            this.preconditions.AddRange(conditions);
+            preconditions.AddRange(conditions);
         }
 
         public void AddPreconditions(IEnumerable<ICondition<Vector3>> conditions)
         {
-            this.preconditions.AddRange(conditions);
+            preconditions.AddRange(conditions);
         }
 
         public void RemovePrecondition(ICondition<Vector3> condition)
         {
-            this.preconditions.Remove(condition);
+            preconditions.Remove(condition);
         }
 
         public void AddStartAction(Action<Vector3> action)
         {
-            this.startActions.Add(new ActionDelegate<Vector3>(action));
+            startActions.Add(new ActionDelegate<Vector3>(action));
         }
 
         public void AddStartAction(IAction<Vector3> action)
         {
-            this.startActions.Add(action);
+            startActions.Add(action);
         }
 
         public void AddStartActions(IEnumerable<IAction<Vector3>> actions)
         {
-            this.startActions.AddRange(actions);
+            startActions.AddRange(actions);
         }
 
         public void RemoveStartAction(IAction<Vector3> action)
         {
-            this.startActions.Remove(action);
+            startActions.Remove(action);
         }
 
         public void AddStopAction(IAction<Vector3> action)
         {
-            this.stopActions.Add(action);
+            stopActions.Add(action);
         }
 
         public void AddStopActions(IEnumerable<IAction<Vector3>> actions)
         {
-            this.stopActions.AddRange(actions);
+            stopActions.AddRange(actions);
         }
 
         public void RemoveStopAction(IAction<Vector3> action)
         {
-            this.stopActions.Remove(action);
+            stopActions.Remove(action);
         }
 
         private void StartMove()
         {
-            for (int i = 0, count = this.startActions.Count; i < count; i++)
+            for (int i = 0, count = startActions.Count; i < count; i++)
             {
-                var action = this.startActions[i];
-                action.Do(this.direction);
+                var action = startActions[i];
+                action.Do(direction);
             }
 
-            this.OnStartMove?.Invoke();
+            OnStartMove?.Invoke();
         }
 
         private void StopMove()
         {
-            for (int i = 0, count = this.stopActions.Count; i < count; i++)
+            for (int i = 0, count = stopActions.Count; i < count; i++)
             {
-                var action = this.stopActions[i];
-                action.Do(this.direction);
+                var action = stopActions[i];
+                action.Do(direction);
             }
 
-            this.OnStopMove?.Invoke();
+            OnStopMove?.Invoke();
         }
     }
 }

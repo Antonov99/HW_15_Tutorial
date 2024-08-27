@@ -15,7 +15,7 @@ namespace Game.App
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            this.gameFacade.InitGame();
+            gameFacade.InitGame();
             callback?.Invoke(LoadingResult.Success());
         }
     }

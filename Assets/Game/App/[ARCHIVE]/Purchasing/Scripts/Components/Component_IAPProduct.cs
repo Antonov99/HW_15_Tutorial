@@ -8,7 +8,7 @@ namespace Game.App
     {
         public string ProductId
         {
-            get { return this.productId; }
+            get { return productId; }
         }
 
         [SerializeField]

@@ -9,17 +9,17 @@ namespace AI.BTree
 
         protected sealed override void Run()
         {
-            this.coroutine = this.StartCoroutine(this.RunRoutine());
+            coroutine = StartCoroutine(RunRoutine());
         }
 
         protected abstract IEnumerator RunRoutine();
 
         protected override void OnDispose()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                this.StopCoroutine(this.coroutine);
-                this.coroutine = null;
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
     }

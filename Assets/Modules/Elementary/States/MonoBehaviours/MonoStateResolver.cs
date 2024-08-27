@@ -14,12 +14,12 @@ namespace Elementary
 
         private void Update()
         {
-            for (int i = 0, count = this.orderedTransitions.Count; i < count; i++)
+            for (int i = 0, count = orderedTransitions.Count; i < count; i++)
             {
-                var transition = this.orderedTransitions[i];
+                var transition = orderedTransitions[i];
                 if (transition.IsAvailable())
                 {
-                    this.stateMachine.SwitchState(transition.state);
+                    stateMachine.SwitchState(transition.state);
                     return;
                 }
             }
@@ -36,9 +36,9 @@ namespace Elementary
 
             public bool IsAvailable()
             {
-                for (int i = 0, count = this.conditions.Length; i < count; i++)
+                for (int i = 0, count = conditions.Length; i < count; i++)
                 {
-                    var condition = this.conditions[i];
+                    var condition = conditions[i];
                     if (!condition.IsTrue())
                     {
                         return false;

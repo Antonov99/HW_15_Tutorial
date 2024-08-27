@@ -9,12 +9,12 @@ namespace Game.GameEngine
     {
         void IGameStartElement.StartGame()
         {
-            this.Enter();
+            Enter();
         }
         
         void IGameFinishElement.FinishGame()
         {
-            this.Exit();
+            Exit();
         }
     }
 }

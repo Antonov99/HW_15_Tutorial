@@ -28,8 +28,8 @@ namespace Elementary
         [PropertyOrder(-8)]
         public float CurrentTime
         {
-            get { return this.currentTime; }
-            set { this.currentTime = Mathf.Max(value, 0); }
+            get { return currentTime; }
+            set { currentTime = Mathf.Max(value, 0); }
         }
 
         private float currentTime;
@@ -38,34 +38,34 @@ namespace Elementary
         
         public void Play()
         {
-            if (this.IsPlaying)
+            if (IsPlaying)
             {
                 return;
             }
 
-            this.IsPlaying = true;
-            this.OnStarted?.Invoke();
-            this.coroutine = this.StartCoroutine(this.TimerRoutine());
+            IsPlaying = true;
+            OnStarted?.Invoke();
+            coroutine = StartCoroutine(TimerRoutine());
         }
 
         public void Stop()
         {
-            if (this.coroutine != null)
+            if (coroutine != null)
             {
-                this.StopCoroutine(this.coroutine);
+                StopCoroutine(coroutine);
             }
 
-            if (this.IsPlaying)
+            if (IsPlaying)
             {
-                this.IsPlaying = false;
-                this.OnCanceled?.Invoke();
+                IsPlaying = false;
+                OnCanceled?.Invoke();
             }
         }
         
         public void ResetTime()
         {
-            this.currentTime = 0;
-            this.OnReset?.Invoke();
+            currentTime = 0;
+            OnReset?.Invoke();
         }
 
         private IEnumerator TimerRoutine()
@@ -73,8 +73,8 @@ namespace Elementary
             while (true)
             {
                 yield return null;
-                this.currentTime += Time.deltaTime;
-                this.OnTimeChanged?.Invoke();
+                currentTime += Time.deltaTime;
+                OnTimeChanged?.Invoke();
             }
         }
     }

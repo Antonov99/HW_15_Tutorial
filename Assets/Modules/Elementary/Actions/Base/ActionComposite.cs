@@ -8,7 +8,7 @@ namespace Elementary
         
         public ActionComposite()
         {
-            this.actions = new List<IAction>(1);
+            actions = new List<IAction>(1);
         }
 
         public ActionComposite(params IAction[] actions)
@@ -51,7 +51,7 @@ namespace Elementary
         
         public void Do()
         {
-            foreach (var action in this.actions)
+            foreach (var action in actions)
             {
                 action.Do();
             }
@@ -64,7 +64,7 @@ namespace Elementary
         
         public ActionComposite()
         {
-            this.actions = new List<IAction<T>>(1);
+            actions = new List<IAction<T>>(1);
         }
 
         public ActionComposite(params IAction<T>[] actions)
@@ -107,7 +107,7 @@ namespace Elementary
 
         public void Do(T args)
         {
-            foreach (var listener in this.actions)
+            foreach (var listener in actions)
             {
                 listener.Do(args);
             }

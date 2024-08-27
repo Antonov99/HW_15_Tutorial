@@ -9,17 +9,17 @@ namespace Game.Meta
 
         public BoosterConfig GetBooster(string id)
         {
-            return this.catalog.FindBooster(id);
+            return catalog.FindBooster(id);
         }
 
         public BoosterConfig[] GetAllBoosters()
         {
-            return this.catalog.GetAllBoosters();
+            return catalog.GetAllBoosters();
         }
 
         void IConfigLoader.LoadConfigs()
         {
-            this.catalog = Resources.Load<BoosterCatalog>(BoosterExtensions.BOOSTER_CATALOG_RESOURCE_PATH);
+            catalog = Resources.Load<BoosterCatalog>(BoosterExtensions.BOOSTER_CATALOG_RESOURCE_PATH);
         }
     }
 }

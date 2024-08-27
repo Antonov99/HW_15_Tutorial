@@ -30,11 +30,11 @@ namespace Elementary
         protected override int Detect(Collider[] buffer)
         {
             return Physics.OverlapSphereNonAlloc(
-                position: this.centerPoint.position,
-                radius: this.radius,
+                position: centerPoint.position,
+                radius: radius,
                 results: buffer,
-                layerMask: this.layerMask,
-                queryTriggerInteraction: this.triggerInteraction
+                layerMask: layerMask,
+                queryTriggerInteraction: triggerInteraction
             );
         }
 
@@ -45,7 +45,7 @@ namespace Elementary
             {
                 var prevColor = Handles.color;
                 Handles.color = Color.blue;
-                Handles.DrawWireDisc(this.centerPoint.position, Vector3.up, this.radius, 1.25f);
+                Handles.DrawWireDisc(centerPoint.position, Vector3.up, radius, 1.25f);
                 Handles.color = prevColor;
             }
             catch (Exception)

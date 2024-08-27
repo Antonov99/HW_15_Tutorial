@@ -10,18 +10,18 @@ namespace Game.GameEngine.Mechanics
 
         protected virtual void Awake()
         {
-            var isEnable = this.entity.Get<IComponent_Enable>().IsEnable;
-            this.SetEnable(isEnable);
+            var isEnable = entity.Get<IComponent_Enable>().IsEnable;
+            SetEnable(isEnable);
         }
 
         protected virtual void OnEnable()
         {
-            this.entity.Get<IComponent_Enable>().OnEnabled += this.SetEnable;
+            entity.Get<IComponent_Enable>().OnEnabled += SetEnable;
         }
 
         protected virtual void OnDisable()
         {
-            this.entity.Get<IComponent_Enable>().OnEnabled -= this.SetEnable;
+            entity.Get<IComponent_Enable>().OnEnabled -= SetEnable;
         }
 
         protected abstract void SetEnable(bool isEnable);

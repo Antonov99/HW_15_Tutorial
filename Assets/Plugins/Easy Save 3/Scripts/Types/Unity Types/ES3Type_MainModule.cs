@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_MainModule() : base(typeof(UnityEngine.ParticleSystem.MainModule))
+		public ES3Type_MainModule() : base(typeof(ParticleSystem.MainModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.MainModule)obj;
+			var instance = (ParticleSystem.MainModule)obj;
 
 			writer.WriteProperty("duration", instance.duration, ES3Type_float.Instance);
 			writer.WriteProperty("loop", instance.loop, ES3Type_bool.Instance);
@@ -63,106 +63,106 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.MainModule();
+			var instance = new ParticleSystem.MainModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.MainModule)obj;
+			var instance = (ParticleSystem.MainModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
 				switch(propertyName)
 				{
 					case "duration":
-						instance.duration = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.duration = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "loop":
-						instance.loop = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.loop = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "prewarm":
-						instance.prewarm = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.prewarm = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "startDelay":
-						instance.startDelay = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startDelay = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startDelayMultiplier":
-						instance.startDelayMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startDelayMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startLifetime":
-						instance.startLifetime = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startLifetime = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startLifetimeMultiplier":
-						instance.startLifetimeMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startLifetimeMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startSpeed":
-						instance.startSpeed = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startSpeed = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startSpeedMultiplier":
-						instance.startSpeedMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startSpeedMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startSize3D":
-						instance.startSize3D = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.startSize3D = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "startSize":
-						instance.startSize = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startSize = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startSizeMultiplier":
-						instance.startSizeMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startSizeMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startSizeX":
-						instance.startSizeX = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startSizeX = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startSizeXMultiplier":
-						instance.startSizeXMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startSizeXMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startSizeY":
-						instance.startSizeY = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startSizeY = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startSizeYMultiplier":
-						instance.startSizeYMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startSizeYMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startSizeZ":
-						instance.startSizeZ = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startSizeZ = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startSizeZMultiplier":
-						instance.startSizeZMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startSizeZMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startRotation3D":
-						instance.startRotation3D = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.startRotation3D = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "startRotation":
-						instance.startRotation = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startRotation = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startRotationMultiplier":
-						instance.startRotationMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startRotationMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startRotationX":
-						instance.startRotationX = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startRotationX = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startRotationXMultiplier":
-						instance.startRotationXMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startRotationXMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startRotationY":
-						instance.startRotationY = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startRotationY = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startRotationYMultiplier":
-						instance.startRotationYMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startRotationYMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "startRotationZ":
-						instance.startRotationZ = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.startRotationZ = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "startRotationZMultiplier":
-						instance.startRotationZMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.startRotationZMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 						#if UNITY_2018_1_OR_NEWER
 						case "flipRotation":
-						instance.flipRotation = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.flipRotation = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 						case "randomizeRotationDirection":
-						instance.flipRotation = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.flipRotation = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 						#else
 					case "randomizeRotationDirection":
@@ -170,31 +170,31 @@ namespace ES3Types
 						break;
 						#endif
 					case "startColor":
-						instance.startColor = reader.Read<UnityEngine.ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
+						instance.startColor = reader.Read<ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
 						break;
 					case "gravityModifier":
-						instance.gravityModifier = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.gravityModifier = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "gravityModifierMultiplier":
-						instance.gravityModifierMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.gravityModifierMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "simulationSpace":
-						instance.simulationSpace = reader.Read<UnityEngine.ParticleSystemSimulationSpace>();
+						instance.simulationSpace = reader.Read<ParticleSystemSimulationSpace>();
 						break;
 					case "customSimulationSpace":
-						instance.customSimulationSpace = reader.Read<UnityEngine.Transform>(ES3Type_Transform.Instance);
+						instance.customSimulationSpace = reader.Read<Transform>(ES3Type_Transform.Instance);
 						break;
 					case "simulationSpeed":
-						instance.simulationSpeed = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.simulationSpeed = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "scalingMode":
-						instance.scalingMode = reader.Read<UnityEngine.ParticleSystemScalingMode>();
+						instance.scalingMode = reader.Read<ParticleSystemScalingMode>();
 						break;
 					case "playOnAwake":
-						instance.playOnAwake = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.playOnAwake = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "maxParticles":
-						instance.maxParticles = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.maxParticles = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();

@@ -12,7 +12,7 @@ namespace Game.Tutorial
     {
         public int LastIndex
         {
-            get { return this.steps.Count - 1; }
+            get { return steps.Count - 1; }
         }
 
         [SerializeField]
@@ -20,17 +20,17 @@ namespace Game.Tutorial
 
         public TutorialStep this[int index]
         {
-            get { return this.steps[index]; }
+            get { return steps[index]; }
         }
         
         public int IndexOf(TutorialStep step)
         {
-            return this.steps.IndexOf(step);
+            return steps.IndexOf(step);
         }
 
         public bool IsLast(int index)
         {
-            return index >= this.steps.Count - 1;
+            return index >= steps.Count - 1;
         }
     }
 }

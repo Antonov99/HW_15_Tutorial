@@ -86,8 +86,8 @@ namespace Cysharp.Threading.Tasks.Internal
 
             public RentArray(T[] array, int length, ArrayPool<T> pool)
             {
-                this.Array = array;
-                this.Length = length;
+                Array = array;
+                Length = length;
                 this.pool = pool;
             }
 

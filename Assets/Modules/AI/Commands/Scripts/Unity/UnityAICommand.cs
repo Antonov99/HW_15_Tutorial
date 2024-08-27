@@ -6,7 +6,7 @@ namespace AI.Commands
     {
         public bool IsPlaying
         {
-            get { return this.isPlaying; }
+            get { return isPlaying; }
         }
 
         private bool isPlaying;
@@ -17,36 +17,36 @@ namespace AI.Commands
 
         public void Execute(object args, IAICommandCallback callback)
         {
-            if (this.isPlaying)
+            if (isPlaying)
             {
-                Debug.LogWarning($"Command {this.GetType().Name} is already started!");
+                Debug.LogWarning($"Command {GetType().Name} is already started!");
                 return;
             }
 
             this.args = args;
             this.callback = callback;
-            this.isPlaying = true;
-            this.Execute(args);
+            isPlaying = true;
+            Execute(args);
         }
 
         public void Interrupt()
         {
-            if (!this.isPlaying)
+            if (!isPlaying)
             {
                 return;
             }
 
-            this.OnInterrupt();
-            this.isPlaying = false;
-            this.args = null;
-            this.callback = null;
+            OnInterrupt();
+            isPlaying = false;
+            args = null;
+            callback = null;
         }
 
         protected abstract void Execute(object args);
 
         protected void Return(bool success)
         {
-            this.isPlaying = false;
+            isPlaying = false;
 
             var callback = this.callback;
             this.callback = null;
@@ -69,11 +69,11 @@ namespace AI.Commands
             if (args is not T tArgs)
             {
                 Debug.LogWarning("Mismatch command type");
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.Execute(tArgs);
+            Execute(tArgs);
         }
 
         protected abstract void Execute(T args);

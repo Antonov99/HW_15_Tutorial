@@ -9,7 +9,7 @@ namespace Elementary
 
         private void Awake()
         {
-            Application.targetFrameRate = this.targetFrameRate;
+            Application.targetFrameRate = targetFrameRate;
         }
     }
 }

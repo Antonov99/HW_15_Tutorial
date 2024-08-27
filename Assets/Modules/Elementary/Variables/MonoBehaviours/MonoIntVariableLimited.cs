@@ -8,31 +8,31 @@ namespace Elementary
     {
         public event Action<int> OnValueChanged
         {
-            add { this.source.OnValueChanged += value; }
-            remove { this.source.OnValueChanged -= value; }
+            add { source.OnValueChanged += value; }
+            remove { source.OnValueChanged -= value; }
         }
 
         public event Action<int> OnMaxValueChanged
         {
-            add { this.source.OnMaxValueChanged += value; }
-            remove { this.source.OnMaxValueChanged -= value; }
+            add { source.OnMaxValueChanged += value; }
+            remove { source.OnMaxValueChanged -= value; }
         }
 
         public int Current
         {
-            get { return this.source.Current; }
-            set { this.source.Current = value; }
+            get { return source.Current; }
+            set { source.Current = value; }
         }
 
         public int MaxValue
         {
-            get { return this.source.MaxValue; }
-            set { this.source.MaxValue = value; }
+            get { return source.MaxValue; }
+            set { source.MaxValue = value; }
         }
 
         public bool IsLimit
         {
-            get { return this.source.IsLimit; }
+            get { return source.IsLimit; }
         }
 
         [SerializeField]
@@ -40,30 +40,30 @@ namespace Elementary
 
         public void AddListener(IAction<int> listener)
         {
-            this.source.AddListener(listener);
+            source.AddListener(listener);
         }
 
         public void RemoveListener(IAction<int> listener)
         {
-            this.source.RemoveListener(listener);
+            source.RemoveListener(listener);
         }
 
 
         public void AddMaxListener(IAction<int> listener)
         {
-            this.source.AddMaxListener(listener);
+            source.AddMaxListener(listener);
         }
 
         public void RemoveMaxListener(IAction<int> listener)
         {
-            this.source.RemoveMaxListener(listener);
+            source.RemoveMaxListener(listener);
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            this.source.MaxValue = Math.Max(1, this.source.MaxValue);
-            this.source.Current = Mathf.Clamp(this.source.Current, 0, this.source.MaxValue);
+            source.MaxValue = Math.Max(1, source.MaxValue);
+            source.Current = Mathf.Clamp(source.Current, 0, source.MaxValue);
         }
 #endif
     }

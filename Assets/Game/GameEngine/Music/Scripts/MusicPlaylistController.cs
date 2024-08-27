@@ -18,33 +18,33 @@ namespace Game.GameEngine
 
         void IGameStartElement.StartGame()
         {
-            MusicManager.OnFinsihed += this.OnMusicFinished;
+            MusicManager.OnFinsihed += OnMusicFinished;
             
-            var track = this.playlist.trackList[0];
+            var track = playlist.trackList[0];
             MusicManager.Play(track);
         }
 
         void IGameFinishElement.FinishGame()
         {
-            MusicManager.OnFinsihed -= this.OnMusicFinished;
+            MusicManager.OnFinsihed -= OnMusicFinished;
             MusicManager.Stop();
         }
 
         private void OnMusicFinished()
         {
-            this.trackPointer++;
-            if (this.trackPointer >= this.playlist.trackList.Length)
+            trackPointer++;
+            if (trackPointer >= playlist.trackList.Length)
             {
-                this.trackPointer = 0;
+                trackPointer = 0;
             }
 
-            this.StartCoroutine(this.PlayNextTrack());
+            StartCoroutine(PlayNextTrack());
         }
 
         private IEnumerator PlayNextTrack()
         {
-            yield return new WaitForSeconds(this.pauseBetweenTracks);
-            var nextTrack = this.playlist.trackList[this.trackPointer];
+            yield return new WaitForSeconds(pauseBetweenTracks);
+            var nextTrack = playlist.trackList[trackPointer];
             MusicManager.Play(nextTrack);
         }
     }

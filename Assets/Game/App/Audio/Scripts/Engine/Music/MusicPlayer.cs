@@ -17,14 +17,14 @@ namespace Game
 
         public bool IsMute
         {
-            get { return this.isMute; }
-            set { this.SetMute(value); }
+            get { return isMute; }
+            set { SetMute(value); }
         }
 
         public float Volume
         {
-            get { return this.audioSource.volume; }
-            set { this.SetVolume(value); }
+            get { return audioSource.volume; }
+            set { SetVolume(value); }
         }
 
         [PropertySpace(8.0f)]
@@ -33,7 +33,7 @@ namespace Game
         [PropertyOrder(-8)]
         public MusicState State
         {
-            get { return this.state; }
+            get { return state; }
         }
 
         [PropertyOrder(-7)]
@@ -41,7 +41,7 @@ namespace Game
         [ShowInInspector]
         public AudioClip CurrentMusic
         {
-            get { return this.GetCurrentMusic(); }
+            get { return GetCurrentMusic(); }
         }
 
         [PropertyOrder(-6)]
@@ -50,7 +50,7 @@ namespace Game
         [ProgressBar(min: 0, max: 1, r: 1f, g: 0.83f, b: 0f)]
         public float PlayingProgress
         {
-            get { return this.GetPlayingProgress(); }
+            get { return GetPlayingProgress(); }
         }
 
         [PropertySpace(8.0f)]
@@ -82,90 +82,90 @@ namespace Game
         [Button]
         public void Play(AudioClip music)
         {
-            if (this.state != MusicState.IDLE)
+            if (state != MusicState.IDLE)
             {
                 Debug.LogWarning("Music is already started!");
                 return;
             }
 
-            this.state = MusicState.PLAYING;
+            state = MusicState.PLAYING;
             
-            if (this.randomizePitch)
+            if (randomizePitch)
             {
-                this.audioSource.pitch = Random.Range(1 - this.pitchOffset, 1 + this.pitchOffset);
+                audioSource.pitch = Random.Range(1 - pitchOffset, 1 + pitchOffset);
             }
             
-            this.audioSource.clip = music;
-            this.audioSource.Play();
-            this.OnStarted?.Invoke();
+            audioSource.clip = music;
+            audioSource.Play();
+            OnStarted?.Invoke();
         }
 
         [GUIColor(1f, 0.83f, 0f)]
         [Button]
         public void Pause()
         {
-            if (this.state != MusicState.PLAYING)
+            if (state != MusicState.PLAYING)
             {
                 Debug.LogWarning("Music is not playing!");
                 return;
             }
 
-            this.state = MusicState.PAUSED;
-            this.audioSource.Pause();
-            this.OnPaused?.Invoke();
+            state = MusicState.PAUSED;
+            audioSource.Pause();
+            OnPaused?.Invoke();
         }
 
         [GUIColor(1f, 0.83f, 0f)]
         [Button]
         public void Resume()
         {
-            if (this.state != MusicState.PAUSED)
+            if (state != MusicState.PAUSED)
             {
                 Debug.LogWarning("Music is not paused!");
                 return;
             }
 
-            this.state = MusicState.PLAYING;
-            this.audioSource.UnPause();
-            this.OnResumed?.Invoke();
+            state = MusicState.PLAYING;
+            audioSource.UnPause();
+            OnResumed?.Invoke();
         }
 
         [GUIColor(1f, 0.83f, 0f)]
         [Button]
         public void Stop()
         {
-            if (this.state == MusicState.IDLE)
+            if (state == MusicState.IDLE)
             {
                 Debug.LogWarning("Music is not playing!");
                 return;
             }
 
-            this.state = MusicState.IDLE;
-            this.audioSource.Stop();
-            this.audioSource.clip = null;
-            this.OnStopped?.Invoke();
+            state = MusicState.IDLE;
+            audioSource.Stop();
+            audioSource.clip = null;
+            OnStopped?.Invoke();
         }
 
         private void Finish()
         {
-            this.state = MusicState.IDLE;
-            this.audioSource.Stop();
-            this.audioSource.clip = null;
-            this.OnFinsihed?.Invoke();
+            state = MusicState.IDLE;
+            audioSource.Stop();
+            audioSource.clip = null;
+            OnFinsihed?.Invoke();
         }
 
         private void Awake()
         {
-            this.audioSource.volume = this.volume;
-            this.audioSource.mute = this.isMute;
-            this.state = MusicState.IDLE;
+            audioSource.volume = volume;
+            audioSource.mute = isMute;
+            state = MusicState.IDLE;
         }
 
         private void Update()
         {
-            if (this.state == MusicState.PLAYING && this.audioSource.time >= this.audioSource.clip.length)
+            if (state == MusicState.PLAYING && audioSource.time >= audioSource.clip.length)
             {
-                this.Finish();
+                Finish();
             }
         }
 
@@ -178,42 +178,42 @@ namespace Game
             }
 
             this.volume = volume;
-            this.audioSource.volume = volume;
-            this.OnVolumeChanged?.Invoke(volume);
+            audioSource.volume = volume;
+            OnVolumeChanged?.Invoke(volume);
         }
 
         private void SetMute(bool mute)
         {
-            if (this.isMute == mute)
+            if (isMute == mute)
             {
                 return;
             }
 
-            this.isMute = mute;
-            this.audioSource.mute = mute;
-            this.OnMuted?.Invoke(mute);
+            isMute = mute;
+            audioSource.mute = mute;
+            OnMuted?.Invoke(mute);
         }
 
         private float GetPlayingProgress()
         {
-            if (this.state == MusicState.IDLE)
+            if (state == MusicState.IDLE)
             {
                 return 0.0f;
             }
 
-            if (this.audioSource == null || this.audioSource.clip == null)
+            if (audioSource == null || audioSource.clip == null)
             {
                 return 0.0f;
             }
 
-            return this.audioSource.time / this.audioSource.clip.length;
+            return audioSource.time / audioSource.clip.length;
         }
         
         private AudioClip GetCurrentMusic()
         {
-            if (this.audioSource != null)
+            if (audioSource != null)
             {
-                return this.audioSource.clip;
+                return audioSource.clip;
             }
 
             return null;
@@ -224,8 +224,8 @@ namespace Game
         {
             try
             {
-                this.audioSource.volume = this.volume;
-                this.audioSource.mute = this.isMute;
+                audioSource.volume = volume;
+                audioSource.mute = isMute;
             }
             catch (Exception)
             {

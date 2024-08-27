@@ -20,7 +20,7 @@ namespace Game.Meta
         protected override void Validate()
         {
             base.Validate();
-            this.damageTable.OnValidate(this.maxLevel);
+            damageTable.OnValidate(maxLevel);
         }
     }
 }

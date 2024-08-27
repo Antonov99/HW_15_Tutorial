@@ -22,14 +22,14 @@ namespace Game.GameEngine.Mechanics
 
         public int Current
         {
-            get { return this.currentHitPoints; }
-            set { this.SetCurrentPoints(value); }
+            get { return currentHitPoints; }
+            set { SetCurrentPoints(value); }
         }
 
         public int Max
         {
-            get { return this.maxHitPoints; }
-            set { this.SetMaxPoints(value); }
+            get { return maxHitPoints; }
+            set { SetMaxPoints(value); }
         }
 
         [SerializeField, OnValueChanged("SetMaxPoints")]
@@ -43,85 +43,85 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void Setup(int current, int max)
         {
-            this.maxHitPoints = max;
-            this.currentHitPoints = Mathf.Clamp(current, 0, this.maxHitPoints);
+            maxHitPoints = max;
+            currentHitPoints = Mathf.Clamp(current, 0, maxHitPoints);
 
-            this.setupActions?.Do();
-            this.OnSetuped?.Invoke();
+            setupActions?.Do();
+            OnSetuped?.Invoke();
         }
 
         private void SetCurrentPoints(int value)
         {
-            value = Mathf.Clamp(value, 0, this.maxHitPoints);
-            this.currentHitPoints = value;
+            value = Mathf.Clamp(value, 0, maxHitPoints);
+            currentHitPoints = value;
 
-            this.onCurrentPointsChanged?.Do(value);
-            this.OnCurrentPointsChanged?.Invoke(value);
+            onCurrentPointsChanged?.Do(value);
+            OnCurrentPointsChanged?.Invoke(value);
         }
 
         private void SetMaxPoints(int value)
         {
             value = Math.Max(1, value);
-            if (this.currentHitPoints > value)
+            if (currentHitPoints > value)
             {
-                this.currentHitPoints = value;
+                currentHitPoints = value;
             }
 
-            this.maxHitPoints = value;
+            maxHitPoints = value;
 
-            this.onMaxPointsChanged?.Do(value);
-            this.OnMaxPointsChanged?.Invoke(value);
+            onMaxPointsChanged?.Do(value);
+            OnMaxPointsChanged?.Invoke(value);
         }
 
         public IAction<int> AddCurrentListener(Action<int> action)
         {
             var actionDelegate = new ActionDelegate<int>(action);
-            this.onCurrentPointsChanged += actionDelegate;
+            onCurrentPointsChanged += actionDelegate;
             return actionDelegate;
         }
 
         public IAction<int> AddMaxListener(Action<int> action)
         {
             var actionDelegate = new ActionDelegate<int>(action);
-            this.onMaxPointsChanged += actionDelegate;
+            onMaxPointsChanged += actionDelegate;
             return actionDelegate;
         }
 
         public IAction AddSetupListener(Action action)
         {
             var actionDelegate = new ActionDelegate(action);
-            this.setupActions += actionDelegate;
+            setupActions += actionDelegate;
             return actionDelegate;
         }
 
         public void AddCurrentListener(IAction<int> action)
         {
-            this.onCurrentPointsChanged += action;
+            onCurrentPointsChanged += action;
         }
 
         public void AddMaxListener(IAction<int> action)
         {
-            this.onMaxPointsChanged += action;
+            onMaxPointsChanged += action;
         }
 
         public void AddSetupListener(IAction action)
         {
-            this.setupActions += action;
+            setupActions += action;
         }
 
         public void RemoveCurrentListener(IAction<int> action)
         {
-            this.onCurrentPointsChanged -= action;
+            onCurrentPointsChanged -= action;
         }
 
         public void RemoveMaxListener(IAction<int> action)
         {
-            this.onMaxPointsChanged -= action;
+            onMaxPointsChanged -= action;
         }
 
         public void RemoveSetupListener(IAction action)
         {
-            this.setupActions -= action;
+            setupActions -= action;
         }
     }
 }

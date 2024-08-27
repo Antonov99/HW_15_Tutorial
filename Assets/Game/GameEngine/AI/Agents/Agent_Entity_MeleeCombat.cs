@@ -17,25 +17,25 @@ namespace Game.GameEngine.AI
 
         public Agent_Entity_MeleeCombat()
         {
-            this.SetFramePeriod(new WaitForFixedUpdate());
+            SetFramePeriod(new WaitForFixedUpdate());
         }
 
         public void SetAttacker(IEntity unit)
         {
-            if (this.attacker != null)
+            if (attacker != null)
             {
-                this.combatComponent.StopCombat();
+                combatComponent.StopCombat();
             }
 
-            this.attacker = unit;
-            this.combatComponent = unit?.Get<IComponent_MeleeCombat>();
+            attacker = unit;
+            combatComponent = unit?.Get<IComponent_MeleeCombat>();
         }
 
         public void SetTarget(IEntity target)
         {
-            if (this.attacker != null)
+            if (attacker != null)
             {
-                this.combatComponent.StopCombat();
+                combatComponent.StopCombat();
             }
 
             this.target = target;
@@ -45,29 +45,29 @@ namespace Game.GameEngine.AI
         {
             base.OnStop();
 
-            if (this.combatComponent.IsCombat)
+            if (combatComponent.IsCombat)
             {
-                this.combatComponent.StopCombat();
+                combatComponent.StopCombat();
             }
         }
 
         protected override void Update()
         {
-            if (this.attacker != null && this.target != null)
+            if (attacker != null && target != null)
             {
-                this.StartCombat();
+                StartCombat();
             }
         }
 
         private void StartCombat()
         {
-            if (this.combatComponent.IsCombat)
+            if (combatComponent.IsCombat)
             {
                 return;
             }
 
-            var combatOperation = new CombatOperation(this.target);
-            this.combatComponent.StartCombat(combatOperation);
+            var combatOperation = new CombatOperation(target);
+            combatComponent.StartCombat(combatOperation);
         }
     }
 }

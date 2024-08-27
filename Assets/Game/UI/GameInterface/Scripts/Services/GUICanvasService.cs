@@ -7,12 +7,12 @@ namespace Game.GameEngine.GUI
     {
         public Transform RootTransform
         {
-            get { return this.rootTransform; }
+            get { return rootTransform; }
         }
 
         public Canvas Canvas
         {
-            get { return this.canvas; }
+            get { return canvas; }
         }
 
         [Space]

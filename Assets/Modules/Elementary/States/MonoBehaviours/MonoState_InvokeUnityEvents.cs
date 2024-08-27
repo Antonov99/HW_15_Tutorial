@@ -14,12 +14,12 @@ namespace Elementary
 
         public override void Enter()
         {
-            this.enterEvent.Invoke();
+            enterEvent.Invoke();
         }
 
         public override void Exit()
         {
-            this.exitEvent.Invoke();
+            exitEvent.Invoke();
         }
     }
 }

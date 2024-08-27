@@ -15,9 +15,9 @@ namespace Game.Gameplay.Player
         
         public bool FindPopupName(WorldPlaceType placeType, out PopupName popupName)
         {
-            for (int i = 0, count = this.popups.Length; i < count; i++)
+            for (int i = 0, count = popups.Length; i < count; i++)
             {
-                var popupInfo = this.popups[i];
+                var popupInfo = popups[i];
                 if (popupInfo.placeType == placeType)
                 {
                     popupName = popupInfo.popupName;

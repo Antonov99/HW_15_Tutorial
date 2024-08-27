@@ -12,14 +12,14 @@ namespace Game.SceneAudio
 
         public bool IsEnabled
         {
-            get { return this.isEnable; }
-            set { this.SetEnable(value); }
+            get { return isEnable; }
+            set { SetEnable(value); }
         }
 
         public float Volume
         {
-            get { return this.volume; }
-            set { this.SetVolume(value); }
+            get { return volume; }
+            set { SetVolume(value); }
         }
 
         [SerializeField]
@@ -43,39 +43,39 @@ namespace Game.SceneAudio
 
         public void PlaySound(AudioClip clip)
         {
-            if (!this.isEnable)
+            if (!isEnable)
             {
                 return;
             }
 
             var clipName = clip.name;
             
-            if (this.controlClips)
+            if (controlClips)
             {
-                if (this.IsBlocked(clipName))
+                if (IsBlocked(clipName))
                 {
                     return;
                 }
 
-                this.blockedClips.Add(new BlockedAudio(clipName, BLOCKED_AUDIO_DELAY));
+                blockedClips.Add(new BlockedAudio(clipName, BLOCKED_AUDIO_DELAY));
             }
 
-            this.source.PlayOneShot(clip);
+            source.PlayOneShot(clip);
         }
 
         private void SetEnable(bool enable)
         {
-            if (this.isEnable == enable)
+            if (isEnable == enable)
             {
                 return;
             }
 
-            this.isEnable = enable;
-            this.source.enabled = enable;
+            isEnable = enable;
+            source.enabled = enable;
 
-            for (int i = 0, count = this.listeners.Count; i < count; i++)
+            for (int i = 0, count = listeners.Count; i < count; i++)
             {
-                var observer = this.listeners[i];
+                var observer = listeners[i];
                 observer.OnEnabled(enable);
             }
         }
@@ -89,36 +89,36 @@ namespace Game.SceneAudio
             }
 
             this.volume = volume;
-            this.source.volume = volume;
+            source.volume = volume;
 
-            for (int i = 0, count = this.listeners.Count; i < count; i++)
+            for (int i = 0, count = listeners.Count; i < count; i++)
             {
-                var observer = this.listeners[i];
+                var observer = listeners[i];
                 observer.OnVolumeChanged(volume);
             }
         }
 
         public void AddListener(ISceneAudioListener listener)
         {
-            this.listeners.Add(listener);
+            listeners.Add(listener);
         }
 
         public void RemoveListener(ISceneAudioListener listener)
         {
-            this.listeners.Remove(listener);
+            listeners.Remove(listener);
         }
 
         private void Awake()
         {
-            this.source.enabled = this.isEnable;
-            this.source.volume = this.volume;
+            source.enabled = isEnable;
+            source.volume = volume;
         }
 
         private void Update()
         {
-            if (this.isEnable)
+            if (isEnable)
             {
-                this.ProcessBlockedClips(Time.deltaTime);
+                ProcessBlockedClips(Time.deltaTime);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Game.SceneAudio
         {
             try
             {
-                this.Awake();
+                Awake();
             }
             catch (Exception)
             {
@@ -137,9 +137,9 @@ namespace Game.SceneAudio
 
         private bool IsBlocked(string soundName)
         {
-            for (int i = 0, count = this.blockedClips.Count; i < count; i++)
+            for (int i = 0, count = blockedClips.Count; i < count; i++)
             {
-                var clip = this.blockedClips[i];
+                var clip = blockedClips[i];
                 if (clip.name == soundName)
                 {
                     return true;
@@ -151,26 +151,26 @@ namespace Game.SceneAudio
 
         private void ProcessBlockedClips(float deltaTime)
         {
-            if (!this.controlClips)
+            if (!controlClips)
             {
                 return;
             }
             
-            this.cache.Clear();
-            this.cache.AddRange(this.blockedClips);
+            cache.Clear();
+            cache.AddRange(blockedClips);
 
-            for (int i = 0, count = this.cache.Count; i < count; i++)
+            for (int i = 0, count = cache.Count; i < count; i++)
             {
-                var clip = this.cache[i];
+                var clip = cache[i];
                 var remainingTime = clip.delay - deltaTime;
 
                 if (remainingTime <= 0)
                 {
-                    this.blockedClips.RemoveAt(i);
+                    blockedClips.RemoveAt(i);
                 }
                 else
                 {
-                    this.blockedClips[i] = new BlockedAudio(clip.name, remainingTime);
+                    blockedClips[i] = new BlockedAudio(clip.name, remainingTime);
                 }
             }
         }

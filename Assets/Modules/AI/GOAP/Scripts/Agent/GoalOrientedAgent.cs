@@ -36,28 +36,28 @@ namespace AI.GOAP
         [ShowInInspector, ReadOnly, PropertySpace, PropertyOrder(-6)]
         public bool IsPlaying
         {
-            get { return this.currentPlan != null; }
+            get { return currentPlan != null; }
         }
 
         [ShowInInspector, ReadOnly, PropertyOrder(-5)]
         public IGoal CurrentGoal
         {
-            get { return this.currentGoal; }
+            get { return currentGoal; }
         }
 
         public FactState WorldState
         {
-            get { return this.GenerateWorldState(); }
+            get { return GenerateWorldState(); }
         }
 
         public IEnumerable<IGoal> Goals
         {
-            get { return this.goals; }
+            get { return goals; }
         }
 
         public IEnumerable<IActor> Actions
         {
-            get { return this.actions; }
+            get { return actions; }
         }
         
         private IGoal currentGoal;
@@ -70,12 +70,12 @@ namespace AI.GOAP
 
         private void Awake()
         {
-            this.planner = PlannerFactory.CreatePlanner(this.plannerMode);
+            planner = PlannerFactory.CreatePlanner(plannerMode);
         }
 
         public void Play()
         {
-            var goal = this.goals
+            var goal = goals
                 .Where(it => it.IsValid())
                 .OrderByDescending(it => it.EvaluatePriority())
                 .FirstOrDefault();
@@ -96,7 +96,7 @@ namespace AI.GOAP
                 return;
             }
 
-            if (!this.planner.MakePlan(this.WorldState, goal.ResultState, actions, out var plan))
+            if (!planner.MakePlan(WorldState, goal.ResultState, actions, out var plan))
             {
                 Debug.LogWarning($"Can't make a plan for goal {goal.name}!");
                 return;
@@ -108,48 +108,48 @@ namespace AI.GOAP
                 return;
             }
 
-            this.currentGoal = goal;
-            this.currentPlan = plan;
+            currentGoal = goal;
+            currentPlan = plan;
 
-            this.actionIndex = 0;
-            this.OnStarted?.Invoke();
+            actionIndex = 0;
+            OnStarted?.Invoke();
 
-            this.PlayAction();
+            PlayAction();
         }
 
         public void Cancel()
         {
-            this.StopAllCoroutines();
+            StopAllCoroutines();
             
-            if (this.currentPlan != null && 
-                this.actionIndex < this.currentPlan.Count)
+            if (currentPlan != null && 
+                actionIndex < currentPlan.Count)
             {
-                this.currentPlan[this.actionIndex].Cancel();
+                currentPlan[actionIndex].Cancel();
             }
 
-            this.currentPlan = null;
-            this.actionIndex = 0;
-            this.OnCancel();
+            currentPlan = null;
+            actionIndex = 0;
+            OnCancel();
         }
 
         public void Replay()
         {
-            this.Cancel();
-            this.Play();
+            Cancel();
+            Play();
         }
         
         private void PlayAction()
         {
-            var action = this.currentPlan[this.actionIndex];
+            var action = currentPlan[actionIndex];
             if (!action.IsValid())
             {
-                this.Fail();
+                Fail();
                 return;
             }
 
-            if (!action.RequiredState.EqualsTo(this.WorldState))
+            if (!action.RequiredState.EqualsTo(WorldState))
             {
-                this.Fail();
+                Fail();
                 return;
             }
 
@@ -160,54 +160,54 @@ namespace AI.GOAP
         {
             if (!success)
             {
-                this.Fail();
+                Fail();
                 return;
             }
 
-            if (!action.ResultState.EqualsTo(this.WorldState))
+            if (!action.ResultState.EqualsTo(WorldState))
             {
-                this.Fail();
+                Fail();
                 return;
             }
 
-            var planCompleted = this.actionIndex + 1 >= this.currentPlan.Count;
+            var planCompleted = actionIndex + 1 >= currentPlan.Count;
             if (planCompleted)
             {
-                this.Complete();
+                Complete();
                 return;
             }
 
-            this.actionIndex++;
-            this.StartCoroutine(this.PlayNextAction());
+            actionIndex++;
+            StartCoroutine(PlayNextAction());
         }
 
         private IEnumerator PlayNextAction()
         {
             yield return new WaitForFixedUpdate();
-            this.PlayAction();
+            PlayAction();
         }
 
         private void Fail()
         {
-            this.currentPlan = null;
-            this.actionIndex = 0;
-            this.OnFail();
+            currentPlan = null;
+            actionIndex = 0;
+            OnFail();
         }
 
         private void Complete()
         {
-            this.currentPlan = null;
-            this.actionIndex = 0;
-            this.OnComplete();
+            currentPlan = null;
+            actionIndex = 0;
+            OnComplete();
         }
         
         private FactState GenerateWorldState()
         {
             var worldState = new FactState();
             
-            for (int i = 0, count = this.factInspectors.Length; i < count; i++)
+            for (int i = 0, count = factInspectors.Length; i < count; i++)
             {
-                var inspector = this.factInspectors[i];
+                var inspector = factInspectors[i];
                 inspector.PopulateFacts(worldState);
             }
 
@@ -216,17 +216,17 @@ namespace AI.GOAP
 
         protected virtual void OnFail()
         {
-            this.OnFailed?.Invoke();
+            OnFailed?.Invoke();
         }
 
         protected virtual void OnComplete()
         {
-            this.OnCompleted?.Invoke();
+            OnCompleted?.Invoke();
         }
 
         protected virtual void OnCancel()
         {
-            this.OnCanceled?.Invoke();
+            OnCanceled?.Invoke();
         }
     }
 }

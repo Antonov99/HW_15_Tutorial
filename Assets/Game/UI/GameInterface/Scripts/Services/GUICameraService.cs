@@ -6,7 +6,7 @@ namespace Game.GameEngine.GUI
     {
         public Camera Camera
         {
-            get { return this.camera; }
+            get { return camera; }
         }
 
         [SerializeField]

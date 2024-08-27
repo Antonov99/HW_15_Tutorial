@@ -14,7 +14,7 @@ namespace ES3Internal
 		public ES3PlayerPrefsStream(string path) : base(GetData(path,false))
 		{
 			this.path = path;
-			this.append = false;
+			append = false;
 		}
 
 		// This constructor should be used for write streams only.
@@ -22,7 +22,7 @@ namespace ES3Internal
 		{
 			this.path = path;
 			this.append = append;
-			this.isWriteStream = true;
+			isWriteStream = true;
 		}
 
 		private static byte[] GetData(string path, bool isWriteStream)
@@ -37,13 +37,13 @@ namespace ES3Internal
 			if(isDisposed)
 				return;
 			isDisposed = true;
-			if(isWriteStream && this.Length > 0)
+			if(isWriteStream && Length > 0)
 			{
 	            if (append)
 	            {
 	                // Convert data back to bytes before appending, as appending Base-64 strings directly can corrupt the data.
 	                var sourceBytes = System.Convert.FromBase64String(PlayerPrefs.GetString(path));
-	                var appendBytes = this.ToArray();
+	                var appendBytes = ToArray();
 	                var finalBytes = new byte[sourceBytes.Length + appendBytes.Length];
 	                System.Buffer.BlockCopy(sourceBytes, 0, finalBytes, 0, sourceBytes.Length);
 	                System.Buffer.BlockCopy(appendBytes, 0, finalBytes, sourceBytes.Length, appendBytes.Length);
@@ -53,7 +53,7 @@ namespace ES3Internal
 					PlayerPrefs.Save();
 	            }
 	            else
-					PlayerPrefs.SetString(path + ES3IO.temporaryFileSuffix, System.Convert.ToBase64String(this.ToArray()));
+					PlayerPrefs.SetString(path + ES3IO.temporaryFileSuffix, System.Convert.ToBase64String(ToArray()));
 				// Save the timestamp to a separate key.
 				PlayerPrefs.SetString("timestamp_" + path, System.DateTime.UtcNow.Ticks.ToString());
 			}

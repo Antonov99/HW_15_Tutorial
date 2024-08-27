@@ -17,19 +17,19 @@ namespace AI.Blackboards
 
         private void Awake()
         {
-            if (this.injectOnAwake)
+            if (injectOnAwake)
             {
-                this.InjectBlackboard();
+                InjectBlackboard();
             }
         }
 
         public void InjectBlackboard()
         {
-            var injects = this.root.GetComponentsInChildren<IBlackboardInjective>();
+            var injects = root.GetComponentsInChildren<IBlackboardInjective>();
             for (int i = 0, count = injects.Length; i < count; i++)
             {
                 var injections = injects[i];
-                injections.Blackboard = this.blackboard;
+                injections.Blackboard = blackboard;
             }
         }
     }

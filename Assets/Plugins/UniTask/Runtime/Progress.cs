@@ -65,7 +65,7 @@ namespace Cysharp.Threading.Tasks
             {
                 this.action = action;
                 this.comparer = comparer;
-                this.isFirstCall = true;
+                isFirstCall = true;
             }
 
             public void Report(T value)

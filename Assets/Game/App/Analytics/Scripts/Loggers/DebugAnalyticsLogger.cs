@@ -11,8 +11,8 @@ namespace Game.App
         
         public DebugAnalyticsLogger(Color color)
         {
-            this.colorHtml = ColorUtility.ToHtmlStringRGBA(color);
-            this.stringBuilder = new StringBuilder();
+            colorHtml = ColorUtility.ToHtmlStringRGBA(color);
+            stringBuilder = new StringBuilder();
         }
 
         public void LogEvent(string eventName, params AnalyticsParameter[] parameters)
@@ -22,24 +22,24 @@ namespace Game.App
                 eventName = AnalyticsConst.UNDEFINED;
             }
             
-            this.stringBuilder.Clear();
-            this.stringBuilder
+            stringBuilder.Clear();
+            stringBuilder
                 .Append("Log Event: ")
-                .Append($"<color=#{this.colorHtml}>")
+                .Append($"<color=#{colorHtml}>")
                 .Append($"{eventName}");
 
             if (parameters is {Length: > 0})
             {
-                this.stringBuilder.Append(", parameters: ");
+                stringBuilder.Append(", parameters: ");
                 foreach (var parameter in parameters)
                 {
-                    this.stringBuilder.Append($"(key: {parameter.name}, value: {parameter.value})");
+                    stringBuilder.Append($"(key: {parameter.name}, value: {parameter.value})");
                 }
             }
 
-            this.stringBuilder.Append("</color>");
+            stringBuilder.Append("</color>");
             
-            Debug.Log(this.stringBuilder.ToString());
+            Debug.Log(stringBuilder.ToString());
         }
     }
 }

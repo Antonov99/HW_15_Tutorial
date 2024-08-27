@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Entities;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.GameEngine.Entities
 {
@@ -21,14 +22,14 @@ namespace Game.GameEngine.Entities
         public MonoEntity Get()
         {
             MonoEntity entity;
-            if (this.availableEntities.Count > 0)
+            if (availableEntities.Count > 0)
             {
-                entity = this.availableEntities.Dequeue();
+                entity = availableEntities.Dequeue();
                 entity.gameObject.hideFlags = HideFlags.None;
             }
             else
             {
-                entity = GameObject.Instantiate(this.prefab, this.parent);
+                entity = Object.Instantiate(prefab, parent);
             }
             
             return entity;
@@ -39,7 +40,7 @@ namespace Game.GameEngine.Entities
             var entityObject = entity.gameObject;
             entityObject.SetActive(false);
             entityObject.hideFlags = HideFlags.HideInHierarchy;
-            this.availableEntities.Enqueue(entity);
+            availableEntities.Enqueue(entity);
         }
     }
 }

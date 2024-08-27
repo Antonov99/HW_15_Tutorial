@@ -21,27 +21,27 @@ namespace Game.Meta
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public void SetColor(Color color)
         {
-            this.progressBar.SetColor(color);
+            progressBar.SetColor(color);
         }
 
         public void SetLabel(string label)
         {
-            this.labelText.text = label;
+            labelText.text = label;
         }
 
         public void SetProgress(float progress)
         {
-            this.progressBar.SetProgress(progress);
+            progressBar.SetProgress(progress);
         }
         
         public void SetRemainingText(string text)
         {
-            this.timerText.text = text;
+            timerText.text = text;
         }
     }
 }

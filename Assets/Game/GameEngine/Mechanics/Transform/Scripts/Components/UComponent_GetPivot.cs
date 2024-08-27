@@ -7,7 +7,7 @@ namespace Game.GameEngine.Mechanics
     {
         public Transform Pivot
         {
-            get { return this.pivot; }
+            get { return pivot; }
         }
 
         [SerializeField]

@@ -23,7 +23,7 @@ namespace ES3Types
 
 		protected override object ReadObject<T>(ES3Reader reader)
 		{
-			var obj = ES3Reflection.CreateInstance(this.type);
+			var obj = ES3Reflection.CreateInstance(type);
 			ReadProperties(reader, obj);
 			return obj;
 		}

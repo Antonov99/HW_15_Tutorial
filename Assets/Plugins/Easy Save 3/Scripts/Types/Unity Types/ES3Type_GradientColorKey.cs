@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_GradientColorKey() : base(typeof(UnityEngine.GradientColorKey))
+		public ES3Type_GradientColorKey() : base(typeof(GradientColorKey))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.GradientColorKey)obj;
+			var instance = (GradientColorKey)obj;
 			
 			writer.WriteProperty("color", instance.color, ES3Type_Color.Instance);
 			writer.WriteProperty("time", instance.time, ES3Type_float.Instance);
@@ -24,7 +24,7 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			return new UnityEngine.GradientColorKey(reader.ReadProperty<Color>(ES3Type_Color.Instance),
+			return new GradientColorKey(reader.ReadProperty<Color>(ES3Type_Color.Instance),
 													reader.ReadProperty<float>(ES3Type_float.Instance));
 		}
 	}

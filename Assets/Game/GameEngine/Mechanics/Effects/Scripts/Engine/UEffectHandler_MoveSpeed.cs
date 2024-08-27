@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
         {
             if (effect.TryGetParameter<float>(EffectId.MOVE_SPEED, out var multiplier))
             {
-                this.speedMultiplier.Multiply(multiplier);
+                speedMultiplier.Multiply(multiplier);
             }
         }
 
@@ -21,7 +21,7 @@ namespace Game.GameEngine.Mechanics
         {
             if (effect.TryGetParameter<float>(EffectId.MOVE_SPEED, out var multiplier))
             {
-                this.speedMultiplier.Divide(multiplier);
+                speedMultiplier.Divide(multiplier);
             }
         }
     }

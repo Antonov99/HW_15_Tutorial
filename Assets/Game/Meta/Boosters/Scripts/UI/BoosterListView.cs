@@ -15,30 +15,30 @@ namespace Game.Meta
 
         public void AddBooster(Booster booster)
         {
-            if (this.boosters.ContainsKey(booster))
+            if (boosters.ContainsKey(booster))
             {
                 return;
             }
 
-            var view = Instantiate(this.prefab, this.container);
+            var view = Instantiate(prefab, container);
             var adapter = new BoosterViewAdapter(view, booster, coroutineDispatcher: this);
             var viewHolder = new ViewHolder(view, adapter);
-            this.boosters.Add(booster, viewHolder);
+            boosters.Add(booster, viewHolder);
             
             adapter.Show();
         }
 
         public void RemoveBooster(Booster booster)
         {
-            if (!this.boosters.ContainsKey(booster))
+            if (!boosters.ContainsKey(booster))
             {
                 return;
             }
 
-            var viewHolder = this.boosters[booster];
+            var viewHolder = boosters[booster];
             viewHolder.adapter.Hide();
             Destroy(viewHolder.view.gameObject);
-            this.boosters.Remove(booster);
+            boosters.Remove(booster);
         }
         
         private struct ViewHolder

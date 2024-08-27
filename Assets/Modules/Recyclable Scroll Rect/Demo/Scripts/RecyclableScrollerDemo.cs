@@ -27,7 +27,7 @@ namespace PolyAndCode.Examples
 
         DemoCell IDataAdapter<DemoCell>.ViewPrefab
         {
-            get { return this.viewPrefab; }
+            get { return viewPrefab; }
         }
         
         [SerializeField]

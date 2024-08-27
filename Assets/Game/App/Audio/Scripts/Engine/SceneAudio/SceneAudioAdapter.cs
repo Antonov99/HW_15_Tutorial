@@ -17,51 +17,51 @@ namespace Game.SceneAudio
         {
             if (SceneAudioManager.IsInitialized)
             {
-                this.Initialize();
+                Initialize();
             }
             else
             {
-                SceneAudioManager.OnInitialized += this.Initialize;
+                SceneAudioManager.OnInitialized += Initialize;
             }
         }
 
         private void OnDisable()
         {
-            SceneAudioManager.RemoveListener(this.audioType, this);
+            SceneAudioManager.RemoveListener(audioType, this);
         }
 
         private void Initialize()
         {
-            SceneAudioManager.OnInitialized -= this.Initialize;
-            SceneAudioManager.AddListener(this.audioType, this);
-            this.SetEnable(SceneAudioManager.IsEnable(this.audioType));
-            this.SetVolume(SceneAudioManager.GetVolume(this.audioType));
+            SceneAudioManager.OnInitialized -= Initialize;
+            SceneAudioManager.AddListener(audioType, this);
+            SetEnable(SceneAudioManager.IsEnable(audioType));
+            SetVolume(SceneAudioManager.GetVolume(audioType));
         }
 
         void ISceneAudioListener.OnEnabled(bool enabled)
         {
-            this.SetEnable(enabled);
+            SetEnable(enabled);
         }
 
         void ISceneAudioListener.OnVolumeChanged(float volume)
         {
-            this.SetVolume(volume);
+            SetVolume(volume);
         }
         
         private void SetEnable(bool enabled)
         {
-            for (int i = 0, count = this.audioSources.Length; i < count; i++)
+            for (int i = 0, count = audioSources.Length; i < count; i++)
             {
-                var source = this.audioSources[i];
+                var source = audioSources[i];
                 source.enabled = enabled;
             }
         }
 
         private void SetVolume(float volume)
         {
-            for (int i = 0, count = this.audioSources.Length; i < count; i++)
+            for (int i = 0, count = audioSources.Length; i < count; i++)
             {
-                var source = this.audioSources[i];
+                var source = audioSources[i];
                 source.volume = volume;
             }
         }

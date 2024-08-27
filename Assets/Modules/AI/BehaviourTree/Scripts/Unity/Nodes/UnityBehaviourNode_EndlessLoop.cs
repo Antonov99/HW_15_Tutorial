@@ -11,26 +11,26 @@ namespace AI.BTree
 
         protected override void Run()
         {
-            this.child.Run(callback: this);
+            child.Run(callback: this);
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
-            this.StartCoroutine(this.RunInNextFrame());
+            StartCoroutine(RunInNextFrame());
         }
 
         private IEnumerator RunInNextFrame()
         {
             yield return new WaitForEndOfFrame();
-            this.child.Run(callback: this);
+            child.Run(callback: this);
         }
 
         protected override void OnAbort()
         {
-            this.StopAllCoroutines();
-            if (this.child.IsRunning)
+            StopAllCoroutines();
+            if (child.IsRunning)
             {
-                this.child.Abort();
+                child.Abort();
             }
         }
     }

@@ -15,7 +15,7 @@ namespace Game.GameEngine.Mechanics
 
         public void ConstructMotor(IMoveInDirectionMotor motor)
         {
-            this.moveEngine = motor;
+            moveEngine = motor;
         }
 
         public void ConstructTransform(ITransformEngine transform)
@@ -35,33 +35,33 @@ namespace Game.GameEngine.Mechanics
 
         protected override void FixedUpdate(float deltaTime)
         {
-            this.MoveInDirection(deltaTime);
+            MoveInDirection(deltaTime);
         }
 
         private void MoveInDirection(float deltaTime)
         {
-            var velocity = this.moveEngine.Direction * (this.speed.Current * deltaTime);
-            if (this.surface.Current != null)
+            var velocity = moveEngine.Direction * (speed.Current * deltaTime);
+            if (surface.Current != null)
             {
-                this.MoveBySurface(velocity);
+                MoveBySurface(velocity);
             }
             else
             {
-                this.transform.MovePosition(velocity);
+                transform.MovePosition(velocity);
             }
         }
 
         private void MoveBySurface(Vector3 velocity)
         {
-            var nextPosition = this.transform.WorldPosition + velocity;
+            var nextPosition = transform.WorldPosition + velocity;
             var surface = this.surface.Current;
             if (surface.IsAvailablePosition(nextPosition))
             {
-                this.transform.SetPosiiton(nextPosition);
+                transform.SetPosiiton(nextPosition);
             }
             else if (surface.FindAvailablePosition(nextPosition, out var clampedPosition))
             {
-                this.transform.SetPosiiton(clampedPosition);
+                transform.SetPosiiton(clampedPosition);
             }
         }
     }

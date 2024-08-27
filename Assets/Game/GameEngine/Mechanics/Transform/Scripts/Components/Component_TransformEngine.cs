@@ -11,12 +11,12 @@ namespace Game.GameEngine.Mechanics
     {
         public Vector3 Position
         {
-            get { return this.engine.WorldPosition; }
+            get { return engine.WorldPosition; }
         }
 
         public Quaternion Rotation
         {
-            get { return this.engine.WorldRotation; }
+            get { return engine.WorldRotation; }
         }
 
         private readonly ITransformEngine engine;
@@ -28,17 +28,17 @@ namespace Game.GameEngine.Mechanics
 
         public void SetPosition(Vector3 position)
         {
-            this.engine.SetPosiiton(position);
+            engine.SetPosiiton(position);
         }
 
         public void SetRotation(Quaternion rotation)
         {
-            this.engine.SetRotation(rotation);
+            engine.SetRotation(rotation);
         }
 
         public void LookAtPosition(Vector3 position)
         {
-            this.engine.LookAtPosition(position);
+            engine.LookAtPosition(position);
         }
     }
 }

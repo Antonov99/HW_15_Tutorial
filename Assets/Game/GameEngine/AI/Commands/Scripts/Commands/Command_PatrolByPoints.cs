@@ -7,7 +7,7 @@ namespace Game.GameEngine.AI
     {
         public string PatrolIteratorKey
         {
-            set { this.patrolIteratorKey = value; }
+            set { patrolIteratorKey = value; }
         }
 
         [Space]
@@ -25,13 +25,13 @@ namespace Game.GameEngine.AI
         protected override void Execute(CommandArgs_PatrolByPoints args)
         {
             var patrolIterator = args.CreateIterator();
-            this.blackboard.ReplaceVariable(this.patrolIteratorKey, patrolIterator);
+            blackboard.ReplaceVariable(patrolIteratorKey, patrolIterator);
             base.Execute(args);
         }
 
         protected override void OnInterrupt()
         {
-            this.blackboard.RemoveVariable(this.patrolIteratorKey);
+            blackboard.RemoveVariable(patrolIteratorKey);
             base.OnInterrupt();
         }
     }

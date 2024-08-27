@@ -13,17 +13,17 @@ namespace Game.Meta
 
         public Sprite Icon
         {
-            get { return this.dialogue.Icon; }
+            get { return dialogue.Icon; }
         }
 
         public string CurrentMessage
         {
-            get { return this.dialogue.CurrentMessage; }
+            get { return dialogue.CurrentMessage; }
         }
 
         public IOption[] CurrentOptions
         {
-            get { return this.currentOptions; }
+            get { return currentOptions; }
         }
 
         private readonly Dialogue dialogue;
@@ -34,33 +34,33 @@ namespace Game.Meta
         {
             this.dialogue = dialogue;
 
-            this.UpdateOptions();
+            UpdateOptions();
         }
 
         private void UpdateOptions()
         {
-            var choices = this.dialogue.CurrentChoices;
+            var choices = dialogue.CurrentChoices;
             var count = choices.Length;
 
-            this.currentOptions = new IOption[count];
+            currentOptions = new IOption[count];
             for (var i = 0; i < count; i++)
             {
                 var choice = choices[i];
                 var option = new Option(this, choice, i);
-                this.currentOptions[i] = option;
+                currentOptions[i] = option;
             }
         }
 
         private void SelectChoice(int choiceIndex)
         {
-            if (this.dialogue.MoveNext(choiceIndex))
+            if (dialogue.MoveNext(choiceIndex))
             {
-                this.UpdateOptions();
-                this.OnStateChanged?.Invoke();
+                UpdateOptions();
+                OnStateChanged?.Invoke();
             }
             else
             {
-                this.OnFinished?.Invoke();
+                OnFinished?.Invoke();
             }
         }
 
@@ -68,7 +68,7 @@ namespace Game.Meta
         {
             string IOption.Text
             {
-                get { return this.choice; }
+                get { return choice; }
             }
 
             private readonly DialoguePresentationModel parent;
@@ -86,7 +86,7 @@ namespace Game.Meta
 
             void IOption.OnSelected()
             {
-                this.parent.SelectChoice(this.index);
+                parent.SelectChoice(index);
             }
         }
     }

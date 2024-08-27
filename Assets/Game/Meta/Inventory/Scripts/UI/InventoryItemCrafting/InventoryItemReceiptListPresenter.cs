@@ -28,50 +28,50 @@ namespace Game.Meta
 
         protected override void OnShow(object args)
         {
-            if (!this.receiptsCreated)
+            if (!receiptsCreated)
             {
-                this.CreateReceipts();
-                this.receiptsCreated = true;
+                CreateReceipts();
+                receiptsCreated = true;
             }
             
-            for (int i = 0, count = this.presenters.Count; i < count; i++)
+            for (int i = 0, count = presenters.Count; i < count; i++)
             {
-                var presenter = this.presenters[i];
+                var presenter = presenters[i];
                 presenter.Start();
             }
         }
 
         protected override void OnHide()
         {
-            for (int i = 0, count = this.presenters.Count; i < count; i++)
+            for (int i = 0, count = presenters.Count; i < count; i++)
             {
-                var presenter = this.presenters[i];
+                var presenter = presenters[i];
                 presenter.Stop();
             }
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.inventory = context.GetService<InventoryService>().GetInventory();
-            this.craftManager = context.GetService<InventoryItemCrafter>();
+            inventory = context.GetService<InventoryService>().GetInventory();
+            craftManager = context.GetService<InventoryItemCrafter>();
         }
 
         private void CreateReceipts()
         {
-            var receipts = this.receiptCatalog.GetAllReceipts();
+            var receipts = receiptCatalog.GetAllReceipts();
             for (int i = 0, count = receipts.Length; i < count; i++)
             {
                 var receipt = receipts[i];
-                this.CreateReceipt(receipt);
+                CreateReceipt(receipt);
             }
         }
 
         private void CreateReceipt(InventoryItemReceipt receipt)
         {
-            var view = Instantiate(this.viewPrefab, this.container);
+            var view = Instantiate(viewPrefab, container);
             var presenter = new InventoryItemReceiptPresenter(view, receipt);
-            presenter.Construct(this.craftManager, this.inventory);
-            this.presenters.Add(presenter);
+            presenter.Construct(craftManager, inventory);
+            presenters.Add(presenter);
         }
     }
 }

@@ -10,27 +10,27 @@ namespace Game.Tutorial.Gameplay
 
         private void Awake()
         {
-            this.pointer.SetActive(false);
+            pointer.SetActive(false);
         }
 
         [Button]
         public void ShowPointer(Transform targetPoint)
         {
-            this.ShowPointer(targetPoint.position, targetPoint.rotation);
+            ShowPointer(targetPoint.position, targetPoint.rotation);
         }
 
         public void ShowPointer(Vector3 position, Quaternion rotation)
         {
-            var pointerTransform = this.pointer.transform;
+            var pointerTransform = pointer.transform;
             pointerTransform.position = position;
             pointerTransform.rotation = rotation;
             
-            this.pointer.SetActive(true);
+            pointer.SetActive(true);
         }
 
         public void HidePointer()
         {
-            this.pointer.SetActive(false);
+            pointer.SetActive(false);
         }
     }
 }

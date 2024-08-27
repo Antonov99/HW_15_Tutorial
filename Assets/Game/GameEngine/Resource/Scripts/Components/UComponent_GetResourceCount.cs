@@ -8,7 +8,7 @@ namespace Game.GameEngine.GameResources
     {
         public int Count
         {
-            get { return this.adapter.Current; }
+            get { return adapter.Current; }
         }
         
         [SerializeField]

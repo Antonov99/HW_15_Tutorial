@@ -15,8 +15,8 @@ namespace Game.Tutorial
         {
             if (args is CongratulationsArgs infoArgs)
             {
-                this.titleText.text = infoArgs.title;
-                this.descriptionText.text = infoArgs.description;
+                titleText.text = infoArgs.title;
+                descriptionText.text = infoArgs.description;
             }
         }
     }

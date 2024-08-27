@@ -26,27 +26,27 @@ namespace Game.Tutorial
         public override void ConstructGame(GameContext context)
         {
             base.ConstructGame(context);
-            this.popupManager = context.GetService<PopupManager>();
+            popupManager = context.GetService<PopupManager>();
         }
 
         protected override void OnTutorialComplete()
         {
-            this.ShowPopup();
+            ShowPopup();
         }
 
         private async void ShowPopup()
         {
-            await new WaitForSeconds(this.showPopupDelay);
+            await new WaitForSeconds(showPopupDelay);
 
             var handle = this.popupPrefab.LoadAssetAsync<GameObject>();
             await handle.Task;
             var popupPrefab = handle.Result.GetComponent<MonoWindow>();
             
-            var title = LocalizationManager.GetCurrentText(this.config.title);
-            var description = LocalizationManager.GetCurrentText(this.config.description);
+            var title = LocalizationManager.GetCurrentText(config.title);
+            var description = LocalizationManager.GetCurrentText(config.description);
             
             var args = new CongratulationsArgs(title, description);
-            this.popupManager.Show(popupPrefab, args);
+            popupManager.Show(popupPrefab, args);
         }
     }
 }

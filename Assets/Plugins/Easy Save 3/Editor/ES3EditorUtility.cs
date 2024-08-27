@@ -20,7 +20,7 @@ public class ES3EditorUtility : Editor
 		EditorGUIUtility.AddCursorRect(buttonRect, MouseCursor.Link);	
 	}
 
-	public static bool IsPrefabInAssets(UnityEngine.Object obj)
+	public static bool IsPrefabInAssets(Object obj)
 	{
 		#if UNITY_2018_3_OR_NEWER
 		return PrefabUtility.IsPartOfPrefabAsset(obj);
@@ -33,9 +33,9 @@ public class ES3EditorUtility : Editor
      * Gets all children and components from a GameObject or GameObjects.
      * We create our own method for this because EditorUtility.CollectDeepHierarchy isn't thread safe in the Editor.
      */
-    public static IEnumerable<UnityEngine.Object> CollectDeepHierarchy(IEnumerable<GameObject> gos)
+    public static IEnumerable<Object> CollectDeepHierarchy(IEnumerable<GameObject> gos)
     {
-        var deepHierarchy = new HashSet<UnityEngine.Object>();
+        var deepHierarchy = new HashSet<Object>();
         foreach (var go in gos)
         {
             deepHierarchy.Add(go);

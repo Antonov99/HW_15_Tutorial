@@ -10,17 +10,17 @@ namespace Game.Meta
 
         public InventoryItemConfig GetItem(string name)
         {
-            return this.catalog.FindItem(name);
+            return catalog.FindItem(name);
         }
 
         public InventoryItemConfig[] GetAllItems()
         {
-            return this.catalog.GetAllItems();
+            return catalog.GetAllItems();
         }
 
         void IConfigLoader.LoadConfigs()
         {
-            this.catalog = Resources.Load<InventoryItemCatalog>("InventoryItemCatalog");
+            catalog = Resources.Load<InventoryItemCatalog>("InventoryItemCatalog");
         }
     }
 }

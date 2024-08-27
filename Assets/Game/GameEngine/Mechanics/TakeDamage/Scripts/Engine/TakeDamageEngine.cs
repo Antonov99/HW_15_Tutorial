@@ -23,18 +23,18 @@ namespace Game.GameEngine.Mechanics
                 return;
             }
         
-            if (this.hitPointsEngine.Current <= 0)
+            if (hitPointsEngine.Current <= 0)
             {
                 return;
             }
 
-            this.hitPointsEngine.Current -= damageArgs.damage;
+            hitPointsEngine.Current -= damageArgs.damage;
             base.Call(damageArgs);
 
-            if (this.hitPointsEngine.Current <= 0)
+            if (hitPointsEngine.Current <= 0)
             {
                 var destroyEvent = MechanicsUtils.ConvertToDestroyEvent(damageArgs);
-                this.destroyReceiver.Call(destroyEvent);
+                destroyReceiver.Call(destroyEvent);
             }
         }
     }

@@ -157,7 +157,7 @@ namespace KevinIglesias{
         {
             yield return new WaitForSeconds(delay);
            
-            GameObject newNova = Instantiate(spellPrefab, new Vector3(this.transform.position.x, spellPrefab.transform.position.y, this.transform.position.z), Quaternion.identity);
+            GameObject newNova = Instantiate(spellPrefab, new Vector3(transform.position.x, spellPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
             Transform t = newNova.transform;
             

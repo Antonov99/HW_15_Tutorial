@@ -20,7 +20,7 @@ namespace Game.Meta
                 return;
             }
 
-            if (!this.heroService.GetHero().TryGet(out IComponent_AddHitPoints hitPointsComponent))
+            if (!heroService.GetHero().TryGet(out IComponent_AddHitPoints hitPointsComponent))
             {
                 return;
             }

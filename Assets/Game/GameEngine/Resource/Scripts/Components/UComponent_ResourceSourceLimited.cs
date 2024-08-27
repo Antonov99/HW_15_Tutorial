@@ -9,29 +9,29 @@ namespace Game.GameEngine.GameResources
     {
         public event Action<ResourceType, int> OnResourcesChanged
         {
-            add { this.stack.OnValueChanged += value; }
-            remove { this.stack.OnValueChanged -= value; }
+            add { stack.OnValueChanged += value; }
+            remove { stack.OnValueChanged -= value; }
         }
 
         public event Action<int> OnLimitChanged
         {
-            add { this.stack.OnLimitChanged += value; }
-            remove { this.stack.OnLimitChanged -= value; }
+            add { stack.OnLimitChanged += value; }
+            remove { stack.OnLimitChanged -= value; }
         }
 
         public int AvailableSlots
         {
-            get { return this.stack.AvailableCount; }
+            get { return stack.AvailableCount; }
         }
         
         public int Limit
         {
-            get { return this.stack.Limit; }
+            get { return stack.Limit; }
         }
 
         public bool IsLimit
         {
-            get { return this.stack.IsLimit; }
+            get { return stack.IsLimit; }
         }
 
         [SerializeField]
@@ -42,21 +42,21 @@ namespace Game.GameEngine.GameResources
         [Button]
         public void PutResources(ResourceType type, int amount)
         {
-            this.stack.Plus(type, amount);
+            stack.Plus(type, amount);
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void SetupResources(ResourceData[] resources)
         {
-            this.stack.Setup(resources);
+            stack.Setup(resources);
         }
         
         [GUIColor(0, 1, 0)]
         [Button]
         public void ExtractResources(ResourceType type, int amount)
         {
-            this.stack.Minus(type, amount);
+            stack.Minus(type, amount);
         }
 
         public int GetSum()
@@ -66,24 +66,24 @@ namespace Game.GameEngine.GameResources
 
         public void Clear()
         {
-            this.stack.Clear();
+            stack.Clear();
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void SetLimit(int limit)
         {
-            this.stack.SetLimit(limit);
+            stack.SetLimit(limit);
         }
 
         public int GetResources(ResourceType type)
         {
-            return this.stack[type];
+            return stack[type];
         }
 
         public ResourceData[] GetAllResources()
         {
-            return this.stack.GetAll();
+            return stack.GetAll();
         }
     }
 }

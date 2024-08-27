@@ -522,8 +522,8 @@ namespace Cysharp.Threading.Tasks.Linq
 
             public Grouping(TKey key)
             {
-                this.Key = key;
-                this.elements = new List<TElement>();
+                Key = key;
+                elements = new List<TElement>();
             }
 
             public void Add(TElement value)

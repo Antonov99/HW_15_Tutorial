@@ -9,7 +9,7 @@ namespace Game.Meta
     {
         public int HitPointsStep
         {
-            get { return this.hitPointsStep; }
+            get { return hitPointsStep; }
         }
 
         [InfoBox("Hit Points: Linear Function")]
@@ -31,18 +31,18 @@ namespace Game.Meta
         public int GetHitPoints(int level)
         {
             var index = level - 1;
-            return this.levels[index];
+            return levels[index];
         }
 
         public void OnValidate(int maxLevel)
         {
             var levels = new int[maxLevel];
 
-            var currentHitPoints = this.startHitPoints;
+            var currentHitPoints = startHitPoints;
             for (var i = 0; i < maxLevel; i++)
             {
                 levels[i] = currentHitPoints;
-                currentHitPoints += this.hitPointsStep;
+                currentHitPoints += hitPointsStep;
             }
 
             this.levels = levels;

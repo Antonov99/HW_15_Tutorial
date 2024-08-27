@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Mesh() : base(typeof(UnityEngine.Mesh))
+		public ES3Type_Mesh() : base(typeof(Mesh))
 		{
 			Instance = this;
 		}
 
 		protected override void WriteUnityObject(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Mesh)obj;
+			var instance = (Mesh)obj;
 
             if(!instance.isReadable)
             {
@@ -53,7 +53,7 @@ namespace ES3Types
 
 		protected override void ReadUnityObject<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.Mesh)obj;
+			var instance = (Mesh)obj;
             if (instance == null)
                 return;
 
@@ -77,43 +77,43 @@ namespace ES3Types
 						break;
 					#endif
 					case "bounds":
-						instance.bounds = reader.Read<UnityEngine.Bounds>(ES3Type_Bounds.Instance);
+						instance.bounds = reader.Read<Bounds>(ES3Type_Bounds.Instance);
 						break;
 					case "boneWeights":
-						instance.boneWeights = reader.Read<UnityEngine.BoneWeight[]>(ES3Type_BoneWeightArray.Instance);
+						instance.boneWeights = reader.Read<BoneWeight[]>(ES3Type_BoneWeightArray.Instance);
 						break;
 					case "bindposes":
-						instance.bindposes = reader.Read<UnityEngine.Matrix4x4[]>(ES3Type_Matrix4x4Array.Instance);
+						instance.bindposes = reader.Read<Matrix4x4[]>(ES3Type_Matrix4x4Array.Instance);
 						break;
 					case "vertices":
-						instance.vertices = reader.Read<UnityEngine.Vector3[]>(ES3Type_Vector3Array.Instance);
+						instance.vertices = reader.Read<Vector3[]>(ES3Type_Vector3Array.Instance);
 						break;
 					case "normals":
-						instance.normals = reader.Read<UnityEngine.Vector3[]>(ES3Type_Vector3Array.Instance);
+						instance.normals = reader.Read<Vector3[]>(ES3Type_Vector3Array.Instance);
 						break;
 					case "tangents":
-						instance.tangents = reader.Read<UnityEngine.Vector4[]>(ES3Type_Vector4Array.Instance);
+						instance.tangents = reader.Read<Vector4[]>(ES3Type_Vector4Array.Instance);
 						break;
 					case "uv":
-						instance.uv = reader.Read<UnityEngine.Vector2[]>(ES3Type_Vector2Array.Instance);
+						instance.uv = reader.Read<Vector2[]>(ES3Type_Vector2Array.Instance);
 						break;
 					case "uv2":
-						instance.uv2 = reader.Read<UnityEngine.Vector2[]>(ES3Type_Vector2Array.Instance);
+						instance.uv2 = reader.Read<Vector2[]>(ES3Type_Vector2Array.Instance);
 						break;
 					case "uv3":
-						instance.uv3 = reader.Read<UnityEngine.Vector2[]>(ES3Type_Vector2Array.Instance);
+						instance.uv3 = reader.Read<Vector2[]>(ES3Type_Vector2Array.Instance);
 						break;
 					case "uv4":
-						instance.uv4 = reader.Read<UnityEngine.Vector2[]>(ES3Type_Vector2Array.Instance);
+						instance.uv4 = reader.Read<Vector2[]>(ES3Type_Vector2Array.Instance);
 						break;
 					case "colors32":
-						instance.colors32 = reader.Read<UnityEngine.Color32[]>(ES3Type_Color32Array.Instance);
+						instance.colors32 = reader.Read<Color32[]>(ES3Type_Color32Array.Instance);
 						break;
 					case "triangles":
-						instance.triangles = reader.Read<System.Int32[]>(ES3Type_intArray.Instance);
+						instance.triangles = reader.Read<Int32[]>(ES3Type_intArray.Instance);
 						break;
 					case "subMeshCount":
-						instance.subMeshCount = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.subMeshCount = reader.Read<Int32>(ES3Type_int.Instance);
 						for(int i=0; i<instance.subMeshCount; i++)
 							instance.SetTriangles(reader.ReadProperty<int[]>(ES3Type_intArray.Instance), i);
 						break;

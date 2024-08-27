@@ -12,22 +12,22 @@ namespace Game.Gameplay.Player
 
         private void Awake()
         {
-            this.CreateItems();
+            CreateItems();
         }
 
         private void CreateItems()
         {
-            var resourceConfigs = this.resourceCatalog.GetAllResources();
+            var resourceConfigs = resourceCatalog.GetAllResources();
             for (int i = 0, count = resourceConfigs.Length; i < count; i++)
             {
                 var config = resourceConfigs[i];
-                this.AddItem(config.type, 0);
+                AddItem(config.type, 0);
             }
         }
 
         protected override Sprite FindIcon(ResourceType key)
         {
-            var resourceInfo = this.resourceCatalog.FindResource(key);
+            var resourceInfo = resourceCatalog.FindResource(key);
             return resourceInfo.icon;
         }
     }

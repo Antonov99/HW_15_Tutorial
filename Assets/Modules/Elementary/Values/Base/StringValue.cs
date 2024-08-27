@@ -8,7 +8,7 @@ namespace Elementary
     {
         public string Current
         {
-            get { return this.value; }
+            get { return value; }
         }
 
         [SerializeField]

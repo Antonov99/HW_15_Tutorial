@@ -18,30 +18,30 @@ namespace Game.GameEngine.Mechanics
 
         private void Awake()
         {
-            this.UpdateSpeed();
+            UpdateSpeed();
         }
 
         private void OnEnable()
         {
-            this.baseSpeed.OnValueChanged += this.OnStateChanged;
-            this.multiplier.OnValueChanged += this.OnStateChanged;
+            baseSpeed.OnValueChanged += OnStateChanged;
+            multiplier.OnValueChanged += OnStateChanged;
         }
 
         private void OnDisable()
         {
-            this.baseSpeed.OnValueChanged -= this.OnStateChanged;
-            this.multiplier.OnValueChanged -= this.OnStateChanged;
+            baseSpeed.OnValueChanged -= OnStateChanged;
+            multiplier.OnValueChanged -= OnStateChanged;
         }
 
         private void OnStateChanged(float _)
         {
-           this.UpdateSpeed();
+           UpdateSpeed();
         }
 
         private void UpdateSpeed()
         {
-            var newSpeed = this.baseSpeed.Current * this.multiplier.Current;
-            this.fullSpeed.SetValue(newSpeed);
+            var newSpeed = baseSpeed.Current * multiplier.Current;
+            fullSpeed.SetValue(newSpeed);
         }
     }
 }

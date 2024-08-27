@@ -64,21 +64,21 @@ namespace SystemTime
             if (request.isNetworkError)
             {
                 var error = $"Downloading time stopped: {request.error}";
-                this.Result = new Response(isSuccess: false, error: error, time: default);
+                Result = new Response(isSuccess: false, error: error, time: default);
                 yield break;
             }
 
             if (request.downloadHandler == null)
             {
                 const string error = "Downloading time stopped: DownloadHandler is NULL";
-                this.Result = new Response(isSuccess: false, error: error, time: default);
+                Result = new Response(isSuccess: false, error: error, time: default);
                 yield break;
             }
 
             if (string.IsNullOrEmpty(request.downloadHandler.text))
             {
                 const string error = "Downloading time stopped: Downloaded string is empty or NULL";
-                this.Result = new Response(isSuccess: false, error: error, time: default);
+                Result = new Response(isSuccess: false, error: error, time: default);
                 yield break;
             }
 
@@ -90,7 +90,7 @@ namespace SystemTime
                 DateTimeStyles.AdjustToUniversal
             );
 
-            this.Result = new Response(isSuccess: true, error: "", time: time);
+            Result = new Response(isSuccess: true, error: "", time: time);
             yield return new WaitForEndOfFrame();
         }
 

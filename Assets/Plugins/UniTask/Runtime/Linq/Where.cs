@@ -87,7 +87,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.predicate = predicate;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 
@@ -205,7 +205,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.predicate = predicate;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 
@@ -323,7 +323,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.predicate = predicate;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 
@@ -455,7 +455,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.predicate = predicate;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 
@@ -586,7 +586,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.predicate = predicate;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 
@@ -718,7 +718,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 this.source = source;
                 this.predicate = predicate;
                 this.cancellationToken = cancellationToken;
-                this.moveNextAction = MoveNext;
+                moveNextAction = MoveNext;
                 TaskTracker.TrackActiveTask(this, 3);
             }
 

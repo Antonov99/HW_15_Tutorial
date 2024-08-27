@@ -14,17 +14,17 @@ namespace Elementary
         
         private void OnCollisionEnter(Collision collision)
         {
-            this.OnCollisionEntered?.Invoke(collision);
+            OnCollisionEntered?.Invoke(collision);
         }
 
         private void OnCollisionStay(Collision collision)
         {
-            this.OnCollisionStaying?.Invoke(collision);
+            OnCollisionStaying?.Invoke(collision);
         }
 
         private void OnCollisionExit(Collision collision)
         {
-            this.OnCollisionExited?.Invoke(collision);
+            OnCollisionExited?.Invoke(collision);
         }
     }
 }

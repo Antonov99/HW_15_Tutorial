@@ -50,26 +50,26 @@ namespace Game.UI
         public override void Initialize(IAdapter adapter)
         {
             this.adapter = adapter;
-            this.viewport = this.scrollRect.viewport;
-            this.content = this.scrollRect.content;
+            viewport = scrollRect.viewport;
+            content = scrollRect.content;
 
-            this.content.SetTopAnchor();
-            this.content.anchoredPosition = Vector3.zero;
+            content.SetTopAnchor();
+            content.anchoredPosition = Vector3.zero;
 
-            this.StartCoroutine(this.InitializeRoutine());
+            StartCoroutine(InitializeRoutine());
         }
 
         public override void Terminate()
         {
-            this.scrollRect.onValueChanged.RemoveListener(this.OnPositionChanged);
-            this.DestroyViews();
+            scrollRect.onValueChanged.RemoveListener(OnPositionChanged);
+            DestroyViews();
         }
 
         private IEnumerator InitializeRoutine()
         {
             //Using coroutine for init because few UI stuff requires a frame to update
             yield return null;
-            this.SetRecyclingBounds();
+            SetRecyclingBounds();
 
             //Cell Poool
             CreateViews();
@@ -81,16 +81,16 @@ namespace Game.UI
             //Set content height according to no of rows
             int noOfRows = (int) Mathf.Ceil(_cellPool.Count);
             float contentYSize = noOfRows * (_viewHeight + spacing);
-            this.content.sizeDelta = new Vector2(this.content.sizeDelta.x, contentYSize);
-            this.content.SetTopAnchor();
+            content.sizeDelta = new Vector2(content.sizeDelta.x, contentYSize);
+            content.SetTopAnchor();
 
-            this.scrollRect.onValueChanged.AddListener(this.OnPositionChanged);
+            scrollRect.onValueChanged.AddListener(OnPositionChanged);
         }
 
         private void CreateViews()
         {
             //Reseting Pool
-            this.DestroyViews();
+            DestroyViews();
             _cellPool = new List<RectTransform>();
 
             //Set the prototype cell active and set cell anchor as top 
@@ -104,30 +104,30 @@ namespace Game.UI
             float posY = 0;
 
             //set new cell size according to its aspect ratio
-            _viewWidth = this.content.rect.width;
+            _viewWidth = content.rect.width;
             _viewHeight = prototypeTransform.sizeDelta.y / prototypeTransform.sizeDelta.x * _viewWidth;
 
             //Get the required pool coverage and mininum size for the Cell pool
-            float requriedCoverage = minPoolCoverage * this.viewport.rect.height;
-            int minPoolSize = Math.Min(this.minPoolSize, this.adapter.GetDataCount());
+            float requriedCoverage = minPoolCoverage * viewport.rect.height;
+            int minPoolSize = Math.Min(this.minPoolSize, adapter.GetDataCount());
 
             //create cells untill the Pool area is covered and pool size is the minimum required
             while ((poolSize < minPoolSize || currentPoolCoverage < requriedCoverage) &&
-                   poolSize < this.adapter.GetDataCount())
+                   poolSize < adapter.GetDataCount())
             {
                 //Instantiate and add to Pool
                 RectTransform item = Instantiate(viewPrefab.gameObject).GetComponent<RectTransform>();
                 item.name = "View";
                 item.sizeDelta = new Vector2(_viewWidth, _viewHeight);
                 _cellPool.Add(item);
-                item.SetParent(this.content, false);
+                item.SetParent(content, false);
 
                 item.anchoredPosition = new Vector2(0, posY);
-                posY = item.anchoredPosition.y - (item.rect.height + this.spacing);
+                posY = item.anchoredPosition.y - (item.rect.height + spacing);
                 currentPoolCoverage += item.rect.height;
 
                 //Setting data for Cell
-                this.adapter.OnCreateView(view: item, index: poolSize);
+                adapter.OnCreateView(view: item, index: poolSize);
 
                 //Update the Pool size
                 poolSize++;
@@ -143,7 +143,7 @@ namespace Game.UI
 
             foreach (var view in _cellPool)
             {
-                this.adapter.OnDestroyView(view);
+                adapter.OnDestroyView(view);
                 Destroy(view.gameObject);
             }
             
@@ -152,9 +152,9 @@ namespace Game.UI
 
         private void OnPositionChanged(Vector2 normalizedPos)
         {
-            var direction = this.scrollRect.content.anchoredPosition - this.previousAnchoredPos;
-            this.scrollRect.MoveContentStartPosition(this.DoScroll(direction));
-            this.previousAnchoredPos = this.scrollRect.content.anchoredPosition;
+            var direction = scrollRect.content.anchoredPosition - previousAnchoredPos;
+            scrollRect.MoveContentStartPosition(DoScroll(direction));
+            previousAnchoredPos = scrollRect.content.anchoredPosition;
         }
 
         private Vector2 DoScroll(Vector2 direction)
@@ -182,7 +182,7 @@ namespace Game.UI
 
         private void SetRecyclingBounds()
         {
-            this.viewport.GetWorldCorners(_corners);
+            viewport.GetWorldCorners(_corners);
             float threshHold = recyclingThreshold * (_corners[2].y - _corners[0].y);
             _recyclableViewBounds.min = new Vector3(_corners[0].x, _corners[0].y - threshHold);
             _recyclableViewBounds.max = new Vector3(_corners[2].x, _corners[2].y + threshHold);
@@ -200,7 +200,7 @@ namespace Game.UI
             //to determine if content size needs to be updated
             //Recycle until cell at Top is avaiable and current item count smaller than datasource
             while (_cellPool[topMostCellIndex].MinY() > _recyclableViewBounds.max.y &&
-                   currentItemCount < this.adapter.GetDataCount())
+                   currentItemCount < adapter.GetDataCount())
             {
                 //Move top cell to bottom
                 var posY = _cellPool[bottomMostCellIndex].anchoredPosition.y -
@@ -210,7 +210,7 @@ namespace Game.UI
                     new Vector2(_cellPool[topMostCellIndex].anchoredPosition.x, posY);
 
                 //Cell for row at
-                this.adapter.OnUpdateView(
+                adapter.OnUpdateView(
                     view: _cellPool[topMostCellIndex],
                     index: currentItemCount
                 );
@@ -226,7 +226,7 @@ namespace Game.UI
             //Content anchor position adjustment.
             _cellPool.ForEach(cell =>
                 cell.anchoredPosition += n * Vector2.up * (_cellPool[topMostCellIndex].sizeDelta.y + spacing));
-            this.content.anchoredPosition -= n * Vector2.up * (_cellPool[topMostCellIndex].sizeDelta.y + spacing);
+            content.anchoredPosition -= n * Vector2.up * (_cellPool[topMostCellIndex].sizeDelta.y + spacing);
             _recycling = false;
             return -new Vector2(0, n * (_cellPool[topMostCellIndex].sizeDelta.y + spacing));
         }
@@ -255,7 +255,7 @@ namespace Game.UI
                 currentItemCount--;
 
                 //Cell for row at
-                this.adapter.OnUpdateView(
+                adapter.OnUpdateView(
                     view: _cellPool[bottomMostCellIndex],
                     index: currentItemCount - _cellPool.Count
                 );
@@ -267,7 +267,7 @@ namespace Game.UI
 
             _cellPool.ForEach(cell =>
                 cell.anchoredPosition -= n * Vector2.up * (_cellPool[topMostCellIndex].sizeDelta.y + spacing));
-            this.content.anchoredPosition += n * Vector2.up * (_cellPool[topMostCellIndex].sizeDelta.y + spacing);
+            content.anchoredPosition += n * Vector2.up * (_cellPool[topMostCellIndex].sizeDelta.y + spacing);
             _recycling = false;
             return new Vector2(0, n * (_cellPool[topMostCellIndex].sizeDelta.y + spacing));
         }

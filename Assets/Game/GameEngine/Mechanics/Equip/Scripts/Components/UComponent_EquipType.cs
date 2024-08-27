@@ -7,7 +7,7 @@ namespace Game.GameEngine.Mechanics
     {
         public EquipType Type
         {
-            get { return this.type; }
+            get { return type; }
         }
 
         [SerializeField]

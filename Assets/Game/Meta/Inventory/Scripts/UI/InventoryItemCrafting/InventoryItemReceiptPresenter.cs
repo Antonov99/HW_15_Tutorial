@@ -26,71 +26,71 @@ namespace Game.Meta
 
         public void Start()
         {
-            this.SetupIngredients();
-            this.SetupResult();
-            this.SetupCraftButton();
-            this.view.OnCraftButtonClicked += this.OnCraftButtonClicked;
+            SetupIngredients();
+            SetupResult();
+            SetupCraftButton();
+            view.OnCraftButtonClicked += OnCraftButtonClicked;
         }
 
         private void SetupCraftButton()
         {
-            var canCraft = this.craftManager.CanCraftItem(this.receipt);
-            this.view.SetInteractibleButton(canCraft);
+            var canCraft = craftManager.CanCraftItem(receipt);
+            view.SetInteractibleButton(canCraft);
         }
 
         public void Stop()
         {
-            this.view.OnCraftButtonClicked -= this.OnCraftButtonClicked;
+            view.OnCraftButtonClicked -= OnCraftButtonClicked;
         }
 
         private void OnCraftButtonClicked()
         {
-            if (!this.craftManager.CanCraftItem(this.receipt))
+            if (!craftManager.CanCraftItem(receipt))
             {
                 return;
             }
 
-            this.craftManager.CraftItem(this.receipt);
+            craftManager.CraftItem(receipt);
 
             //TODO: Show particles
                 
             //Update state:
-            this.SetupIngredients();
-            this.SetupCraftButton();
+            SetupIngredients();
+            SetupCraftButton();
         }
 
         private void SetupResult()
         {
-            var resultItem = this.receipt.resultInfo;
+            var resultItem = receipt.resultInfo;
             var metadata = resultItem.Metadata;
-            this.view.SetTitle(metadata.title);
-            this.view.SetDescription(metadata.decription);
-            this.view.SetIcon(metadata.icon);
+            view.SetTitle(metadata.title);
+            view.SetDescription(metadata.decription);
+            view.SetIcon(metadata.icon);
         }
 
         private void SetupIngredients()
         {
-            var ingredients = this.receipt.ingredients;
+            var ingredients = receipt.ingredients;
             var ingredientCount = ingredients.Length;
 
             //Show used ingredient views:
             for (var i = 0; i < ingredientCount; i++)
             {
                 var ingredient = ingredients[i];
-                var ingredientView = this.view.GetIngredient(i);
+                var ingredientView = view.GetIngredient(i);
                 var ingredientItem = ingredient.itemInfo;
 
                 var title = ingredientItem.Metadata.title;
                 var requiredCount = ingredient.requiredCount;
-                var actualCount = this.inventory.CountItems(ingredientItem.ItemName);
+                var actualCount = inventory.CountItems(ingredientItem.ItemName);
                 ingredientView.Setup(title, requiredCount, actualCount);
                 ingredientView.SetVisible(true);
             }
 
             //Hide unused ingredients views:
-            for (int i = ingredientCount, end = this.view.IngredientCount; i < end; i++)
+            for (int i = ingredientCount, end = view.IngredientCount; i < end; i++)
             {
-                var ingredientView = this.view.GetIngredient(i);
+                var ingredientView = view.GetIngredient(i);
                 ingredientView.SetVisible(false);
             }
         }

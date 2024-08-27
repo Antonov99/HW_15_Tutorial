@@ -331,8 +331,8 @@ namespace Cysharp.Threading.Tasks
 
         public TextSelectionEventConverter(UnityEvent<string, int, int> unityEvent)
         {
-            this.innerEvent = unityEvent;
-            this.invokeDelegate = InvokeCore;
+            innerEvent = unityEvent;
+            invokeDelegate = InvokeCore;
 
             innerEvent.AddListener(invokeDelegate);
         }
@@ -371,7 +371,7 @@ namespace Cysharp.Threading.Tasks
                 return;
             }
 
-            this.action = Invoke;
+            action = Invoke;
             this.unityEvent = unityEvent;
             this.callOnce = callOnce;
 
@@ -390,7 +390,7 @@ namespace Cysharp.Threading.Tasks
             core.Reset();
             if (isDisposed)
             {
-                core.TrySetCanceled(this.cancellationToken);
+                core.TrySetCanceled(cancellationToken);
             }
             return new UniTask(this, core.Version);
         }
@@ -481,7 +481,7 @@ namespace Cysharp.Threading.Tasks
                 return;
             }
 
-            this.action = Invoke;
+            action = Invoke;
             this.unityEvent = unityEvent;
             this.callOnce = callOnce;
 
@@ -500,7 +500,7 @@ namespace Cysharp.Threading.Tasks
             core.Reset();
             if (isDisposed)
             {
-                core.TrySetCanceled(this.cancellationToken);
+                core.TrySetCanceled(cancellationToken);
             }
             return new UniTask<T>(this, core.Version);
         }
@@ -617,18 +617,18 @@ namespace Cysharp.Threading.Tasks
         public UnityEventHandlerAsyncEnumerable(UnityEvent unityEvent, CancellationToken cancellationToken)
         {
             this.unityEvent = unityEvent;
-            this.cancellationToken1 = cancellationToken;
+            cancellationToken1 = cancellationToken;
         }
 
         public IUniTaskAsyncEnumerator<AsyncUnit> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            if (this.cancellationToken1 == cancellationToken)
+            if (cancellationToken1 == cancellationToken)
             {
-                return new UnityEventHandlerAsyncEnumerator(unityEvent, this.cancellationToken1, CancellationToken.None);
+                return new UnityEventHandlerAsyncEnumerator(unityEvent, cancellationToken1, CancellationToken.None);
             }
             else
             {
-                return new UnityEventHandlerAsyncEnumerator(unityEvent, this.cancellationToken1, cancellationToken);
+                return new UnityEventHandlerAsyncEnumerator(unityEvent, cancellationToken1, cancellationToken);
             }
         }
 
@@ -737,18 +737,18 @@ namespace Cysharp.Threading.Tasks
         public UnityEventHandlerAsyncEnumerable(UnityEvent<T> unityEvent, CancellationToken cancellationToken)
         {
             this.unityEvent = unityEvent;
-            this.cancellationToken1 = cancellationToken;
+            cancellationToken1 = cancellationToken;
         }
 
         public IUniTaskAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            if (this.cancellationToken1 == cancellationToken)
+            if (cancellationToken1 == cancellationToken)
             {
-                return new UnityEventHandlerAsyncEnumerator(unityEvent, this.cancellationToken1, CancellationToken.None);
+                return new UnityEventHandlerAsyncEnumerator(unityEvent, cancellationToken1, CancellationToken.None);
             }
             else
             {
-                return new UnityEventHandlerAsyncEnumerator(unityEvent, this.cancellationToken1, cancellationToken);
+                return new UnityEventHandlerAsyncEnumerator(unityEvent, cancellationToken1, cancellationToken);
             }
         }
 

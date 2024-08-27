@@ -12,24 +12,24 @@ namespace Game.Tutorial.Gameplay
 
         public void Show()
         {
-            this.rootGameObject.SetActive(true);
+            rootGameObject.SetActive(true);
         }
 
         public void Hide()
         {
-            this.gameObject.SetActive(false);   
+            gameObject.SetActive(false);   
         }
 
         public void SetPosition(Vector3 position)
         {
-            this.rootTransform.position = position;
+            rootTransform.position = position;
         }
         
         public void LookAt(Vector3 targetPosition)
         {
-            var distanceVector = targetPosition - this.rootTransform.position;
+            var distanceVector = targetPosition - rootTransform.position;
             distanceVector.y = 0;
-            this.rootTransform.rotation = Quaternion.LookRotation(distanceVector.normalized, Vector3.up);
+            rootTransform.rotation = Quaternion.LookRotation(distanceVector.normalized, Vector3.up);
         }
     }
 }

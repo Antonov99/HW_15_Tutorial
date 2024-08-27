@@ -13,12 +13,12 @@ namespace Game.Tutorial.UI
 
         public void SetTitle(string title)
         {
-            this.titleText.text = title;
+            titleText.text = title;
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
     }
 }

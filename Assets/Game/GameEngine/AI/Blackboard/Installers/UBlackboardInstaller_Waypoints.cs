@@ -22,17 +22,17 @@ namespace Game.Gameplay.AI
 
         protected override void Install(IBlackboard blackboard, GameContext context)
         {
-            var iterator = this.CreateIterator();
-            blackboard.AddVariable(this.iteratorKey, iterator);
+            var iterator = CreateIterator();
+            blackboard.AddVariable(iteratorKey, iterator);
         }
 
         private IEnumerator<Vector3> CreateIterator()
         {
-            var waypoints = this.pointsPath
+            var waypoints = pointsPath
                 .GetPositionPoints()
                 .ToArray();
 
-            return IteratorFactory.CreateIterator(this.mode, waypoints);
+            return IteratorFactory.CreateIterator(mode, waypoints);
         }
     }
 }

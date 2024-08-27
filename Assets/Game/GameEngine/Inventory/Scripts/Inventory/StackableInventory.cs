@@ -19,27 +19,27 @@ namespace Game.GameEngine.InventorySystem
 
         public StackableInventory()
         {
-            this.list = new ListInventory();
+            list = new ListInventory();
         }
 
         public InventoryItem[] GetAllItems()
         {
-            return this.list.GetAllItems();
+            return list.GetAllItems();
         }
 
         public List<InventoryItem> GetAllItemsUnsafe()
         {
-            return this.list.GetAllItemsUnsafe();
+            return list.GetAllItemsUnsafe();
         }
 
         public bool FindItemFirst(string name, out InventoryItem item)
         {
-            return this.list.FindItemFirst(name, out item);
+            return list.FindItemFirst(name, out item);
         }
 
         public bool FindItemFirst(InventoryItemFlags tags, out InventoryItem item)
         {
-            return this.list.FindItemFirst(tags, out item);
+            return list.FindItemFirst(tags, out item);
         }
 
         public bool FindItemLast(string name, out InventoryItem item)
@@ -49,22 +49,22 @@ namespace Game.GameEngine.InventorySystem
 
         public InventoryItem[] FindItems(string name)
         {
-            return this.list.FindItems(name);
+            return list.FindItems(name);
         }
 
         public InventoryItem[] FindItems(InventoryItemFlags tags)
         {
-            return this.list.FindItems(tags);
+            return list.FindItems(tags);
         }
 
         public bool IsEmpty()
         {
-            return this.list.IsEmpty();
+            return list.IsEmpty();
         }
 
         public bool IsItemExists(InventoryItem item)
         {
-            return this.list.IsItemExists(item);
+            return list.IsItemExists(item);
         }
         
         public bool SetupItem(InventoryItem item)
@@ -74,12 +74,12 @@ namespace Game.GameEngine.InventorySystem
                 return false;
             }
         
-            if (this.IsItemExists(item))
+            if (IsItemExists(item))
             {
                 return false;
             }
 
-            this.list.AddItem(item);
+            list.AddItem(item);
             return true;
         }
         
@@ -93,13 +93,13 @@ namespace Game.GameEngine.InventorySystem
                 return false;
             }
         
-            if (this.IsItemExists(item))
+            if (IsItemExists(item))
             {
                 return false;
             }
 
-            this.list.AddItem(item);
-            this.OnItemAdded?.Invoke(item);
+            list.AddItem(item);
+            OnItemAdded?.Invoke(item);
             return true;
         }
         
@@ -116,25 +116,25 @@ namespace Game.GameEngine.InventorySystem
 
             if (item.FlagsExists(InventoryItemFlags.STACKABLE))
             {
-                return this.RemoveAsStackable(item);
+                return RemoveAsStackable(item);
             }
 
-            return this.RemoveAsInstance(item);
+            return RemoveAsInstance(item);
         }
 
         public bool RemoveItem(string itemName)
         {
-            if (!this.list.FindItemLast(itemName, out var item))
+            if (!list.FindItemLast(itemName, out var item))
             {
                 return false;
             }
 
             if (item.FlagsExists(InventoryItemFlags.STACKABLE))
             {
-                return this.RemoveAsStackable(item);
+                return RemoveAsStackable(item);
             }
 
-            return this.RemoveAsInstance(item);
+            return RemoveAsInstance(item);
         }
 
         /// <summary>
@@ -146,25 +146,25 @@ namespace Game.GameEngine.InventorySystem
         {
             while (count > 0)
             {
-                if (!this.list.FindItemLast(itemName, out var item))
+                if (!list.FindItemLast(itemName, out var item))
                 {
                     return;
                 }
 
                 if (item.FlagsExists(InventoryItemFlags.STACKABLE))
                 {
-                    this.DecrementValueInStack(item, ref count);
+                    DecrementValueInStack(item, ref count);
                 }
                 else
                 {
-                    this.RemoveAsInstance(item);
+                    RemoveAsInstance(item);
                 }
             }
         }
         
         private bool RemoveAsStackable(InventoryItem item)
         {
-            if (!this.list.IsItemExists(item))
+            if (!list.IsItemExists(item))
             {
                 return false;
             }
@@ -176,9 +176,9 @@ namespace Game.GameEngine.InventorySystem
                 return true;
             }
 
-            if (this.list.RemoveItem(item))
+            if (list.RemoveItem(item))
             {
-                this.OnItemRemoved?.Invoke(item);
+                OnItemRemoved?.Invoke(item);
             }
 
             return true;
@@ -186,9 +186,9 @@ namespace Game.GameEngine.InventorySystem
 
         private bool RemoveAsInstance(InventoryItem item)
         {
-            if (this.list.RemoveItem(item))
+            if (list.RemoveItem(item))
             {
-                this.OnItemRemoved?.Invoke(item);
+                OnItemRemoved?.Invoke(item);
                 return true;
             }
 
@@ -199,11 +199,11 @@ namespace Game.GameEngine.InventorySystem
         {
             var result = 0;
 
-            var items = this.list.GetAllItemsUnsafe();
+            var items = list.GetAllItemsUnsafe();
             for (int i = 0, count = items.Count; i < count; i++)
             {
                 var item = items[i];
-                result += this.CountItem(item);
+                result += CountItem(item);
             }
 
             return result;
@@ -212,7 +212,7 @@ namespace Game.GameEngine.InventorySystem
         public Dictionary<string, int> CountAllItemsInDictionary()
         {
             var result = new Dictionary<string, int>();
-            var items = this.list.GetAllItemsUnsafe();
+            var items = list.GetAllItemsUnsafe();
             for (int i = 0, count = items.Count; i < count; i++)
             {
                 var item = items[i];
@@ -238,11 +238,11 @@ namespace Game.GameEngine.InventorySystem
         {
             var result = 0;
 
-            var items = this.list.FindItems(itemName);
+            var items = list.FindItems(itemName);
             for (int i = 0, count = items.Length; i < count; i++)
             {
                 var item = items[i];
-                result += this.CountItem(item);
+                result += CountItem(item);
             }
 
             return result;
@@ -267,11 +267,11 @@ namespace Game.GameEngine.InventorySystem
         {
             if (prototype.FlagsExists(InventoryItemFlags.STACKABLE))
             {
-                this.SpawnAsStackable(prototype, count);
+                SpawnAsStackable(prototype, count);
             }
             else
             {
-                this.SpawnAsSingle(prototype, count);
+                SpawnAsSingle(prototype, count);
             }
         }
 
@@ -282,16 +282,16 @@ namespace Game.GameEngine.InventorySystem
 
             while (count > 0)
             {
-                if (this.list.FindItemFirst(IsAvailable, out var targetItem))
+                if (list.FindItemFirst(IsAvailable, out var targetItem))
                 {
-                    this.IncrementValueInStack(targetItem, stackSize, ref count);
+                    IncrementValueInStack(targetItem, stackSize, ref count);
                 }
                 else
                 {
                     targetItem = prototype.Clone();
-                    this.IncrementValueInStack(targetItem, stackSize, ref count);
-                    this.list.AddItem(targetItem);
-                    this.OnItemAdded?.Invoke(targetItem);
+                    IncrementValueInStack(targetItem, stackSize, ref count);
+                    list.AddItem(targetItem);
+                    OnItemAdded?.Invoke(targetItem);
                 }
             }
 
@@ -305,15 +305,15 @@ namespace Game.GameEngine.InventorySystem
         {
             for (var i = 0; i < count; i++)
             {
-                this.SpawnAsSingle(prototype);
+                SpawnAsSingle(prototype);
             }
         }
 
         private void SpawnAsSingle(InventoryItem prototype)
         {
             var item = prototype.Clone();
-            this.list.AddItem(item);
-            this.OnItemAdded?.Invoke(item);
+            list.AddItem(item);
+            OnItemAdded?.Invoke(item);
         }
 
         private void IncrementValueInStack(InventoryItem item, int stackSize, ref int remainingCount)
@@ -344,7 +344,7 @@ namespace Game.GameEngine.InventorySystem
             {
                 newCount = 0;
                 stackableComponent.Value = 0;
-                this.RemoveAsInstance(item);
+                RemoveAsInstance(item);
             }
             else
             {
@@ -363,7 +363,7 @@ namespace Game.GameEngine.InventorySystem
         [ShowInInspector]
         private List<InventoryItem> _items
         {
-            get { return this.list.GetAllItemsUnsafe(); }
+            get { return list.GetAllItemsUnsafe(); }
         }
 #endif
     }

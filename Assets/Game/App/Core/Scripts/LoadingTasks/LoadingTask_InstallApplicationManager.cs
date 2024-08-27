@@ -20,7 +20,7 @@ namespace Game.App
             {
                 if (service is IAppUpdateListener or IAppPauseListener or IAppResumeListener or IAppQuitListener)
                 {
-                    this.manager.AddListener(service);
+                    manager.AddListener(service);
                 }
             }
 

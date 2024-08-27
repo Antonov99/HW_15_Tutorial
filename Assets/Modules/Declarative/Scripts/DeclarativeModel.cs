@@ -21,102 +21,102 @@ namespace Declarative
 
         internal object GetSection(Type type)
         {
-            return this.sections[type];
+            return sections[type];
         }
 
         internal bool TryGetSection(Type type, out object section)
         {
-            return this.sections.TryGetValue(type, out section);
+            return sections.TryGetValue(type, out section);
         }
 
         private void Awake()
         {
-            this.onAwake = null;
-            this.onEnable = null;
-            this.onStart = null;
-            this.onUpdate = null;
-            this.onFixedUpdate = null;
-            this.onLateUpdate = null;
-            this.onDisable = null;
-            this.onDestroy = null;
+            onAwake = null;
+            onEnable = null;
+            onStart = null;
+            onUpdate = null;
+            onFixedUpdate = null;
+            onLateUpdate = null;
+            onDisable = null;
+            onDestroy = null;
 
-            this.monoContext = new MonoContext(this);
-            this.sections = SectionScanner.ScanSections(this);
+            monoContext = new MonoContext(this);
+            sections = SectionScanner.ScanSections(this);
 
-            foreach (var section in this.sections.Values)
+            foreach (var section in sections.Values)
             {
-                MonoContextInstaller.InstallElements(section, this.monoContext);
+                MonoContextInstaller.InstallElements(section, monoContext);
                 SectionConstructor.ConstructSection(section, this);
             }
 
-            this.monoContext.Awake();
-            this.onAwake?.Invoke();
+            monoContext.Awake();
+            onAwake?.Invoke();
         }
 
         private void OnEnable()
         {
-            this.monoContext.OnEnable();
-            this.onEnable?.Invoke();
+            monoContext.OnEnable();
+            onEnable?.Invoke();
         }
 
         private void Start()
         {
-            this.monoContext.Start();
-            this.onStart?.Invoke();
+            monoContext.Start();
+            onStart?.Invoke();
         }
 
         private void FixedUpdate()
         {
             var deltaTime = Time.fixedDeltaTime;
-            this.monoContext.FixedUpdate(deltaTime);
-            this.onFixedUpdate?.Invoke(deltaTime);
+            monoContext.FixedUpdate(deltaTime);
+            onFixedUpdate?.Invoke(deltaTime);
         }
 
         private void Update()
         {
             var deltaTime = Time.deltaTime;
-            this.monoContext.Update(deltaTime);
-            this.onUpdate?.Invoke(deltaTime);
+            monoContext.Update(deltaTime);
+            onUpdate?.Invoke(deltaTime);
         }
 
         private void LateUpdate()
         {
             var deltaTime = Time.deltaTime;
-            this.monoContext.LateUpdate(deltaTime);
-            this.onLateUpdate?.Invoke(deltaTime);
+            monoContext.LateUpdate(deltaTime);
+            onLateUpdate?.Invoke(deltaTime);
         }
 
         private void OnDisable()
         {
-            this.monoContext.OnDisable();
-            this.onDisable?.Invoke();
+            monoContext.OnDisable();
+            onDisable?.Invoke();
         }
 
         private void OnDestroy()
         {
-            this.monoContext.OnDestroy();
-            this.onDestroy?.Invoke();
+            monoContext.OnDestroy();
+            onDestroy?.Invoke();
         }
 
 #if UNITY_EDITOR
         [ContextMenu("Construct")]
         private void Construct()
         {
-            this.Awake();
-            this.OnEnable();
-            Debug.Log($"<color=#FF6235>: {this.name} successfully constructed!</color>");
+            Awake();
+            OnEnable();
+            Debug.Log($"<color=#FF6235>: {name} successfully constructed!</color>");
         }
 
         [ContextMenu("Destruct")]
         private void Destruct()
         {
-            if (this.monoContext != null)
+            if (monoContext != null)
             {
-                this.monoContext.OnDisable();
-                this.monoContext.OnDestroy();
+                monoContext.OnDisable();
+                monoContext.OnDestroy();
             }
 
-            Debug.Log($"<color=#FF6235>: {this.name} successfully destructed!</color>");
+            Debug.Log($"<color=#FF6235>: {name} successfully destructed!</color>");
         }
 #endif
     }

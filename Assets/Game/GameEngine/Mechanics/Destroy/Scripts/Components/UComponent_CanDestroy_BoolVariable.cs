@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
 
         public bool CanDestroy()
         {
-            return this.isAlive.Current;
+            return isAlive.Current;
         }
     }
 }

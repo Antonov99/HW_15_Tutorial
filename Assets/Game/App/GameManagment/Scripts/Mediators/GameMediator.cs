@@ -15,25 +15,25 @@ namespace Game.App
 
         void IGameMediator.SetupData(GameRepository repository)
         {
-            var service = this.gameFacade.GetService<TGameService>();
+            var service = gameFacade.GetService<TGameService>();
 
-            if (repository.TryGetData(this.DataKey, out var json))
+            if (repository.TryGetData(DataKey, out var json))
             {
                 var data = JsonConvert.DeserializeObject<TData>(json);
-                this.SetupFromData(service, data);
+                SetupFromData(service, data);
             }
             else
             {
-                this.SetupByDefault(service);
+                SetupByDefault(service);
             }
         }
 
         void IGameMediator.SaveData(GameRepository repository)
         {
-            var service = this.gameFacade.GetService<TGameService>();
-            var data = this.ConvertToData(service);
+            var service = gameFacade.GetService<TGameService>();
+            var data = ConvertToData(service);
             var json = JsonConvert.SerializeObject(data);
-            repository.SetData(this.DataKey, json);
+            repository.SetData(DataKey, json);
         }
 
         protected abstract void SetupFromData(TGameService service, TData data);

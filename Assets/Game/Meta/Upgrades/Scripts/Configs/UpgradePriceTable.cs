@@ -20,8 +20,8 @@ namespace Game.Meta
         public int GetPrice(int level)
         {
             var index = level - 1;
-            index = Mathf.Clamp(index, 0, this.levels.Length - 1);
-            return this.levels[index];
+            index = Mathf.Clamp(index, 0, levels.Length - 1);
+            return levels[index];
         }
 
         private void DrawLevels(int index)
@@ -32,7 +32,7 @@ namespace Game.Meta
         
         public void OnValidate(int maxLevel)
         {
-            this.EvaluatePriceTable(maxLevel);
+            EvaluatePriceTable(maxLevel);
         }
 
         private void EvaluatePriceTable(int maxLevel)
@@ -41,11 +41,11 @@ namespace Game.Meta
             table[0] = new int();
             for (var level = 2; level <= maxLevel; level++)
             {
-                var price = this.basePrice * level;
+                var price = basePrice * level;
                 table[level - 1] = price;
             }
 
-            this.levels = table;
+            levels = table;
         }
     }
 }

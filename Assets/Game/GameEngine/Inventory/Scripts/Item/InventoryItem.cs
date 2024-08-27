@@ -10,17 +10,17 @@ namespace Game.GameEngine.InventorySystem
     {
         public string Name
         {
-            get { return this.name; }
+            get { return name; }
         }
 
         public InventoryItemFlags Flags
         {
-            get { return this.flags; }
+            get { return flags; }
         }
 
         public InventoryItemMetadata Metadata
         {
-            get { return this.metadata; }
+            get { return metadata; }
         }
 
         [PropertyOrder(-10)]
@@ -41,8 +41,8 @@ namespace Game.GameEngine.InventorySystem
 
         public InventoryItem()
         {
-            this.name = string.Empty;
-            this.components = new object[0];
+            name = string.Empty;
+            components = new object[0];
         }
 
         public InventoryItem(
@@ -60,9 +60,9 @@ namespace Game.GameEngine.InventorySystem
 
         public T GetComponent<T>()
         {
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            for (int i = 0, count = components.Length; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is T result)
                 {
                     return result;
@@ -75,9 +75,9 @@ namespace Game.GameEngine.InventorySystem
         public T[] GetComponents<T>()
         {
             var result = new List<T>();
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            for (int i = 0, count = components.Length; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is T tComponent)
                 {
                     result.Add(tComponent);
@@ -89,14 +89,14 @@ namespace Game.GameEngine.InventorySystem
 
         public object[] GetAllComponents()
         {
-            return this.components;
+            return components;
         }
 
         public bool TryGetComponent<T>(out T result)
         {
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            for (int i = 0, count = components.Length; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is T tComponent)
                 {
                     result = tComponent;
@@ -111,21 +111,21 @@ namespace Game.GameEngine.InventorySystem
         public InventoryItem Clone()
         {
             return new InventoryItem(
-                this.name,
-                this.flags,
-                this.metadata,
-                this.CloneComponents()
+                name,
+                flags,
+                metadata,
+                CloneComponents()
             );
         }
 
         private object[] CloneComponents()
         {
-            var count = this.components.Length;
+            var count = components.Length;
             var result = new object[count];
 
             for (var i = 0; i < count; i++)
             {
-                var component = this.components[i];
+                var component = components[i];
                 if (component is ICloneable cloneable)
                 {
                     component = cloneable.Clone();

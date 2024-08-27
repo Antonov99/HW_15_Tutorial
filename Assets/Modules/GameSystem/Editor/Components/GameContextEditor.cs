@@ -26,81 +26,81 @@ namespace GameSystem.UnityEditor
 
         private void OnEnable()
         {
-            this.gameContext = (GameContext) this.target;
+            gameContext = (GameContext) target;
 
-            this.autoRun = this.serializedObject.FindProperty(nameof(this.autoRun));
+            autoRun = serializedObject.FindProperty(nameof(autoRun));
             
-            this.gameServices = this.serializedObject.FindProperty(nameof(this.gameServices));
-            this.gameElements = this.serializedObject.FindProperty(nameof(this.gameElements));
-            this.constructTasks = this.serializedObject.FindProperty(nameof(this.constructTasks));
+            gameServices = serializedObject.FindProperty(nameof(gameServices));
+            gameElements = serializedObject.FindProperty(nameof(gameElements));
+            constructTasks = serializedObject.FindProperty(nameof(constructTasks));
 
-           this.dragAndDropServiceDrawler = DragAndDropDrawler.CreateForServices(this.OnDragAndDropService);
-           this.dragAndDropElementDrawler = DragAndDropDrawler.CreateForElements(this.OnDragAndDropElement);
-           this.dragAndDropInitTaskDrawler = DragAndDropDrawler.CreateForConstructTasks(this.OnDragAndDropTask);
+           dragAndDropServiceDrawler = DragAndDropDrawler.CreateForServices(OnDragAndDropService);
+           dragAndDropElementDrawler = DragAndDropDrawler.CreateForElements(OnDragAndDropElement);
+           dragAndDropInitTaskDrawler = DragAndDropDrawler.CreateForConstructTasks(OnDragAndDropTask);
         }
 
         private void OnDisable()
         {
-            this.dragAndDropServiceDrawler.OnDragAndDrop -= this.OnDragAndDropService;
-            this.dragAndDropElementDrawler.OnDragAndDrop -= this.OnDragAndDropElement;
-            this.dragAndDropInitTaskDrawler.OnDragAndDrop -= this.OnDragAndDropTask;
+            dragAndDropServiceDrawler.OnDragAndDrop -= OnDragAndDropService;
+            dragAndDropElementDrawler.OnDragAndDrop -= OnDragAndDropElement;
+            dragAndDropInitTaskDrawler.OnDragAndDrop -= OnDragAndDropTask;
         }
 
         public override void OnInspectorGUI()
         {
-            this.serializedObject.Update();
+            serializedObject.Update();
 
             EditorGUILayout.Space(2);
-            EditorGUILayout.PropertyField(this.autoRun);
+            EditorGUILayout.PropertyField(autoRun);
 
             EditorGUILayout.Space(4);
             GUI.enabled = false;
-            EditorGUILayout.LabelField($"Status:  {this.gameContext.CurrentState}");
+            EditorGUILayout.LabelField($"Status:  {gameContext.CurrentState}");
             GUI.enabled = true;
 
             EditorGUILayout.Space(2);
-            this.DrawGameServices();
+            DrawGameServices();
             EditorGUILayout.Space(10);
-            this.DrawGameElements();
+            DrawGameElements();
             EditorGUILayout.Space(10);
-            this.DrawInitTasks();
+            DrawInitTasks();
 
-            this.serializedObject.ApplyModifiedProperties();
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void DrawGameServices()
         {
-            EditorGUILayout.PropertyField(this.gameServices, includeChildren: true);
+            EditorGUILayout.PropertyField(gameServices, includeChildren: true);
             EditorGUILayout.Space(8);
-            this.dragAndDropServiceDrawler.Draw();
+            dragAndDropServiceDrawler.Draw();
         }
 
         private void DrawGameElements()
         {
-            EditorGUILayout.PropertyField(this.gameElements, includeChildren: true);
+            EditorGUILayout.PropertyField(gameElements, includeChildren: true);
             EditorGUILayout.Space(8);
-            this.dragAndDropElementDrawler.Draw();
+            dragAndDropElementDrawler.Draw();
         }
 
         private void DrawInitTasks()
         {
-            EditorGUILayout.PropertyField(this.constructTasks, includeChildren: true);
+            EditorGUILayout.PropertyField(constructTasks, includeChildren: true);
             EditorGUILayout.Space(8);
-            this.dragAndDropInitTaskDrawler.Draw();
+            dragAndDropInitTaskDrawler.Draw();
         }
 
         private void OnDragAndDropElement(Object draggedObject)
         {
             if (draggedObject is GameObject gameObject)
             {
-                this.AddElementByGameObject(gameObject);
-                EditorUtility.SetDirty(this.gameContext);
+                AddElementByGameObject(gameObject);
+                EditorUtility.SetDirty(gameContext);
             }
 
             if (draggedObject is IGameElement gameElement)
             {
-                this.gameContext.Editor_AddElement((MonoBehaviour) gameElement);
-                EditorUtility.SetDirty(this.gameContext);
+                gameContext.Editor_AddElement((MonoBehaviour) gameElement);
+                EditorUtility.SetDirty(gameContext);
             }
         }
 
@@ -109,7 +109,7 @@ namespace GameSystem.UnityEditor
             var gameElements = gameObject.GetComponents<IGameElement>();
             foreach (var element in gameElements)
             {
-                this.gameContext.Editor_AddElement((MonoBehaviour) element);
+                gameContext.Editor_AddElement((MonoBehaviour) element);
             }
         }
 
@@ -117,14 +117,14 @@ namespace GameSystem.UnityEditor
         {
             if (draggedObject is GameObject gameObject)
             {
-                this.AddServiceByGameObject(gameObject);
-                EditorUtility.SetDirty(this.gameContext);
+                AddServiceByGameObject(gameObject);
+                EditorUtility.SetDirty(gameContext);
             }
 
             if (draggedObject is MonoBehaviour monoBehaviour)
             {
-                this.AddServiceByMonoBehavour(monoBehaviour);
-                EditorUtility.SetDirty(this.gameContext);
+                AddServiceByMonoBehavour(monoBehaviour);
+                EditorUtility.SetDirty(gameContext);
             }
         }
 
@@ -132,13 +132,13 @@ namespace GameSystem.UnityEditor
         {
             if (monoBehaviour is IGameServiceGroup)
             {
-                this.gameContext.Editor_AddService(monoBehaviour);
+                gameContext.Editor_AddService(monoBehaviour);
                 return;
             }
 
             if (monoBehaviour is not IGameElementGroup)
             {
-                this.gameContext.Editor_AddService(monoBehaviour);
+                gameContext.Editor_AddService(monoBehaviour);
             }
         }
 
@@ -147,7 +147,7 @@ namespace GameSystem.UnityEditor
             var monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
             foreach (var monoBehaviour in monoBehaviours)
             {
-                this.AddServiceByMonoBehavour(monoBehaviour);
+                AddServiceByMonoBehavour(monoBehaviour);
             }
         }
         
@@ -155,14 +155,14 @@ namespace GameSystem.UnityEditor
         {
             if (draggedObject is GameContext.ConstructTask task)
             {
-                this.AddInitTask(task);
-                EditorUtility.SetDirty(this.gameContext);
+                AddInitTask(task);
+                EditorUtility.SetDirty(gameContext);
             }
         }
 
         private void AddInitTask(GameContext.ConstructTask task)
         {
-            this.gameContext.Editor_AddConstructTask(task);
+            gameContext.Editor_AddConstructTask(task);
         }
     }
 }

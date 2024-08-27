@@ -30,14 +30,14 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public bool CanStartPatrol(PatrolByPointsOperation operation)
         {
-            if (this.IsPatrol)
+            if (IsPatrol)
             {
                 return false;
             }
 
-            for (int i = 0, count = this.preconditions.Length; i < count; i++)
+            for (int i = 0, count = preconditions.Length; i < count; i++)
             {
-                var condition = this.preconditions[i];
+                var condition = preconditions[i];
                 if (!condition.IsTrue(operation))
                 {
                     return false;
@@ -50,40 +50,40 @@ namespace Game.GameEngine.Mechanics
         [Button]
         public void StartPatrol(PatrolByPointsOperation operation)
         {
-            if (!this.CanStartPatrol(operation))
+            if (!CanStartPatrol(operation))
             {
                 return;
             }
 
-            for (int i = 0, count = this.startActions.Length; i < count; i++)
+            for (int i = 0, count = startActions.Length; i < count; i++)
             {
-                var action = this.startActions[i];
+                var action = startActions[i];
                 action.Do(operation);
             }
 
-            this.CurrentOperation = operation;
-            this.IsPatrol = true;
-            this.OnPatrolStarted?.Invoke(operation);
+            CurrentOperation = operation;
+            IsPatrol = true;
+            OnPatrolStarted?.Invoke(operation);
         }
 
         [Button]
         public void StopPatrol()
         {
-            if (!this.IsPatrol)
+            if (!IsPatrol)
             {
                 return;
             }
 
-            var operation = this.CurrentOperation;
-            for (int i = 0, count = this.stopActions.Length; i < count; i++)
+            var operation = CurrentOperation;
+            for (int i = 0, count = stopActions.Length; i < count; i++)
             {
-                var action = this.stopActions[i];
+                var action = stopActions[i];
                 action.Do(operation);
             }
 
-            this.IsPatrol = false;
-            this.CurrentOperation = default;
-            this.OnPatrolStopped?.Invoke(operation);
+            IsPatrol = false;
+            CurrentOperation = default;
+            OnPatrolStopped?.Invoke(operation);
         }
     }
 }

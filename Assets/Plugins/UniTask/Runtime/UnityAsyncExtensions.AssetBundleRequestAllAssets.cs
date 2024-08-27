@@ -40,7 +40,7 @@ namespace Cysharp.Threading.Tasks
             public AssetBundleRequestAllAssetsAwaiter(AssetBundleRequest asyncOperation)
             {
                 this.asyncOperation = asyncOperation;
-                this.continuationAction = null;
+                continuationAction = null;
             }
 
             public AssetBundleRequestAllAssetsAwaiter GetAwaiter()

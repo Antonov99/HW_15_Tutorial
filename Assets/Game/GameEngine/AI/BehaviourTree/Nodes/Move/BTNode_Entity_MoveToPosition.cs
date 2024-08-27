@@ -31,41 +31,41 @@ namespace Game.GameEngine.AI
 
         public void ConstructStoppingDistance(float stoppingDistance)
         {
-            this.moveAgent.SetStoppingDistance(stoppingDistance);
+            moveAgent.SetStoppingDistance(stoppingDistance);
         }
 
         protected override void Run()
         {
-            if (!this.blackboard.TryGetVariable(this.unitKey, out IEntity entity))
+            if (!blackboard.TryGetVariable(unitKey, out IEntity entity))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            if (!this.blackboard.TryGetVariable(this.movePositionKey, out Vector3 targetPosition))
+            if (!blackboard.TryGetVariable(movePositionKey, out Vector3 targetPosition))
             {
-                this.Return(false);
+                Return(false);
                 return;
             }
 
-            this.moveAgent.OnTargetReached += this.OnTargetReached;
-            this.moveAgent.SetMovingEntity(entity);
-            this.moveAgent.SetTarget(targetPosition);
-            this.moveAgent.Play();
+            moveAgent.OnTargetReached += OnTargetReached;
+            moveAgent.SetMovingEntity(entity);
+            moveAgent.SetTarget(targetPosition);
+            moveAgent.Play();
         }
 
         private void OnTargetReached(bool isReached)
         {
             if (isReached)
             {
-                this.Return(true);
+                Return(true);
             }
         }
 
         protected override void OnDispose()
         {
-            this.moveAgent.OnTargetReached -= this.OnTargetReached;
-            this.moveAgent.Stop();
+            moveAgent.OnTargetReached -= OnTargetReached;
+            moveAgent.Stop();
         }
     }
 }

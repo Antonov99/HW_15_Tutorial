@@ -10,7 +10,7 @@ public sealed class BigNumberPropertyDrawer : OdinValueDrawer<BigNumber>
 {
     protected override void DrawPropertyLayout(GUIContent label)
     {
-        var bigNumber = this.ValueEntry.SmartValue;
+        var bigNumber = ValueEntry.SmartValue;
         var baseValue = bigNumber.GetBaseValue();
         Enum order = bigNumber.GetOrder();
 
@@ -25,7 +25,7 @@ public sealed class BigNumberPropertyDrawer : OdinValueDrawer<BigNumber>
         order = SirenixEditorFields.EnumDropdown(rect.Split(2, 3), "Order", order);
         GUIHelper.PopLabelWidth();
 
-        this.ValueEntry.SmartValue = new BigNumber(baseValue, (BigNumber.Order) order);
+        ValueEntry.SmartValue = new BigNumber(baseValue, (BigNumber.Order) order);
     }
 }
 #endif

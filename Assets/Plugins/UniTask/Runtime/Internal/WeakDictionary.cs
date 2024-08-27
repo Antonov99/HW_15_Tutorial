@@ -20,10 +20,10 @@ namespace Cysharp.Threading.Tasks.Internal
         public WeakDictionary(int capacity = 4, float loadFactor = 0.75f, IEqualityComparer<TKey> keyComparer = null)
         {
             var tableSize = CalculateCapacity(capacity, loadFactor);
-            this.buckets = new Entry[tableSize];
+            buckets = new Entry[tableSize];
             this.loadFactor = loadFactor;
-            this.gate = new SpinLock(false);
-            this.keyEqualityComparer = keyComparer ?? EqualityComparer<TKey>.Default;
+            gate = new SpinLock(false);
+            keyEqualityComparer = keyComparer ?? EqualityComparer<TKey>.Default;
         }
 
         public bool TryAdd(TKey key, TValue value)

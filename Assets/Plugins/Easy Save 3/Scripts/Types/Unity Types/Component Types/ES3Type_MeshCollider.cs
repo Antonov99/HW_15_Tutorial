@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_MeshCollider() : base(typeof(UnityEngine.MeshCollider))
+		public ES3Type_MeshCollider() : base(typeof(MeshCollider))
 		{
 			Instance = this;
 		}
 
 		protected override void WriteComponent(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.MeshCollider)obj;
+			var instance = (MeshCollider)obj;
 
             writer.WritePropertyByRef("sharedMesh", instance.sharedMesh);
             writer.WriteProperty("convex", instance.convex, ES3Type_bool.Instance);
@@ -30,17 +30,17 @@ namespace ES3Types
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.MeshCollider)obj;
+			var instance = (MeshCollider)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
 				{
 					
 					case "sharedMesh":
-						instance.sharedMesh = reader.Read<UnityEngine.Mesh>(ES3Type_Mesh.Instance);
+						instance.sharedMesh = reader.Read<Mesh>(ES3Type_Mesh.Instance);
 						break;
 					case "convex":
-						instance.convex = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.convex = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					/*case "inflateMesh":
 						instance.inflateMesh = reader.Read<System.Boolean>(ES3Type_bool.Instance);
@@ -49,16 +49,16 @@ namespace ES3Types
 						instance.skinWidth = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;*/
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "isTrigger":
-						instance.isTrigger = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.isTrigger = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "contactOffset":
-						instance.contactOffset = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.contactOffset = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "material":
-                        instance.sharedMaterial = reader.Read<UnityEngine.PhysicMaterial>(ES3Type_PhysicMaterial.Instance);
+                        instance.sharedMaterial = reader.Read<PhysicMaterial>(ES3Type_PhysicMaterial.Instance);
 						break;
 					default:
 						reader.Skip();
@@ -72,7 +72,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_MeshColliderArray() : base(typeof(UnityEngine.MeshCollider[]), ES3Type_MeshCollider.Instance)
+		public ES3Type_MeshColliderArray() : base(typeof(MeshCollider[]), ES3Type_MeshCollider.Instance)
 		{
 			Instance = this;
 		}

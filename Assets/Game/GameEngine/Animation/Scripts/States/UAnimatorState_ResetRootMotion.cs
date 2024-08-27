@@ -18,9 +18,9 @@ namespace Game.GameEngine.Animation
         
         public override void Enter()
         {
-            this.system.ResetRootMotion(
-                resetPosition: this.resetPosition,
-                resetRotation: this.resetRotation
+            system.ResetRootMotion(
+                resetPosition: resetPosition,
+                resetRotation: resetRotation
             );
         }
     }

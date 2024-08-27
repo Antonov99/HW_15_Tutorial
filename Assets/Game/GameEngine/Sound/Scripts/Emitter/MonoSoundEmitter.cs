@@ -16,9 +16,9 @@ namespace Game.GameEngine
         [GUIColor(0, 1, 0)]
         public void PlaySound(string id)
         {
-            if (this.catalog.FindSound(id, out var sound))
+            if (catalog.FindSound(id, out var sound))
             {
-                this.source.PlayOneShot(sound);
+                source.PlayOneShot(sound);
             }
         }
     }

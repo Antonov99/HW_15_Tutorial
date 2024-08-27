@@ -16,7 +16,7 @@ namespace Elementary
         [ShowInInspector]
         public bool IsVisible
         {
-            get { return this.isVisible; }
+            get { return isVisible; }
         }
 
         private bool isVisible;
@@ -29,14 +29,14 @@ namespace Elementary
 
         private void OnBecameVisible()
         {
-            this.isVisible = true;
-            this.OnVisible?.Invoke();
+            isVisible = true;
+            OnVisible?.Invoke();
         }
 
         private void OnBecameInvisible()
         {
-            this.isVisible = false;
-            this.OnInvisible?.Invoke();
+            isVisible = false;
+            OnInvisible?.Invoke();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AI.BTree
 #endif
         public bool IsRunning
         {
-            get { return this.isRunning; }
+            get { return isRunning; }
         }
 
         private bool isRunning;
@@ -20,42 +20,42 @@ namespace AI.BTree
 
         public void Run(IBehaviourCallback callback)
         {
-            if (this.isRunning)
+            if (isRunning)
             {
                 return;
             }
 
             this.callback = callback;
-            this.isRunning = true;
-            this.Run();
+            isRunning = true;
+            Run();
         }
 
         public void Abort()
         {
-            if (!this.isRunning)
+            if (!isRunning)
             {
                 return;
             }
 
-            this.OnAbort();
-            this.isRunning = false;
-            this.callback = null;
-            this.OnDispose();
+            OnAbort();
+            isRunning = false;
+            callback = null;
+            OnDispose();
         }
 
         protected abstract void Run();
 
         protected void Return(bool success)
         {
-            if (!this.isRunning)
+            if (!isRunning)
             {
                 return;
             }
 
-            this.isRunning = false;
-            this.OnReturn(success);
-            this.OnDispose();
-            this.InvokeCallback(success);
+            isRunning = false;
+            OnReturn(success);
+            OnDispose();
+            InvokeCallback(success);
         }
 
         #region Callbacks

@@ -16,19 +16,19 @@ namespace AI.BTree
 
         private void Awake()
         {
-            if (this.injectOnAwake)
+            if (injectOnAwake)
             {
-                this.InjectBehaviourTree();
+                InjectBehaviourTree();
             }
         }
 
         public void InjectBehaviourTree()
         {
-            var injects = this.root.GetComponentsInChildren<IBehaviourTreeInjective>();
+            var injects = root.GetComponentsInChildren<IBehaviourTreeInjective>();
             for (int i = 0, count = injects.Length; i < count; i++)
             {
                 var injections = injects[i];
-                injections.Tree = this.behaviourTree;
+                injections.Tree = behaviourTree;
             }
         }
     }

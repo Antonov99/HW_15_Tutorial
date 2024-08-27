@@ -23,37 +23,37 @@ namespace Game.GameEngine.Mechanics
 
         private void Awake()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         private void Update()
         {
-            if (this.moveEngine.IsMoving)
+            if (moveEngine.IsMoving)
             {
-                this.RotateInDirection();
+                RotateInDirection();
             }
         }
 
         public override void Enter()
         {
-            this.enabled = true;
+            enabled = true;
         }
 
         public override void Exit()
         {
-            this.enabled = false;
+            enabled = false;
         }
 
         private void RotateInDirection()
         {
-            var direction = this.moveEngine.Direction;
-            if (this.mode == Mode.INSTANTLY)
+            var direction = moveEngine.Direction;
+            if (mode == Mode.INSTANTLY)
             {
-                this.transformEngine.LookInDirection(direction);
+                transformEngine.LookInDirection(direction);
             }
-            else if (this.mode == Mode.SMOOTH)
+            else if (mode == Mode.SMOOTH)
             {
-                this.transformEngine.RotateTowardsInDirection(direction, this.speed.Current, Time.deltaTime);
+                transformEngine.RotateTowardsInDirection(direction, speed.Current, Time.deltaTime);
             }
         }
 

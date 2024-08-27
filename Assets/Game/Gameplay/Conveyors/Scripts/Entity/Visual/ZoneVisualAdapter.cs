@@ -20,22 +20,22 @@ namespace Game.Gameplay.Conveyors
 
         void IAwakeListener.Awake()
         {
-            this.visualZone.SetupItems(this.storage.Current);
+            visualZone.SetupItems(storage.Current);
         }
 
         void IEnableListener.OnEnable()
         {
-            this.storage.OnValueChanged += this.OnItemsChanged;
+            storage.OnValueChanged += OnItemsChanged;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.storage.OnValueChanged -= this.OnItemsChanged;
+            storage.OnValueChanged -= OnItemsChanged;
         }
 
         private void OnItemsChanged(int count)
         {
-            this.visualZone.SetupItems(count);
+            visualZone.SetupItems(count);
         }
     }
 }

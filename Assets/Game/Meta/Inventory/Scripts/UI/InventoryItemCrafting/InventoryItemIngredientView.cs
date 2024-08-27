@@ -21,15 +21,15 @@ namespace Game.Meta
 
         public void Setup(string title, int requiredCount, int actualCount)
         {
-            this.titleText.text = $"{title}: {actualCount}/{requiredCount}";
-            this.iconImage.sprite = actualCount >= requiredCount
-                ? this.completedIcon
-                : this.uncompletedIcon;
+            titleText.text = $"{title}: {actualCount}/{requiredCount}";
+            iconImage.sprite = actualCount >= requiredCount
+                ? completedIcon
+                : uncompletedIcon;
         }
 
         public void SetVisible(bool isVisible)
         {
-            this.gameObject.SetActive(isVisible);
+            gameObject.SetActive(isVisible);
         }
     }
 }

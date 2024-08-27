@@ -48,59 +48,59 @@ namespace Game.Meta
 
         public void SetProduct(Product product)
         {
-            this.currentProduct = product;
-            this.UpdateInfo();
-            this.UpdatePrice();
-            this.UpdateBuyButtonState();
+            currentProduct = product;
+            UpdateInfo();
+            UpdatePrice();
+            UpdateBuyButtonState();
         }
 
         public void Start()
         {
-            if (this.isStarted)
+            if (isStarted)
             {
                 return;
             }
 
-            this.moneyStorage.OnMoneyChanged += this.OnMoneyChanged;
-            this.resourceStorage.OnResourceChanged += this.OnResourcesChanged;
-            this.buyManager.OnBuyCompleted += this.OnBuyCompleted;
+            moneyStorage.OnMoneyChanged += OnMoneyChanged;
+            resourceStorage.OnResourceChanged += OnResourcesChanged;
+            buyManager.OnBuyCompleted += OnBuyCompleted;
             
-            this.view.BuyButton.OnClicked += this.OnBuyButtonClicked;
-            this.isStarted = true;
+            view.BuyButton.OnClicked += OnBuyButtonClicked;
+            isStarted = true;
             
-            this.UpdateBuyButtonState();
+            UpdateBuyButtonState();
         }
         
         public void Stop()
         {
-            if (!this.isStarted)
+            if (!isStarted)
             {
                 return;
             }
 
-            this.buyManager.OnBuyCompleted -= this.OnBuyCompleted;
-            this.view.BuyButton.OnClicked -= this.OnBuyButtonClicked;
-            this.moneyStorage.OnMoneyChanged -= this.OnMoneyChanged;
-            this.resourceStorage.OnResourceChanged -= this.OnResourcesChanged;
+            buyManager.OnBuyCompleted -= OnBuyCompleted;
+            view.BuyButton.OnClicked -= OnBuyButtonClicked;
+            moneyStorage.OnMoneyChanged -= OnMoneyChanged;
+            resourceStorage.OnResourceChanged -= OnResourcesChanged;
             
-            this.isStarted = false;
+            isStarted = false;
         }
 
         #region GameEvents
 
         private void OnBuyCompleted(Product product)
         {
-            this.UpdateBuyButtonState();
+            UpdateBuyButtonState();
         }
 
         private void OnResourcesChanged(ResourceType type, int amount)
         {
-            this.UpdateBuyButtonState();
+            UpdateBuyButtonState();
         }
 
         private void OnMoneyChanged(int money)
         {
-            this.UpdateBuyButtonState();
+            UpdateBuyButtonState();
         }
 
         #endregion
@@ -109,9 +109,9 @@ namespace Game.Meta
 
         private void OnBuyButtonClicked()
         {
-            if (this.buyManager.CanBuyProduct(this.currentProduct))
+            if (buyManager.CanBuyProduct(currentProduct))
             {
-                this.buyManager.BuyProduct(this.currentProduct);
+                buyManager.BuyProduct(currentProduct);
             }
         }
 
@@ -119,46 +119,46 @@ namespace Game.Meta
 
         private void UpdateInfo()
         {
-            var metadata = this.currentProduct.Metadata;
-            this.view.SetTitle(metadata.Title);
-            this.view.SetDescription(metadata.Decription);
-            this.view.SetIcon(metadata.Icon);
+            var metadata = currentProduct.Metadata;
+            view.SetTitle(metadata.Title);
+            view.SetDescription(metadata.Decription);
+            view.SetIcon(metadata.Icon);
         }
 
         private void UpdateBuyButtonState()
         {
-            var canBuyProduct = this.buyManager.CanBuyProduct(this.currentProduct);
+            var canBuyProduct = buyManager.CanBuyProduct(currentProduct);
             var state = canBuyProduct
                 ? ProductBuyButton.State.AVAILABLE
                 : ProductBuyButton.State.LOCKED;
-            this.view.BuyButton.SetState(state);
+            view.BuyButton.SetState(state);
         }
 
         private void UpdatePrice()
         {
-            if (this.currentProduct.TryGetComponent(out Component_MoneyPrice moneyPriceComponent))
+            if (currentProduct.TryGetComponent(out Component_MoneyPrice moneyPriceComponent))
             {
-                this.SetMoneyPrice(moneyPriceComponent);
+                SetMoneyPrice(moneyPriceComponent);
             }
-            else if (this.currentProduct.TryGetComponent(out Component_ResourcePrice resourcePriceComponent))
+            else if (currentProduct.TryGetComponent(out Component_ResourcePrice resourcePriceComponent))
             {
-                this.SetResourcePrice(resourcePriceComponent);
+                SetResourcePrice(resourcePriceComponent);
             }
         }
 
         private void SetMoneyPrice(Component_MoneyPrice component)
         {
-            var buyButton = this.view.BuyButton;
+            var buyButton = view.BuyButton;
             buyButton.SetPriceSize1();
 
             var pricePanel = buyButton.PriceItem1;
-            pricePanel.SetIcon(this.moneyIcon);
+            pricePanel.SetIcon(moneyIcon);
             pricePanel.SetPrice(component.Price.ToString());
         }
 
         private void SetResourcePrice(Component_ResourcePrice component)
         {
-            var buyButton = this.view.BuyButton;
+            var buyButton = view.BuyButton;
             var resources = component.GetPrice();
             var length = resources.Length;
             if (length is < 1 or > 2)
@@ -169,7 +169,7 @@ namespace Game.Meta
             var resource1 = resources[0];
             var pricePanel1 = buyButton.PriceItem1;
             pricePanel1.SetPrice(resource1.amount.ToString());
-            pricePanel1.SetIcon(this.resourceCatalog.FindResource(resource1.type).icon);
+            pricePanel1.SetIcon(resourceCatalog.FindResource(resource1.type).icon);
 
             if (length == 1)
             {
@@ -180,7 +180,7 @@ namespace Game.Meta
             var resource2 = resources[1];
             var pricePanel2 = buyButton.PriceItem2;
             pricePanel2.SetPrice(resource2.amount.ToString());
-            pricePanel2.SetIcon(this.resourceCatalog.FindResource(resource2.type).icon);
+            pricePanel2.SetIcon(resourceCatalog.FindResource(resource2.type).icon);
 
             buyButton.SetPriceSize2();
         }

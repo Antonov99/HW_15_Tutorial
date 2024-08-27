@@ -7,7 +7,7 @@ namespace Game.GameEngine.AI
     {
         public IBehaviourNode BehaviourNode
         {
-            set { this.behaviourNode = value; }
+            set { behaviourNode = value; }
         }
 
         private IBehaviourNode behaviourNode;
@@ -18,22 +18,22 @@ namespace Game.GameEngine.AI
 
         public Command_BTNode(IBehaviourNode node)
         {
-            this.behaviourNode = node;
+            behaviourNode = node;
         }
 
         protected override void Execute(T args)
         {
-            this.behaviourNode.Run(callback: this);
+            behaviourNode.Run(callback: this);
         }
 
         protected override void OnInterrupt()
         {
-            this.behaviourNode.Abort();
+            behaviourNode.Abort();
         }
 
         void IBehaviourCallback.Invoke(IBehaviourNode node, bool success)
         {
-            this.Return(success);
+            Return(success);
         }
     }
 }

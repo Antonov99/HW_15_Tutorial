@@ -1023,7 +1023,7 @@ namespace CraftingAnims
 			{
 				animator.SetTrigger("ItemHandoffTrigger");
 				StartCoroutine(_ShowItem("none", 0.4f));
-				StartCoroutine(_ChangeCharacterState(0.4f, CrafterController.CharacterState.Idle));
+				StartCoroutine(_ChangeCharacterState(0.4f, CharacterState.Idle));
 				LockMovement(1f);
 				BlendOff(0f);
 			}
@@ -1031,7 +1031,7 @@ namespace CraftingAnims
 			{
 				animator.SetTrigger("ItemBeltAwayTrigger");
 				StartCoroutine(_ShowItem("none", 0.5f));
-				StartCoroutine(_ChangeCharacterState(0.4f, CrafterController.CharacterState.Idle));
+				StartCoroutine(_ChangeCharacterState(0.4f, CharacterState.Idle));
 				LockMovement(1f);
 				BlendOff(0f);
 			}
@@ -1039,7 +1039,7 @@ namespace CraftingAnims
 			{
 				animator.SetTrigger("ItemPutdownTrigger");
 				StartCoroutine(_ShowItem("none", 0.7f));
-				charState = CrafterController.CharacterState.Idle;
+				charState = CharacterState.Idle;
 				LockMovement(1.2f);
 				BlendOff(0f);
 			}
@@ -1047,7 +1047,7 @@ namespace CraftingAnims
 			{
 				animator.SetTrigger("ItemDropTrigger");
 				StartCoroutine(_ShowItem("none", 0.4f));
-				charState = CrafterController.CharacterState.Idle;
+				charState = CharacterState.Idle;
 				LockMovement(1.2f);
 				BlendOff(0f);
 			}
@@ -1055,14 +1055,14 @@ namespace CraftingAnims
 			{
 				animator.SetTrigger("ItemPlantTrigger");
 				StartCoroutine(_ShowItem("none", 0.4f));
-				charState = CrafterController.CharacterState.Idle;
+				charState = CharacterState.Idle;
 				LockMovement(1.8f);
 				BlendOff(0f);
 			}
 
 			#endregion
 
-			if(charState == CrafterController.CharacterState.Idle)
+			if(charState == CharacterState.Idle)
 			{
 				#region GainItems
 
@@ -1070,7 +1070,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBeltTrigger");
 					StartCoroutine(_ShowItem("hammer", 0.5f));
-					charState = CrafterController.CharacterState.Hammer;
+					charState = CharacterState.Hammer;
 					LockMovement(1f);
 					RightHandBlend(true);
 				}
@@ -1078,7 +1078,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBeltTrigger");
 					StartCoroutine(_ShowItem("paintbrush", 0.5f));
-					charState = CrafterController.CharacterState.Painting;
+					charState = CharacterState.Painting;
 					LockMovement(1f);
 					RightHandBlend(true);
 				}
@@ -1086,7 +1086,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBackTrigger");
 					StartCoroutine(_ShowItem("axe", 0.5f));
-					charState = CrafterController.CharacterState.Axe;
+					charState = CharacterState.Axe;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1094,7 +1094,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBackTrigger");
 					StartCoroutine(_ShowItem("spear", 0.5f));
-					charState = CrafterController.CharacterState.Spear;
+					charState = CharacterState.Spear;
 					isSpearfishing = true;
 					LockMovement(1.2f);
 					RightHandBlend(true);
@@ -1103,7 +1103,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBackTrigger");
 					StartCoroutine(_ShowItem("pickaxe", 0.5f));
-					charState = CrafterController.CharacterState.PickAxe;
+					charState = CharacterState.PickAxe;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1111,7 +1111,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemPickupTrigger");
 					StartCoroutine(_ShowItem("shovel", 0.3f));
-					charState = CrafterController.CharacterState.Shovel;
+					charState = CharacterState.Shovel;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1119,7 +1119,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemPullUpTrigger");
 					StartCoroutine(_ShowItem("fishingpole", 0.5f));
-					charState = CrafterController.CharacterState.FishingPole;
+					charState = CharacterState.FishingPole;
 					LockMovement(1.7f);
 					RightHandBlend(true);
 				}
@@ -1127,7 +1127,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemTakeTrigger");
 					StartCoroutine(_ShowItem("food", 0.3f));
-					charState = CrafterController.CharacterState.Food;
+					charState = CharacterState.Food;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1135,7 +1135,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemRecieveTrigger");
 					StartCoroutine(_ShowItem("drink", 0.5f));
-					charState = CrafterController.CharacterState.Drink;
+					charState = CharacterState.Drink;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1143,35 +1143,35 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("CarryPickupTrigger");
 					StartCoroutine(_ShowItem("box", 0.1f));
-					charState = CrafterController.CharacterState.Box;
+					charState = CharacterState.Box;
 					LockMovement(1.2f);
 				}
 				if(action == "Pickup Lumber")
 				{
 					animator.SetTrigger("LumberPickupTrigger");
 					StartCoroutine(_ShowItem("lumber", 0.5f));
-					charState = CrafterController.CharacterState.Lumber;
+					charState = CharacterState.Lumber;
 					LockMovement(1.6f);
 				}
 				if(action == "Pickup Overhead")
 				{
 					animator.SetTrigger("CarryOverheadPickupTrigger");
 					StartCoroutine(_ShowItem("sphere", 0.5f));
-					charState = CrafterController.CharacterState.Overhead;
+					charState = CharacterState.Overhead;
 					LockMovement(1.2f);
 				}
 				if(action == "Recieve Box")
 				{
 					animator.SetTrigger("CarryRecieveTrigger");
 					StartCoroutine(_ShowItem("box", 0.5f));
-					charState = CrafterController.CharacterState.Box;
+					charState = CharacterState.Box;
 					LockMovement(1.2f);
 				}
 				if(action == "Get Saw")
 				{
 					animator.SetTrigger("ItemBeltTrigger");
 					StartCoroutine(_ShowItem("saw", 0.5f));
-					charState = CrafterController.CharacterState.Saw;
+					charState = CharacterState.Saw;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1179,7 +1179,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBeltTrigger");
 					StartCoroutine(_ShowItem("sickle", 0.5f));
-					charState = CrafterController.CharacterState.Sickle;
+					charState = CharacterState.Sickle;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1187,7 +1187,7 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemBackTrigger");
 					StartCoroutine(_ShowItem("rake", 0.5f));
-					charState = CrafterController.CharacterState.Rake;
+					charState = CharacterState.Rake;
 					LockMovement(1.2f);
 					RightHandBlend(true);
 				}
@@ -1199,33 +1199,33 @@ namespace CraftingAnims
 				if(action == "Use")
 				{
 					animator.SetBool("Use", true);
-					charState = CrafterController.CharacterState.Use;
+					charState = CharacterState.Use;
 					LockMovement(-1);
 				}
 				if(action == "Crawl")
 				{
 					animator.SetTrigger("CrawlStartTrigger");
-					charState = CrafterController.CharacterState.Crawl;
+					charState = CharacterState.Crawl;
 					LockMovement(1f);
 				}
 				if(action == "Sit")
 				{
 					animator.SetTrigger("ChairSitTrigger");
 					StartCoroutine(_ShowItem("chair", 0.3f));
-					charState = CrafterController.CharacterState.Sit;
+					charState = CharacterState.Sit;
 					LockMovement(-1f);
 				}
 				if(action == "Push Cart")
 				{
 					animator.SetTrigger("CartPullGrabTrigger");
 					StartCoroutine(_ShowItem("cart", 0.25f));
-					charState = CrafterController.CharacterState.Cart;
+					charState = CharacterState.Cart;
 					LockMovement(1.2f);
 				}
 				if(action == "Laydown")
 				{
 					animator.SetTrigger("LaydownLaydownTrigger");
-					charState = CrafterController.CharacterState.Laydown;
+					charState = CharacterState.Laydown;
 					LockMovement(-1f);
 				}
 				if(action == "Gather")
@@ -1272,28 +1272,28 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ClimbStartTrigger");
 					StartCoroutine(_ShowItem("ladder", 0.3f));
-					charState = CrafterController.CharacterState.Climb;
+					charState = CharacterState.Climb;
 					LockMovement(-1f);
 				}
 				if(action == "Climb Top")
 				{
-					this.gameObject.transform.position += new Vector3(0, 3, 0);
+					gameObject.transform.position += new Vector3(0, 3, 0);
 					animator.SetTrigger("ClimbOnTopTrigger");
 					StartCoroutine(_ShowItem("ladder", 0.3f));
-					charState = CrafterController.CharacterState.Climb;
+					charState = CharacterState.Climb;
 					LockMovement(-1f);
 				}
 				if(action == "Pray")
 				{
 					animator.SetTrigger("Pray-DownTrigger");
-					charState = CrafterController.CharacterState.Pray;
+					charState = CharacterState.Pray;
 					LockMovement(-1f);
 				}
 				if(action == "Push Pull")
 				{
 					animator.SetTrigger("PushPullStartTrigger");
 					StartCoroutine(_ShowItem("pushpull", 0.3f));
-					charState = CrafterController.CharacterState.PushPull;
+					charState = CharacterState.PushPull;
 					LockMovement(1.2f);
 				}
 			}
@@ -1302,48 +1302,48 @@ namespace CraftingAnims
 
 			#region EnterStates
 
-			if(charState == CrafterController.CharacterState.Shovel)
+			if(charState == CharacterState.Shovel)
 			{
 				if(action == "Start Digging")
 				{
 					animator.SetTrigger("DiggingStartTrigger");
-					charState = CrafterController.CharacterState.Digging;
+					charState = CharacterState.Digging;
 					LockMovement(-1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Rake)
+			if(charState == CharacterState.Rake)
 			{
 				if(action == "Start Raking")
 				{
 					animator.SetTrigger("DiggingStartTrigger");
-					charState = CrafterController.CharacterState.Raking;
+					charState = CharacterState.Raking;
 					LockMovement(-1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Axe)
+			if(charState == CharacterState.Axe)
 			{
 				if(action == "Start Chopping")
 				{
 					animator.SetTrigger("ChoppingStartTrigger");
-					charState = CrafterController.CharacterState.Chopping;
+					charState = CharacterState.Chopping;
 					LockMovement(-1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.FishingPole)
+			if(charState == CharacterState.FishingPole)
 			{
 				if(action == "Cast Reel")
 				{
 					animator.SetTrigger("FishingCastTrigger");
-					charState = CrafterController.CharacterState.Fishing;
+					charState = CharacterState.Fishing;
 					LockMovement(-1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Spear)
+			if(charState == CharacterState.Spear)
 			{
 				if(action == "Start Spearfishing")
 				{
 					animator.SetTrigger("SpearfishStartTrigger");
-					charState = CrafterController.CharacterState.Spearfishing;
+					charState = CharacterState.Spearfishing;
 					LockMovement(1.2f);
 				}
 			}
@@ -1352,17 +1352,17 @@ namespace CraftingAnims
 
 			#region States
 
-			if(charState == CrafterController.CharacterState.Cart)
+			if(charState == CharacterState.Cart)
 			{
 				if(action == "Release Cart")
 				{
 					animator.SetTrigger("CartPullReleaseTrigger");
 					StartCoroutine(_ShowItem("none", 0.75f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Hammer)
+			if(charState == CharacterState.Hammer)
 			{
 				if(action == "Hammer Wall")
 				{
@@ -1377,7 +1377,7 @@ namespace CraftingAnims
 				if(action == "Kneel")
 				{
 					animator.SetTrigger("ItemKneelDownTrigger");
-					charState = CrafterController.CharacterState.Kneel;
+					charState = CharacterState.Kneel;
 					LockMovement(-1f);
 				}
 				if(action == "Chisel")
@@ -1386,7 +1386,7 @@ namespace CraftingAnims
 					LockMovement(1.2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Painting)
+			if(charState == CharacterState.Painting)
 			{
 				if(action == "Paint Wall")
 				{
@@ -1399,25 +1399,25 @@ namespace CraftingAnims
 					LockMovement(1.9f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.PickAxe)
+			if(charState == CharacterState.PickAxe)
 			{
 				if(action == "Start PickAxing")
 				{
 					animator.SetTrigger("ChoppingStartTrigger");
-					charState = CrafterController.CharacterState.PickAxing;
+					charState = CharacterState.PickAxing;
 					LockMovement(-1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Saw)
+			if(charState == CharacterState.Saw)
 			{
 				if(action == "Start Sawing")
 				{
 					animator.SetTrigger("SawStartTrigger");
-					charState = CrafterController.CharacterState.Sawing;
+					charState = CharacterState.Sawing;
 					LockMovement(-1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Drink)
+			if(charState == CharacterState.Drink)
 			{
 				if(action == "Drink")
 				{
@@ -1430,7 +1430,7 @@ namespace CraftingAnims
 					LockMovement(2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Food)
+			if(charState == CharacterState.Food)
 			{
 				if(action == "Eat Food")
 				{
@@ -1441,11 +1441,11 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ItemPlantTrigger");
 					StartCoroutine(_ShowItem("none", 0.6f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Sickle)
+			if(charState == CharacterState.Sickle)
 			{
 				if(action == "Use Sickle")
 				{
@@ -1453,70 +1453,70 @@ namespace CraftingAnims
 					LockMovement(1.6f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Box)
+			if(charState == CharacterState.Box)
 			{
 				if(action == "Put Down Box")
 				{
 					animator.SetTrigger("CarryPutdownTrigger");
 					StartCoroutine(_ShowItem("none", 0.9f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 				if(action == "Throw Box")
 				{
 					animator.SetTrigger("CarryThrowTrigger");
 					StartCoroutine(_ShowItem("none", 0.5f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 				if(action == "Give Box")
 				{
 					animator.SetTrigger("CarryHandoffTrigger");
 					StartCoroutine(_ShowItem("none", 0.6f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Lumber)
+			if(charState == CharacterState.Lumber)
 			{
 				if(action == "Put Down Lumber")
 				{
 					animator.SetTrigger("CarryPutdownTrigger");
 					StartCoroutine(_ShowItem("none", 1f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Overhead)
+			if(charState == CharacterState.Overhead)
 			{
 				if(action == "Throw Sphere")
 				{
 					animator.SetTrigger("CarryOverheadThrowTrigger");
 					StartCoroutine(_ShowItem("none", 0.5f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.PushPull)
+			if(charState == CharacterState.PushPull)
 			{
 				if(action == "Release")
 				{
 					animator.SetTrigger("PushPullReleaseTrigger");
 					StartCoroutine(_ShowItem("none", 0.5f));
-					StartCoroutine(_ChangeCharacterState(0.5f, CrafterController.CharacterState.Idle));
+					StartCoroutine(_ChangeCharacterState(0.5f, CharacterState.Idle));
 					LockMovement(1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Crawl)
+			if(charState == CharacterState.Crawl)
 			{
 				if(action == "Getup")
 				{
 					animator.SetTrigger("CrawlGetupTrigger");
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Spear)
+			if(charState == CharacterState.Spear)
 			{
 				if(action == "Start Spearfishing")
 				{
@@ -1530,7 +1530,7 @@ namespace CraftingAnims
 				}
 			}
 
-			if(charState == CrafterController.CharacterState.Spearfishing)
+			if(charState == CharacterState.Spearfishing)
 			{
 				if(action == "Spear")
 				{
@@ -1540,7 +1540,7 @@ namespace CraftingAnims
 				if(action == "Finish Spearfishing")
 				{
 					animator.SetTrigger("SpearfishEndTrigger");
-					charState = CrafterController.CharacterState.Spear;
+					charState = CharacterState.Spear;
 					LockMovement(0.6f);
 				}
 			}
@@ -1549,26 +1549,26 @@ namespace CraftingAnims
 
 			#region LockedStates
 
-			if(charState == CrafterController.CharacterState.Pray)
+			if(charState == CharacterState.Pray)
 			{
 				if(action == "Stand")
 				{
 					animator.SetTrigger("Pray-StandTrigger");
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.4f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Kneel)
+			if(charState == CharacterState.Kneel)
 			{
 				if(action == "Hammer") { animator.SetTrigger("ItemKneelHammerTrigger"); }
 				if(action == "Stand")
 				{
 					animator.SetTrigger("ItemKneelStandTrigger");
-					charState = CrafterController.CharacterState.Hammer;
+					charState = CharacterState.Hammer;
 					LockMovement(1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Chopping)
+			if(charState == CharacterState.Chopping)
 			{
 				if(action == "Chop Vertical") { animator.SetTrigger("ChopVerticalTrigger"); }
 				if(action == "Chop Horizontal") { animator.SetTrigger("ChopHorizontalTrigger"); }
@@ -1577,11 +1577,11 @@ namespace CraftingAnims
 				if(action == "Finish Chopping")
 				{
 					animator.SetTrigger("ChopFinishTrigger");
-					charState = CrafterController.CharacterState.Axe;
+					charState = CharacterState.Axe;
 					LockMovement(1.4f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.PickAxing)
+			if(charState == CharacterState.PickAxing)
 			{
 				if(action == "Swing Vertical") { animator.SetTrigger("ChopVerticalTrigger"); }
 				if(action == "Swing Horizontal") { animator.SetTrigger("ChopHorizontalTrigger"); }
@@ -1591,40 +1591,40 @@ namespace CraftingAnims
 				if(action == "Finish PickAxing")
 				{
 					animator.SetTrigger("ChopFinishTrigger");
-					charState = CrafterController.CharacterState.PickAxe;
+					charState = CharacterState.PickAxe;
 					LockMovement(1.4f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Raking)
+			if(charState == CharacterState.Raking)
 			{
 				if(action == "Rake") { animator.SetTrigger("ItemRakeUse"); }
 				if(action == "Finish Raking")
 				{
 					animator.SetTrigger("DiggingFinishTrigger");
-					charState = CrafterController.CharacterState.Rake;
+					charState = CharacterState.Rake;
 					LockMovement(1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Digging)
+			if(charState == CharacterState.Digging)
 			{
 				if(action == "Dig") { animator.SetTrigger("DiggingScoopTrigger"); }
 				if(action == "Finish Digging")
 				{
 					animator.SetTrigger("DiggingFinishTrigger");
-					charState = CrafterController.CharacterState.Shovel;
+					charState = CharacterState.Shovel;
 					LockMovement(1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Sawing)
+			if(charState == CharacterState.Sawing)
 			{
 				if(action == "Finish Sawing")
 				{
 					animator.SetTrigger("SawFinishTrigger");
-					charState = CrafterController.CharacterState.Saw;
+					charState = CharacterState.Saw;
 					LockMovement(1f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Sit)
+			if(charState == CharacterState.Sit)
 			{
 				if(action == "Talk1") { animator.SetTrigger("ChairTalk1Trigger"); }
 				if(action == "Eat")
@@ -1643,27 +1643,27 @@ namespace CraftingAnims
 				{
 					animator.SetTrigger("ChairStandTrigger");
 					StartCoroutine(_ShowItem("none", 0.5f));
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(1.3f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Fishing)
+			if(charState == CharacterState.Fishing)
 			{
 				if(action == "Reel In") { animator.SetTrigger("FishingReelTrigger"); }
 				if(action == "Finish Fishing")
 				{
 					animator.SetTrigger("FishingFinishTrigger");
-					charState = CrafterController.CharacterState.FishingPole;
+					charState = CharacterState.FishingPole;
 					LockMovement(0.7f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Climb)
+			if(charState == CharacterState.Climb)
 			{
 				if(action == "Climb Off Bottom")
 				{
 					animator.SetTrigger("ClimbOffBottomTrigger");
 					StartCoroutine(_ShowItem("none", 0.9f));
-					StartCoroutine(_ChangeCharacterState(0.9f, CrafterController.CharacterState.Idle));
+					StartCoroutine(_ChangeCharacterState(0.9f, CharacterState.Idle));
 				}
 				if(action == "Climb Up") { animator.SetTrigger("ClimbUpTrigger"); }
 				if(action == "Climb Down") { animator.SetTrigger("ClimbDownTrigger"); }
@@ -1672,25 +1672,25 @@ namespace CraftingAnims
 					Vector3 posPivot = animator.pivotPosition;
 					animator.SetTrigger("ClimbOffTopTrigger");
 					StartCoroutine(_ShowItem("none", 2f));
-					StartCoroutine(_ChangeCharacterState(2f, CrafterController.CharacterState.Idle));
+					StartCoroutine(_ChangeCharacterState(2f, CharacterState.Idle));
 					animator.stabilizeFeet = true;
 				}
 			}
-			if(charState == CrafterController.CharacterState.Laydown)
+			if(charState == CharacterState.Laydown)
 			{
 				if(action == "Getup")
 				{
 					animator.SetTrigger("LaydownGetupTrigger");
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(2f);
 				}
 			}
-			if(charState == CrafterController.CharacterState.Use)
+			if(charState == CharacterState.Use)
 			{
 				if(action == "Stop Use")
 				{
 					animator.SetBool("Use", false);
-					charState = CrafterController.CharacterState.Idle;
+					charState = CharacterState.Idle;
 					LockMovement(0.3f);
 				}
 			}

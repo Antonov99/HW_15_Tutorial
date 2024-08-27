@@ -7,7 +7,7 @@ namespace Game.GameEngine.AI
     {
         public bool IsRunning
         {
-            get { return this.enqueuer.IsRunning; }
+            get { return enqueuer.IsRunning; }
         }
 
         private readonly IAICommandEnqueuer<Type> enqueuer;
@@ -19,12 +19,12 @@ namespace Game.GameEngine.AI
 
         public void Enqueue<T>(T args)
         {
-            this.enqueuer.Enqueue(args);
+            enqueuer.Enqueue(args);
         }
 
         public void Interrupt()
         {
-            this.enqueuer.Interrupt();
+            enqueuer.Interrupt();
         }
     }
 }

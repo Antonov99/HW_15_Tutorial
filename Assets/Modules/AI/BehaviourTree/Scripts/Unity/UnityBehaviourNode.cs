@@ -13,43 +13,43 @@ namespace AI.BTree
         [Button]
         public void Run(IBehaviourCallback callback)
         {
-            if (this.IsRunning)
+            if (IsRunning)
             {
                 return;
             }
 
             this.callback = callback;
-            this.IsRunning = true;
-            this.Run();
+            IsRunning = true;
+            Run();
         }
 
         [Button]
         public void Abort()
         {
-            if (!this.IsRunning)
+            if (!IsRunning)
             {
                 return;
             }
 
-            this.OnAbort();
-            this.IsRunning = false;
-            this.callback = null;
-            this.OnDispose();
+            OnAbort();
+            IsRunning = false;
+            callback = null;
+            OnDispose();
         }
 
         protected abstract void Run();
 
         protected void Return(bool success)
         {
-            if (!this.IsRunning)
+            if (!IsRunning)
             {
                 return;
             }
 
-            this.IsRunning = false;
-            this.OnReturn(success);
-            this.OnDispose();
-            this.InvokeCallback(success);
+            IsRunning = false;
+            OnReturn(success);
+            OnDispose();
+            InvokeCallback(success);
         }
 
         #region Callbacks

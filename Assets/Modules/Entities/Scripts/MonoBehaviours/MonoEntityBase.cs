@@ -11,7 +11,7 @@ namespace Entities
         {
             try
             {
-                return this.entity.Get<T>();
+                return entity.Get<T>();
             }
             catch (EntityException exception)
             {
@@ -22,37 +22,37 @@ namespace Entities
 
         public override object[] GetAll()
         {
-            return this.entity.GetAll();
+            return entity.GetAll();
         }
 
         public T[] GetAll<T>()
         {
-            return this.entity.GetAll<T>();
+            return entity.GetAll<T>();
         }
 
         public void Add(object element)
         {
-            this.entity.Add(element);
+            entity.Add(element);
         }
 
         public void Remove(object element)
         {
-            this.entity.Remove(element);
+            entity.Remove(element);
         }
 
         public void AddRange(params object[] elements)
         {
-            this.entity.AddRange(elements);
+            entity.AddRange(elements);
         }
 
         public void AddRange(IEnumerable<object> elements)
         {
-            this.entity.AddRange(elements);
+            entity.AddRange(elements);
         }
 
         public override bool TryGet<T>(out T element)
         {
-            return this.entity.TryGet(out element);
+            return entity.TryGet(out element);
         }
     }
 }

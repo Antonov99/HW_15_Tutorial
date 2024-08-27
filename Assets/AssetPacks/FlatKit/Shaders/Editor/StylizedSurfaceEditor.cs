@@ -246,10 +246,10 @@ public class StylizedSurfaceEditor : BaseShaderGUI {
 
             if (surfaceType == SurfaceType.Opaque) {
                 if (alphaClip) {
-                    material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.AlphaTest;
+                    material.renderQueue = (int)RenderQueue.AlphaTest;
                     material.SetOverrideTag("RenderType", "TransparentCutout");
                 } else {
-                    material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
+                    material.renderQueue = (int)RenderQueue.Geometry;
                     material.SetOverrideTag("RenderType", "Opaque");
                 }
 
@@ -292,7 +292,7 @@ public class StylizedSurfaceEditor : BaseShaderGUI {
                 // General Transparent Material Settings
                 material.SetOverrideTag("RenderType", "Transparent");
                 material.SetInt("_ZWrite", 0);
-                material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+                material.renderQueue = (int)RenderQueue.Transparent;
                 material.renderQueue +=
                     material.HasProperty("_QueueOffset") ? (int)material.GetFloat("_QueueOffset") : 0;
                 material.SetShaderPassEnabled("ShadowCaster", false);
@@ -404,7 +404,7 @@ public class StylizedSurfaceEditor : BaseShaderGUI {
         Debug.Log(string.Format("Texture saved as: {0}", fullPath));
 
         string pathRelativeToAssets = ConvertFullPathToAssetPath(fullPath);
-        TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(pathRelativeToAssets);
+        TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(pathRelativeToAssets);
         if (importer != null) {
             importer.filterMode = filterMode;
             importer.textureType = TextureImporterType.SingleChannel;

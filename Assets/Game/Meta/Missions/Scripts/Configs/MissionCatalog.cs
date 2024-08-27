@@ -15,14 +15,14 @@ namespace Game.Meta
 
         public MissionConfig[] GetAllMissions()
         {
-            return this.missions;
+            return missions;
         }
 
         public MissionConfig FindMission(string id)
         {
-            for (int i = 0, count = this.missions.Length; i < count; i++)
+            for (int i = 0, count = missions.Length; i < count; i++)
             {
-                var mission = this.missions[i];
+                var mission = missions[i];
                 if (mission.Id == id)
                 {
                     return mission;
@@ -49,7 +49,7 @@ namespace Game.Meta
 
         public MissionConfig[] FindMissions(Predicate<MissionConfig> predicate)
         {
-            return Array.FindAll(this.missions, predicate);
+            return Array.FindAll(missions, predicate);
         }
     }
 }

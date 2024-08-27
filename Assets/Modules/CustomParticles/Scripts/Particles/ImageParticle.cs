@@ -10,12 +10,12 @@ namespace CustomParticles
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
         
         private void Reset()
         {
-            this.iconImage = this.GetComponent<Image>();
+            iconImage = GetComponent<Image>();
         }
     }
 }

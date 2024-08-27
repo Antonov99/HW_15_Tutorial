@@ -15,12 +15,12 @@ namespace Game.GameEngine.Mechanics
         [GUIColor(0, 1, 0)]
         public override void Do()
         {
-            if (!this.engine.IsActive)
+            if (!engine.IsActive)
             {
                 return;
             }
 
-            this.engine.Current
+            engine.Current
                 .targetResource
                 .Get<IComponent_Hit>()
                 .Hit();

@@ -7,18 +7,18 @@ namespace AI.GOAP
     {
         public IFactState ResultState
         {
-            get { return this.resultState; }
+            get { return resultState; }
         }
 
         public IFactState RequiredState
         {
-            get { return this.requiredState; }
+            get { return requiredState; }
         }
 
         [ShowInInspector, ReadOnly, PropertyOrder(-10)]
         public bool IsPlaying
         {
-            get { return this.isPlaying; }
+            get { return isPlaying; }
         }
 
         [Space]
@@ -38,42 +38,42 @@ namespace AI.GOAP
 
         public void Play(IActor.Callback callback)
         {
-            if (this.isPlaying)
+            if (isPlaying)
             {
                 return;
             }
 
             this.callback = callback;
-            this.isPlaying = true;
-            this.Play();
+            isPlaying = true;
+            Play();
         }
 
         public void Cancel()
         {
-            if (!this.isPlaying)
+            if (!isPlaying)
             {
                 return;
             }
 
-            this.OnCancel();
-            this.isPlaying = false;
-            this.callback = null;
-            this.OnDispose();
+            OnCancel();
+            isPlaying = false;
+            callback = null;
+            OnDispose();
         }
 
         protected abstract void Play();
 
         protected virtual void Return(bool success)
         {
-            if (!this.isPlaying)
+            if (!isPlaying)
             {
                 return;
             }
             
-            this.isPlaying = false;
-            this.OnReturn();
-            this.OnDispose();
-            this.InvokeCallback(success);
+            isPlaying = false;
+            OnReturn();
+            OnDispose();
+            InvokeCallback(success);
         }
 
         #region Callbacks

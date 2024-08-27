@@ -14,9 +14,9 @@ namespace Game.Localization.UnityEditor
 
         private void OnEnable()
         {
-            this.titleContent = new GUIContent("Localization Audio Clips");
-            this.serializedObject = new SerializedObject(Configs.AudioClipConfig);
-            this.entities = this.serializedObject.FindProperty("entities");
+            titleContent = new GUIContent("Localization Audio Clips");
+            serializedObject = new SerializedObject(Configs.AudioClipConfig);
+            entities = serializedObject.FindProperty("entities");
         }
 
         private void OnGUI()
@@ -24,14 +24,14 @@ namespace Game.Localization.UnityEditor
             EditorGUILayout.Space(8);
 
             EditorGUILayout.BeginVertical();
-            this.scrollPosition = EditorGUILayout.BeginScrollView(
-                this.scrollPosition,
+            scrollPosition = EditorGUILayout.BeginScrollView(
+                scrollPosition,
                 GUILayout.ExpandWidth(true),
                 GUILayout.ExpandHeight(true)
             );
             
-            EditorGUILayout.PropertyField(this.entities, includeChildren: true);
-            this.serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.PropertyField(entities, includeChildren: true);
+            serializedObject.ApplyModifiedProperties();
 
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();

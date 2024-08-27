@@ -34,33 +34,33 @@ namespace Game.GameEngine.AI
 
         protected override IEnumerator RunRoutine()
         {
-            if (!this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit))
+            if (!Blackboard.TryGetVariable(unitKey, out IEntity unit))
             {
-                this.Return(false);
+                Return(false);
                 yield break;
             }
 
-            if (!this.Blackboard.TryGetVariable(this.targetKey, out IEntity enemy)) 
+            if (!Blackboard.TryGetVariable(targetKey, out IEntity enemy)) 
             {
-                this.Return(false);
+                Return(false);
                 yield break;
             }
             
-            this.unitComponent = unit.Get<IComponent_GetPosition>();
-            this.enemyComponent = enemy.Get<IComponent_GetPosition>();
+            unitComponent = unit.Get<IComponent_GetPosition>();
+            enemyComponent = enemy.Get<IComponent_GetPosition>();
 
-            yield return this.HandleDistance();
+            yield return HandleDistance();
         }
 
         private IEnumerator HandleDistance()
         {
-            var period = new WaitForSeconds(this.observePeriod.Current);
+            var period = new WaitForSeconds(observePeriod.Current);
             while (true)
             {
                 yield return period;
-                if (!this.IsDistanceReached())
+                if (!IsDistanceReached())
                 {
-                    this.Return(false);
+                    Return(false);
                     yield break;
                 }
             }
@@ -68,11 +68,11 @@ namespace Game.GameEngine.AI
         
         private bool IsDistanceReached()
         {
-            var unitPosition = this.unitComponent.Position;
-            var targetPosition = this.enemyComponent.Position;
+            var unitPosition = unitComponent.Position;
+            var targetPosition = enemyComponent.Position;
 
             var distanceVector = targetPosition - unitPosition;
-            return distanceVector.sqrMagnitude <= Mathf.Pow(this.visibleDistance.Current, 2);
+            return distanceVector.sqrMagnitude <= Mathf.Pow(visibleDistance.Current, 2);
         }
     }
 }

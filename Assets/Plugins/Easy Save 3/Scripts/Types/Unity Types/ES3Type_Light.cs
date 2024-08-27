@@ -54,40 +54,40 @@ namespace ES3Types
 						instance.color = reader.Read<UnityEngine.Color>(ES3Type_Color.Instance);
 						break;
 					case "intensity":
-						instance.intensity = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.intensity = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "bounceIntensity":
-						instance.bounceIntensity = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.bounceIntensity = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "shadows":
 						instance.shadows = reader.Read<UnityEngine.LightShadows>();
 						break;
 					case "shadowStrength":
-						instance.shadowStrength = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.shadowStrength = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "shadowResolution":
 						instance.shadowResolution = reader.Read<UnityEngine.Rendering.LightShadowResolution>();
 						break;
 					case "shadowCustomResolution":
-						instance.shadowCustomResolution = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.shadowCustomResolution = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "shadowBias":
-						instance.shadowBias = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.shadowBias = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "shadowNormalBias":
-						instance.shadowNormalBias = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.shadowNormalBias = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "shadowNearPlane":
-						instance.shadowNearPlane = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.shadowNearPlane = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "range":
-						instance.range = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.range = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "spotAngle":
-						instance.spotAngle = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.spotAngle = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "cookieSize":
-						instance.cookieSize = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.cookieSize = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "cookie":
 						instance.cookie = reader.Read<UnityEngine.Texture>();
@@ -99,10 +99,10 @@ namespace ES3Types
 						instance.renderMode = reader.Read<UnityEngine.LightRenderMode>();
 						break;
 					case "cullingMask":
-						instance.cullingMask = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.cullingMask = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "hideFlags":
 						instance.hideFlags = reader.Read<UnityEngine.HideFlags>();

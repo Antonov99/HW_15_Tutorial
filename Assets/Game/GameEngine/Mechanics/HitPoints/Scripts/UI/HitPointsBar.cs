@@ -18,29 +18,29 @@ namespace Game.GameEngine.Mechanics
 
         public void SetHitPoints(int current, int max)
         {
-            this.text.text = $"{current}/{max}";
-            this.progressBar.fillAmount = (float) current / max;
+            text.text = $"{current}/{max}";
+            progressBar.fillAmount = (float) current / max;
         }
 
         public void SetVisible(bool isVisible)
         {
-            this.root.SetActive(isVisible);
+            root.SetActive(isVisible);
         }
 
         public void Show()
         {
-            this.root.SetActive(true);
+            root.SetActive(true);
         }
 
         public void Hide()
         {
-            this.root.SetActive(false);
+            root.SetActive(false);
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            this.root = this.gameObject;
+            root = gameObject;
         }
 #endif
     }

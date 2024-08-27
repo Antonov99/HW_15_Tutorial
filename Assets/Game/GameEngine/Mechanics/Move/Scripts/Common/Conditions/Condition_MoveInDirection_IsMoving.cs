@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
 
         public bool IsTrue()
         {
-            return this.engine.IsMoving;
+            return engine.IsMoving;
         }
     }
 }

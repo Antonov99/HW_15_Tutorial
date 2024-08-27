@@ -14,7 +14,7 @@ namespace Elementary
 
         protected override void OnEvent()
         {
-            this.animator.Play(this.animationName, -1, 0);
+            animator.Play(animationName, -1, 0);
         }
     }
 }

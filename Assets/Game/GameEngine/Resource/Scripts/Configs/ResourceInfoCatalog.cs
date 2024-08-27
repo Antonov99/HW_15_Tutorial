@@ -14,9 +14,9 @@ namespace Game.GameEngine.GameResources
 
         public ResourceInfo FindResource(ResourceType type)
         {
-            for (int i = 0, count = this.configs.Length; i < count; i++)
+            for (int i = 0, count = configs.Length; i < count; i++)
             {
-                var info = this.configs[i];
+                var info = configs[i];
                 if (info.type == type)
                 {
                     return info;
@@ -28,7 +28,7 @@ namespace Game.GameEngine.GameResources
 
         public ResourceInfo[] GetAllResources()
         {
-            return this.configs;
+            return configs;
         }
     }
 }

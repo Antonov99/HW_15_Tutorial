@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
 
         protected override void SetEnable(bool isEnable)
         {
-            this.toggle.SetValue(isEnable);
+            toggle.SetValue(isEnable);
         }
     }
 }

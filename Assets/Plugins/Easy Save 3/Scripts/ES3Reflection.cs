@@ -16,10 +16,10 @@ namespace ES3Internal
         public const string componentNameFieldName = "name";
         public static readonly string[] excludedPropertyNames = new string[] { "runInEditMode", "useGUILayout", "hideFlags" };
 
-        public static readonly Type serializableAttributeType = typeof(System.SerializableAttribute);
+        public static readonly Type serializableAttributeType = typeof(SerializableAttribute);
         public static readonly Type serializeFieldAttributeType = typeof(SerializeField);
-        public static readonly Type obsoleteAttributeType = typeof(System.ObsoleteAttribute);
-        public static readonly Type nonSerializedAttributeType = typeof(System.NonSerializedAttribute);
+        public static readonly Type obsoleteAttributeType = typeof(ObsoleteAttribute);
+        public static readonly Type nonSerializedAttributeType = typeof(NonSerializedAttribute);
         public static readonly Type es3SerializableAttributeType = typeof(ES3Serializable);
         public static readonly Type es3NonSerializableAttributeType = typeof(ES3NonSerializable);
 
@@ -58,9 +58,9 @@ namespace ES3Internal
         public static Type[] GetElementTypes(Type type)
         {
             if (IsGenericType(type))
-                return ES3Reflection.GetGenericArguments(type);
+                return GetGenericArguments(type);
             else if (type.IsArray)
-                return new Type[] { ES3Reflection.GetElementType(type) };
+                return new Type[] { GetElementType(type) };
             else
                 return null;
         }
@@ -220,7 +220,7 @@ namespace ES3Internal
             if (AttributeIsDefined(type, es3NonSerializableAttributeType))
                 return false;
 
-            if (IsPrimitive(type) || IsValueType(type) || IsAssignableFrom(typeof(UnityEngine.Component), type) || IsAssignableFrom(typeof(UnityEngine.ScriptableObject), type))
+            if (IsPrimitive(type) || IsValueType(type) || IsAssignableFrom(typeof(UnityEngine.Component), type) || IsAssignableFrom(typeof(ScriptableObject), type))
                 return true;
 
             var es3Type = ES3TypeMgr.GetOrCreateES3Type(type, false);
@@ -297,13 +297,13 @@ namespace ES3Internal
 
         public static ES3ReflectedMember GetES3ReflectedProperty(Type type, string propertyName)
         {
-            var propertyInfo = ES3Reflection.GetProperty(type, propertyName);
+            var propertyInfo = GetProperty(type, propertyName);
             return new ES3ReflectedMember(propertyInfo);
         }
 
         public static ES3ReflectedMember GetES3ReflectedMember(Type type, string fieldName)
         {
-            var fieldInfo = ES3Reflection.GetField(type, fieldName);
+            var fieldInfo = GetField(type, fieldName);
             return new ES3ReflectedMember(fieldInfo);
         }
 
@@ -316,7 +316,7 @@ namespace ES3Internal
             var instances = new List<T>();
             foreach (var assembly in Assemblies)
                 foreach (var type in assembly.GetTypes())
-                    if (IsAssignableFrom(typeof(T), type) && ES3Reflection.HasParameterlessConstructor(type) && !ES3Reflection.IsAbstract(type))
+                    if (IsAssignableFrom(typeof(T), type) && HasParameterlessConstructor(type) && !IsAbstract(type))
                         instances.Add((T)Activator.CreateInstance(type));
             return instances;
         }
@@ -704,22 +704,22 @@ namespace ES3Internal
             {
                 if (fieldPropertyInfo == null)
                 {
-                    this.propertyInfo = null;
-                    this.fieldInfo = null;
+                    propertyInfo = null;
+                    fieldInfo = null;
                     isProperty = false;
                     return;
                 }
 
-                isProperty = ES3Reflection.IsAssignableFrom(typeof(PropertyInfo), fieldPropertyInfo.GetType());
+                isProperty = IsAssignableFrom(typeof(PropertyInfo), fieldPropertyInfo.GetType());
                 if (isProperty)
                 {
-                    this.propertyInfo = (PropertyInfo)fieldPropertyInfo;
-                    this.fieldInfo = null;
+                    propertyInfo = (PropertyInfo)fieldPropertyInfo;
+                    fieldInfo = null;
                 }
                 else
                 {
-                    this.fieldInfo = (FieldInfo)fieldPropertyInfo;
-                    this.propertyInfo = null;
+                    fieldInfo = (FieldInfo)fieldPropertyInfo;
+                    propertyInfo = null;
                 }
             }
 
@@ -747,13 +747,13 @@ namespace ES3Internal
             public ES3ReflectedMethod(Type type, string methodName, Type[] genericParameters, Type[] parameterTypes)
             {
                 MethodInfo nonGenericMethod = type.GetMethod(methodName, parameterTypes);
-                this.method = nonGenericMethod.MakeGenericMethod(genericParameters);
+                method = nonGenericMethod.MakeGenericMethod(genericParameters);
             }
 
             public ES3ReflectedMethod(Type type, string methodName, Type[] genericParameters, Type[] parameterTypes, BindingFlags bindingAttr)
             {
                 MethodInfo nonGenericMethod = type.GetMethod(methodName, bindingAttr, null, parameterTypes, null);
-                this.method = nonGenericMethod.MakeGenericMethod(genericParameters);
+                method = nonGenericMethod.MakeGenericMethod(genericParameters);
             }
 
             public object Invoke(object obj, object[] parameters = null)

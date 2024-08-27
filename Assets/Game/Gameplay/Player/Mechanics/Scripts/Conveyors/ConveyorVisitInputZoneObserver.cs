@@ -25,45 +25,45 @@ namespace Game.Gameplay.Player
             MonoBehaviour monoContext
         )
         {
-            this.visitInteractor = conveyorVisitInteractor;
+            visitInteractor = conveyorVisitInteractor;
             this.resourceStorage = resourceStorage;
             this.monoContext = monoContext;
         }
 
         void IGameReadyElement.ReadyGame()
         {
-            this.visitInteractor.InputZone.OnEntered += this.OnConveyorEntered;
-            this.visitInteractor.InputZone.OnExited += this.OnConveyorExited;
+            visitInteractor.InputZone.OnEntered += OnConveyorEntered;
+            visitInteractor.InputZone.OnExited += OnConveyorExited;
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.visitInteractor.InputZone.OnEntered -= this.OnConveyorEntered;
-            this.visitInteractor.InputZone.OnExited -= this.OnConveyorExited;
+            visitInteractor.InputZone.OnEntered -= OnConveyorEntered;
+            visitInteractor.InputZone.OnExited -= OnConveyorExited;
         }
 
         private void OnConveyorEntered(IEntity entity)
         {
-            this.targetLoadZone = entity.Get<IComponent_LoadZone>();
-            this.targetLoadZone.OnAmountChanged += this.OnAmountChanged;
-            this.MoveResourcesTo(this.targetLoadZone);
+            targetLoadZone = entity.Get<IComponent_LoadZone>();
+            targetLoadZone.OnAmountChanged += OnAmountChanged;
+            MoveResourcesTo(targetLoadZone);
         }
 
         private void OnConveyorExited(IEntity entity)
         {
-            this.targetLoadZone.OnAmountChanged -= this.OnAmountChanged;
-            this.targetLoadZone = null;
+            targetLoadZone.OnAmountChanged -= OnAmountChanged;
+            targetLoadZone = null;
         }
 
         private void OnAmountChanged(int currentAmount)
         {
-            this.monoContext.StartCoroutine(this.MoveResourcesInNextFrame(this.targetLoadZone));
+            monoContext.StartCoroutine(MoveResourcesInNextFrame(targetLoadZone));
         }
 
         private IEnumerator MoveResourcesInNextFrame(IComponent_LoadZone loadZone)
         {
             yield return new WaitForEndOfFrame();
-            this.MoveResourcesTo(loadZone);
+            MoveResourcesTo(loadZone);
         }
 
         private void MoveResourcesTo(IComponent_LoadZone loadZone)
@@ -74,14 +74,14 @@ namespace Game.Gameplay.Player
             }
 
             var resourceType = loadZone.ResourceType;
-            var resourcesInStorage = this.resourceStorage.GetResource(resourceType);
+            var resourcesInStorage = resourceStorage.GetResource(resourceType);
             if (resourcesInStorage <= 0)
             {
                 return;
             }
 
             var resultAmount = Math.Min(resourcesInStorage, loadZone.AvailableAmount);
-            this.resourceStorage.ExtractResource(resourceType, resultAmount);
+            resourceStorage.ExtractResource(resourceType, resultAmount);
             loadZone.PutAmount(resultAmount);
         }
     }

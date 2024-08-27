@@ -9,11 +9,11 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_AudioClip() : base(typeof(UnityEngine.AudioClip)){ Instance = this; }
+		public ES3Type_AudioClip() : base(typeof(AudioClip)){ Instance = this; }
 
 		protected override void WriteUnityObject(object obj, ES3Writer writer)
 		{
-			var param = (UnityEngine.AudioClip)obj;
+			var param = (AudioClip)obj;
 			float[] samples = new float[param.samples * param.channels];
 			param.GetData(samples, 0);
 			writer.WriteProperty("name", param.name);
@@ -82,7 +82,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_AudioClipArray() : base(typeof(UnityEngine.AudioClip[]), ES3Type_AudioClip.Instance)
+		public ES3Type_AudioClipArray() : base(typeof(AudioClip[]), ES3Type_AudioClip.Instance)
 		{
 			Instance = this;
 		}

@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_NoiseModule() : base(typeof(UnityEngine.ParticleSystem.NoiseModule))
+		public ES3Type_NoiseModule() : base(typeof(ParticleSystem.NoiseModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.NoiseModule)obj;
+			var instance = (ParticleSystem.NoiseModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("separateAxes", instance.separateAxes, ES3Type_bool.Instance);
@@ -49,14 +49,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.NoiseModule();
+			var instance = new ParticleSystem.NoiseModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.NoiseModule)obj;
+			var instance = (ParticleSystem.NoiseModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -64,85 +64,85 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "separateAxes":
-						instance.separateAxes = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.separateAxes = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "strength":
-						instance.strength = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.strength = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "strengthMultiplier":
-						instance.strengthMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.strengthMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "strengthX":
-						instance.strengthX = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.strengthX = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "strengthXMultiplier":
-						instance.strengthXMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.strengthXMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "strengthY":
-						instance.strengthY = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.strengthY = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "strengthYMultiplier":
-						instance.strengthYMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.strengthYMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "strengthZ":
-						instance.strengthZ = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.strengthZ = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "strengthZMultiplier":
-						instance.strengthZMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.strengthZMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "frequency":
-						instance.frequency = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.frequency = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "damping":
-						instance.damping = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.damping = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "octaveCount":
-						instance.octaveCount = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.octaveCount = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					case "octaveMultiplier":
-						instance.octaveMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.octaveMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "octaveScale":
-						instance.octaveScale = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.octaveScale = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "quality":
-						instance.quality = reader.Read<UnityEngine.ParticleSystemNoiseQuality>();
+						instance.quality = reader.Read<ParticleSystemNoiseQuality>();
 						break;
 					case "scrollSpeed":
-						instance.scrollSpeed = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.scrollSpeed = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "scrollSpeedMultiplier":
-						instance.scrollSpeedMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.scrollSpeedMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "remapEnabled":
-						instance.remapEnabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.remapEnabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "remap":
-						instance.remap = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.remap = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "remapMultiplier":
-						instance.remapMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.remapMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "remapX":
-						instance.remapX = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.remapX = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "remapXMultiplier":
-						instance.remapXMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.remapXMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "remapY":
-						instance.remapY = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.remapY = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "remapYMultiplier":
-						instance.remapYMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.remapYMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "remapZ":
-						instance.remapZ = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.remapZ = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "remapZMultiplier":
-						instance.remapZMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.remapZMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					default:
 						reader.Skip();

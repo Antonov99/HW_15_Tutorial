@@ -22,19 +22,19 @@ namespace Game.Meta
 
         void IGameInitElement.InitGame()
         {
-            this.heroComponent = this.heroService.GetHero().Get<IComponent_Effector>();
+            heroComponent = heroService.GetHero().Get<IComponent_Effector>();
         }
 
         void IGameStartElement.StartGame()
         {
-            this.ActivateExisitingEffects();
+            ActivateExisitingEffects();
         }
 
         protected override void OnItemAdded(InventoryItem item)
         {
             if (item.FlagsExists(InventoryItemFlags.EFFECTIBLE))
             {
-                this.ActivateEffect(item);
+                ActivateEffect(item);
             }
         }
 
@@ -42,29 +42,29 @@ namespace Game.Meta
         {
             if (item.FlagsExists(InventoryItemFlags.EFFECTIBLE))
             {
-                this.DeactivateEffect(item);
+                DeactivateEffect(item);
             }
         }
 
         private void ActivateEffect(InventoryItem item)
         {
             var effect = item.GetComponent<IComponent_GetEffect>().Effect;
-            this.heroComponent.Apply(effect);
+            heroComponent.Apply(effect);
         }
 
         private void DeactivateEffect(InventoryItem item)
         {
             var effect = item.GetComponent<IComponent_GetEffect>().Effect;
-            this.heroComponent.Discard(effect);
+            heroComponent.Discard(effect);
         }
 
         private void ActivateExisitingEffects()
         {
-            var items = this.inventory.FindItems(InventoryItemFlags.EFFECTIBLE);
+            var items = inventory.FindItems(InventoryItemFlags.EFFECTIBLE);
             for (int i = 0, count = items.Length; i < count; i++)
             {
                 var item = items[i];
-                this.ActivateEffect(item);
+                ActivateEffect(item);
             }
         }
     }

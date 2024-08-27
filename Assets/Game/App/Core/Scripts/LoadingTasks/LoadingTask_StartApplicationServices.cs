@@ -15,9 +15,9 @@ namespace Game.App
 
         public void Do(Action<LoadingResult> callback)
         {
-            for (int i = 0, count = this.services.Length; i < count; i++)
+            for (int i = 0, count = services.Length; i < count; i++)
             {
-                var service = this.services[i];
+                var service = services[i];
                 service.Start();
             }
 

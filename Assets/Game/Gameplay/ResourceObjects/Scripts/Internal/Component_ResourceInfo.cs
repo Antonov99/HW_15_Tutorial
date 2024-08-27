@@ -8,12 +8,12 @@ namespace Game.Gameplay.ResourceObjects
     {
         public ResourceType Type
         {
-            get { return this.info.resourceType; }
+            get { return info.resourceType; }
         }
 
         public int Count
         {
-            get { return this.info.resourceAmount; }
+            get { return info.resourceAmount; }
         }
 
         private readonly ScriptableResource info;

@@ -11,7 +11,7 @@ namespace Elementary
 
         public T CurrentState
         {
-            get { return this.currentId; }
+            get { return currentId; }
         }
         
         public List<StateEntry<T>> states = new();
@@ -24,54 +24,54 @@ namespace Elementary
 
         public virtual void SwitchState(T key)
         {
-            if (this.currentState != null)
+            if (currentState != null)
             {
-                this.currentState.Exit();
+                currentState.Exit();
             }
 
-            this.currentId = key;
-            if (this.FindState(this.currentId, out this.currentState))
+            currentId = key;
+            if (FindState(currentId, out currentState))
             {
-                this.currentState.Enter();
+                currentState.Enter();
             }
 
-            this.OnStateSwitched?.Invoke(key);
+            OnStateSwitched?.Invoke(key);
         }
 
         [Title("Methods")]
         [Button, GUIColor(0, 1, 0)]
         public override void Enter()
         {
-            if (this.currentState == null && this.FindState(this.currentId, out this.currentState))
+            if (currentState == null && FindState(currentId, out currentState))
             {
-                this.currentState.Enter();
+                currentState.Enter();
             }
         }
 
         [Button, GUIColor(0, 1, 0)]
         public override void Exit()
         {
-            if (this.currentState != null)
+            if (currentState != null)
             {
-                this.currentState.Exit();
-                this.currentState = null;
+                currentState.Exit();
+                currentState = null;
             }
         }
 
         public void AddState(T key, IState state)
         {
             var entry = new StateEntry<T>(key, state);
-            this.states.Add(entry);
+            states.Add(entry);
         }
 
         public void RemoveState(T key)
         {
-            for (int i = 0, count = this.states.Count; i < count; i++)
+            for (int i = 0, count = states.Count; i < count; i++)
             {
-                var state = this.states[i];
+                var state = states[i];
                 if (key.Equals(state.key))
                 {
-                    this.states.Remove(state);
+                    states.Remove(state);
                     return;
                 }
             }
@@ -79,7 +79,7 @@ namespace Elementary
 
         public void ClearStates()
         {
-            this.states.Clear();
+            states.Clear();
         }
         
         public static StateMachine<T> operator +(StateMachine<T> stateMachine, StateEntry<T> state)
@@ -102,9 +102,9 @@ namespace Elementary
 
         private bool FindState(T type, out IState state)
         {
-            for (int i = 0, count = this.states.Count; i < count; i++)
+            for (int i = 0, count = states.Count; i < count; i++)
             {
-                var holder = this.states[i];
+                var holder = states[i];
                 if (holder.key.Equals(type))
                 {
                     state = holder.state;

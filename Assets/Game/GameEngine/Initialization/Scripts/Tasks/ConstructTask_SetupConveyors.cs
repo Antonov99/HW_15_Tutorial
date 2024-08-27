@@ -20,7 +20,7 @@ namespace Game.GameEngine
             if (gameContext.TryGetService(out ConveyorsService conveyorsService))
             {
                 var entitiesService = gameContext.GetService<EntitiesService>();
-                var conveyours = entitiesService.FindEntities(this.conveyorCondition);
+                var conveyours = entitiesService.FindEntities(conveyorCondition);
                 conveyorsService.SetupConveyours(conveyours);
             }
         }

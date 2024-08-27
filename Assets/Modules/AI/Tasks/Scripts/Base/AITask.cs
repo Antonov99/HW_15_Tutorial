@@ -6,7 +6,7 @@ namespace AI.Tasks
     {
         public bool IsPlaying
         {
-            get { return this.isPlaying; }
+            get { return isPlaying; }
         }
 
         private bool isPlaying;
@@ -15,34 +15,34 @@ namespace AI.Tasks
 
         public void Do(IAITaskCallback callback)
         {
-            if (this.isPlaying)
+            if (isPlaying)
             {
-                Debug.LogWarning($"Task {this.GetType().Name} is already started!");
+                Debug.LogWarning($"Task {GetType().Name} is already started!");
                 return;
             }
 
-            this.isPlaying = true;
+            isPlaying = true;
             this.callback = callback;
-            this.Do();
+            Do();
         }
 
         public void Cancel()
         {
-            if (!this.isPlaying)
+            if (!isPlaying)
             {
                 return;
             }
 
-            this.isPlaying = false;
-            this.callback = null;
-            this.OnCancel();
+            isPlaying = false;
+            callback = null;
+            OnCancel();
         }
         
         protected abstract void Do();
 
         protected void Return(bool success)
         {
-            this.isPlaying = false;
+            isPlaying = false;
             
             var callback = this.callback;
             this.callback = null;

@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
 
         public void Hit()
         {
-            this.eventReceiver.Call();
+            eventReceiver.Call();
         }
     }
 }

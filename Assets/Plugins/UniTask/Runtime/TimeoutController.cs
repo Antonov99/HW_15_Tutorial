@@ -32,18 +32,18 @@ namespace Cysharp.Threading.Tasks
 
         public TimeoutController(DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming delayTiming = PlayerLoopTiming.Update)
         {
-            this.timeoutSource = new CancellationTokenSource();
-            this.originalLinkCancellationTokenSource = null;
-            this.linkedSource = null;
+            timeoutSource = new CancellationTokenSource();
+            originalLinkCancellationTokenSource = null;
+            linkedSource = null;
             this.delayType = delayType;
             this.delayTiming = delayTiming;
         }
 
         public TimeoutController(CancellationTokenSource linkCancellationTokenSource, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming delayTiming = PlayerLoopTiming.Update)
         {
-            this.timeoutSource = new CancellationTokenSource();
-            this.originalLinkCancellationTokenSource = linkCancellationTokenSource;
-            this.linkedSource = CancellationTokenSource.CreateLinkedTokenSource(timeoutSource.Token, linkCancellationTokenSource.Token);
+            timeoutSource = new CancellationTokenSource();
+            originalLinkCancellationTokenSource = linkCancellationTokenSource;
+            linkedSource = CancellationTokenSource.CreateLinkedTokenSource(timeoutSource.Token, linkCancellationTokenSource.Token);
             this.delayType = delayType;
             this.delayTiming = delayTiming;
         }
@@ -67,9 +67,9 @@ namespace Cysharp.Threading.Tasks
                 timeoutSource = new CancellationTokenSource();
                 if (linkedSource != null)
                 {
-                    this.linkedSource.Cancel();
-                    this.linkedSource.Dispose();
-                    this.linkedSource = CancellationTokenSource.CreateLinkedTokenSource(timeoutSource.Token, originalLinkCancellationTokenSource.Token);
+                    linkedSource.Cancel();
+                    linkedSource.Dispose();
+                    linkedSource = CancellationTokenSource.CreateLinkedTokenSource(timeoutSource.Token, originalLinkCancellationTokenSource.Token);
                 }
 
                 timer?.Dispose();

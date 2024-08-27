@@ -21,17 +21,17 @@ namespace Game.Meta
         [ShowInInspector]
         public int RequiredKills
         {
-            get { return this.config.RequiredKills; }
+            get { return config.RequiredKills; }
         }
 
         public override float NormalizedProgress
         {
-            get { return (float) this.CurrentKills / this.RequiredKills; }
+            get { return (float) CurrentKills / RequiredKills; }
         }
 
         public override string TextProgress
         {
-            get { return $"{this.CurrentKills}/{this.RequiredKills}"; }
+            get { return $"{CurrentKills}/{RequiredKills}"; }
         }
 
         private readonly KillEnemyMissionConfig config;
@@ -46,26 +46,26 @@ namespace Game.Meta
 
         public void Setup(int currentKills)
         {
-            this.CurrentKills = currentKills;
+            CurrentKills = currentKills;
         }
 
         protected override void OnStart()
         {
-            this.heroService.GetHero().Get<IComponent_MeleeCombat>().OnCombatStopped += this.OnCombatFinished;
+            heroService.GetHero().Get<IComponent_MeleeCombat>().OnCombatStopped += OnCombatFinished;
         }
 
         protected override void OnStop()
         {
-            this.heroService.GetHero().Get<IComponent_MeleeCombat>().OnCombatStopped -= this.OnCombatFinished;                        
+            heroService.GetHero().Get<IComponent_MeleeCombat>().OnCombatStopped -= OnCombatFinished;                        
         }
 
         private void OnCombatFinished(CombatOperation operation)
         {
             if (operation.targetDestroyed)
             {
-                this.CurrentKills++;
-                this.OnProgressChanged?.Invoke(this);
-                this.TryComplete();
+                CurrentKills++;
+                OnProgressChanged?.Invoke(this);
+                TryComplete();
             }
         }
     }

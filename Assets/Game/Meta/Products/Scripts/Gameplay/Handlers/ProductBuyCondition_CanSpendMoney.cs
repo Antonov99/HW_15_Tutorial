@@ -18,7 +18,7 @@ namespace Game.Meta
         {
             if (product.TryGetComponent(out IComponent_MoneyPrice component))
             {
-                return this.moneyStorage.Money >= component.Price;
+                return moneyStorage.Money >= component.Price;
             }
 
             return true;

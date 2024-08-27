@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
 
         public override void Enter()
         {
-            this.targetComponent = engine
+            targetComponent = engine
                 .Current
                 .targetResource
                 .Get<IComponent_GetPosition>();
@@ -25,13 +25,13 @@ namespace Game.GameEngine.Mechanics
         {
             if (!distanceReached)
             {
-                this.engine.Stop();
+                engine.Stop();
             }
         }
 
         protected override Vector3 GetTargetPosition()
         {
-            return this.targetComponent.Position;
+            return targetComponent.Position;
         }
     }
 }

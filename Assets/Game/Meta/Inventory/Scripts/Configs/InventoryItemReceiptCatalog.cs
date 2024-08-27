@@ -15,14 +15,14 @@ namespace Game.Meta
 
         public InventoryItemReceipt[] GetAllReceipts()
         {
-            return this.receipts;
+            return receipts;
         }
 
         public InventoryItemReceipt FindReceipt(string name)
         {
-            for (int i = 0, count = this.receipts.Length; i < count; i++)
+            for (int i = 0, count = receipts.Length; i < count; i++)
             {
-                var receipt = this.receipts[i];
+                var receipt = receipts[i];
                 if (receipt.resultInfo.ItemName == name)
                 {
                     return receipt;

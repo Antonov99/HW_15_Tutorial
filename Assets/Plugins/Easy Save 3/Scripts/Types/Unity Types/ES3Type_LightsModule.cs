@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_LightsModule() : base(typeof(UnityEngine.ParticleSystem.LightsModule))
+		public ES3Type_LightsModule() : base(typeof(ParticleSystem.LightsModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.LightsModule)obj;
+			var instance = (ParticleSystem.LightsModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("ratio", instance.ratio, ES3Type_float.Instance);
@@ -34,14 +34,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.LightsModule();
+			var instance = new ParticleSystem.LightsModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.LightsModule)obj;
+			var instance = (ParticleSystem.LightsModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -49,40 +49,40 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "ratio":
-						instance.ratio = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.ratio = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "useRandomDistribution":
-						instance.useRandomDistribution = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useRandomDistribution = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "light":
-						instance.light = reader.Read<UnityEngine.Light>(ES3Type_Light.Instance);
+						instance.light = reader.Read<Light>(ES3Type_Light.Instance);
 						break;
 					case "useParticleColor":
-						instance.useParticleColor = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.useParticleColor = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "sizeAffectsRange":
-						instance.sizeAffectsRange = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.sizeAffectsRange = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "alphaAffectsIntensity":
-						instance.alphaAffectsIntensity = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.alphaAffectsIntensity = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "range":
-						instance.range = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.range = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "rangeMultiplier":
-						instance.rangeMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.rangeMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "intensity":
-						instance.intensity = reader.Read<UnityEngine.ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
+						instance.intensity = reader.Read<ParticleSystem.MinMaxCurve>(ES3Type_MinMaxCurve.Instance);
 						break;
 					case "intensityMultiplier":
-						instance.intensityMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.intensityMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "maxLights":
-						instance.maxLights = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.maxLights = reader.Read<Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();

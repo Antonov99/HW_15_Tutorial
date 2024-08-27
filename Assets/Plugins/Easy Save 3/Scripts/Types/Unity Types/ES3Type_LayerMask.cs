@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_LayerMask() : base(typeof(UnityEngine.LayerMask))
+		public ES3Type_LayerMask() : base(typeof(LayerMask))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.LayerMask)obj;
+			var instance = (LayerMask)obj;
 
 			writer.WriteProperty("value", instance.value, ES3Type_int.Instance);
 		}

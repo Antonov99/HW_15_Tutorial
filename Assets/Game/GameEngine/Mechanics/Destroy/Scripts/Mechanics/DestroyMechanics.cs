@@ -11,12 +11,12 @@ namespace Game.GameEngine.Mechanics
 
         void IEnableListener.OnEnable()
         {
-            this.emitter.OnEvent += this.Destroy;
+            emitter.OnEvent += Destroy;
         }
 
         void IDisableListener.OnDisable()
         {
-            this.emitter.OnEvent -= this.Destroy;
+            emitter.OnEvent -= Destroy;
         }
 
         protected abstract void Destroy(DestroyArgs destroyArgs);

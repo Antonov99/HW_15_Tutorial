@@ -33,12 +33,12 @@ namespace Game.Meta
 
         public Upgrade GetUpgrade(string id)
         {
-            return this.upgrades[id];
+            return upgrades[id];
         }
 
         public Upgrade[] GetAllUpgrades()
         {
-            return this.upgrades.Values.ToArray<Upgrade>();
+            return upgrades.Values.ToArray<Upgrade>();
         }
 
         public bool CanLevelUp(Upgrade upgrade)
@@ -49,36 +49,36 @@ namespace Game.Meta
             }
 
             var price = upgrade.NextPrice;
-            return this.moneyStorage.CanSpendMoney(price);
+            return moneyStorage.CanSpendMoney(price);
         }
 
         public void LevelUp(Upgrade upgrade)
         {
-            if (!this.CanLevelUp(upgrade))
+            if (!CanLevelUp(upgrade))
             {
                 throw new Exception($"Can not level up {upgrade.Id}");
             }
 
             var price = upgrade.NextPrice;
-            this.moneyStorage.SpendMoney(price);
+            moneyStorage.SpendMoney(price);
 
             upgrade.LevelUp();
-            this.OnLevelUp?.Invoke(upgrade);
+            OnLevelUp?.Invoke(upgrade);
         }
 
         [Title("Methods")]
         [Button]
         public bool CanLevelUp(string id)
         {
-            var upgrade = this.upgrades[id];
-            return this.CanLevelUp(upgrade);
+            var upgrade = upgrades[id];
+            return CanLevelUp(upgrade);
         }
 
         [Button]
         public void LevelUp(string id)
         {
-            var upgrade = this.upgrades[id];
-            this.LevelUp(upgrade);
+            var upgrade = upgrades[id];
+            LevelUp(upgrade);
         }
     }
 }

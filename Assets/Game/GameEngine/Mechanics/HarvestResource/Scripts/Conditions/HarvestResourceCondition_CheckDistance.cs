@@ -23,7 +23,7 @@ namespace Game.GameEngine.Mechanics
         public bool IsTrue(HarvestResourceOperation value)
         {
             var targetPosition = value.targetResource.Get<IComponent_GetPosition>().Position;
-            return this.myTransform.IsDistanceReached(targetPosition, this.minDistance.Current);
+            return myTransform.IsDistanceReached(targetPosition, minDistance.Current);
         }
     }
 }

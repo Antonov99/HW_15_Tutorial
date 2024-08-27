@@ -15,7 +15,7 @@ namespace Game.GameEngine.GUI
             await new WaitUntil(() => handle.isDone);
 
             var prefab = (GameObject) handle.asset;
-            var gameInteface = GameObject.Instantiate(prefab);
+            var gameInteface = Object.Instantiate(prefab);
             gameInteface.name = OBJECT_NAME;
 
             var gameElement = gameInteface.GetComponent<IGameElementGroup>();

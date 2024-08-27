@@ -17,11 +17,11 @@ namespace Game.App
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            this.gameFacade.ConstructGame();
+            gameFacade.ConstructGame();
 
-            foreach (var listener in this.listeners)
+            foreach (var listener in listeners)
             {
-                listener.OnLoadGame(this.gameFacade);
+                listener.OnLoadGame(gameFacade);
             }
             
             callback?.Invoke(LoadingResult.Success());

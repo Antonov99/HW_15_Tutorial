@@ -49,7 +49,7 @@ namespace KevinIglesias {
         private Vector3 nextPos;
         
         void Start() {
-            characterRoot = this.transform;
+            characterRoot = transform;
             
             zeroPosition1 = propToThrow1.localPosition;
             zeroRotation1 = propToThrow1.localRotation;

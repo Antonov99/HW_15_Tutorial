@@ -30,13 +30,13 @@ namespace ES3Types
 				{
 					
 					case "dynamicFriction":
-						instance.dynamicFriction = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.dynamicFriction = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "staticFriction":
-						instance.staticFriction = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.staticFriction = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "bounciness":
-						instance.bounciness = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.bounciness = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "frictionCombine":
 						instance.frictionCombine = reader.Read<UnityEngine.PhysicMaterialCombine>();

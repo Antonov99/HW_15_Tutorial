@@ -14,12 +14,12 @@ namespace Game.GameEngine
         [Button]
         public void HidePopup()
         {
-            this.popupManager.HidePopup(this.popupName);
+            popupManager.HidePopup(popupName);
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.popupManager = context.GetService<PopupManager>();
+            popupManager = context.GetService<PopupManager>();
         }
     }
 }

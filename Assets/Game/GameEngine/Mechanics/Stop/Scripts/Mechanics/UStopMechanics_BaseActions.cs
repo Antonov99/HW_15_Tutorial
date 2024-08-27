@@ -15,17 +15,17 @@ namespace Game.GameEngine.Mechanics
 
         private void OnEnable()
         {
-            foreach (var action in this.actions)
+            foreach (var action in actions)
             {
-                this.stopEmitter.AddListener(action);
+                stopEmitter.AddListener(action);
             }
         }
 
         private void OnDisable()
         {
-            foreach (var action in this.actions)
+            foreach (var action in actions)
             {
-                this.stopEmitter.RemoveListener(action);
+                stopEmitter.RemoveListener(action);
             }
         }
     }

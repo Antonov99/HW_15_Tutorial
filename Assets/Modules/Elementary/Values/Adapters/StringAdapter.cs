@@ -10,7 +10,7 @@ namespace Elementary
     {
         public string Current
         {
-            get { return this.id; }
+            get { return id; }
         }
 
         [Space]
@@ -33,22 +33,22 @@ namespace Elementary
 
         public string GetValue()
         {
-            if (this.mode == Mode.SCRIPTABLE_OBJECT)
+            if (mode == Mode.SCRIPTABLE_OBJECT)
             {
-                return this.scriptableString.Current;
+                return scriptableString.Current;
             }
 
-            if (this.mode == Mode.CUSTOM)
+            if (mode == Mode.CUSTOM)
             {
-                return this.id;
+                return id;
             }
 
-            if (this.mode == Mode.GAME_OBJECT)
+            if (mode == Mode.GAME_OBJECT)
             {
-                return this.targetObject.name;
+                return targetObject.name;
             }
 
-            throw new Exception($"Mode {this.mode} is undefined!");
+            throw new Exception($"Mode {mode} is undefined!");
         }
 
         public enum Mode

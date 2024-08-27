@@ -12,13 +12,13 @@ namespace Game.Tutorial.App
                 return;
             }
 
-            tutorialManager.OnCompleted += this.OnCompleteTutorial;
+            tutorialManager.OnCompleted += OnCompleteTutorial;
             TutorialAnalytics.LogTutorialStarted(); //1 раз
         }
 
         private void OnCompleteTutorial()
         {
-            TutorialManager.Instance.OnCompleted -= this.OnCompleteTutorial;
+            TutorialManager.Instance.OnCompleted -= OnCompleteTutorial;
             TutorialAnalytics.LogTutorialCompleted(); //1 раз
         }
     }

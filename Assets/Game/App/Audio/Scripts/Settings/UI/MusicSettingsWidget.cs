@@ -8,13 +8,13 @@ namespace Game.App
         protected override void OnEnable()
         {
             base.OnEnable();
-            AudioSettingsManager.OnMusicVolumeChangd += this.UpdateSlider;
+            AudioSettingsManager.OnMusicVolumeChangd += UpdateSlider;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            AudioSettingsManager.OnMusicVolumeChangd -= this.UpdateSlider;
+            AudioSettingsManager.OnMusicVolumeChangd -= UpdateSlider;
         }
 
         protected override void SetVolume(float volume)

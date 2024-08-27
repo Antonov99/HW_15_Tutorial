@@ -13,8 +13,8 @@ namespace Elementary
 
         public float Current
         {
-            get { return this.value; }
-            set { this.SetValue(value); }
+            get { return value; }
+            set { SetValue(value); }
         }
 
         private readonly List<IAction<float>> listeners = new();
@@ -28,49 +28,49 @@ namespace Elementary
 
         public void SetValue(float value)
         {
-            for (int i = 0, count = this.listeners.Count; i < count; i++)
+            for (int i = 0, count = listeners.Count; i < count; i++)
             {
-                var listener = this.listeners[i];
+                var listener = listeners[i];
                 listener.Do(value);
             }
 
             this.value = value;
-            this.onValueChanged?.Invoke(value);
-            this.OnValueChanged?.Invoke(value);
+            onValueChanged?.Invoke(value);
+            OnValueChanged?.Invoke(value);
         }
 
         public void Plus(float range)
         {
-            var newValue = this.value + range;
-            this.SetValue(newValue);
+            var newValue = value + range;
+            SetValue(newValue);
         }
 
         public void Minus(float range)
         {
-            var newValue = this.value - range;
-            this.SetValue(newValue);
+            var newValue = value - range;
+            SetValue(newValue);
         }
 
         public void Multiply(float multiplier)
         {
-            var newValue = this.value * multiplier;
-            this.SetValue(newValue);
+            var newValue = value * multiplier;
+            SetValue(newValue);
         }
 
         public void Divide(float divider)
         {
-            var newValue = this.value / divider;
-            this.SetValue(newValue);
+            var newValue = value / divider;
+            SetValue(newValue);
         }
 
         public void AddListener(IAction<float> listener)
         {
-            this.listeners.Add(listener);
+            listeners.Add(listener);
         }
 
         public void RemoveListener(IAction<float> listener)
         {
-            this.listeners.Remove(listener);
+            listeners.Remove(listener);
         }
     }
 }

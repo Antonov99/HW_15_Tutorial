@@ -16,12 +16,12 @@ namespace Game.GameEngine
 
         void IEnableListener.OnEnable()
         {
-            this.parryTween = UIAnimations.AnimateParry(this.moveTransform);
+            parryTween = UIAnimations.AnimateParry(moveTransform);
         }
 
         void IDisableListener.OnDisable()
         {
-            this.parryTween.Kill();
+            parryTween.Kill();
         }
     }
 }

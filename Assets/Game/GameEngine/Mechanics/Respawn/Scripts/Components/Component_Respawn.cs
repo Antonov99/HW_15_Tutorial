@@ -13,7 +13,7 @@ namespace Game.GameEngine.Mechanics
 
         public void Respawn()
         {
-            this.emitter.Call();
+            emitter.Call();
         }
     }
 }

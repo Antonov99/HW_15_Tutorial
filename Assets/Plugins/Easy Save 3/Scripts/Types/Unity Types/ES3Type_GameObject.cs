@@ -14,13 +14,13 @@ namespace ES3Types
         public static ES3Type Instance = null;
         public bool saveChildren = false;
 
-        public ES3Type_GameObject() : base(typeof(UnityEngine.GameObject)) { Instance = this; }
+        public ES3Type_GameObject() : base(typeof(GameObject)) { Instance = this; }
 
         public override void WriteObject(object obj, ES3Writer writer, ES3.ReferenceMode mode)
         {
             if (WriteUsingDerivedType(obj, writer))
                 return;
-            var instance = (UnityEngine.GameObject)obj;
+            var instance = (GameObject)obj;
 
             if (mode != ES3.ReferenceMode.ByValue)
             {
@@ -80,7 +80,7 @@ namespace ES3Types
 
                 var propertyName = ReadPropertyName(reader);
 
-                if (propertyName == ES3Type.typeFieldName)
+                if (propertyName == typeFieldName)
                     return ES3TypeMgr.GetOrCreateES3Type(reader.ReadType()).Read<T>(reader);
                 else if (propertyName == ES3ReferenceMgrBase.referencePropertyName)
                 {
@@ -129,28 +129,28 @@ namespace ES3Types
 
         protected override void ReadObject<T>(ES3Reader reader, object obj)
         {
-            var instance = (UnityEngine.GameObject)obj;
+            var instance = (GameObject)obj;
 
             foreach (string propertyName in reader.Properties)
             {
                 switch (propertyName)
                 {
                     case ES3ReferenceMgrBase.referencePropertyName:
-                        ES3ReferenceMgr.Current.Add(instance, reader.Read_ref());
+                        ES3ReferenceMgrBase.Current.Add(instance, reader.Read_ref());
                         break;
                     case "prefab":
                         break;
                     case "layer":
-                        instance.layer = reader.Read<System.Int32>(ES3Type_int.Instance);
+                        instance.layer = reader.Read<Int32>(ES3Type_int.Instance);
                         break;
                     case "tag":
-                        instance.tag = reader.Read<System.String>(ES3Type_string.Instance);
+                        instance.tag = reader.Read<String>(ES3Type_string.Instance);
                         break;
                     case "name":
-                        instance.name = reader.Read<System.String>(ES3Type_string.Instance);
+                        instance.name = reader.Read<String>(ES3Type_string.Instance);
                         break;
                     case "hideFlags":
-                        instance.hideFlags = reader.Read<UnityEngine.HideFlags>();
+                        instance.hideFlags = reader.Read<HideFlags>();
                         break;
                     case "active":
                         instance.SetActive(reader.Read<bool>(ES3Type_bool.Instance));
@@ -191,7 +191,7 @@ namespace ES3Types
                 {
                     propertyName = ReadPropertyName(reader);
 
-                    if (propertyName == ES3Type.typeFieldName)
+                    if (propertyName == typeFieldName)
                         type = reader.ReadType();
                     else if (propertyName == ES3ReferenceMgrBase.referencePropertyName)
                     {
@@ -275,7 +275,7 @@ namespace ES3Types
     {
         public static ES3Type Instance;
 
-        public ES3Type_GameObjectArray() : base(typeof(UnityEngine.GameObject[]), ES3Type_GameObject.Instance)
+        public ES3Type_GameObjectArray() : base(typeof(GameObject[]), ES3Type_GameObject.Instance)
         {
             Instance = this;
         }

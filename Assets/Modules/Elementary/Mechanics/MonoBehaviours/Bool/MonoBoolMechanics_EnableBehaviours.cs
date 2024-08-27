@@ -11,9 +11,9 @@ namespace Elementary
 
         protected override void SetEnable(bool isEnable)
         {
-            for (int i = 0, count = this.behaviours.Length; i < count; i++)
+            for (int i = 0, count = behaviours.Length; i < count; i++)
             {
-                var behaviour = this.behaviours[i];
+                var behaviour = behaviours[i];
                 behaviour.enabled = isEnable;
             }
         }

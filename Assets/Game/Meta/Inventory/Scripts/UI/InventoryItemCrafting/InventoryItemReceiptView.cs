@@ -10,13 +10,13 @@ namespace Game.Meta
     {
         public event UnityAction OnCraftButtonClicked
         {
-            add { this.craftButton.AddListener(value); }
-            remove { this.craftButton.RemoveListener(value); }
+            add { craftButton.AddListener(value); }
+            remove { craftButton.RemoveListener(value); }
         }
 
         public int IngredientCount
         {
-            get { return this.ingredients.Length; }
+            get { return ingredients.Length; }
         }
 
         [SerializeField]
@@ -37,12 +37,12 @@ namespace Game.Meta
 
         public void SetTitle(string title)
         {
-            this.titleText.text = title;
+            titleText.text = title;
         }
 
         public void SetDescription(string description)
         {
-            this.descriptionText.text = description;
+            descriptionText.text = description;
         }
 
         public void SetInteractibleButton(bool interactible)
@@ -50,17 +50,17 @@ namespace Game.Meta
             var state = interactible
                 ? CraftButton.State.AVAILABLE
                 : CraftButton.State.LOCKED;
-            this.craftButton.SetState(state);
+            craftButton.SetState(state);
         }
 
         public void SetIcon(Sprite icon)
         {
-            this.iconImage.sprite = icon;
+            iconImage.sprite = icon;
         }
 
         public InventoryItemIngredientView GetIngredient(int index)
         {
-            return this.ingredients[index];
+            return ingredients[index];
         }
     }
 }

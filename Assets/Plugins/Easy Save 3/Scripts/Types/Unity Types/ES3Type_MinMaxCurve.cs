@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_MinMaxCurve() : base(typeof(UnityEngine.ParticleSystem.MinMaxCurve))
+		public ES3Type_MinMaxCurve() : base(typeof(ParticleSystem.MinMaxCurve))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.MinMaxCurve)obj;
+			var instance = (ParticleSystem.MinMaxCurve)obj;
 			
 			writer.WriteProperty("mode", instance.mode);
 			writer.WriteProperty("curveMultiplier", instance.curveMultiplier, ES3Type_float.Instance);
@@ -31,7 +31,7 @@ namespace ES3Types
 		[UnityEngine.Scripting.Preserve]
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.MinMaxCurve();
+			var instance = new ParticleSystem.MinMaxCurve();
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -39,28 +39,28 @@ namespace ES3Types
 				{
 
 					case "mode":
-						instance.mode = reader.Read<UnityEngine.ParticleSystemCurveMode>();
+						instance.mode = reader.Read<ParticleSystemCurveMode>();
 						break;
 					case "curveMultiplier":
-						instance.curveMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.curveMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "curveMax":
-						instance.curveMax = reader.Read<UnityEngine.AnimationCurve>(ES3Type_AnimationCurve.Instance);
+						instance.curveMax = reader.Read<AnimationCurve>(ES3Type_AnimationCurve.Instance);
 						break;
 					case "curveMin":
-						instance.curveMin = reader.Read<UnityEngine.AnimationCurve>(ES3Type_AnimationCurve.Instance);
+						instance.curveMin = reader.Read<AnimationCurve>(ES3Type_AnimationCurve.Instance);
 						break;
 					case "constantMax":
-						instance.constantMax = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.constantMax = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "constantMin":
-						instance.constantMin = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.constantMin = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "constant":
-						instance.constant = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.constant = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "curve":
-						instance.curve = reader.Read<UnityEngine.AnimationCurve>(ES3Type_AnimationCurve.Instance);
+						instance.curve = reader.Read<AnimationCurve>(ES3Type_AnimationCurve.Instance);
 						break;
 					default:
 						reader.Skip();
@@ -73,7 +73,7 @@ namespace ES3Types
 		[UnityEngine.Scripting.Preserve]
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.MinMaxCurve)obj;
+			var instance = (ParticleSystem.MinMaxCurve)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -81,28 +81,28 @@ namespace ES3Types
 				{
 					
 					case "mode":
-						instance.mode = reader.Read<UnityEngine.ParticleSystemCurveMode>();
+						instance.mode = reader.Read<ParticleSystemCurveMode>();
 						break;
 					case "curveMultiplier":
-						instance.curveMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.curveMultiplier = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "curveMax":
-						instance.curveMax = reader.Read<UnityEngine.AnimationCurve>(ES3Type_AnimationCurve.Instance);
+						instance.curveMax = reader.Read<AnimationCurve>(ES3Type_AnimationCurve.Instance);
 						break;
 					case "curveMin":
-						instance.curveMin = reader.Read<UnityEngine.AnimationCurve>(ES3Type_AnimationCurve.Instance);
+						instance.curveMin = reader.Read<AnimationCurve>(ES3Type_AnimationCurve.Instance);
 						break;
 					case "constantMax":
-						instance.constantMax = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.constantMax = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "constantMin":
-						instance.constantMin = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.constantMin = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "constant":
-						instance.constant = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.constant = reader.Read<Single>(ES3Type_float.Instance);
 						break;
 					case "curve":
-						instance.curve = reader.Read<UnityEngine.AnimationCurve>(ES3Type_AnimationCurve.Instance);
+						instance.curve = reader.Read<AnimationCurve>(ES3Type_AnimationCurve.Instance);
 						break;
 					default:
 						reader.Skip();

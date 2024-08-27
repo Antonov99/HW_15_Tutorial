@@ -22,12 +22,12 @@ namespace Game.App
 
         void IAppStartListener.Start()
         {
-            LanguageManager.OnLanguageChanged += this.SaveLanguage;
+            LanguageManager.OnLanguageChanged += SaveLanguage;
         }
 
         void IAppQuitListener.OnQuit()
         {
-            LanguageManager.OnLanguageChanged -= this.SaveLanguage;
+            LanguageManager.OnLanguageChanged -= SaveLanguage;
         }
 
         private void SaveLanguage(SystemLanguage language)

@@ -10,7 +10,7 @@ namespace Elementary
     {
         public float Current
         {
-            get { return this.GetValue(); }
+            get { return GetValue(); }
         }
 
         [SerializeField]
@@ -32,11 +32,11 @@ namespace Elementary
 
         public float GetValue()
         {
-            return this.mode switch
+            return mode switch
             {
-                Mode.BASE => this.baseValue,
-                Mode.MONO_BEHAVIOUR => this.monoValue.Current,
-                Mode.SCRIPTABLE_OBJECT => this.scriptableValue.Current,
+                Mode.BASE => baseValue,
+                Mode.MONO_BEHAVIOUR => monoValue.Current,
+                Mode.SCRIPTABLE_OBJECT => scriptableValue.Current,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

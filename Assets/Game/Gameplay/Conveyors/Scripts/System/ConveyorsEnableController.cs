@@ -18,17 +18,17 @@ namespace Game.Gameplay.Conveyors
 
         void IGameStartElement.StartGame()
         {
-            this.EnableConveyors(true);
+            EnableConveyors(true);
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.EnableConveyors(false);
+            EnableConveyors(false);
         }
 
         private void EnableConveyors(bool isEnable)
         {
-            var conveyors = this.conveyorsService.GetAllConveyors();
+            var conveyors = conveyorsService.GetAllConveyors();
             foreach (var conveyor in conveyors)
             {
                 var enableComponent = conveyor.Get<IComponent_Enable>();

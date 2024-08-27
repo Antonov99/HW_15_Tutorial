@@ -11,7 +11,7 @@ namespace Game.GameEngine.Mechanics
         
         public void Respawn()
         {
-            this.eventReceiver.Call();
+            eventReceiver.Call();
         }
     }
 }

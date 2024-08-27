@@ -19,7 +19,7 @@ namespace Game.Meta
             if (product.TryGetComponent(out IComponent_InventoryItem component))
             {
                 var prototype = component.Item;
-                this.inventory.AddItemsByPrototype(prototype, 1);
+                inventory.AddItemsByPrototype(prototype, 1);
             }
         }
     }

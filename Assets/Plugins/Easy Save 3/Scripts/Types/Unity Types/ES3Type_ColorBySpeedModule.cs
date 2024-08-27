@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_ColorBySpeedModule() : base(typeof(UnityEngine.ParticleSystem.ColorBySpeedModule))
+		public ES3Type_ColorBySpeedModule() : base(typeof(ParticleSystem.ColorBySpeedModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.ColorBySpeedModule)obj;
+			var instance = (ParticleSystem.ColorBySpeedModule)obj;
 			
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 			writer.WriteProperty("color", instance.color, ES3Type_MinMaxGradient.Instance);
@@ -25,14 +25,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.ColorBySpeedModule();
+			var instance = new ParticleSystem.ColorBySpeedModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.ColorBySpeedModule)obj;
+			var instance = (ParticleSystem.ColorBySpeedModule)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -40,13 +40,13 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "color":
-						instance.color = reader.Read<UnityEngine.ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
+						instance.color = reader.Read<ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);
 						break;
 					case "range":
-						instance.range = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
+						instance.range = reader.Read<Vector2>(ES3Type_Vector2.Instance);
 						break;
 					default:
 						reader.Skip();

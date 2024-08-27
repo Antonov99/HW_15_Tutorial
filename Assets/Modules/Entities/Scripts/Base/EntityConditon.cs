@@ -13,7 +13,7 @@ namespace Entities
         
         public bool IsTrue(IEntity entity)
         {
-            return this.condition.Invoke(entity);
+            return condition.Invoke(entity);
         }
     }
 }

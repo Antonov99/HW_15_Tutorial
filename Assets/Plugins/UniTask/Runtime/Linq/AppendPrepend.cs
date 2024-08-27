@@ -63,7 +63,7 @@ namespace Cysharp.Threading.Tasks.Linq
             {
                 this.source = source;
                 this.element = element;
-                this.state = append ? State.RequireAppend : State.RequirePrepend;
+                state = append ? State.RequireAppend : State.RequirePrepend;
                 this.cancellationToken = cancellationToken;
 
                 TaskTracker.TrackActiveTask(this, 3);

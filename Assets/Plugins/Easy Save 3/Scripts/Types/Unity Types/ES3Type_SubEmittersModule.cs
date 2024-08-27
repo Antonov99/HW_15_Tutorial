@@ -9,14 +9,14 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_SubEmittersModule() : base(typeof(UnityEngine.ParticleSystem.SubEmittersModule))
+		public ES3Type_SubEmittersModule() : base(typeof(ParticleSystem.SubEmittersModule))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.ParticleSystem.SubEmittersModule)obj;
+			var instance = (ParticleSystem.SubEmittersModule)obj;
 
 			var seProperties = new ParticleSystemSubEmitterProperties[instance.subEmittersCount];
 			var seSystems = new ParticleSystem[instance.subEmittersCount]; 
@@ -36,14 +36,14 @@ namespace ES3Types
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.ParticleSystem.SubEmittersModule();
+			var instance = new ParticleSystem.SubEmittersModule();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.ParticleSystem.SubEmittersModule)obj;
+			var instance = (ParticleSystem.SubEmittersModule)obj;
 
 			ParticleSystemSubEmitterProperties[] seProperties = null;
 			ParticleSystem[] seSystems = null; 
@@ -56,7 +56,7 @@ namespace ES3Types
 				{
 					
 					case "enabled":
-						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						instance.enabled = reader.Read<Boolean>(ES3Type_bool.Instance);
 						break;
 					case "properties":
 						seProperties = reader.Read<ParticleSystemSubEmitterProperties[]>(new ES3ArrayType(typeof(ParticleSystemSubEmitterProperties[])));

@@ -30,17 +30,17 @@ namespace Game.GameEngine
 
         public bool FindEntryNode(out Node node)
         {
-            return this.FindNode(this.entryId, out node);
+            return FindNode(entryId, out node);
         }
 
         public bool FindNextNode(int prevId, int choiceIndex, out Node nextNode)
         {
-            for (int i = 0, count = this.edges.Count; i < count; i++)
+            for (int i = 0, count = edges.Count; i < count; i++)
             {
-                var edge = this.edges[i];
+                var edge = edges[i];
                 if (edge.nodeId == prevId && edge.choiceIndex == choiceIndex)
                 {
-                    if (this.FindNode(edge.nextId, out nextNode))
+                    if (FindNode(edge.nextId, out nextNode))
                     {
                         return true;
                     }
@@ -55,7 +55,7 @@ namespace Game.GameEngine
 
         private bool FindNode(int id, out Node result)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in nodes)
             {
                 if (node.id == id)
                 {

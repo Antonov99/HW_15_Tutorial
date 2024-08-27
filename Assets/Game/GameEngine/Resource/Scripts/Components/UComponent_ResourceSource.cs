@@ -9,8 +9,8 @@ namespace Game.GameEngine.GameResources
     {
         public event Action<ResourceType, int> OnResourcesChanged
         {
-            add { this.table.OnValueChanged += value; }
-            remove { this.table.OnValueChanged -= value; }
+            add { table.OnValueChanged += value; }
+            remove { table.OnValueChanged -= value; }
         }
 
         [SerializeField]
@@ -21,41 +21,41 @@ namespace Game.GameEngine.GameResources
         [Button]
         public void PutResources(ResourceType type, int amount)
         {
-            this.table.Plus(type, amount);
+            table.Plus(type, amount);
         }
         
         [GUIColor(0, 1, 0)]
         [Button]
         public void ExtractResources(ResourceType type, int amount)
         {
-            this.table.Minus(type, amount);
+            table.Minus(type, amount);
         }
 
         public int GetSum()
         {
-            return this.table.GetSum();
+            return table.GetSum();
         }
 
         public void Clear()
         {
-            this.table.Clear();
+            table.Clear();
         }
 
         [GUIColor(0, 1, 0)]
         [Button]
         public void SetupResources(ResourceData[] resources)
         {
-            this.table.Setup(resources);
+            table.Setup(resources);
         }
 
         public int GetResources(ResourceType type)
         {
-            return this.table[type];
+            return table[type];
         }
 
         public ResourceData[] GetAllResources()
         {
-            return this.table.GetAll();
+            return table.GetAll();
         }
     }
 }

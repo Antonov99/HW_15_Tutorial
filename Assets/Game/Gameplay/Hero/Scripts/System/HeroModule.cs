@@ -72,13 +72,13 @@ namespace Game.Gameplay.Hero
         public override void ConstructGame(GameContext context)
         {
             base.ConstructGame(context);
-            this.ConstructDetector();
+            ConstructDetector();
         }
 
         private void ConstructDetector()
         {
-            this.detectService.AddListener(this.enemyDetectController);
-            this.detectService.AddListener(this.resourceDetectController);
+            detectService.AddListener(enemyDetectController);
+            detectService.AddListener(resourceDetectController);
         }
     }
 }

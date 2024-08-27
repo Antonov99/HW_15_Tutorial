@@ -210,7 +210,7 @@ public class FlatKitWaterEditor : ShaderGUI {
             Debug.LogWarning($"Could not save the texture to {fullPath}.");
         }
 
-        TextureImporter importer = (TextureImporter) TextureImporter.GetAtPath(pathRelativeToAssets);
+        TextureImporter importer = (TextureImporter) AssetImporter.GetAtPath(pathRelativeToAssets);
         Debug.Assert(importer != null,
             $"[FlatKit] Could not create importer at {pathRelativeToAssets}.");
         if (importer != null) {

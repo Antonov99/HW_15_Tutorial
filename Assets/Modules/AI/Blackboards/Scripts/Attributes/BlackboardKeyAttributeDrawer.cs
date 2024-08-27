@@ -19,7 +19,7 @@ namespace AI.Blackboards.UnityEditor
 
             GUIHelper.PushLabelWidth(GUIHelper.BetterLabelWidth);
             
-            var name = this.ValueEntry.SmartValue;
+            var name = ValueEntry.SmartValue;
             if (string.IsNullOrEmpty(name))
             {
                 name = names[0];
@@ -32,7 +32,7 @@ namespace AI.Blackboards.UnityEditor
             }
             
             currentIndex = EditorGUILayout.Popup(label, currentIndex, names);
-            this.ValueEntry.SmartValue = names[currentIndex];
+            ValueEntry.SmartValue = names[currentIndex];
 
             GUIHelper.PopLabelWidth();
         }

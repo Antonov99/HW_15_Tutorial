@@ -104,7 +104,7 @@ namespace PolyAndCode.UI
             //Reseting Pool
             if (_cellPool != null)
             {
-                _cellPool.ForEach((RectTransform item) => UnityEngine.Object.Destroy(item.gameObject));
+                _cellPool.ForEach((RectTransform item) => Object.Destroy(item.gameObject));
                 _cellPool.Clear();
                 _cachedCells.Clear();
             }
@@ -140,7 +140,7 @@ namespace PolyAndCode.UI
             while ((poolSize < minPoolSize || currentPoolCoverage < requriedCoverage) && poolSize < DataAdapter.DataCount)
             {
                 //Instantiate and add to Pool
-                RectTransform item = (UnityEngine.Object.Instantiate(PrototypeCell.gameObject)).GetComponent<RectTransform>();
+                RectTransform item = (Object.Instantiate(PrototypeCell.gameObject)).GetComponent<RectTransform>();
                 item.name = "Cell";
                 item.sizeDelta = new Vector2(_cellWidth, _cellHeight);
                 _cellPool.Add(item);

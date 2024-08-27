@@ -35,25 +35,25 @@ namespace Game.Meta
         public bool CanReceiveReward(Mission mission)
         {
             return mission.State == MissionState.COMPLETED &&
-                   this.missions.ContainsValue(mission);
+                   missions.ContainsValue(mission);
         }
 
         public void ReceiveReward(Mission mission)
         {
-            if (!this.CanReceiveReward(mission))
+            if (!CanReceiveReward(mission))
             {
                 throw new Exception($"Can not receive reward from mission {mission.Id}!");
             }
 
-            this.moneyStorage.EarnMoney(mission.MoneyReward);
-            this.OnRewardReceived?.Invoke(mission);
+            moneyStorage.EarnMoney(mission.MoneyReward);
+            OnRewardReceived?.Invoke(mission);
 
-            this.GenerateNextMission(mission.Difficulty, mission.Id);
+            GenerateNextMission(mission.Difficulty, mission.Id);
         }
 
         public Mission GetMission(MissionDifficulty difficulty)
         {
-            if (this.missions.TryGetValue(difficulty, out var mission))
+            if (missions.TryGetValue(difficulty, out var mission))
             {
                 return mission;
             }
@@ -63,34 +63,34 @@ namespace Game.Meta
 
         public Mission[] GetMissions()
         {
-            return this.missions.Values.ToArray();
+            return missions.Values.ToArray();
         }
 
         public bool IsMissionExists(MissionDifficulty difficulty)
         {
-            return this.missions.ContainsKey(difficulty);
+            return missions.ContainsKey(difficulty);
         }
 
         public Mission SetupMission(MissionConfig missionConfig)
         {
-            var mission = this.factory.CreateMission(missionConfig);
-            this.missions[missionConfig.Difficulty] = mission;
+            var mission = factory.CreateMission(missionConfig);
+            missions[missionConfig.Difficulty] = mission;
             return mission;
         }
         
         void IGameStartElement.StartGame()
         {
-            this.StartMissions();
+            StartMissions();
         }
 
         void IGameFinishElement.FinishGame()
         {
-            this.StopMissions();
+            StopMissions();
         }
 
         private void StartMissions()
         {
-            foreach (var mission in this.missions.Values)
+            foreach (var mission in missions.Values)
             {
                 mission.Start();
             }
@@ -98,7 +98,7 @@ namespace Game.Meta
 
         private void StopMissions()
         {
-            foreach (var mission in this.missions.Values)
+            foreach (var mission in missions.Values)
             {
                 mission.Stop();
             }
@@ -106,12 +106,12 @@ namespace Game.Meta
 
         private void GenerateNextMission(MissionDifficulty difficulty, string prevMissionId)
         {
-            var missionConfig = this.selector.SelectNextMission(difficulty, prevMissionId);
-            var mission = this.factory.CreateMission(missionConfig);
-            this.missions[difficulty] = mission;
+            var missionConfig = selector.SelectNextMission(difficulty, prevMissionId);
+            var mission = factory.CreateMission(missionConfig);
+            missions[difficulty] = mission;
 
             mission.Start();
-            this.OnMissionChanged?.Invoke(mission);
+            OnMissionChanged?.Invoke(mission);
         }
     }
 }

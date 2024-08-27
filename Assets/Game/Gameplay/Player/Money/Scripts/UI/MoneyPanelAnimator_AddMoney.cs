@@ -38,58 +38,58 @@ namespace Game.Gameplay.Player
 
         public void PlayIncomeFromUI(Vector3 startUIPosition, int income)
         {
-            this.StartCoroutine(this.PlayFromUIRoutine(startUIPosition, income));
+            StartCoroutine(PlayFromUIRoutine(startUIPosition, income));
         }
 
         private IEnumerator PlayFromUIRoutine(Vector3 startUIPosition, int income)
         {
-            var prevValue = this.panel.Money;
+            var prevValue = panel.Money;
             var newValue = prevValue + income;
-            var particleIterator = new IntValueIterator(prevValue, newValue, this.maxParticleCount);
+            var particleIterator = new IntValueIterator(prevValue, newValue, maxParticleCount);
 
-            var endUIPosition = this.panel.GetIconPosition();
-            var emissionPeriod = new WaitForSeconds(this.emissonPeriod);
+            var endUIPosition = panel.GetIconPosition();
+            var emissionPeriod = new WaitForSeconds(emissonPeriod);
 
             for (int i = 0, count = particleIterator.ParticleCount; i < count; i++)
             {
-                this.StartCoroutine(this.PlayParticleFromUI(startUIPosition, endUIPosition, particleIterator));
+                StartCoroutine(PlayParticleFromUI(startUIPosition, endUIPosition, particleIterator));
                 yield return emissionPeriod;
             }
         }
 
         private IEnumerator PlayParticleFromUI(Vector3 startUIPosition, Vector3 endUIPosition, IntValueIterator particleIterator)
         {
-            var particleObject = this.particlePool.Get(this.overlayViewport);
-            particleObject.SetIcon(this.moneyIcon);
+            var particleObject = particlePool.Get(overlayViewport);
+            particleObject.SetIcon(moneyIcon);
 
             var particleTransform = particleObject.transform;
             particleTransform.position = startUIPosition;
-            yield return UIAnimations.AnimateFlyRoutine(particleTransform, this.settings, endUIPosition);
-            this.particlePool.Release(particleObject);
+            yield return UIAnimations.AnimateFlyRoutine(particleTransform, settings, endUIPosition);
+            particlePool.Release(particleObject);
 
             if (particleIterator.NextValue(out var resourceCount))
             {
-                this.panel.IncrementMoney(resourceCount);
+                panel.IncrementMoney(resourceCount);
             }
         }
 
         public void PlayIncomeFromWorld(Vector3 startWorldPosition, int income)
         {
-            this.StartCoroutine(this.PlayFromWorldRoutine(startWorldPosition, income));
+            StartCoroutine(PlayFromWorldRoutine(startWorldPosition, income));
         }
 
         private IEnumerator PlayFromWorldRoutine(Vector3 startWorldPosition, int income)
         {
-            var prevValue = this.panel.Money;
+            var prevValue = panel.Money;
             var newValue = prevValue + income;
-            var particleIterator = new IntValueIterator(prevValue, newValue, this.maxParticleCount);
+            var particleIterator = new IntValueIterator(prevValue, newValue, maxParticleCount);
 
-            var endUIPosition = this.panel.GetIconPosition();
-            var emissionPeriod = new WaitForSeconds(this.emissonPeriod);
+            var endUIPosition = panel.GetIconPosition();
+            var emissionPeriod = new WaitForSeconds(emissonPeriod);
 
             for (int i = 0, count = particleIterator.ParticleCount; i < count; i++)
             {
-                this.StartCoroutine(this.PlayParticleFromWorld(startWorldPosition, endUIPosition, particleIterator));
+                StartCoroutine(PlayParticleFromWorld(startWorldPosition, endUIPosition, particleIterator));
                 yield return emissionPeriod;
             }
         }
@@ -100,34 +100,34 @@ namespace Game.Gameplay.Player
             IntValueIterator particleIterator
         )
         {
-            var particleObject = this.particlePool.Get(this.worldViewport);
-            particleObject.SetIcon(this.moneyIcon);
+            var particleObject = particlePool.Get(worldViewport);
+            particleObject.SetIcon(moneyIcon);
 
             var particleTransform = particleObject.transform;
             particleTransform.position = CameraUtils.FromWorldToUIPosition(
-                this.worldCamera,
-                this.uiCamera,
+                worldCamera,
+                uiCamera,
                 startWorldPosition
             );
 
-            yield return UIAnimations.AnimateFlyRoutine(particleTransform, this.settings, endUIPosiiton);
-            this.particlePool.Release(particleObject);
+            yield return UIAnimations.AnimateFlyRoutine(particleTransform, settings, endUIPosiiton);
+            particlePool.Release(particleObject);
 
             if (particleIterator.NextValue(out var resourceCount))
             {
-                this.panel.IncrementMoney(resourceCount);
+                panel.IncrementMoney(resourceCount);
             }
         }
 
         void IGameConstructElement.ConstructGame(GameContext context)
         {
-            this.particlePool = context.GetService<GUIParticlePoolService>().ImagePool;
-            this.uiCamera = context.GetService<GUICameraService>().Camera;
-            this.worldCamera = WorldCamera.Instance;
+            particlePool = context.GetService<GUIParticlePoolService>().ImagePool;
+            uiCamera = context.GetService<GUICameraService>().Camera;
+            worldCamera = WorldCamera.Instance;
             
             var viewportService = context.GetService<GUIParticleViewportService>();
-            this.worldViewport = viewportService.WorldViewport;
-            this.overlayViewport = viewportService.OverlayViewport;
+            worldViewport = viewportService.WorldViewport;
+            overlayViewport = viewportService.OverlayViewport;
         }
     }
 }

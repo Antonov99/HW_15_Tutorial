@@ -12,7 +12,7 @@ namespace Game.Gameplay
 
         public ZoneType Zone
         {
-            get { return this.zone; }
+            get { return zone; }
         }
 
         [SerializeField]
@@ -20,7 +20,7 @@ namespace Game.Gameplay
 
         public void Setup(IEntity conveyor)
         {
-            this.Conveyor = conveyor;
+            Conveyor = conveyor;
         }
 
         [Serializable]

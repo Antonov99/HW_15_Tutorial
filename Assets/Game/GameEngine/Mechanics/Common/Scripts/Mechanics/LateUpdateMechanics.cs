@@ -14,7 +14,7 @@ namespace Game.GameEngine.Mechanics
 
         void ILateUpdateListener.LateUpdate(float deltaTime)
         {
-            this.action.Invoke(deltaTime);
+            action.Invoke(deltaTime);
         }
     }
 }

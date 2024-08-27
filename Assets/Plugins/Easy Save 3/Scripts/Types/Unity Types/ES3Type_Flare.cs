@@ -9,28 +9,28 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_Flare() : base(typeof(UnityEngine.Flare))
+		public ES3Type_Flare() : base(typeof(Flare))
 		{
 			Instance = this;
 		}
 
 		public override void Write(object obj, ES3Writer writer)
 		{
-			var instance = (UnityEngine.Flare)obj;
+			var instance = (Flare)obj;
 
 			writer.WriteProperty("hideFlags", instance.hideFlags);
 		}
 
 		public override object Read<T>(ES3Reader reader)
 		{
-			var instance = new UnityEngine.Flare();
+			var instance = new Flare();
 			ReadInto<T>(reader, instance);
 			return instance;
 		}
 
 		public override void ReadInto<T>(ES3Reader reader, object obj)
 		{
-			var instance = (UnityEngine.Flare)obj;
+			var instance = (Flare)obj;
 			string propertyName;
 			while((propertyName = reader.ReadPropertyName()) != null)
 			{
@@ -38,7 +38,7 @@ namespace ES3Types
 				{
 					
 					case "hideFlags":
-						instance.hideFlags = reader.Read<UnityEngine.HideFlags>();
+						instance.hideFlags = reader.Read<HideFlags>();
 						break;
 					default:
 						reader.Skip();
@@ -52,7 +52,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_FlareArray() : base(typeof(UnityEngine.Flare[]), ES3Type_Flare.Instance)
+		public ES3Type_FlareArray() : base(typeof(Flare[]), ES3Type_Flare.Instance)
 		{
 			Instance = this;
 		}

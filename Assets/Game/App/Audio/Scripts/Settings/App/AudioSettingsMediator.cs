@@ -12,17 +12,17 @@ namespace Game.App
 
         void IAppInitListener.Init()
         {
-            this.LoadSettings();
+            LoadSettings();
         }
         
         void IAppPauseListener.OnPaused()
         {
-            this.SaveSettings();
+            SaveSettings();
         }
 
         void IAppQuitListener.OnQuit()
         {
-            this.SaveSettings();
+            SaveSettings();
         }
 
         private void LoadSettings()

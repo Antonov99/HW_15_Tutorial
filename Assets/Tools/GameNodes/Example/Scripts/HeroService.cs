@@ -13,7 +13,7 @@ namespace GameNodes
         
         public IEntity GetHero()
         {
-            return this.hero;
+            return hero;
         }
     }
 }

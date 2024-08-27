@@ -10,7 +10,7 @@ namespace Game.Meta
         public Mission CreateMission(MissionConfig config)
         {
             var mission = config.InstantiateMission();
-            GameInjector.Inject(this.gameContext, mission);
+            GameInjector.Inject(gameContext, mission);
             return mission;
         }
     }
