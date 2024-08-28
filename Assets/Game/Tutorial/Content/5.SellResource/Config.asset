@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac00ff35bc4c8eac4ca30b3c8e1831, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  targetResourceType: 1
-  title: Tutorial|SELL_STONE
-  icon: {fileID: 21300000, guid: d29138e8659754a718ff048d6aa8572c, type: 3}
+  targetResourceType: 2
+  title: Tutorial|SELL_LUMBER
+  icon: {fileID: 21300000, guid: 4c72251e5fc59480c9940015c2bfa7aa, type: 3}

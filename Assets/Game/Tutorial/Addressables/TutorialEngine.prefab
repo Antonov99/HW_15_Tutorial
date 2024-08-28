@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 264281719}
   m_Layer: 0
-  m_Name: SellStone
+  m_Name: SellLumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264281718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.43, y: 2.25, z: 11.21}
+  m_LocalPosition: {x: -5.99, y: 0, z: 14.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -355,6 +355,7 @@ MonoBehaviour:
   - {fileID: 8191445035365891073}
   - {fileID: 4693716560327999602}
   - {fileID: 857856321720598767}
+  - {fileID: 7803452722337092562}
   - {fileID: 4911381372348552171}
   - {fileID: 2426757044515287115}
   - {fileID: 7165680554008715135}
@@ -398,6 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4209202774680577156}
+  - component: {fileID: 7803452722337092562}
   m_Layer: 0
   m_Name: 3.ConvertResources
   m_TagString: Untagged
@@ -420,6 +422,25 @@ Transform:
   m_Father: {fileID: 3148927194187487716}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7803452722337092562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2202014033569338692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c9587b797740b789535aab37245c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 2
+  config: {fileID: 11400000, guid: 6c234e01428e4e74aa038a1447a30ae1, type: 2}
+  panelShower:
+    showDelay: 1
+    viewPrefab: {fileID: 7004754039173447821, guid: ec0a3f3dd5a8e46c68f98d15568a6457,
+      type: 3}
+  pointerTransform: {fileID: 6784288335309739009}
 --- !u!1 &4257378992284525787
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +725,37 @@ MonoBehaviour:
     showDelay: 0.5
     viewPrefab: {fileID: 7004754039173447821, guid: ec0a3f3dd5a8e46c68f98d15568a6457,
       type: 3}
+--- !u!1 &7510626558118389533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2554361035626484626}
+  m_Layer: 0
+  m_Name: GetLumber
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2554361035626484626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510626558118389533}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2435874646546107567}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7671630507988244190
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,8 +788,41 @@ Transform:
   - {fileID: 264281719}
   - {fileID: 9212810819539266258}
   - {fileID: 1642970014}
+  - {fileID: 6784288335309739009}
+  - {fileID: 2554361035626484626}
   m_Father: {fileID: 1558592513771340664}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8098560516085615096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6784288335309739009}
+  m_Layer: 0
+  m_Name: ConvertWoodToLumber
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6784288335309739009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098560516085615096}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.25, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2435874646546107567}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8766210075855354300
 GameObject:

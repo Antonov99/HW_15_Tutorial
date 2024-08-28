@@ -10,6 +10,8 @@ namespace Game.Gameplay.Player
         IGameReadyElement,
         IGameFinishElement
     {
+        public event Action OnResourcesLoaded; 
+        
         private ConveyorVisitInteractor visitInteractor;
 
         private ResourceStorage resourceStorage;
@@ -83,6 +85,8 @@ namespace Game.Gameplay.Player
             var resultAmount = Math.Min(resourcesInStorage, loadZone.AvailableAmount);
             resourceStorage.ExtractResource(resourceType, resultAmount);
             loadZone.PutAmount(resultAmount);
+            
+            OnResourcesLoaded?.Invoke();
         }
     }
 }
