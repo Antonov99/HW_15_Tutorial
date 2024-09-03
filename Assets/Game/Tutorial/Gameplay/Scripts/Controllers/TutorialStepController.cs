@@ -89,8 +89,6 @@ namespace Game.Tutorial.Gameplay
 
         private void CheckForStart(TutorialStep step)
         {
-            Debug.Log(this.step);
-            Debug.Log(step);
             if (this.step == step)
             {
                 OnStart();

@@ -8,6 +8,7 @@ namespace Game.Tutorial
         GET_RESOURCE = 3,
         SELL_RESOURCE = 4,
         UPGRADE_HERO = 5,
-        DESTROY_ENEMY = 6
+        DESTROY_ENEMY = 6,
+        GET_REWARD
     }
 }

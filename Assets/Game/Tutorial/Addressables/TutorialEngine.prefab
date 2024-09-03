@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264281718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 13}
+  m_LocalPosition: {x: -3, y: 0, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -360,6 +360,7 @@ MonoBehaviour:
   - {fileID: 4911381372348552171}
   - {fileID: 2426757044515287115}
   - {fileID: 7165680554008715135}
+  - {fileID: 1160564992907579403}
 --- !u!1 &2173936365805031374
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +526,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3148927194187487716}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8191445035365891073
 MonoBehaviour:
@@ -599,6 +600,57 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     showPopupDelay: 0.5
+--- !u!1 &5473365687936680157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6393115927370819929}
+  - component: {fileID: 1160564992907579403}
+  m_Layer: 0
+  m_Name: 8.TakeReward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6393115927370819929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473365687936680157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3148927194187487716}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1160564992907579403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473365687936680157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71c4134b3524b0484805b2ba395de7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 7
+  config: {fileID: 11400000, guid: 27a4420f643ac1e4fa223e8a5ed8ac5e, type: 2}
+  actionPanel:
+    showDelay: 0.5
+    viewPrefab: {fileID: 7004754039173447821, guid: ec0a3f3dd5a8e46c68f98d15568a6457,
+      type: 3}
+  pointerTransform: {fileID: 8025538790453061966}
 --- !u!1 &5774641300251117817
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +798,37 @@ MonoBehaviour:
     showDelay: 0.5
     viewPrefab: {fileID: 7004754039173447821, guid: ec0a3f3dd5a8e46c68f98d15568a6457,
       type: 3}
+--- !u!1 &7192005321541946462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8025538790453061966}
+  m_Layer: 0
+  m_Name: GetReward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8025538790453061966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7192005321541946462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.26, y: 0, z: 10.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2435874646546107567}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7510626558118389533
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +894,7 @@ Transform:
   - {fileID: 1642970014}
   - {fileID: 6784288335309739009}
   - {fileID: 2554361035626484626}
+  - {fileID: 8025538790453061966}
   m_Father: {fileID: 1558592513771340664}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -880,6 +964,7 @@ Transform:
   - {fileID: 3631100122495761853}
   - {fileID: 546143346056862684}
   - {fileID: 5861923413027745657}
+  - {fileID: 6393115927370819929}
   - {fileID: 212520846365235768}
   m_Father: {fileID: 3272375028230642151}
   m_RootOrder: 1
