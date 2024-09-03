@@ -1,28 +1,23 @@
 ﻿using System;
-using Game.GameEngine.Mechanics;
-using Game.Gameplay.Hero;
 using Game.Gameplay.Player;
 
 namespace Game.Tutorial
 {
     public sealed class ConvertResourceInspector
     {
-        private IHeroService heroService;
+        private ConveyorVisitInputZoneObserver conveyorVisitInputZoneObserver;
 
         private Action callback;
-
-        public void Construct(IHeroService heroService)
+        
+        public void Construct(ConveyorVisitInputZoneObserver conveyorVisitInputZoneObserver)
         {
-            this.heroService = heroService;
+            this.conveyorVisitInputZoneObserver = conveyorVisitInputZoneObserver;
         }
 
         public void Inspect(Action callback)
         {
             this.callback = callback;
-            heroService
-                .GetHero()
-                .Get<ConveyorVisitInputZoneObserver>()
-                .OnResourcesLoaded += OnResourcesLoaded;
+            conveyorVisitInputZoneObserver.OnResourcesLoaded += OnResourcesLoaded;
         }
 
         private void OnResourcesLoaded()
@@ -32,10 +27,7 @@ namespace Game.Tutorial
 
         private void CompleteQuest()
         {
-            heroService
-                .GetHero()
-                .Get<ConveyorVisitInputZoneObserver>()
-                .OnResourcesLoaded -= OnResourcesLoaded;
+            conveyorVisitInputZoneObserver.OnResourcesLoaded -= OnResourcesLoaded;
             callback?.Invoke();
         }
     }

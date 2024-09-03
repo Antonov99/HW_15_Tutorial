@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace Game.Tutorial
 {
-    [AddComponentMenu("Tutorial/Step «Convert Resource»")]
-    public sealed class ConvertResourceStepController : TutorialStepController
+    [AddComponentMenu("Tutorial/Step «Get Resource»")]
+    public sealed class GetResourceStepController : TutorialStepController
     {
         private PointerManager pointerManager;
         
@@ -16,13 +16,13 @@ namespace Game.Tutorial
 
         private ScreenTransform screenTransform;
         
-        private readonly ConvertResourceInspector inspector = new();
+        private readonly GetResourceInspector inspector = new();
 
         [SerializeField]
-        private ConvertResourceConfig config;
+        private GetResourceConfig config;
 
         [SerializeField]
-        private ConvertResourcePanelShower panelShower = new();
+        private GetResourcePanelShower panelShower = new();
 
         [SerializeField]
         private Transform pointerTransform;
@@ -33,8 +33,8 @@ namespace Game.Tutorial
             navigationManager = context.GetService<NavigationManager>();
             screenTransform = context.GetService<ScreenTransform>();
             
-            var conveyorVisitInputZoneObserver = context.GetService<ConveyorVisitInputZoneObserver>();
-            inspector.Construct(conveyorVisitInputZoneObserver);
+            var conveyorVisitUnloadZoneObserver = context.GetService<ConveyorVisitUnloadZoneObserver>();
+            inspector.Construct(conveyorVisitUnloadZoneObserver);
             
             panelShower.Construct(config);
 

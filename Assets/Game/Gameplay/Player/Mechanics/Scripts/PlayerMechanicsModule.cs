@@ -22,9 +22,11 @@ namespace Game.Gameplay.Player
         [ReadOnly, ShowInInspector]
         private ConveyorVisitInteractor conveyorVisitInteractor = new();
 
+        [GameService]
         [GameElement]
         private readonly ConveyorVisitUnloadZoneObserver conveyorUnloadZoneObserver = new();
 
+        [GameService]
         [GameElement]
         private readonly ConveyorVisitInputZoneObserver conveyorLoadZoneObserver = new();
         

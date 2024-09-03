@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Entities;
 using GameSystem;
@@ -9,6 +10,8 @@ namespace Game.Gameplay.Player
         IGameReadyElement,
         IGameFinishElement
     {
+        public event Action OnResourcesUnloaded;
+        
         private ConveyorVisitInteractor visitInteractor;
 
         private ResourceStorage resourceStorage;
@@ -80,6 +83,8 @@ namespace Game.Gameplay.Player
             var income = unloadZone.ExtractAll();
             resourceStorage.AddResource(resourceType, income);
             uiAnimator.PlayIncomeFromWorld(unloadZone.ParticlePosition, resourceType, income);
+            
+            OnResourcesUnloaded?.Invoke();
         }
     }
 }
